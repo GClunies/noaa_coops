@@ -44,3 +44,6 @@ class Station:
                  units='metric',
                  time_zone='gmt'):
         pass
+
+if __name__ == "__main__":
+    pass
