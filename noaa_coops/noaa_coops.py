@@ -52,7 +52,7 @@ class Station:
             self.disclaimers = station_metadata['disclaimers']
             self.flood_levels = station_metadata['floodlevels']
             self.greatlakes = station_metadata['greatlakes']
-            self.tidal_constituents=station_metadata['harmonicConstituents']
+            self.tidal_constituents = station_metadata['harmonicConstituents']
             self.lat_lon = {
                 'lat' : station_metadata['lat'],
                 'lon' : station_metadata['lng']
