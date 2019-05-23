@@ -586,6 +586,8 @@ class Station:
 
                 # Convert columns to numeric values
                 data_cols = df.columns.drop(['date_time'])
+                df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1,
+                                                errors='coerce')
 
             elif interval == 'hilo':
                 # Rename columns for clarity
@@ -595,6 +597,8 @@ class Station:
 
                 # Convert columns to numeric values
                 data_cols = df.columns.drop(['date_time', 'hi_lo'])
+                df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1,
+                                                errors='coerce')
 
             # Convert date & time strings to datetime objects
             df['date_time'] = pd.to_datetime(df['date_time'])
