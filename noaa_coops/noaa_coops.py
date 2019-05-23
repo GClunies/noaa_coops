@@ -43,7 +43,7 @@ class Station:
 
         # Determine station type, then assign class attributes accordingly from
         # metadata 
-        if station_metadata['datums']:  # if True --> water levels
+        if 'datums' in station_metadata:  # if True --> water levels
             self.metadata = station_metadata
             self.affiliations = station_metadata['affiliations']
             self.benchmarks = station_metadata['benchmarks']
@@ -72,18 +72,74 @@ class Station:
             self.timezone = station_metadata['timezone']
             self.timezone_corr = station_metadata['timezonecorr']
 
-        elif station_metadata['tidepredoffsets']:  # if True --> predicted tide
-            pass
+        elif 'tidepredoffsets' in station_metadata:  # if True --> predicted tide
+            self.metadata = station_metadata
+            self.state = station_metadata['state']
+            self.tide_pred_offsets = station_metadata['tidepredoffsets']
+            self.type = station_metadata['type']
+            self.time_meridian = station_metadata['timemeridian']
+            self.reference_id = station_metadata['reference_id']
+            self.timezone_corr = station_metadata['timezonecorr']
+            self.station_name = station_metadata['name']
+            self.lat_lon = {
+                'lat' : station_metadata['lat'],
+                'lon' : station_metadata['lng']
+            }
+            self.affiliations = station_metadata['affiliations']
+            self.ports_code = station_metadata['portscode']
+            self.products = station_metadata['products']
+            self.disclaimers = station_metadata['disclaimers']
+            self.notices = station_metadata['notices']
+            self.tide_type = station_metadata['tideType']
         
-        elif station_metadata['bins']:  # if True --> currents
-            pass
+        elif 'bins' in station_metadata:  # if True --> currents
+            self.metadata = station_metadata
+            self.project = station_metadata['project']
+            self.deployed = station_metadata['deployed']
+            self.retrieved = station_metadata['retrieved']
+            self.timezone_offset = station_metadata['timezone_offset']
+            self.observe_dst = station_metadata['observedst']
+            self.project_type = station_metadata['project_type']
+            self.noaa_chart = station_metadata['noaachart']
+            self.deployments = station_metadata['deployments']
+            self.bins = station_metadata['bins']
+            self.station_name = station_metadata['name']
+            self.lat_lon = {
+                'lat' : station_metadata['lat'],
+                'lon' : station_metadata['lng']
+            }
+            self.affiliations = station_metadata['affiliations']
+            self.ports_code = station_metadata['portscode']
+            self.products = station_metadata['products']
+            self.disclaimers = station_metadata['disclaimers']
+            self.notices = station_metadata['notices']
+            self.tide_type = station_metadata['tideType']
         
-        elif station_metadata['currbin']:  # if True --> predicted currents
-            pass
+        elif 'currbin' in station_metadata:  # if True --> predicted currents
+            self.metadata = station_metadata
+            self.current_pred_offsets = station_metadata['currentpredictionoffsets']
+            self.curr_bin = station_metadata['currbin']
+            self.type = station_metadata['type']
+            self.depth = station_metadata['depth']
+            self.depth_type = station_metadata['depthType']
+            self.name = station_metadata['name']
+            self.lat_lon = {
+                'lat' : station_metadata['lat'],
+                'lon' : station_metadata['lng']
+            }
+            self.affiliations = station_metadata['affiliations']
+            self.ports_code = station_metadata['portscode']
+            self.products = station_metadata['products']
+            self.disclaimers = station_metadata['disclaimers']
+            self.notices = station_metadata['notices']
+            self.tide_type = station_metadata['tideType']
+
+
         
     def get_data(self, 
                  begin_date,
                  end_date,
+                 stationid,
                  product,
                  datum,
                  interval=None, 
@@ -91,7 +147,10 @@ class Station:
                  time_zone='gmt'):
         pass
 
-# Us e
+# Use for testing
 if __name__ == "__main__":
     
-    seattle = Station(9447130, units='metric')
+    seattle = Station(9447130)
+    cherry_pt = Station('cp0101')
+    tacoma = Station(9446484)
+    alki = Station('PUG1516')
