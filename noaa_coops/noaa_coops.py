@@ -680,6 +680,7 @@ class Station:
                 interval == 'h'):
             df = df.resample('H').first()  # Only return the hourly data
 
+        df.drop_duplicates()  # Handle duplicates due to overlapping requests
         self.data = df
         return df
 
