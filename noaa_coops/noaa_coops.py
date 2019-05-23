@@ -48,7 +48,7 @@ class Station:
             self.affiliations = station_metadata['affiliations']
             self.benchmarks = station_metadata['benchmarks']
             self.datums = station_metadata['datums']
-            self.details = station_metadata['details']
+            # self.details = station_metadata['details']  # Only 4 water levels
             self.disclaimers = station_metadata['disclaimers']
             self.flood_levels = station_metadata['floodlevels']
             self.greatlakes = station_metadata['greatlakes']
@@ -133,8 +133,6 @@ class Station:
             self.disclaimers = station_metadata['disclaimers']
             self.notices = station_metadata['notices']
             self.tide_type = station_metadata['tideType']
-
-
         
     def get_data(self, 
                  begin_date,
@@ -147,10 +145,12 @@ class Station:
                  time_zone='gmt'):
         pass
 
-# Use for testing
+# Test functionality
 if __name__ == "__main__":
     
-    seattle = Station(9447130)
-    cherry_pt = Station('cp0101')
-    tacoma = Station(9446484)
-    alki = Station('PUG1516')
+    # Test metadata functionality
+    seattle = Station(9447130)     # water levels
+    tacoma = Station(9446484)      # tide predictions
+    cherry = Station('cp0101')     # currents - side viewing
+    humboldt = Station('hb0201')   # currents - down viewing
+    alki = Station('PUG1516')      # predicted currents
