@@ -5,7 +5,7 @@ import noaa_coops as nc
 import pytest
 
 def test_error_handling():
-    seatlle = nc.Station(9447130)
+    seattle = nc.Station(9447130)
     with pytest.raises(ValueError):
         seattle.get_data(
             begin_date="20150101",
