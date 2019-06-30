@@ -698,7 +698,7 @@ if __name__ == "__main__":
     humboldt = Station('hb0201')   # currents - down viewing
     alki = Station('PUG1516')      # predicted currents
 
-    seattle.get_data(begin_date="20121115",
+    sea_data = seattle.get_data(begin_date="20121115",
                      end_date="20121217",
                      product="predictions",
                      datum="MLLW",
@@ -706,4 +706,5 @@ if __name__ == "__main__":
                      units="metric",
                      time_zone="gmt")
 
+    print(sea_data.head())
     print('__main__ done!')
