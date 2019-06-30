@@ -1,0 +1,10 @@
+README.md
+setup.py
+noaa_coops/__init__.py
+noaa_coops/noaa_coops.py
+noaa_coops.egg-info/PKG-INFO
+noaa_coops.egg-info/SOURCES.txt
+noaa_coops.egg-info/dependency_links.txt
+noaa_coops.egg-info/not-zip-safe
+noaa_coops.egg-info/requires.txt
+noaa_coops.egg-info/top_level.txt

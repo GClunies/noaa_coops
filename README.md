@@ -1,4 +1,130 @@
 # noaa_coops
-Python wrapper for NOAA CO-OPS Tides &amp; Currents Data
 
-This will eventaully come to replace [py_noaa](https://github.com/GClunies/py_noaa)
+`noaa_coops` is a Python wrapper for NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
+and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
+
+
+This package is an evolution of [py_noaa](https://github.com/GClunies/py_noaa).
+ The main addition being the creation of a `Station` class that is central to 
+ `noaa_coops`.
+
+## Use
+---
+
+All data and metadata is handled using a `Station` class with methods for 
+retriving metadata, observed data, and predicted data.
+
+### Getting Metadata
+
+All available metadata for a desired station (identifed by unique `stationid`) 
+is automagically generated when a `Station` object is initialzed. Station IDs 
+can be found using the mapping interface at https://tidesandcurrents.noaa.gov/.
+All metadata is stored as a dictionary in the `.metadata` attribute of a 
+`Station` object for easy exploration. 
+
+In the example below, we initialze a `Station` object for Seattle, WA 
+(`stationid`=9447130) and then print the dictionary keys of the metadata 
+attribute to see what type of metadata information is available.
+
+```python
+>>> from pprint import pprint  # For pretty printing
+>>> import noaa_coops as nc
+>>> seattle = nc.Station(9447130)
+>>> pprint(seattle.metadata.keys()) # doctest: +NORMALIZE_WHITESPACE
+dict_keys(['tidal', 'greatlakes', 'shefcode', 'details', 'sensors', 'floodlevels', 'datums', 'supersededdatums', 'harmonicConstit
+uents', 'benchmarks', 'tidePredOffsets', 'state', 'timezone', 'timezonecorr', 'observedst', 'stormsurge', 'nearby', 'id', 'name',
+ 'lat', 'lng', 'affiliations', 'portscode', 'products', 'disclaimers', 'notices', 'self', 'expand', 'tideType'])
+```
+
+Additionally, the keys of the metadata attribute dictionary are also assigned 
+as attribites of the station object itself. For example:
+
+```python
+>>> from pprint import pprint  # For pretty printing
+>>> import noaa_coops as nc
+>>> seattle = nc.Station(9447130)
+>>> pprint(seattle.lat_lon)  # doctest: +NORMALIZE_WHITESPACE
+{'lat': 47.601944, 'lon': -122.339167}
+>>> pprint(seattle.sensors)  # doctest: +NORMALIZE_WHITESPACE
+{'self': 'https://tidesandcurrents.noaa.gov/mdapi/v1.0/webapi/stations/9447130/sensors.json',
+ 'sensors': [{'dcp': 3,
+              'elevation': None,
+              'message': '',
+              'name': 'Microwave WL',
+              'refdatum': '',
+              'sensorID': 'Y1',
+              'status': 1},
+             {'dcp': 0,
+              'elevation': 12.48063,
+              'message': '',
+              'name': 'site',
+              'refdatum': 'MSL',
+              'sensorID': 'site',
+              'status': 1}],
+ 'units': 'feet'}
+```
+
+### Getting Observed or Predicted Data
+Station data can be retrieved using the `.get_data` method on the `Station` 
+class object. Data is returned as a Pandas DataFrame for easy use and analysis. 
+Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products). The currently supported data types for retrieval are:
+
+    - Currents
+    - Observed water levels
+    - Observered daily high and low water levels (use `product="high_low"`)
+    - Predicted water levels
+    - Predicted high and low water levels
+    - Winds
+    - Air pressure
+    - Air temperature
+    - Water temperature
+
+Compatibility with other data products listed on the may exist, but is not guaranteed at this time.
+
+In the example below, water level data is retrieved for the Seattle station (`stationid`=9447130) for a 3 month period.
+
+```python
+>>> import noaa_coops as nc
+>>> seattle = nc.Station(9447130)
+>>> df_water_levels = seattle.get_data(
+...     begin_date="20150101",
+...     end_date="20150331",
+...     product="water_level",
+...     datum="MLLW",
+...     units="metric",
+...     time_zone="gmt")
+>>> df_water_levels.head()  # doctest: +NORMALIZE_WHITESPACE
+                       flags QC  sigma  water_level
+date_time
+2015-01-01 00:00:00  0,0,0,0  v  0.023        1.799
+2015-01-01 01:00:00  0,0,0,0  v  0.014        0.977
+2015-01-01 02:00:00  0,0,0,0  v  0.009        0.284
+2015-01-01 03:00:00  0,0,0,0  v  0.010       -0.126
+2015-01-01 04:00:00  0,0,0,0  v  0.013       -0.161
+```
+
+## Requirements
+
+For use:
+
+- requests
+- numpy
+- pandas
+
+Suggested for development/contributions:
+
+- pytest
+- pytest-cov
+
+
+## TODO
+See [issues](https://github.com/GClunies/py_noaa/issues) for a list of issues and to add issues of your own.
+
+## Contribution
+All contributions are welcome, feel free to submit a pull request if you feel you have a valuable addition to the package or constructive feedback. 
+
+**Many thanks to the following contributors!**
+- [@delgadom](https://github.com/delgadom)
+- [@CraigHarter](https://github.com/CraigHarter)
+- [@jcconnel](https://github.com/jcconnell)
+- [@fabaff](https://github.com/fabaff)
