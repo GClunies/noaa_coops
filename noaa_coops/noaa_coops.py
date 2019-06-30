@@ -134,7 +134,7 @@ class Station:
             self.notices = station_metadata['notices']
             self.tide_type = station_metadata['tideType']
         
-    def build_query_url(self, begin_date, end_date, product,
+    def _build_query_url(self, begin_date, end_date, product,
                         datum=None, bin_num=None, interval=None,
                         units='metric', time_zone='gmt'):
         """
@@ -272,7 +272,7 @@ class Station:
         return query_url
 
 
-    def url2pandas(self, data_url, product, num_request_blocks):
+    def _url2pandas(self, data_url, product, num_request_blocks):
         """
         Takes in a provided URL using the NOAA CO-OPS API conventions
         (see https://tidesandcurrents.noaa.gov/api/) and converts the 
@@ -342,7 +342,7 @@ class Station:
             return df
 
 
-    def parse_known_date_formats(self, dt_string):
+    def _parse_known_date_formats(self, dt_string):
         """Attempt to parse CO-OPS accepted date formats."""
         for fmt in ('%Y%m%d', '%Y%m%d %H:%M', '%m/%d/%Y', '%m/%d/%Y %H:%M'):
             try:
@@ -376,30 +376,30 @@ class Station:
         time_zone -- time zone to be used for data output, string (default gmt)
         """
         # Convert dates to datetime objects so deltas can be calculated
-        begin_datetime = self.parse_known_date_formats(begin_date)
-        end_datetime = self.parse_known_date_formats(end_date)
+        begin_datetime = self._parse_known_date_formats(begin_date)
+        end_datetime = self._parse_known_date_formats(end_date)
         delta = end_datetime - begin_datetime
 
         # If the length of our data request is less or equal to 31 days,
         # we can pull the data from API in one request
         if delta.days <= 31:
-            data_url = self.build_query_url(
+            data_url = self._build_query_url(
                 begin_datetime.strftime("%Y%m%d %H:%M"),
                 end_datetime.strftime("%Y%m%d %H:%M"),
                 product, datum, bin_num, interval, units, time_zone)
 
-            df = self.url2pandas(data_url, product, num_request_blocks=1)
+            df = self._url2pandas(data_url, product, num_request_blocks=1)
 
         # If the length of the user specified data request is less than 365 days
         # AND the product is hourly_height or high_low, we can pull data 
         # directly from the API in one request
         elif delta.days <= 365 and (
                 product == 'hourly_height' or product == 'high_low'):
-            data_url = self.build_query_url(
+            data_url = self._build_query_url(
                 begin_date, end_date, product, 
                 datum, bin_num, interval, units, time_zone)
 
-            df = self.url2pandas(data_url, product, num_request_blocks=1)
+            df = self._url2pandas(data_url, product, num_request_blocks=1)
 
         # If the length of the user specified data request is greater than 365 
         # days AND the product is hourly_height or high_low, we need to load 
@@ -424,14 +424,14 @@ class Station:
                     end_datetime_loop = end_datetime
 
                 # Build url for each API request as we proceed through the loop
-                data_url = self.build_query_url(
+                data_url = self._build_query_url(
                     begin_datetime_loop.strftime('%Y%m%d'),
                     end_datetime_loop.strftime('%Y%m%d'),
                     product, datum, bin_num, 
                     interval, units, time_zone)
                 
                 # Get dataframe for block and append to time series df
-                df_new = self.url2pandas(data_url, product, num_365day_blocks)
+                df_new = self._url2pandas(data_url, product, num_365day_blocks)
                 df = df.append(df_new)
                 
         # If the length of the user specified data request is greater than 31 
@@ -457,14 +457,14 @@ class Station:
                     end_datetime_loop = end_datetime
 
                 # Build URL for each API request as we proceed through the loop
-                data_url = self.build_query_url(
+                data_url = self._build_query_url(
                     begin_datetime_loop.strftime('%Y%m%d'),
                     end_datetime_loop.strftime('%Y%m%d'),
                     product, datum, 
                     bin_num, interval, units, time_zone)
                 
                 # Get dataframe for block and append to time series df
-                df_new = self.url2pandas(data_url, product, num_31day_blocks)
+                df_new = self._url2pandas(data_url, product, num_31day_blocks)
                 df = df.append(df_new)
                 
         # Rename output dataframe columns based on requested product
