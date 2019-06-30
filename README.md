@@ -12,13 +12,17 @@ All data and metadata is handled using a `Station` class with methods for retriv
 
 ### Getting Metadata
 
-Getting metadata for any station is as simple as initiating a `Station` class object with the desired `stationid`. Station IDs can be found using mapping interface found at https://tidesandcurrents.noaa.gov/
+Getting Metadata for any station is as simple as initiating a `Station` class object with the desired `stationid`. Station IDs can be found using mapping interface found at https://tidesandcurrents.noaa.gov/
 
 ```python
-
+seattle = Station(9447130)
+seattle.metadata
 ```
 
 ### Getting Observed or Predicted Data
-```python
+Retrieving data for any station can be done using the `.get_data` method on any `Station` class object.
 
+```python
+seattle = Station(9447130)
+seattle.get_data()
 ```

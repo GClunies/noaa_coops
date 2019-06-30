@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: noaa-coops
+Version: 0.1
+Summary: Python wrapper to fetch NOAA Tides & Currents Data
+Home-page: https://github.com/GClunies/noaa_coops
+Author: Greg Clunies
+Author-email: greg.clunies@gmail.com
+License: GNU GPL
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
