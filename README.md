@@ -4,15 +4,13 @@
 and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
 
-This package is an evolution of [py_noaa](https://github.com/GClunies/py_noaa).
- The main addition being the creation of a `Station` class that is central to 
- `noaa_coops`.
+This package is an evolution of [py_noaa](https://github.com/GClunies/py_noaa), the main addition being the creation of a `Station` class that is central to 
+ `noaa_coops` and provides distinct advantages over `py_noaa`.
 
 ## Use
 ---
-
-All data and metadata is handled using a `Station` class with methods for 
-retriving metadata, observed data, and predicted data.
+All data and metadata is handled using a `Station` class with methods and 
+attributes for retrieving metadata, observed data, and predicted data.
 
 ### Getting Metadata
 
@@ -65,9 +63,9 @@ as attribites of the station object itself. For example:
 ```
 
 ### Getting Observed or Predicted Data
-Station data can be retrieved using the `.get_data` method on the `Station` 
+Station data can be retrieved using the `.get_data` method on a `Station` 
 class object. Data is returned as a Pandas DataFrame for easy use and analysis. 
-Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products). The currently supported data types for retrieval are:
+Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products). The data types currently supported for retrieval with `noaa_coops` are:
 
     - Currents
     - Observed water levels
@@ -79,7 +77,9 @@ Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noa
     - Air temperature
     - Water temperature
 
-Compatibility with other data products listed on the may exist, but is not guaranteed at this time.
+Compatibility with other data products may exist, but is not guaranteed at this 
+time. Feel free to submit a pull request if you would like to add addtional 
+functionality.
 
 In the example below, water level data is retrieved for the Seattle station (`stationid`=9447130) for a 3 month period.
 
@@ -106,22 +106,21 @@ date_time
 ## Requirements
 
 For use:
-
 - requests
 - numpy
 - pandas
 
-Suggested for development/contributions:
-
+For development/contributions:
 - pytest
 - pytest-cov
 
 
 ## TODO
-See [issues](https://github.com/GClunies/py_noaa/issues) for a list of issues and to add issues of your own.
+See [issues](https://github.com/GClunies/py_noaa/issues) for a list of issues 
+and to add issues of your own.
 
 ## Contribution
-All contributions are welcome, feel free to submit a pull request if you feel you have a valuable addition to the package or constructive feedback. 
+All contributions are welcome, feel free to submit a pull request if you have a valuable addition to the package or constructive feedback.
 
 **Many thanks to the following contributors!**
 - [@delgadom](https://github.com/delgadom)
