@@ -1,6 +1,6 @@
 # noaa_coops
 
-`noaa_coops` is a Python wrapper for NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
+`noaa_coops` is a Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
 and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
 
