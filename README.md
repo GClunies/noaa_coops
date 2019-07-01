@@ -23,7 +23,7 @@ is automagically generated when a `Station` object is initialzed. Station IDs
 can be found using the mapping interface at https://tidesandcurrents.noaa.gov/.
 All metadata is stored as a dictionary in the `.metadata` attribute of a 
 `Station` object for easy exploration (e.g. `seattle.metadata`). Additionally, 
-the keys of the metadata attribute dictionary are also assigned as attribites 
+the keys of the metadata attribute dictionary are also assigned as attributes 
 of the station object itself (easily explored using tab-completion in your IDE).
 For example:
 
