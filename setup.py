@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(name='noaa_coops',
       version='0.1',
-      description='Python wrapper to fetch NOAA Tides & Currents Data',
+      description='Python wrapper for NOAA Tides & Currents Data and Metadata',
       long_description=long_description,
       long_description_content_type='text/markdown',
       url='https://github.com/GClunies/noaa_coops',
