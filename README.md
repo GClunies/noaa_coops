@@ -25,13 +25,12 @@ In the example below, we initialze a `Station` object for Seattle, WA
 attribute to see what type of metadata information is available.
 
 ```python
->>> from pprint import pprint  # For pretty printing
+>>> from pprint import pprint
 >>> import noaa_coops as nc
 >>> seattle = nc.Station(9447130)
->>> pprint(seattle.metadata.keys()) # doctest: +NORMALIZE_WHITESPACE
-dict_keys(['tidal', 'greatlakes', 'shefcode', 'details', 'sensors', 'floodlevels', 'datums', 'supersededdatums', 'harmonicConstit
-uents', 'benchmarks', 'tidePredOffsets', 'state', 'timezone', 'timezonecorr', 'observedst', 'stormsurge', 'nearby', 'id', 'name',
- 'lat', 'lng', 'affiliations', 'portscode', 'products', 'disclaimers', 'notices', 'self', 'expand', 'tideType'])
+>>> pprint(list(seattle.metadata.keys())[:5]) # doctest: +NORMALIZE_WHITESPACE
+['tidal', 'greatlakes', 'shefcode', 'details', 'sensors']
+
 ```
 
 Additionally, the keys of the metadata attribute dictionary are also assigned 
@@ -41,25 +40,11 @@ as attribites of the station object itself. For example:
 >>> from pprint import pprint  # For pretty printing
 >>> import noaa_coops as nc
 >>> seattle = nc.Station(9447130)
->>> pprint(seattle.lat_lon)  # doctest: +NORMALIZE_WHITESPACE
-{'lat': 47.601944, 'lon': -122.339167}
->>> pprint(seattle.sensors)  # doctest: +NORMALIZE_WHITESPACE
-{'self': 'https://tidesandcurrents.noaa.gov/mdapi/v1.0/webapi/stations/9447130/sensors.json',
- 'sensors': [{'dcp': 3,
-              'elevation': None,
-              'message': '',
-              'name': 'Microwave WL',
-              'refdatum': '',
-              'sensorID': 'Y1',
-              'status': 1},
-             {'dcp': 0,
-              'elevation': 12.48063,
-              'message': '',
-              'name': 'site',
-              'refdatum': 'MSL',
-              'sensorID': 'site',
-              'status': 1}],
- 'units': 'feet'}
+>>> pprint(seattle.lat_lon['lat'])
+47.601944
+>>> pprint(seattle.lat_lon['lon'])
+-122.339167
+
 ```
 
 ### Getting Observed or Predicted Data
@@ -101,6 +86,7 @@ date_time
 2015-01-01 02:00:00  0,0,0,0  v  0.009        0.284
 2015-01-01 03:00:00  0,0,0,0  v  0.010       -0.126
 2015-01-01 04:00:00  0,0,0,0  v  0.013       -0.161
+
 ```
 
 ## Requirements
