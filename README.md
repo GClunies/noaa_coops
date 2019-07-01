@@ -18,25 +18,10 @@ All available metadata for a desired station (identifed by unique `stationid`)
 is automagically generated when a `Station` object is initialzed. Station IDs 
 can be found using the mapping interface at https://tidesandcurrents.noaa.gov/.
 All metadata is stored as a dictionary in the `.metadata` attribute of a 
-`Station` object for easy exploration. 
-
-In the example below, we initialze a `Station` object for Seattle, WA 
-(`stationid`=9447130) and then print the dictionary keys of the metadata 
-attribute to see what type of metadata information is available.
-
-```python
->>> from pprint import pprint
->>> import noaa_coops as nc
->>> seattle = nc.Station(9447130)
->>> pprint(seattle.metadata.keys()) # doctest: +NORMALIZE_WHITESPACE
-dict_keys(['tidal', 'greatlakes', 'shefcode', 'details', 'sensors', 'floodlevels', 'datums', 'supersededdatums', 'harmonicConstit
-uents', 'benchmarks', 'tidePredOffsets', 'state', 'timezone', 'timezonecorr', 'observedst', 'stormsurge', 'nearby', 'id', 'name',
- 'lat', 'lng', 'affiliations', 'portscode', 'products', 'disclaimers', 'notices', 'self', 'expand', 'tideType'])
-
-```
-
-Additionally, the keys of the metadata attribute dictionary are also assigned 
-as attribites of the station object itself. For example:
+`Station` object for easy exploration (e.g. `seattle.metadata`). Additionally, 
+the keys of the metadata attribute dictionary are also assigned as attribites 
+of the station object itself (easily explored using tab-completion in your IDE).
+For example:
 
 ```python
 >>> from pprint import pprint  # For pretty printing
