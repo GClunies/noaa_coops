@@ -1,18 +1,16 @@
 # noaa_coops
 
-`noaa_coops` is a Python wrapper for NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
+`noaa_coops` is a Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
 and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
 
-This package is an evolution of [py_noaa](https://github.com/GClunies/py_noaa).
- The main addition being the creation of a `Station` class that is central to 
- `noaa_coops`.
+This package is an evolution of [py_noaa](https://github.com/GClunies/py_noaa), the main addition being the creation of a `Station` class that is central to 
+ `noaa_coops` and provides distinct advantages over `py_noaa`.
 
 ## Use
 ---
-
-All data and metadata is handled using a `Station` class with methods for 
-retriving metadata, observed data, and predicted data.
+All data and metadata is handled using a `Station` class with methods and 
+attributes for retrieving metadata, observed data, and predicted data.
 
 ### Getting Metadata
 
@@ -27,13 +25,12 @@ In the example below, we initialze a `Station` object for Seattle, WA
 attribute to see what type of metadata information is available.
 
 ```python
->>> from pprint import pprint  # For pretty printing
+>>> from pprint import pprint
 >>> import noaa_coops as nc
 >>> seattle = nc.Station(9447130)
->>> pprint(seattle.metadata.keys()) # doctest: +NORMALIZE_WHITESPACE
-dict_keys(['tidal', 'greatlakes', 'shefcode', 'details', 'sensors', 'floodlevels', 'datums', 'supersededdatums', 'harmonicConstit
-uents', 'benchmarks', 'tidePredOffsets', 'state', 'timezone', 'timezonecorr', 'observedst', 'stormsurge', 'nearby', 'id', 'name',
- 'lat', 'lng', 'affiliations', 'portscode', 'products', 'disclaimers', 'notices', 'self', 'expand', 'tideType'])
+>>> pprint(list(seattle.metadata.keys())[:5]) # doctest: +NORMALIZE_WHITESPACE
+['tidal', 'greatlakes', 'shefcode', 'details', 'sensors']
+
 ```
 
 Additionally, the keys of the metadata attribute dictionary are also assigned 
@@ -43,31 +40,17 @@ as attribites of the station object itself. For example:
 >>> from pprint import pprint  # For pretty printing
 >>> import noaa_coops as nc
 >>> seattle = nc.Station(9447130)
->>> pprint(seattle.lat_lon)  # doctest: +NORMALIZE_WHITESPACE
-{'lat': 47.601944, 'lon': -122.339167}
->>> pprint(seattle.sensors)  # doctest: +NORMALIZE_WHITESPACE
-{'self': 'https://tidesandcurrents.noaa.gov/mdapi/v1.0/webapi/stations/9447130/sensors.json',
- 'sensors': [{'dcp': 3,
-              'elevation': None,
-              'message': '',
-              'name': 'Microwave WL',
-              'refdatum': '',
-              'sensorID': 'Y1',
-              'status': 1},
-             {'dcp': 0,
-              'elevation': 12.48063,
-              'message': '',
-              'name': 'site',
-              'refdatum': 'MSL',
-              'sensorID': 'site',
-              'status': 1}],
- 'units': 'feet'}
+>>> pprint(seattle.lat_lon['lat'])
+47.601944
+>>> pprint(seattle.lat_lon['lon'])
+-122.339167
+
 ```
 
 ### Getting Observed or Predicted Data
-Station data can be retrieved using the `.get_data` method on the `Station` 
+Station data can be retrieved using the `.get_data` method on a `Station` 
 class object. Data is returned as a Pandas DataFrame for easy use and analysis. 
-Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products). The currently supported data types for retrieval are:
+Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products). The data types currently supported for retrieval with `noaa_coops` are:
 
     - Currents
     - Observed water levels
@@ -79,7 +62,9 @@ Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noa
     - Air temperature
     - Water temperature
 
-Compatibility with other data products listed on the may exist, but is not guaranteed at this time.
+Compatibility with other data products may exist, but is not guaranteed at this 
+time. Feel free to submit a pull request if you would like to add addtional 
+functionality.
 
 In the example below, water level data is retrieved for the Seattle station (`stationid`=9447130) for a 3 month period.
 
@@ -101,27 +86,27 @@ date_time
 2015-01-01 02:00:00  0,0,0,0  v  0.009        0.284
 2015-01-01 03:00:00  0,0,0,0  v  0.010       -0.126
 2015-01-01 04:00:00  0,0,0,0  v  0.013       -0.161
+
 ```
 
 ## Requirements
 
 For use:
-
 - requests
 - numpy
 - pandas
 
-Suggested for development/contributions:
-
+For development/contributions:
 - pytest
 - pytest-cov
 
 
 ## TODO
-See [issues](https://github.com/GClunies/py_noaa/issues) for a list of issues and to add issues of your own.
+See [issues](https://github.com/GClunies/py_noaa/issues) for a list of issues 
+and to add issues of your own.
 
 ## Contribution
-All contributions are welcome, feel free to submit a pull request if you feel you have a valuable addition to the package or constructive feedback. 
+All contributions are welcome, feel free to submit a pull request if you have a valuable addition to the package or constructive feedback.
 
 **Many thanks to the following contributors!**
 - [@delgadom](https://github.com/delgadom)

@@ -1,9 +1,17 @@
 from setuptools import setup
 import noaa_coops
 
+# Read the contents of README.md file
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(name='noaa_coops',
       version='0.1',
-      description='Python wrapper to fetch NOAA Tides & Currents Data',
+      description='Python wrapper for NOAA Tides & Currents Data and Metadata',
+      long_description=long_description,
+      long_description_content_type='text/markdown',
       url='https://github.com/GClunies/noaa_coops',
       author='Greg Clunies',
       author_email='greg.clunies@gmail.com',
