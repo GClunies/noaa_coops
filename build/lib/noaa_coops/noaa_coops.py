@@ -57,7 +57,7 @@ class Station:
                 'lat' : station_metadata['lat'],
                 'lon' : station_metadata['lng']
             }
-            self.station_name = station_metadata['name']
+            self.name = station_metadata['name']
             self.nearby_stations = station_metadata['nearby']
             self.notices = station_metadata['notices']
             self.observe_dst = station_metadata['observedst']
@@ -80,7 +80,7 @@ class Station:
             self.time_meridian = station_metadata['timemeridian']
             self.reference_id = station_metadata['reference_id']
             self.timezone_corr = station_metadata['timezonecorr']
-            self.station_name = station_metadata['name']
+            self.name = station_metadata['name']
             self.lat_lon = {
                 'lat' : station_metadata['lat'],
                 'lon' : station_metadata['lng']
@@ -103,7 +103,7 @@ class Station:
             self.noaa_chart = station_metadata['noaachart']
             self.deployments = station_metadata['deployments']
             self.bins = station_metadata['bins']
-            self.station_name = station_metadata['name']
+            self.name = station_metadata['name']
             self.lat_lon = {
                 'lat' : station_metadata['lat'],
                 'lon' : station_metadata['lng']
@@ -403,7 +403,7 @@ class Station:
 
         # If the length of the user specified data request is greater than 365 
         # days AND the product is hourly_height or high_low, we need to load 
-        # data from the API in365 day blocks.
+        # data from the API in 365 day blocks.
         elif product == 'hourly_height' or product == 'high_low':
             # Find the number of 365 day blocks in our desired period,
             # constrain the upper limit of index in the for loop to follow
@@ -579,7 +579,7 @@ class Station:
             df['date_time_LL'] = pd.to_datetime(df['date_time_LL'])
 
         elif product == 'predictions':
-            if interval == 'h':
+            if interval == 'h' or interval is None:
                 # Rename columns for clarity
                 df.rename(columns={'t': 'date_time', 'v': 'predicted_wl'},
                         inplace=True)

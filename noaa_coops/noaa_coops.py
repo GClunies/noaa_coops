@@ -579,7 +579,7 @@ class Station:
             df['date_time_LL'] = pd.to_datetime(df['date_time_LL'])
 
         elif product == 'predictions':
-            if interval == 'h':
+            if interval == 'h' or interval is None:
                 # Rename columns for clarity
                 df.rename(columns={'t': 'date_time', 'v': 'predicted_wl'},
                         inplace=True)
