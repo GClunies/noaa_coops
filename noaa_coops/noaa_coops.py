@@ -680,7 +680,7 @@ class Station:
         df = df.drop(columns=['date_time'])
 
         # Handle hourly requests for water_level and currents data
-        if (product == 'water_level') | (product == 'currents') & (
+        if ((product == 'water_level') | (product == 'currents')) & (
                 interval == 'h'):
             df = df.resample('H').first()  # Only return the hourly data
 
@@ -693,16 +693,11 @@ if __name__ == "__main__":
     
     # Test metadata functionality
     seattle = Station(9447130)     # water levels
-    tacoma = Station(9446484)      # tide predictions
-    cherry = Station('cp0101')     # currents - side viewing
-    humboldt = Station('hb0201')   # currents - down viewing
-    alki = Station('PUG1516')      # predicted currents
 
-    sea_data = seattle.get_data(begin_date="20121115",
-                     end_date="20121217",
-                     product="predictions",
+    sea_data = seattle.get_data(begin_date="20150101",
+                     end_date="20150331",
+                     product="water_level",
                      datum="MLLW",
-                     interval="h",
                      units="metric",
                      time_zone="gmt")
 
