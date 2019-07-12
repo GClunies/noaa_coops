@@ -8,6 +8,10 @@ Author-email: greg.clunies@gmail.com
 License: GNU GPL
 Description: # noaa_coops
         
+        [![Build Status](https://travis-ci.org/GClunies/noaa_coops.svg?branch=master)](https://travis-ci.org/GClunies/noaa_coops)
+        [![PyPI](https://img.shields.io/pypi/v/noaa_coops.svg)](https://pypi.python.org/pypi/noaa-coops)
+        [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noaa_coops.svg)](https://pypi.python.org/pypi/noaa-coops)
+        
         `noaa_coops` is a Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
         and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
         
@@ -27,7 +31,7 @@ Description: # noaa_coops
         can be found using the mapping interface at https://tidesandcurrents.noaa.gov/.
         All metadata is stored as a dictionary in the `.metadata` attribute of a 
         `Station` object for easy exploration (e.g. `seattle.metadata`). Additionally, 
-        the keys of the metadata attribute dictionary are also assigned as attribites 
+        the keys of the metadata attribute dictionary are also assigned as attributes 
         of the station object itself (easily explored using tab-completion in your IDE).
         For example:
         
