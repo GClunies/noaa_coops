@@ -4,7 +4,7 @@ __pycache__/
 # Distribution / packaging
 build/
 dist/
-*.egg-info/
+noaa_coops.egg-info/
 
 # Jupyter Notebook
 .ipynb_checkpoints
