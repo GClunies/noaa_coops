@@ -104,3 +104,4 @@ All contributions are welcome, feel free to submit a pull request if you have a 
 - [@CraigHarter](https://github.com/CraigHarter)
 - [@jcconnel](https://github.com/jcconnell)
 - [@fabaff](https://github.com/fabaff)
+- [@taataam](https://github.com/taataam)
