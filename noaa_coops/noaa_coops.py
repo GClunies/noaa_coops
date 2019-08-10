@@ -703,3 +703,12 @@ if __name__ == "__main__":
 
     print(sea_data.head())
     print('__main__ done!')
+
+    # Test request qith data gap larger than block size (should throuw an error)
+    npt = Station(9418767)
+    npt_data = npt.get_data(begin_date='20080808',
+                            end_date='20120101',
+                            product='wind',
+                            units='metric',
+                            time_zone='gmt'
+                            )
