@@ -691,18 +691,18 @@ class Station:
 # Test functionality
 if __name__ == "__main__":
     
-    # Test metadata functionality
-    seattle = Station(9447130)     # water levels
+    # # Test metadata functionality
+    # seattle = Station(9447130)     # water levels
 
-    sea_data = seattle.get_data(begin_date="20150101",
-                     end_date="20150331",
-                     product="water_level",
-                     datum="MLLW",
-                     units="metric",
-                     time_zone="gmt")
+    # sea_data = seattle.get_data(begin_date="20150101",
+    #                  end_date="20150331",
+    #                  product="water_level",
+    #                  datum="MLLW",
+    #                  units="metric",
+    #                  time_zone="gmt")
 
-    print(sea_data.head())
-    print('__main__ done!')
+    # print(sea_data.head())
+    # print('__main__ done!')
 
     # Test request qith data gap larger than block size (should throuw an error)
     npt = Station(9418767)
