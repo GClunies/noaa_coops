@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import requests
 from pandas.io.json import json_normalize
+import zeep
 
 
 class Station:
@@ -13,6 +14,7 @@ class Station:
     
     For data retrieval API, see https://tidesandcurrents.noaa.gov/api/.
     For metadata API, see: https://tidesandcurrents.noaa.gov/mdapi/latest/
+    For data inventory info, see: https://opendap.co-ops.nos.noaa.gov/axis/
     """
 
     data_base_url = 'http://tidesandcurrents.noaa.gov/api/datagetter?'
@@ -20,11 +22,32 @@ class Station:
     def __init__(self, stationid, units='metric'):
         self.stationid = stationid
         self.units = units
-        self.get_metadata(self.stationid)   
+        self.get_metadata(self.stationid)
+
+        try:
+            self.get_data_inventory(self.stationid)
+        except:
+            pass
+        
+    def get_data_inventory(self, stationid):
+        """
+        Get data inventory for station with water level and meteoroligical data.
+        Data inventory is fetched from NOAA CO-OPS SOAP Web Services, see:
+        https://opendap.co-ops.nos.noaa.gov/axis/
+        """
+
+        wsdl = ('https://opendap.co-ops.nos.noaa.gov/axis/webservices/'
+                'datainventory/wsdl/DataInventory.wsdl')
+        client = zeep.Client(wsdl=wsdl)
+        response = client.service.getDataInventory(str(self.stationid))
+        self.data_inventory = response['parameter']    
     
     def get_metadata(self, stationid):
-        # Build URL for metadata API request. When a Station object is
-        # initialized, fill out metadata automatically.
+        """
+        Build URL for metadata API request. When a Station object is
+        initialized, fill out metadata automatically.
+        """
+
         metadata_base_url = ('http://tidesandcurrents.noaa.gov/mdapi/v1.0/'
                              'webapi/stations/')
         extension = '.json'
@@ -146,7 +169,7 @@ class Station:
         # If the data product is water levels, check that a datum is specified
         if product == 'water_level':
             if datum is None:
-                raise ValueError('No datum specified for water level data.See'
+                raise ValueError('No datum specified for water level data. See'
                                 ' https://tidesandcurrents.noaa.gov/api/#datum '
                                 'for list of available datums')
             else:
@@ -163,7 +186,7 @@ class Station:
 
         elif product == 'hourly_height':
             if datum is None:
-                raise ValueError('No datum specified for water level data.See'
+                raise ValueError('No datum specified for water level data. See'
                                 ' https://tidesandcurrents.noaa.gov/api/#datum '
                                 'for list of available datums')
             else:
@@ -179,7 +202,7 @@ class Station:
                             'format': 'json'}
         elif product == 'high_low':
             if datum is None:
-                raise ValueError('No datum specified for water level data.See'
+                raise ValueError('No datum specified for water level data. See'
                                 ' https://tidesandcurrents.noaa.gov/api/#datum '
                                 'for list of available datums')
             else:
@@ -286,7 +309,8 @@ class Station:
 
         # Error when the requested begin_date and/or end_date does not have data
         large_data_gap_error = ('No data was found. This product may not be ' 
-                                'offered at this station at the requested time.')
+                                'offered at this station at the '
+                                'requested time.')
 
         # Handle .get_data() request size & errors from COOPS API, cases below:
             # 1. .get_data() makes a large request (i.e. >1 block requests)
@@ -688,29 +712,52 @@ class Station:
         self.data = df
         return df
 
+# -----------------------------------------------
+
 # Test functionality
-# if __name__ == "__main__":
+if __name__ == "__main__":
+
+    # Test that except: pass works for stations with noe data inventory
+    # e.g. current stations
+    puget = Station("PUG1515")
+
+    puget_data = puget.get_data(
+        begin_date="20150727",
+        end_date="20150910",
+        product="currents",
+        bin_num=1,
+        units="metric",
+        time_zone="gmt")
+
+    print(puget_data.head())
+    print('\n')
+    print('\n')
+    print('\n')
     
-    # # Test metadata functionality
-    # seattle = Station(9447130)     # water levels
+    # Test metadata functionality
+    seattle = Station(9447130)     # water levels
 
-    # sea_data = seattle.get_data(begin_date="20150101",
-    #                  end_date="20150331",
-    #                  product="water_level",
-    #                  datum="MLLW",
-    #                  units="metric",
-    #                  time_zone="gmt")
+    print(seattle.data_inventory)
 
-    # print(sea_data.head())
-    # print('__main__ done!')
+    sea_data = seattle.get_data(begin_date="20150101",
+                     end_date="20150331",
+                     product="water_level",
+                     datum="MLLW",
+                     units="metric",
+                     time_zone="gmt")
+
+    print(sea_data.head())
+    print('\n')
+    print('\n')
+    print('__main__ done!')
 
     # Test request qith data gap larger than block size (should throuw an error)
-    # npt = Station(9418767)
-    # npt_data = npt.get_data(begin_date='20080808',
-    #                         end_date='20120101',
-    #                         product='wind',
-    #                         units='metric',
-    #                         time_zone='gmt'
-    #                         )
+    npt = Station(9418767)
+    npt_data = npt.get_data(begin_date='20080808',
+                            end_date='20120101',
+                            product='wind',
+                            units='metric',
+                            time_zone='gmt'
+                            )
 
-    # print(npt_data.head())
+    print(npt_data.head())
