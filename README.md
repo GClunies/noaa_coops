@@ -70,13 +70,13 @@ In the example below, water level data is retrieved for the Seattle station (`st
 ...     units="metric",
 ...     time_zone="gmt")
 >>> df_water_levels.head()  # doctest: +NORMALIZE_WHITESPACE
-                       flags QC  sigma  water_level
-date_time
-2015-01-01 00:00:00  0,0,0,0  v  0.023        1.799
-2015-01-01 00:06:00  0,0,0,0  v  0.018        1.718
-2015-01-01 00:12:00  0,0,0,0  v  0.013        1.639
-2015-01-01 00:18:00  0,0,0,0  v  0.012        1.557
-2015-01-01 00:24:00  0,0,0,0  v  0.014        1.473
+                     water_level  sigma    flags QC
+date_time                                          
+2015-01-01 00:00:00        1.799  0.023  0,0,0,0  v
+2015-01-01 00:06:00        1.718  0.018  0,0,0,0  v
+2015-01-01 00:12:00        1.639  0.013  0,0,0,0  v
+2015-01-01 00:18:00        1.557  0.012  0,0,0,0  v
+2015-01-01 00:24:00        1.473  0.014  0,0,0,0  v
 
 ```
 

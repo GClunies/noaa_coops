@@ -285,8 +285,8 @@ class Station:
         df = pd.DataFrame()  # Initialize a empty DataFrame
 
         # Error when the requested begin_date and/or end_date does not have data
-        large_data_gap_error = ('No data was found. This product may not be' 
-                                'offered at this station at the requested time')
+        large_data_gap_error = ('No data was found. This product may not be ' 
+                                'offered at this station at the requested time.')
 
         # Handle .get_data() request size & errors from COOPS API, cases below:
             # 1. .get_data() makes a large request (i.e. >1 block requests)
@@ -689,17 +689,28 @@ class Station:
         return df
 
 # Test functionality
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
-    # Test metadata functionality
-    seattle = Station(9447130)     # water levels
+    # # Test metadata functionality
+    # seattle = Station(9447130)     # water levels
 
-    sea_data = seattle.get_data(begin_date="20150101",
-                     end_date="20150331",
-                     product="water_level",
-                     datum="MLLW",
-                     units="metric",
-                     time_zone="gmt")
+    # sea_data = seattle.get_data(begin_date="20150101",
+    #                  end_date="20150331",
+    #                  product="water_level",
+    #                  datum="MLLW",
+    #                  units="metric",
+    #                  time_zone="gmt")
 
-    print(sea_data.head())
-    print('__main__ done!')
+    # print(sea_data.head())
+    # print('__main__ done!')
+
+    # Test request qith data gap larger than block size (should throuw an error)
+    # npt = Station(9418767)
+    # npt_data = npt.get_data(begin_date='20080808',
+    #                         end_date='20120101',
+    #                         product='wind',
+    #                         units='metric',
+    #                         time_zone='gmt'
+    #                         )
+
+    # print(npt_data.head())
