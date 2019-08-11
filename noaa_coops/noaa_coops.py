@@ -715,65 +715,65 @@ class Station:
 # -----------------------------------------------
 
 # Test functionality
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    # Test that except: pass works for stations with noe data inventory
-    # e.g. current stations
+#     # Test that except: pass works for stations with noe data inventory
+#     # e.g. current stations
     
-    print('Test current station request & that data_inventory exception works')
-    print('\n')
+#     print('Test current station request & that data_inventory exception works')
+#     print('\n')
 
-    puget = Station("PUG1515")
+#     puget = Station("PUG1515")
 
-    puget_data = puget.get_data(
-        begin_date="20150727",
-        end_date="20150910",
-        product="currents",
-        bin_num=1,
-        units="metric",
-        time_zone="gmt"
-        )
+#     puget_data = puget.get_data(
+#         begin_date="20150727",
+#         end_date="20150910",
+#         product="currents",
+#         bin_num=1,
+#         units="metric",
+#         time_zone="gmt"
+#         )
 
-    print(puget_data.head())
-    print('\n')
+#     print(puget_data.head())
+#     print('\n')
     
-    # Test metadata functionality
-    seattle = Station(9447130)     # water levels
+#     # Test metadata functionality
+#     seattle = Station(9447130)     # water levels
 
-    print('Test that metadata is working')
-    print(seattle.sensors)
-    print('\n')
+#     print('Test that metadata is working')
+#     print(seattle.sensors)
+#     print('\n')
 
-    print('Test that data_inventory is working')
-    print(seattle.data_inventory)
-    print('\n')
+#     print('Test that data_inventory is working')
+#     print(seattle.data_inventory)
+#     print('\n')
 
-    print('Test water level station request')
+#     print('Test water level station request')
 
-    sea_data = seattle.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt"
-        )
+#     sea_data = seattle.get_data(
+#         begin_date="20150101",
+#         end_date="20150331",
+#         product="water_level",
+#         datum="MLLW",
+#         units="metric",
+#         time_zone="gmt"
+#         )
 
-    print(sea_data.head())
-    print('\n')
+#     print(sea_data.head())
+#     print('\n')
 
-    print('Test wind data request with large data gap (>block size)')
+#     print('Test wind data request with large data gap (>block size)')
 
-    # Test request qith data gap larger than block size (should throuw an error)
-    npt = Station(9418767)
-    npt_data = npt.get_data(
-        begin_date='20080808',
-        end_date='20120101',
-        product='wind',
-        units='metric',
-        time_zone='gmt'
-        )
+#     # Test request qith data gap larger than block size (should throuw an error)
+#     npt = Station(9418767)
+#     npt_data = npt.get_data(
+#         begin_date='20080808',
+#         end_date='20120101',
+#         product='wind',
+#         units='metric',
+#         time_zone='gmt'
+#         )
 
-    print(npt_data.head())
-    print('\n')
-    print('__main__ done!')
+#     print(npt_data.head())
+#     print('\n')
+#     print('__main__ done!')
