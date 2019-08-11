@@ -689,7 +689,7 @@ class Station:
         return df
 
 # Test functionality
-if __name__ == "__main__":
+# if __name__ == "__main__":
     
     # # Test metadata functionality
     # seattle = Station(9447130)     # water levels
@@ -705,12 +705,12 @@ if __name__ == "__main__":
     # print('__main__ done!')
 
     # Test request qith data gap larger than block size (should throuw an error)
-    npt = Station(9418767)
-    npt_data = npt.get_data(begin_date='20080808',
-                            end_date='20120101',
-                            product='wind',
-                            units='metric',
-                            time_zone='gmt'
-                            )
+    # npt = Station(9418767)
+    # npt_data = npt.get_data(begin_date='20080808',
+    #                         end_date='20120101',
+    #                         product='wind',
+    #                         units='metric',
+    #                         time_zone='gmt'
+    #                         )
 
-    print(npt_data.head())
+    # print(npt_data.head())
