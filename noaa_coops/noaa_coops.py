@@ -285,8 +285,8 @@ class Station:
         df = pd.DataFrame()  # Initialize a empty DataFrame
 
         # Error when the requested begin_date and/or end_date does not have data
-        large_data_gap_error = ('No data was found. This product may not be' 
-                                'offered at this station at the requested time')
+        large_data_gap_error = ('No data was found. This product may not be ' 
+                                'offered at this station at the requested time.')
 
         # Handle .get_data() request size & errors from COOPS API, cases below:
             # 1. .get_data() makes a large request (i.e. >1 block requests)
@@ -712,3 +712,5 @@ if __name__ == "__main__":
                             units='metric',
                             time_zone='gmt'
                             )
+
+    print(npt_data.head())
