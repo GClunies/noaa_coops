@@ -5,11 +5,12 @@ __pycache__/
 build/
 dist/
 noaa_coops.egg-info/
+noaa_coops/__pycache__/*
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Testing & Coverage
+# Testing & Coverages
 .cache
 .coverage
 .pytest_cache
