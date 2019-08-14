@@ -39,8 +39,16 @@ class Station:
         wsdl = ('https://opendap.co-ops.nos.noaa.gov/axis/webservices/'
                 'datainventory/wsdl/DataInventory.wsdl')
         client = zeep.Client(wsdl=wsdl)
-        response = client.service.getDataInventory(str(self.stationid))
-        self.data_inventory = response['parameter']    
+        response = client.service.getDataInventory(str(self.stationid))['parameter']
+        names = [x['name'] for x in response]
+        starts = [x['first'] for x in response]
+        ends = [x['last'] for x in response]
+
+        inventory_dict = {}
+        for name, start, end in zip(names, starts, ends):
+            inventory_dict[name] = {'start_date' : start, 'end_date' : end} 
+        
+        self.data_inventory = inventory_dict    
     
     def get_metadata(self, stationid):
         """
@@ -715,7 +723,7 @@ class Station:
 # -----------------------------------------------
 
 # Test functionality
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
 #     # Test that except: pass works for stations with noe data inventory
 #     # e.g. current stations
@@ -738,15 +746,15 @@ class Station:
 #     print('\n')
     
 #     # Test metadata functionality
-#     seattle = Station(9447130)     # water levels
+    seattle = Station(9447130)     # water levels
 
-#     print('Test that metadata is working')
-#     print(seattle.sensors)
-#     print('\n')
+    print('Test that metadata is working')
+    print(seattle.sensors)
+    print('\n')
 
-#     print('Test that data_inventory is working')
-#     print(seattle.data_inventory)
-#     print('\n')
+    print('Test that data_inventory is working')
+    print(seattle.data_inventory)
+    print('\n')
 
 #     print('Test water level station request')
 
