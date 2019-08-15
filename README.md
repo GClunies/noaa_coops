@@ -86,6 +86,7 @@ For use:
 - requests
 - numpy
 - pandas
+- zeep
 
 For development/contributions:
 - pytest
