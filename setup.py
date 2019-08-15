@@ -26,6 +26,6 @@ setup(name='noaa_coops',
           'Programming Language :: Python :: 3.7',
       ],
       packages=['noaa_coops'],
-      install_requires=['requests', 'numpy', 'pandas'],
+      install_requires=['requests', 'numpy', 'pandas', 'zeep'],
       zip_safe=False)
       
