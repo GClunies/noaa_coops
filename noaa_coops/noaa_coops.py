@@ -17,8 +17,6 @@ class Station:
     For data inventory info, see: https://opendap.co-ops.nos.noaa.gov/axis/
     """
 
-    data_base_url = 'http://tidesandcurrents.noaa.gov/api/datagetter?'
-
     def __init__(self, stationid, units='metric'):
         self.stationid = stationid
         self.units = units
@@ -56,8 +54,8 @@ class Station:
         initialized, fill out metadata automatically.
         """
 
-        metadata_base_url = ('http://tidesandcurrents.noaa.gov/mdapi/v1.0/'
-                             'webapi/stations/')
+        metadata_base_url = ('https://api.tidesandcurrents.noaa.gov/mdapi/'
+                             'prod/webapi/stations/')
         extension = '.json'
         metadata_expand = ('?expand=details,sensors,products,disclaimers,'
                            'notices,datums,harcon,tidepredoffets,benchmarks,'
@@ -172,7 +170,7 @@ class Station:
         Build an URL to be used to fetch data from the NOAA CO-OPS data API
         (see https://tidesandcurrents.noaa.gov/api/)
         """
-        base_url = 'http://tidesandcurrents.noaa.gov/api/datagetter?'
+        base_url = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?'
 
         # If the data product is water levels, check that a datum is specified
         if product == 'water_level':
