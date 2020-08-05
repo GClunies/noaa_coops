@@ -56,7 +56,7 @@ class Station:
         initialized, fill out metadata automatically.
         """
 
-        metadata_base_url = ('http://tidesandcurrents.noaa.gov/mdapi/v1.0/'
+        metadata_base_url = ('https://api.tidesandcurrents.noaa.gov/mdapi/prod/'
                              'webapi/stations/')
         extension = '.json'
         metadata_expand = ('?expand=details,sensors,products,disclaimers,'
