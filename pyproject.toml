@@ -1,3 +1,7 @@
 [tool.black]
 line-length = 79
 skip-string-normalization = true
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
