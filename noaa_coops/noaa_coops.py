@@ -452,7 +452,7 @@ class Station:
 
         Info on the NOOA CO-OPS API can be found at:
         https://tidesandcurrents.noaa.gov/api/
-        
+
         Arguments listed below generally follow the same (or similar) format.
 
         Arguments:
@@ -892,7 +892,7 @@ if __name__ == "__main__":
     #     # Test that except: pass works for stations with noe data inventory
     #     # e.g. current stations
 
-    #     print('Test current station request & that data_inventory exception works')
+    #     print('Test current station request & inventory exception works')
     #     print('\n')
 
     #     puget = Station("PUG1515")
@@ -936,7 +936,7 @@ if __name__ == "__main__":
 
 #     print('Test wind data request with large data gap (>block size)')
 
-#     # Test request qith data gap larger than block size (should throuw an error)
+#     # Test request w/ data gap larger than block size (should throw an error)
 #     npt = Station(9418767)
 #     npt_data = npt.get_data(
 #         begin_date='20080808',
