@@ -295,7 +295,7 @@ class Station:
                 raise ValueError(
                     "No bin specified for current data. Bin info can be "
                     "found on the station info page"
-                    " (e.g., https://tidesandcurrents.noaa.gov/cdata/StationInfo?id=PUG1515)"
+                    " (e.g., https://tidesandcurrents.noaa.gov/cdata/StationInfo?id=PUG1515)"  # noqa
                 )
             else:
                 # Compile parameter string for use in URL
