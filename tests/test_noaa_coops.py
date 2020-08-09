@@ -1,8 +1,9 @@
-
 from __future__ import absolute_import
-import noaa_coops as nc
 
 import pytest
+
+import noaa_coops as nc
+
 
 def test_error_handling():
     seattle = nc.Station(9447130)
@@ -11,6 +12,7 @@ def test_error_handling():
             begin_date="20150101",
             end_date="20150331",
             product="water_level",
-            datum="navd88", # this is an invalid datum
+            datum="navd88",  # this is an invalid datum
             units="metric",
-            time_zone="gmt")
+            time_zone="gmt",
+        )

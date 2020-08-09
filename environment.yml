@@ -1,0 +1,21 @@
+name: noaa-coops-dev
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - autoflake
+  - black
+  - bumpversion
+  - flake8
+  - isort
+  - make
+  - mypy
+  - pip
+  - pytest
+  - python=3.7.3
+  - numpy
+  - pandas
+  - requests
+  - zeep
+  - pytest
+  - pytest-cov

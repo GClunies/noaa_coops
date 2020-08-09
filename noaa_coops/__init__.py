@@ -1,5 +1,4 @@
-import noaa_coops
+import noaa_coops  # noqa: F401
+from noaa_coops.noaa_coops import Station  # noqa: F401
 
-__version__ = "0.1.5"
-
-from noaa_coops.noaa_coops import Station
+__version__ = "0.1.7"
