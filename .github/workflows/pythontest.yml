@@ -1,0 +1,40 @@
+name: Python Test Package
+
+on: push
+
+jobs:
+  python-test:
+    name: Python Test (${{ matrix.python-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Miniconda
+        uses: goanpeca/setup-miniconda@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+          auto-update-conda: true
+          auto-activate-base: false
+          channels: defaults,conda-forge
+          environment-file: environment.yml
+          activate-environment: noaa-coops-dev
+          show-channel-urls: true
+          use-only-tar-bz2: true
+      - name: Lint with flake8 and black
+        shell: pwsh
+        run: |
+          flake8 --exclude .git,__pycache__,docs/source/conf.py,old,build,dist \ .
+          black --check .
+      - name: Test with pytest
+        shell: pwsh
+        run: |
+          if("${{ matrix.os }}" -eq "windows-latest"){
+             pytest
+          } else {
+             pytest --cov=./ --cov-report=xml
+          }
