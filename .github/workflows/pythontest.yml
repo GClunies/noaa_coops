@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
+        os: ['ubuntu-latest']
         python-version: [3.6, 3.7, 3.8]
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           auto-update-conda: true
           auto-activate-base: false
-          channels: defaults,conda-forge
+          channels: conda-forge, defaults
           environment-file: environment.yml
           activate-environment: noaa-coops-dev
           show-channel-urls: true
