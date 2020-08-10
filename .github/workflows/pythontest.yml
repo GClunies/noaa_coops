@@ -20,7 +20,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           auto-update-conda: true
           auto-activate-base: false
-          channels: defaults,conda-forge
+          channels: conda-forge, defaults
           environment-file: environment.yml
           activate-environment: noaa-coops-dev
           show-channel-urls: true
