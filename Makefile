@@ -9,5 +9,5 @@ format:
 
 .PHONY: lint
 lint:
-	@flake8 --exclude .git,__pycache__,docs/source/conf.py,old,build,dist \ .
+	@flake8 --exclude .git,__pycache__,docs/source/conf.py,old,build,dist .
 	@black --check .

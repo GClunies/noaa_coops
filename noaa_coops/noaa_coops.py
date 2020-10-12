@@ -926,8 +926,8 @@ if __name__ == "__main__":
         product="water_level",
         datum="MLLW",
         units="metric",
-        time_zone="gmt"
-        )
+        time_zone="gmt",
+    )
 
     print(sea_data.head())
     # print('\n')
