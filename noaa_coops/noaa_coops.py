@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import requests
 import zeep
-from pandas.io.json import json_normalize
+from pandas import json_normalize
 
 
 class Station:
@@ -887,7 +887,7 @@ class Station:
 if __name__ == "__main__":
     # Test functionality
     # ------------------------------------------------------------------------
-    # Test that except: pass works for stations with noe data inventory
+    # Test that except: pass works for stations with no data inventory
     # e.g. current stations
 
     # print('Test current station request & inventory exception works')
@@ -918,18 +918,18 @@ if __name__ == "__main__":
     print(seattle.data_inventory)
     print("\n")
 
-    # print('Test water level station request')
+    print('Test water level station request')
 
-    # sea_data = seattle.get_data(
-    #     begin_date="20150101",
-    #     end_date="20150331",
-    #     product="water_level",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt"
-    #     )
+    sea_data = seattle.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="water_level",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt"
+        )
 
-    # print(sea_data.head())
+    print(sea_data.head())
     # print('\n')
 
     # print('Test wind data request with large data gap (>block size)')
