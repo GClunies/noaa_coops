@@ -46,9 +46,14 @@ class Station:
         starts = [x["first"] for x in response]
         ends = [x["last"] for x in response]
 
+        unique_names = []
+        for name in names: 
+            if name not in unique_names: unique_names.append(name)
+        
         inventory_dict = {}
-        for name, start, end in zip(names, starts, ends):
-            inventory_dict[name] = {"start_date": start, "end_date": end}
+        for name in unique_names:
+            idxs = [i for i, x in enumerate(names) if x == name]
+            inventory_dict[name] = {"start_date": [starts[i] for i in idxs][0], "end_date": [ends[i] for i in idxs][-1]}
 
         self.data_inventory = inventory_dict
 
