@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         os: ['ubuntu-latest']
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,6 +25,10 @@ jobs:
           activate-environment: noaa-coops-dev
           show-channel-urls: true
           use-only-tar-bz2: true
+      - name: Conda list
+        shell: pwsh
+        run: |
+          conda list
       - name: Lint with flake8 and black
         shell: pwsh
         run: |
