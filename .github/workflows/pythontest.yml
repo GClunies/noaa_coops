@@ -28,7 +28,7 @@ jobs:
       - name: Lint with flake8 and black
         shell: pwsh
         run: |
-          flake8 --exclude .git,__pycache__,docs/source/conf.py,old,build,dist \ .
+          flake8 --exclude .git,__pycache__,docs/source/conf.py,old,build,dist \.
           black --check .
       - name: Test with pytest
         shell: pwsh
