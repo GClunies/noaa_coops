@@ -1,7 +1,7 @@
 """Main script to use NOAA_CO-OPS API.
 
 Contains Station class."""
-from typing import List
+from typing import Union, List
 import math
 from datetime import datetime, timedelta
 import pandas as pd
@@ -20,7 +20,7 @@ class Station:
     For data inventory info, see: https://opendap.co-ops.nos.noaa.gov/axis/
     """
 
-    def __init__(self, stationid: str, units: str ="metric") -> None:
+    def __init__(self, stationid: Union[int, str], units: str ="metric") -> None:
         self.stationid = stationid
         self.units = units
         self.get_metadata()
@@ -896,39 +896,52 @@ class Station:
         return df
 
 
-def stations_from_bbox(bbox: List[float], start: str, end: str,
-                       property="water_surface_height_above_reference_datum", 
-                       time_zone="gmt") -> List[str]:
-    """_summary_
+def stationids_from_bbox(bbox: List[float]) -> List[str]:
+    """List of stations from bounding box.
 
     Args:
         bbox (List[float]): Bounding box in lon lat space. E.g. -74.4751,40.389,-73.7432,40.9397
-        start (str): start time.
-        end (str): end time.
-        time_zone (str, optional): _description_. Defaults to "gmt".
 
     Returns:
         List[str]: List of stations.
     """
+    data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+    response = requests.get(data_url)
+    json_dict = response.json()
 
-    call = str(f"http://opendap.co-ops.nos.noaa.gov/ioos-dif-sos/SOS?service=SOS&request=GetObservation&version=1.0.0&observedProperty={property}"
-            + f"&offering=urn:ioos:network:NOAA.NOS.CO-OPS:WaterLevelActive&featureOfInterest=BBOX:{bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]}"
-            + r"&responseFormat=text%2Fcsv&" 
-            + f"eventTime={start}"
-            + "&result=VerticalDatum%3D%3Durn:ogc:def:datum:epsg::5103&dataType=VerifiedSixMinute")
+    station_list = []
+    
+    for station_dict in json_dict["stations"]:
+        if bbox[0]< station_dict["lng"] < bbox[2]:
+            if bbox[1]< station_dict["lat"] < bbox[3]:
+                station_list.append(station_dict["id"])
 
-    print(call)
-    print("end unused")
-
-    requests.get(call)
-    print(requests)
+    return station_list
 
 
-def test_bbox() -> None:
+def all_stationid_list() -> List[str]:
+    """All stations in a list.
+
+    Returns:
+        List[str]: All station id.
+    """
+    data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+    response = requests.get(data_url)
+    json_dict = response.json()
+
+    station_list = []
+    
+    print(json_dict["count"])
+    for station_dict in json_dict["stations"]:
+        station_list.append(station_dict["id"])
+
+    return station_list
+
+
+def test_bbox() -> List[str]:
     bbox = [-74.4751,40.389,-73.7432,40.9397]
-    start="2012-10-26T00:00:00Z"
-    end="2013"
-    stations_from_bbox(bbox, start, end)
+    return stationids_from_bbox(bbox)
+
 
 def test_metatdata_functionality():
     # Test metadata functionality
@@ -954,6 +967,38 @@ def test_metatdata_functionality():
     )
 
     print(sea_data.head())
+
+
+def test_station(stationid):
+    # Test metadata functionality
+    station = Station(stationid)  # water levels
+
+    print("Test that metadata is working")
+    print(station.sensors)
+    print("\n")
+
+    print("Test that data_inventory is working")
+    print(station.data_inventory)
+    print("\n")
+
+    print('Test water level station request')
+
+    sea_data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="water_level",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+
+    print(sea_data.head())
+
+
+def test_stations(stationid_list) -> None:
+    for stationid in stationid_list:
+        test_station(stationid)
+
 
 if __name__ == "__main__":
     # Test functionality
@@ -993,5 +1038,9 @@ if __name__ == "__main__":
     # print(npt_data.head())
     # print('\n')
     # print('__main__ done!')
-    test_bbox()
+    print(len(all_stationid_list()))
+    print(len(test_bbox()))
+    test_stations(test_bbox())
+
+
 
