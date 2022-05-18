@@ -1,6 +1,7 @@
 """Main script to use NOAA_CO-OPS API.
 
 Contains Station class."""
+from typing import List
 import math
 from datetime import datetime, timedelta
 import pandas as pd
@@ -895,29 +896,41 @@ class Station:
         return df
 
 
-if __name__ == "__main__":
-    # Test functionality
-    # ------------------------------------------------------------------------
-    # Test that except: pass works for stations with no data inventory
-    # e.g. current stations
+def stations_from_bbox(bbox: List[float], start: str, end: str,
+                       property="water_surface_height_above_reference_datum", 
+                       time_zone="gmt") -> List[str]:
+    """_summary_
 
-    # print('Test current station request & inventory exception works')
-    # print('\n')
+    Args:
+        bbox (List[float]): Bounding box in lon lat space. E.g. -74.4751,40.389,-73.7432,40.9397
+        start (str): start time.
+        end (str): end time.
+        time_zone (str, optional): _description_. Defaults to "gmt".
 
-    # puget = Station("PUG1515")
+    Returns:
+        List[str]: List of stations.
+    """
 
-    # puget_data = puget.get_data(
-    #     begin_date="20150727",
-    #     end_date="20150910",
-    #     product="currents",
-    #     bin_num=1,
-    #     units="metric",
-    #     time_zone="gmt"
-    #     )
+    call = str(f"http://opendap.co-ops.nos.noaa.gov/ioos-dif-sos/SOS?service=SOS&request=GetObservation&version=1.0.0&observedProperty={property}"
+            + f"&offering=urn:ioos:network:NOAA.NOS.CO-OPS:WaterLevelActive&featureOfInterest=BBOX:{bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]}"
+            + r"&responseFormat=text%2Fcsv&" 
+            + f"eventTime={start}"
+            + "&result=VerticalDatum%3D%3Durn:ogc:def:datum:epsg::5103&dataType=VerifiedSixMinute")
 
-    # print(puget_data.head())
-    # print('\n')
+    print(call)
+    print("end unused")
 
+    requests.get(call)
+    print(requests)
+
+
+def test_bbox() -> None:
+    bbox = [-74.4751,40.389,-73.7432,40.9397]
+    start="2012-10-26T00:00:00Z"
+    end="2013"
+    stations_from_bbox(bbox, start, end)
+
+def test_metatdata_functionality():
     # Test metadata functionality
     seattle = Station(9447130)  # water levels
 
@@ -941,6 +954,28 @@ if __name__ == "__main__":
     )
 
     print(sea_data.head())
+
+if __name__ == "__main__":
+    # Test functionality
+    # ------------------------------------------------------------------------
+    # Test that except: pass works for stations with no data inventory
+    # e.g. current stations
+
+    # print('Test current station request & inventory exception works')
+    # print('\n')
+
+    # puget = Station("PUG1515")
+
+    # puget_data = puget.get_data(
+    #     begin_date="20150727",
+    #     end_date="20150910",
+    #     product="currents",
+    #     bin_num=1,
+    #     units="metric",
+    #     time_zone="gmt"
+    #     )
+
+    # print(puget_data.head())
     # print('\n')
 
     # print('Test wind data request with large data gap (>block size)')
@@ -958,3 +993,5 @@ if __name__ == "__main__":
     # print(npt_data.head())
     # print('\n')
     # print('__main__ done!')
+    test_bbox()
+

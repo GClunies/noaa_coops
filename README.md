@@ -94,7 +94,7 @@ For development/contributions:
 
 
 ## TODO
-See [issues](https://github.com/GClunies/py_noaa/issues) for a list of issues 
+See [issues](https://github.com/GClunies/noaa_coops/issues) for a list of issues 
 and to add issues of your own.
 
 ## Contribution
