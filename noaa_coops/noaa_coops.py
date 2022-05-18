@@ -30,6 +30,14 @@ class Station:
         except:  # noqa: E722
             pass
 
+    def __repr__(self):
+        """The repr function to provide a summary of each station for debugging."""
+
+        return "Station details: " + str([self.metadata["id"],
+            self.metadata["name"], self.metadata["lng"],
+            self.metadata["lat"], self.metadata["details"]["origyear"]])
+
+
     def get_data_inventory(self):
         """
         Get data inventory for station with water level & meteoroligical data.
@@ -896,7 +904,7 @@ class Station:
         return df
 
 
-def stationids_from_bbox(bbox: List[float]) -> List[str]:
+def stationid_from_bbox(bbox: List[float]) -> List[str]:
     """List of stations from bounding box.
 
     Args:
@@ -919,6 +927,11 @@ def stationids_from_bbox(bbox: List[float]) -> List[str]:
     return station_list
 
 
+def test_bbox() -> List[str]:
+    bbox = [-74.4751,40.389,-73.7432,40.9397]
+    return stationid_from_bbox([-74.4751,40.389,-73.7432,40.9397])
+
+
 def all_stationid_list() -> List[str]:
     """All stations in a list.
 
@@ -936,11 +949,6 @@ def all_stationid_list() -> List[str]:
         station_list.append(station_dict["id"])
 
     return station_list
-
-
-def test_bbox() -> List[str]:
-    bbox = [-74.4751,40.389,-73.7432,40.9397]
-    return stationids_from_bbox(bbox)
 
 
 def test_metatdata_functionality():
@@ -1039,7 +1047,7 @@ if __name__ == "__main__":
     # print('\n')
     # print('__main__ done!')
     print(len(all_stationid_list()))
-    print(len(test_bbox()))
+    print(test_bbox())
     test_stations(test_bbox())
 
 
