@@ -53,7 +53,7 @@ Data types are listed on the [NOAA CO-OPS Data API](https://tidesandcurrents.noa
     - Air temperature
     - Water temperature
 
-Compatibility with other data products may exist, but is not guaranteed at this 
+Compatibility with other data products may exist, but is not guaranteed at this
 time. Feel free to submit a pull request if you would like to add addtional 
 functionality.
 

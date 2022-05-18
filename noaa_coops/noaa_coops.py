@@ -1,10 +1,12 @@
+"""Main script to use NOAA_CO-OPS API.
+
+Contains Station class."""
 import math
 from datetime import datetime, timedelta
-
 import pandas as pd
+from pandas import json_normalize
 import requests
 import zeep
-from pandas import json_normalize
 
 
 class Station:
@@ -17,17 +19,17 @@ class Station:
     For data inventory info, see: https://opendap.co-ops.nos.noaa.gov/axis/
     """
 
-    def __init__(self, stationid, units="metric"):
+    def __init__(self, stationid: str, units: str ="metric") -> None:
         self.stationid = stationid
         self.units = units
-        self.get_metadata(self.stationid)
+        self.get_metadata()
 
         try:
-            self.get_data_inventory(self.stationid)
+            self.get_data_inventory()
         except:  # noqa: E722
             pass
 
-    def get_data_inventory(self, stationid):
+    def get_data_inventory(self):
         """
         Get data inventory for station with water level & meteoroligical data.
         Data inventory is fetched from NOAA CO-OPS SOAP Web Services, see:
@@ -61,7 +63,7 @@ class Station:
 
         self.data_inventory = inventory_dict
 
-    def get_metadata(self, stationid):
+    def get_metadata(self):
         """
         Build URL for metadata API request. When a Station object is
         initialized, fill out metadata automatically.
@@ -195,8 +197,8 @@ class Station:
         datum=None,
         bin_num=None,
         interval=None,
-        units="metric",
-        time_zone="gmt",
+        units: str="metric",
+        time_zone: str ="gmt",
     ):
         """
         Build an URL to be used to fetch data from the NOAA CO-OPS data API
@@ -452,8 +454,8 @@ class Station:
         datum=None,
         bin_num=None,
         interval=None,
-        units="metric",
-        time_zone="gmt",
+        units: str="metric",
+        time_zone: str="gmt",
     ):
         """
         Function to get data from NOAA CO-OPS API and convert it to a pandas
