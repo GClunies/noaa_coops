@@ -1,5 +1,6 @@
 """Unit tests for API wrapper."""
 from __future__ import absolute_import
+import numpy as np
 import pytest
 import noaa_coops as nc
 
@@ -16,3 +17,14 @@ def test_error_handling() -> None:
             units="metric",
             time_zone="gmt",
         )
+
+
+def test_bbox() -> None:
+    """Test bbox script."""
+    bbox = [-74.4751, 40.389, -73.7432, 40.9397]
+    assert np.all(
+        [
+            ['8516945', '8518750', '8519483', '8531680']
+            == nc.stationid_from_bbox(bbox)
+        ]
+    )

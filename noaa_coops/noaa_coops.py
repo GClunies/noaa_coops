@@ -20,7 +20,9 @@ class Station:
     For data inventory info, see: https://opendap.co-ops.nos.noaa.gov/axis/
     """
 
-    def __init__(self, stationid: Union[int, str], units: str ="metric") -> None:
+    def __init__(
+        self, stationid: Union[int, str], units: str = "metric"
+    ) -> None:
         self.stationid = stationid
         self.units = units
         self.get_metadata()
@@ -33,10 +35,15 @@ class Station:
     def __repr__(self):
         """The repr function to provide a summary of each station for debugging."""
 
-        return "Station details: " + str([self.metadata["id"],
-            self.metadata["name"], self.metadata["lng"],
-            self.metadata["lat"], self.metadata["details"]["origyear"]])
-
+        return "Station details: " + str(
+            [
+                self.metadata["id"],
+                self.metadata["name"],
+                self.metadata["lng"],
+                self.metadata["lat"],
+                self.metadata["details"]["origyear"],
+            ]
+        )
 
     def get_data_inventory(self):
         """
@@ -206,8 +213,8 @@ class Station:
         datum=None,
         bin_num=None,
         interval=None,
-        units: str="metric",
-        time_zone: str ="gmt",
+        units: str = "metric",
+        time_zone: str = "gmt",
     ):
         """
         Build an URL to be used to fetch data from the NOAA CO-OPS data API
@@ -463,8 +470,8 @@ class Station:
         datum=None,
         bin_num=None,
         interval=None,
-        units: str="metric",
-        time_zone: str="gmt",
+        units: str = "metric",
+        time_zone: str = "gmt",
     ):
         """
         Function to get data from NOAA CO-OPS API and convert it to a pandas
@@ -913,99 +920,20 @@ def stationid_from_bbox(bbox: List[float]) -> List[str]:
     Returns:
         List[str]: List of stations.
     """
-    data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+    data_url = (
+        "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+    )
     response = requests.get(data_url)
     json_dict = response.json()
 
     station_list = []
-    
+
     for station_dict in json_dict["stations"]:
-        if bbox[0]< station_dict["lng"] < bbox[2]:
-            if bbox[1]< station_dict["lat"] < bbox[3]:
+        if bbox[0] < station_dict["lng"] < bbox[2]:
+            if bbox[1] < station_dict["lat"] < bbox[3]:
                 station_list.append(station_dict["id"])
 
     return station_list
-
-
-def test_bbox() -> List[str]:
-    bbox = [-74.4751,40.389,-73.7432,40.9397]
-    return stationid_from_bbox([-74.4751,40.389,-73.7432,40.9397])
-
-
-def all_stationid_list() -> List[str]:
-    """All stations in a list.
-
-    Returns:
-        List[str]: All station id.
-    """
-    data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
-    response = requests.get(data_url)
-    json_dict = response.json()
-
-    station_list = []
-    
-    print(json_dict["count"])
-    for station_dict in json_dict["stations"]:
-        station_list.append(station_dict["id"])
-
-    return station_list
-
-
-def test_metatdata_functionality():
-    # Test metadata functionality
-    seattle = Station(9447130)  # water levels
-
-    print("Test that metadata is working")
-    print(seattle.sensors)
-    print("\n")
-
-    print("Test that data_inventory is working")
-    print(seattle.data_inventory)
-    print("\n")
-
-    print('Test water level station request')
-
-    sea_data = seattle.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-
-    print(sea_data.head())
-
-
-def test_station(stationid):
-    # Test metadata functionality
-    station = Station(stationid)  # water levels
-
-    print("Test that metadata is working")
-    print(station.sensors)
-    print("\n")
-
-    print("Test that data_inventory is working")
-    print(station.data_inventory)
-    print("\n")
-
-    print('Test water level station request')
-
-    sea_data = station.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-
-    print(sea_data.head())
-
-
-def test_stations(stationid_list) -> None:
-    for stationid in stationid_list:
-        test_station(stationid)
 
 
 if __name__ == "__main__":
@@ -1046,9 +974,5 @@ if __name__ == "__main__":
     # print(npt_data.head())
     # print('\n')
     # print('__main__ done!')
-    print(len(all_stationid_list()))
-    print(test_bbox())
-    test_stations(test_bbox())
-
-
-
+    test_bbox()
+    # python noaa_coops/noaa_coops.py
