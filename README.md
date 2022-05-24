@@ -11,6 +11,10 @@ and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 This package is an evolution of [py_noaa](https://github.com/GClunies/py_noaa), the main addition being the creation of a `Station` class that is central to 
  `noaa_coops` and provides distinct advantages over `py_noaa`.
 
+## Installation
+---
+This package is distributed through [pip](https://pypi.org/project/noaa-coops/) and can be installed to an environment via `pip install noaa-coops`.
+
 ## Use
 ---
 All data and metadata is handled using a `Station` class with methods and 
