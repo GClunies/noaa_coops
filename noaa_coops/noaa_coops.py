@@ -915,7 +915,7 @@ def stationid_from_bbox(bbox: List[float]) -> List[str]:
     """List of stations from bounding box.
 
     Args:
-        bbox (List[float]): Bounding box in lon lat space. E.g. -74.4751,40.389,-73.7432,40.9397
+        bbox (List[float]): Bounding box in lon lat space. E.g. [-74.4751,40.389,-73.7432,40.9397]
 
     Returns:
         List[str]: List of stations.
@@ -945,7 +945,7 @@ if __name__ == "__main__":
     # print('Test current station request & inventory exception works')
     # print('\n')
 
-    # puget = Station("PUG1515")
+    puget = Station("PUG1515")
 
     # puget_data = puget.get_data(
     #     begin_date="20150727",
@@ -974,5 +974,4 @@ if __name__ == "__main__":
     # print(npt_data.head())
     # print('\n')
     # print('__main__ done!')
-    test_bbox()
     # python noaa_coops/noaa_coops.py
