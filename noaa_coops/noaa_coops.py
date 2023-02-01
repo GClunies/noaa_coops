@@ -557,7 +557,7 @@ class Station:
 
                 # Get dataframe for block and append to time series df
                 df_new = self._url2pandas(data_url, product, num_365day_blocks)
-                df = df.append(df_new)
+                df = pd.concat([df, df_new])
 
         # If the length of the user specified data request is greater than 31
         # days for any other products, we need to load data from the API in 31
@@ -595,7 +595,7 @@ class Station:
 
                 # Get dataframe for block and append to time series df
                 df_new = self._url2pandas(data_url, product, num_31day_blocks)
-                df = df.append(df_new)
+                df = pd.concat([df, df_new])
 
         # Rename output dataframe columns based on requested product
         # and convert to useable data types
