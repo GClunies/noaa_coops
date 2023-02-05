@@ -1,6 +1,0 @@
-pytest>=4.0
-pytest-cov
-pandas
-numpy
-requests
-zeep
