@@ -9,7 +9,7 @@ from pandas import json_normalize
 
 class Station:
     """
-    A class to access station data and metadata via the NOAA Tides & Currents
+    A class to access Station data and metadata via the NOAA Tides & Currents
     APIs.
 
     For data retrieval API, see https://tidesandcurrents.noaa.gov/api/.
