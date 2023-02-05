@@ -7,6 +7,10 @@
 A Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
 and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
+## Installation
+---
+This package is distributed through [pip](https://pypi.org/project/noaa-coops/) and can be installed to an environment via `pip install noaa-coops`.
+
 ## Use
 ---
 ### Stations
