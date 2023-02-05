@@ -1,4 +1,4 @@
-name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Publish Python Package to TestPyPI and PyPI
 
 on:
   release:
@@ -23,6 +23,7 @@ jobs:
           poetry install --no-interaction
 
       - name: Publish package to TestPyPI
+        id: publish_test
         env:
           TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
         run: |
@@ -30,6 +31,7 @@ jobs:
           poetry publish --build --repository testpypi
 
       - name: Publish package to PyPI
+        if: steps.publish_test.outcome == 'success'
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
