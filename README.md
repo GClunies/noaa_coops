@@ -17,22 +17,48 @@ All data is accessed via a `Station` class object with methods for retrieving me
 >>> seattle = nc.Station(9447130)
 ```
 
-### Getting Metadata
+### Get Metadata
 Station metadata is stored as a dictionary in the `.metadata` attribute of a `Station` object. Additionally, the keys of the metadata attribute dictionary are also assigned as attributes of the station object itself.
 
 ```python
->>> from pprint import pprint  # For pretty printing
+>>> from pprint import pprint as print  # For pretty printing
 >>> import noaa_coops as nc
 >>> seattle = nc.Station(9447130)
->>> pprint(seattle.lat_lon['lat'])
+>>> print(seattle.lat_lon['lat'])
 47.601944
->>> pprint(seattle.lat_lon['lon'])
+>>> print(seattle.lat_lon['lon'])
 -122.339167
-
 ```
 
-### Getting Observed and Predicted Data
-Station data can be retrieved using the `.get_data` method on a `Station` object. Data is returned as Pandas DataFrames for ease of use and analysis. Available data products can be found in [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products) docs.
+### Get Data Inventory
+A description of a Station's data products and available dates can be accessed via the `.data_inventory` attribute of a `Station` object.
+
+```python
+>>> import noaa_coops as nc
+>>> from pprint import pprint as print
+>>> seattle = nc.Station(9447130)
+>>> print(seattle.data_inventory)
+{'Air Temperature': {'end_date': '2019-01-02 18:36',
+                     'start_date': '1991-11-09 01:00'},
+ 'Barometric Pressure': {'end_date': '2019-01-02 18:36',
+                         'start_date': '1991-11-09 00:00'},
+ 'Preliminary 6-Minute Water Level': {'end_date': '2023-02-05 19:54',
+                                      'start_date': '2001-01-01 00:00'},
+ 'Verified 6-Minute Water Level': {'end_date': '2022-12-31 23:54',
+                                   'start_date': '1995-06-01 00:00'},
+ 'Verified High/Low Water Level': {'end_date': '2022-12-31 23:54',
+                                   'start_date': '1977-10-18 02:18'},
+ 'Verified Hourly Height Water Level': {'end_date': '2022-12-31 23:00',
+                                        'start_date': '1899-01-01 00:00'},
+ 'Verified Monthly Mean Water Level': {'end_date': '2022-12-31 23:54',
+                                       'start_date': '1898-12-01 00:00'},
+ 'Water Temperature': {'end_date': '2019-01-02 18:36',
+                       'start_date': '1991-11-09 00:00'},
+ 'Wind': {'end_date': '2019-01-02 18:36', 'start_date': '1991-11-09 00:00'}}
+```
+
+### Get Data
+Station data can be fetched using the `.get_data` method on a `Station` object. Data is returned as Pandas DataFrames for ease of use and analysis. Available data products can be found in [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products) docs.
 
 `noaa_coops` currently supports the following data products:
 - Currents
@@ -45,8 +71,7 @@ Station data can be retrieved using the `.get_data` method on a `Station` object
 - Air temperature
 - Water temperature
 
-#### Example
-Fetch water level data from the Seattle station (`stationid`=9447130) for a 3 month period.
+The example below fetches water level data from the Seattle station (`stationid`=9447130) for a 3 month period.
 
 ```python
 >>> import noaa_coops as nc
@@ -77,7 +102,6 @@ This package and its dependencies are managed using [poetry](https://python-poet
 ```bash
 poetry install
 ```
-
 
 ### TODO
 Click [here](https://github.com/GClunies/py_noaa/issues) for a list of existing issues and to submit a new one.
