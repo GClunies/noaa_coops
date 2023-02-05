@@ -10,20 +10,22 @@ and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 ## Use
 ---
 ### Stations
-All data is accessed via a `Station` class object with methods for retrieving metadata, observed data, and predicted data. Stations are identified by a unique `stationid` which can be found using this [mapping interface](https://tidesandcurrents.noaa.gov/). You can initialize a `Station` object by passing the `stationid` as an argument:
+Data is accessed via `Station` objects. Each station is uniquely identified by a `stationid` which can be found using this [mapping interface](https://tidesandcurrents.noaa.gov/). To initialize a `Station` object, run:
 
 ```python
 >>> import noaa_coops as nc
->>> seattle = nc.Station(9447130)
+>>> seattle = nc.Station(9447130)  # Station ID for Seattle
 ```
 
 ### Get Metadata
-Station metadata is stored as a dictionary in the `.metadata` attribute of a `Station` object. Additionally, the keys of the metadata attribute dictionary are also assigned as attributes of the station object itself.
+Station metadata is stored in the `.metadata` attribute of a `Station` object. Additionally, the keys of the metadata attribute dictionary are also assigned as attributes of the station object itself.
 
 ```python
->>> from pprint import pprint as print  # For pretty printing
+>>> from pprint import pprint as print
 >>> import noaa_coops as nc
 >>> seattle = nc.Station(9447130)
+>>> print(seattle.metadata)
+{}
 >>> print(seattle.lat_lon['lat'])
 47.601944
 >>> print(seattle.lat_lon['lon'])
