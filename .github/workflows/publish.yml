@@ -23,7 +23,7 @@ jobs:
           poetry install --no-interaction
 
       - name: Publish package to TestPyPI
-        id: publish_test
+        id: publish_test  # Used to check if the step succeeded or failed
         env:
           TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
         run: |
