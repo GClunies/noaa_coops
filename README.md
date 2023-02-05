@@ -8,42 +8,41 @@ A Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesan
 and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
 ## Installation
----
 This package is distributed through [pip](https://pypi.org/project/noaa-coops/) and can be installed to an environment via `pip install noaa-coops`.
 
-## Use
----
+## Getting Started
+
 ### Stations
-Data is accessed via `Station` objects. Each station is uniquely identified by a `stationid` which can be found using this [mapping interface](https://tidesandcurrents.noaa.gov/). To initialize a `Station` object, run:
+Data is accessed via `Station` class objects. Each station is uniquely identified by a `stationid` which can be found using this [mapping interface](https://tidesandcurrents.noaa.gov/). To initialize a `Station` object, run:
 
 ```python
->>> import noaa_coops as nc
->>> seattle = nc.Station(9447130)  # Station ID for Seattle
+>>> from noaa_coops import Station
+>>> seattle = Station(9447130)  # Station ID for Seattle
 ```
 
-### Get Metadata
+#### Metadata
 Station metadata is stored in the `.metadata` attribute of a `Station` object. Additionally, the keys of the metadata attribute dictionary are also assigned as attributes of the station object itself.
 
 ```python
->>> from pprint import pprint as print
->>> import noaa_coops as nc
->>> seattle = nc.Station(9447130)
->>> print(seattle.metadata)
-{}
->>> print(seattle.lat_lon['lat'])
+>>> from pprint import pprint
+>>> from noaa_coops import Station
+>>> seattle = Station(9447130)
+>>> pprint(list(seattle.metadata.items())[:5])                   # Print first 3 items in metadata
+[('tidal', True), ('greatlakes', False), ('shefcode', 'EBSW1')]  # Metadata dictionary can be very long
+>>> pprint(seattle.lat_lon['lat'])                               # Print latitude
 47.601944
->>> print(seattle.lat_lon['lon'])
+>>> pprint(seattle.lat_lon['lon'])                               # Print longitude
 -122.339167
 ```
 
-### Get Data Inventory
+#### Data Inventory
 A description of a Station's data products and available dates can be accessed via the `.data_inventory` attribute of a `Station` object.
 
 ```python
->>> import noaa_coops as nc
->>> from pprint import pprint as print
->>> seattle = nc.Station(9447130)
->>> print(seattle.data_inventory)
+>>> from noaa_coops import Station
+>>> from pprint import pprint
+>>> seattle = Station(9447130)
+>>> pprint(seattle.data_inventory)
 {'Air Temperature': {'end_date': '2019-01-02 18:36',
                      'start_date': '1991-11-09 01:00'},
  'Barometric Pressure': {'end_date': '2019-01-02 18:36',
@@ -63,7 +62,7 @@ A description of a Station's data products and available dates can be accessed v
  'Wind': {'end_date': '2019-01-02 18:36', 'start_date': '1991-11-09 00:00'}}
 ```
 
-### Get Data
+#### Data
 Station data can be fetched using the `.get_data` method on a `Station` object. Data is returned as Pandas DataFrames for ease of use and analysis. Available data products can be found in [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products) docs.
 
 `noaa_coops` currently supports the following data products:
@@ -77,11 +76,11 @@ Station data can be fetched using the `.get_data` method on a `Station` object. 
 - Air temperature
 - Water temperature
 
-The example below fetches water level data from the Seattle station (`stationid`=9447130) for a 3 month period.
+The example below fetches water level data from the Seattle station for a 3 month period.
 
 ```python
->>> import noaa_coops as nc
->>> seattle = nc.Station(9447130)
+>>> from noaa_coops import Station
+>>> seattle = Station(9447130)
 >>> df_water_levels = seattle.get_data(
 ...     begin_date="20150101",
 ...     end_date="20150331",
