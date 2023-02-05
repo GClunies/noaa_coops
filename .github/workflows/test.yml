@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   lint:
-    name: Lint & Test - (${{ matrix.python-version }}, ${{ matrix.os }})
+    name: Lint (${{ matrix.python-version }}, ${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
