@@ -861,24 +861,7 @@ class Station:
 if __name__ == "__main__":
     from pprint import pprint as pp
 
-    # Test functionality
-    # ------------------------------------------------------------------------
-    # Test that except: pass works for stations with no data inventory
-    # e.g. current stations
-    # print('Test current station request & inventory exception works')
-    # print('\n')
-    # puget = Station("PUG1515")
-    # puget_data = puget.get_data(
-    #     begin_date="20150727",
-    #     end_date="20150910",
-    #     product="currents",
-    #     bin_num=1,
-    #     units="metric",
-    #     time_zone="gmt"
-    #     )
-    # print(puget_data.head())
-    # print('\n')
-    # Test metadata functionality
+    # DEBUGGING
     seattle = Station(9447130)  # water levels
 
     print("Test that metadata is working:")
