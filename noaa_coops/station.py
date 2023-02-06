@@ -9,7 +9,7 @@ from pandas import json_normalize
 
 class Station:
     """
-    A class to access station data and metadata via the NOAA Tides & Currents
+    A class to access Station data and metadata via the NOAA Tides & Currents
     APIs.
 
     For data retrieval API, see https://tidesandcurrents.noaa.gov/api/.
@@ -29,7 +29,7 @@ class Station:
 
     def get_data_inventory(self, stationid):
         """
-        Get data inventory for station with water level & meteoroligical data.
+        Get data inventory for station with water level & meteorological data.
         Data inventory is fetched from NOAA CO-OPS SOAP Web Services, see:
         https://opendap.co-ops.nos.noaa.gov/axis/
         """
@@ -39,9 +39,7 @@ class Station:
             "datainventory/wsdl/DataInventory.wsdl"
         )
         client = zeep.Client(wsdl=wsdl)
-        response = client.service.getDataInventory(str(self.stationid))[
-            "parameter"
-        ]
+        response = client.service.getDataInventory(str(self.stationid))["parameter"]
         names = [x["name"] for x in response]
         starts = [x["first"] for x in response]
         ends = [x["last"] for x in response]
@@ -68,8 +66,7 @@ class Station:
         """
 
         metadata_base_url = (
-            "https://api.tidesandcurrents.noaa.gov/mdapi/"
-            "prod/webapi/stations/"
+            "https://api.tidesandcurrents.noaa.gov/mdapi/" "prod/webapi/stations/"
         )
         extension = ".json"
         metadata_expand = (
@@ -168,9 +165,7 @@ class Station:
 
         elif "currbin" in station_metadata:  # if True --> predicted currents
             self.metadata = station_metadata
-            self.current_pred_offsets = station_metadata[
-                "currentpredictionoffsets"
-            ]
+            self.current_pred_offsets = station_metadata["currentpredictionoffsets"]
             self.curr_bin = station_metadata["currbin"]
             self.type = station_metadata["type"]
             self.depth = station_metadata["depth"]
@@ -222,7 +217,7 @@ class Station:
                     "datum": datum,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
 
@@ -243,7 +238,7 @@ class Station:
                     "datum": datum,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
         elif product == "high_low":
@@ -263,7 +258,7 @@ class Station:
                     "datum": datum,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
 
@@ -279,7 +274,7 @@ class Station:
                     "datum": datum,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
 
@@ -294,7 +289,7 @@ class Station:
                     "interval": interval,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
 
@@ -316,7 +311,7 @@ class Station:
                     "bin": str(bin_num),
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
 
@@ -332,7 +327,7 @@ class Station:
                     "product": product,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
             else:
@@ -345,14 +340,12 @@ class Station:
                     "interval": interval,
                     "units": units,
                     "time_zone": time_zone,
-                    "application": "py_noaa",
+                    "application": "noaa_coops",
                     "format": "json",
                 }
 
         # Build URL with requests library
-        query_url = (
-            requests.Request("GET", base_url, params=parameters).prepare().url
-        )
+        query_url = requests.Request("GET", base_url, params=parameters).prepare().url
 
         return query_url
 
@@ -390,9 +383,7 @@ class Station:
 
         # Case 1
         if (num_request_blocks > 1) and ("error" in json_dict):
-            error_message = json_dict["error"].get(
-                "message", "Error retrieving data"
-            )
+            error_message = json_dict["error"].get("message", "Error retrieving data")
             error_message = error_message.lstrip()
             error_message = error_message.rstrip()
 
@@ -416,9 +407,7 @@ class Station:
 
         # Case 3
         elif (num_request_blocks == 1) and ("error" in json_dict):
-            raise ValueError(
-                json_dict["error"].get("message", "Error retrieving data")
-            )
+            raise ValueError(json_dict["error"].get("message", "Error retrieving data"))
 
         # Case 4
         else:
@@ -533,9 +522,7 @@ class Station:
             # adjust the begin_datetime and end_datetime accordingly,
             # make a request to the NOAA CO-OPS API
             for i in range(num_365day_blocks + 1):
-                begin_datetime_loop = begin_datetime + timedelta(
-                    days=(i * 365)
-                )
+                begin_datetime_loop = begin_datetime + timedelta(days=(i * 365))
                 end_datetime_loop = begin_datetime_loop + timedelta(days=365)
 
                 # If end_datetime_loop of the current 365 day block is greater
@@ -614,9 +601,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["flags", "QC", "date_time"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -635,9 +620,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["flags", "date_time"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -692,14 +675,10 @@ class Station:
             )
 
             # Extract dates (without time) for each entry
-            dates_HH = [
-                x.date() for x in pd.to_datetime(df_HH["date_time_HH"])
-            ]
+            dates_HH = [x.date() for x in pd.to_datetime(df_HH["date_time_HH"])]
             dates_H = [x.date() for x in pd.to_datetime(df_H["date_time_H"])]
             dates_L = [x.date() for x in pd.to_datetime(df_L["date_time_L"])]
-            dates_LL = [
-                x.date() for x in pd.to_datetime(df_LL["date_time_LL"])
-            ]
+            dates_LL = [x.date() for x in pd.to_datetime(df_LL["date_time_LL"])]
 
             # Set indices to datetime
             df_HH["date_time"] = dates_HH
@@ -741,9 +720,7 @@ class Station:
                     "date_time_LL",
                 ]
             )
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df.index)
@@ -800,9 +777,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["date_time"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -823,9 +798,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["date_time", "flags", "compass"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -839,9 +812,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -855,9 +826,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -871,9 +840,7 @@ class Station:
 
             # Convert columns to numeric values
             data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(
-                pd.to_numeric, axis=1, errors="coerce"
-            )
+            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
 
             # Convert date & time strings to datetime objects
             df["date_time"] = pd.to_datetime(df["date_time"])
@@ -883,9 +850,7 @@ class Station:
         df = df.drop(columns=["date_time"])
 
         # Handle hourly requests for water_level and currents data
-        if ((product == "water_level") | (product == "currents")) & (
-            interval == "h"
-        ):
+        if ((product == "water_level") | (product == "currents")) & (interval == "h"):
             df = df.resample("H").first()  # Only return the hourly data
 
         df.drop_duplicates()  # Handle duplicates due to overlapping requests
@@ -894,41 +859,24 @@ class Station:
 
 
 if __name__ == "__main__":
-    # Test functionality
-    # ------------------------------------------------------------------------
-    # Test that except: pass works for stations with no data inventory
-    # e.g. current stations
+    from pprint import pprint as pp
 
-    # print('Test current station request & inventory exception works')
-    # print('\n')
-
-    # puget = Station("PUG1515")
-
-    # puget_data = puget.get_data(
-    #     begin_date="20150727",
-    #     end_date="20150910",
-    #     product="currents",
-    #     bin_num=1,
-    #     units="metric",
-    #     time_zone="gmt"
-    #     )
-
-    # print(puget_data.head())
-    # print('\n')
-
-    # Test metadata functionality
+    # DEBUGGING
     seattle = Station(9447130)  # water levels
 
-    print("Test that metadata is working")
-    print(seattle.sensors)
-    print("\n")
+    print("Test that metadata is working:")
+    pp(seattle.metadata)
+    print("\n" * 2)
 
-    print("Test that data_inventory is working")
-    print(seattle.data_inventory)
-    print("\n")
+    print("Test that attributes are populated from metadata:")
+    pp(seattle.sensors)
+    print("\n" * 2)
 
-    print('Test water level station request')
+    print("Test that data_inventory is working:")
+    pp(seattle.data_inventory)
+    print("\n" * 2)
 
+    print("Test water level station request:")
     sea_data = seattle.get_data(
         begin_date="20150101",
         end_date="20150331",
@@ -937,22 +885,5 @@ if __name__ == "__main__":
         units="metric",
         time_zone="gmt",
     )
-
-    print(sea_data.head())
-    # print('\n')
-
-    # print('Test wind data request with large data gap (>block size)')
-
-    # # Test request w/ data gap larger than block size (should throw an error)
-    # npt = Station(9418767)
-    # npt_data = npt.get_data(
-    #     begin_date='20080808',
-    #     end_date='20120101',
-    #     product='wind',
-    #     units='metric',
-    #     time_zone='gmt'
-    #     )
-
-    # print(npt_data.head())
-    # print('\n')
-    # print('__main__ done!')
+    pp(sea_data.head())
+    print("\n" * 2)
