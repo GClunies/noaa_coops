@@ -10,6 +10,47 @@ import zeep
 from pandas import json_normalize
 
 
+def get_stations_from_bbox(
+    lat_coords: list[float, float],
+    lon_coords: list[float, float],
+) -> list[str]:
+    """Return a list of stations IDs found within a bounding box.
+
+    Args:
+        lat_coords (list[float]): The lower and upper latitudes of the box.
+        lon_coords (list[float]): The lower and upper longitudes of the box.
+
+    Raises:
+        ValueError: lat_coords or lon_coords are not of length 2.
+
+    Returns:
+        list[str]: A list of station IDs.
+    """
+    data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+    response = requests.get(data_url)
+    json_dict = response.json()
+
+    station_list = []
+
+    if len(lat_coords) != 2 or len(lon_coords) != 2:
+        raise ValueError("lat_coords and lon_coords must be of length 2.")
+
+    # Ensure lat_coords and lon_coords are in the correct order
+    if lat_coords[0] > lat_coords[1]:
+        lat_coords[0], lat_coords[1] = lat_coords[1], lat_coords[0]
+
+    if lon_coords[0] > lon_coords[1]:
+        lon_coords[0], lon_coords[1] = lon_coords[1], lon_coords[0]
+
+    # Search through stations and append to station_list if within bounding box
+    for station_dict in json_dict["stations"]:
+        if lon_coords[0] < station_dict["lng"] < lon_coords[1]:
+            if lat_coords[0] < station_dict["lat"] < lat_coords[1]:
+                station_list.append(station_dict["id"])
+
+    return station_list
+
+
 class Station:
     """noaa_coops Station class to interact with NOAA CO-OPS APIs.
 

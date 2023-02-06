@@ -58,3 +58,33 @@ def test_invalid_datum():
             units="metric",
             time_zone="gmt",
         )
+
+
+def test_stations_from_bbox():
+    """Test that stations from a bounding box are returned."""
+
+    stations = nc.get_stations_from_bbox(
+        lat_coords=[40.389, 40.9397],
+        lon_coords=[-74.4751, -73.7432],
+    )
+    assert stations == ["8516945", "8518750", "8519483", "8531680"]
+
+
+def test_stations_from_bbox_invalid_lat():
+    """Test error is raised when invalid lat_coords passed.""" ""
+
+    with pytest.raises(ValueError):
+        nc.get_stations_from_bbox(
+            lat_coords=[40.389, 40.9397, 99.0],
+            lon_coords=[-74.4751, -73.7432],
+        )
+
+
+def test_stations_from_bbox_invalid_lon():
+    """Test error is raised when invalid lon_coords passed.""" ""
+
+    with pytest.raises(ValueError):
+        nc.get_stations_from_bbox(
+            lat_coords=[40.389, 40.9397],
+            lon_coords=[-74.4751, -73.7432, 100.0],
+        )

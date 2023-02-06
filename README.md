@@ -13,11 +13,23 @@ This package is distributed through [pip](https://pypi.org/project/noaa-coops/) 
 ## Getting Started
 
 ### Stations
-Data is accessed via `Station` class objects. Each station is uniquely identified by a `stationid` which can be found using this [mapping interface](https://tidesandcurrents.noaa.gov/). To initialize a `Station` object, run:
+Data is accessed via `Station` class objects. Each station is uniquely identified by an `id`. To initialize a `Station` object, run:
 
 ```python
 >>> from noaa_coops import Station
 >>> seattle = Station(id="9447130")  # Create Station object for Seattle (ID = 9447130)
+```
+
+Stations can be found with the Tides & Currents [mapping interface](https://tidesandcurrents.noaa.gov/) or the `get_stations_from_bbox` function, which searches a bounding box for stations and returns their IDs (if found).
+```python
+>>> from pprint import pprint
+>>> from noaa_coops import Station, get_stations_from_bbox
+>>> stations = get_stations_from_bbox(lat_coords=[40.389, 40.9397], lon_coords=[-74.4751, -73.7432])
+>>> pprint(stations)
+['8516945', '8518750', '8519483', '8531680']
+>>> station_one = Station(id="8516945")
+>>> pprint(station_one.name)
+'Kings Point'
 ```
 
 #### Metadata
