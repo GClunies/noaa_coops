@@ -27,7 +27,7 @@ class Station:
         except:  # noqa: E722
             pass
 
-    def get_data_inventory(self, stationid):
+    def get_data_inventory(self):
         """
         Get data inventory for station with water level & meteorological data.
         Data inventory is fetched from NOAA CO-OPS SOAP Web Services, see:
@@ -59,7 +59,7 @@ class Station:
 
         self.data_inventory = inventory_dict
 
-    def get_metadata(self, stationid):
+    def get_metadata(self):
         """
         Build URL for metadata API request. When a Station object is
         initialized, fill out metadata automatically.
