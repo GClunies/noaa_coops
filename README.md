@@ -17,7 +17,7 @@ Data is accessed via `Station` class objects. Each station is uniquely identifie
 
 ```python
 >>> from noaa_coops import Station
->>> seattle = Station(9447130)  # Station ID for Seattle
+>>> seattle = Station(id="9447130")  # Create Station object for Seattle (ID = 9447130)
 ```
 
 #### Metadata
@@ -26,7 +26,7 @@ Station metadata is stored in the `.metadata` attribute of a `Station` object. A
 ```python
 >>> from pprint import pprint
 >>> from noaa_coops import Station
->>> seattle = Station(9447130)
+>>> seattle = Station(id="9447130")
 >>> pprint(list(seattle.metadata.items())[:5])                   # Print first 3 items in metadata
 [('tidal', True), ('greatlakes', False), ('shefcode', 'EBSW1')]  # Metadata dictionary can be very long
 >>> pprint(seattle.lat_lon['lat'])                               # Print latitude
@@ -41,7 +41,7 @@ A description of a Station's data products and available dates can be accessed v
 ```python
 >>> from noaa_coops import Station
 >>> from pprint import pprint
->>> seattle = Station(9447130)
+>>> seattle = Station(id="9447130")
 >>> pprint(seattle.data_inventory)
 {'Air Temperature': {'end_date': '2019-01-02 18:36',
                      'start_date': '1991-11-09 01:00'},
@@ -80,7 +80,7 @@ The example below fetches water level data from the Seattle station for a 3 mont
 
 ```python
 >>> from noaa_coops import Station
->>> seattle = Station(9447130)
+>>> seattle = Station(id="9447130")
 >>> df_water_levels = seattle.get_data(
 ...     begin_date="20150101",
 ...     end_date="20150331",
@@ -109,7 +109,7 @@ poetry install
 ```
 
 ### TODO
-Click [here](https://github.com/GClunies/py_noaa/issues) for a list of existing issues and to submit a new one.
+Click [here](https://github.com/GClunies/noaa_coops/issues) for a list of existing issues and to submit a new one.
 
 ### Contribution
 Contributions are welcome, feel free to submit a pull request.
