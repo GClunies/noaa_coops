@@ -1,4 +1,4 @@
-name: Publish Python Package to TestPyPI and PyPI
+name: Publish Python Package to PyPI
 
 on:
   release:
@@ -21,14 +21,6 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
           poetry install --no-interaction
-
-      - name: Publish package to TestPyPI
-        id: publish_test  # Used to check if the step succeeded or failed
-        env:
-          TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: |
-          poetry config pypi-token.testpypi $TEST_PYPI_TOKEN
-          poetry publish --build --repository testpypi
 
       - name: Publish package to PyPI
         if: steps.publish_test.outcome == 'success'
