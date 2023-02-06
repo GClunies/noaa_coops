@@ -12,41 +12,15 @@ jobs:
       fail-fast: false
       matrix:
         os: ['ubuntu-latest']
-        python-version: ['3.8', '3.9', '3.10']
+        python-version: ['3.10']
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Install Python
-        uses: actions/setup-python@v4
-
-      - name: Install Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python: ${{ matrix.python-version }}
-
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-
-      - name: Load cached venv (if available)
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install dependencies (cache not available)
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root
-
       - name: Publish package to TestPyPI
-        id: publish_test  # Used to check if the step succeeded or failed
-        env:
-          TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
-        run: |
-          poetry config pypi-token.testpypi $TEST_PYPI_TOKEN
-          poetry publish --build --repository testpypi
+        uses: JRubics/poetry-publish@v1.16
+        with:
+          pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
+          repository_name: "testpypi"
+          repository_url: "https://test.pypi.org/legacy/"
