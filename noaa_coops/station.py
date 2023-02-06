@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import math
 from datetime import datetime, timedelta
+from typing import Optional, Union
 
 import pandas as pd
 import requests
@@ -7,39 +10,93 @@ import zeep
 from pandas import json_normalize
 
 
+def get_stations_from_bbox(
+    lat_coords: list[float, float],
+    lon_coords: list[float, float],
+) -> list[str]:
+    """Return a list of stations IDs found within a bounding box.
+
+    Args:
+        lat_coords (list[float]): The lower and upper latitudes of the box.
+        lon_coords (list[float]): The lower and upper longitudes of the box.
+
+    Raises:
+        ValueError: lat_coords or lon_coords are not of length 2.
+
+    Returns:
+        list[str]: A list of station IDs.
+    """
+    data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
+    response = requests.get(data_url)
+    json_dict = response.json()
+
+    station_list = []
+
+    if len(lat_coords) != 2 or len(lon_coords) != 2:
+        raise ValueError("lat_coords and lon_coords must be of length 2.")
+
+    # Ensure lat_coords and lon_coords are in the correct order
+    if lat_coords[0] > lat_coords[1]:
+        lat_coords[0], lat_coords[1] = lat_coords[1], lat_coords[0]
+
+    if lon_coords[0] > lon_coords[1]:
+        lon_coords[0], lon_coords[1] = lon_coords[1], lon_coords[0]
+
+    # Search through stations and append to station_list if within bounding box
+    for station_dict in json_dict["stations"]:
+        if lon_coords[0] < station_dict["lng"] < lon_coords[1]:
+            if lat_coords[0] < station_dict["lat"] < lat_coords[1]:
+                station_list.append(station_dict["id"])
+
+    return station_list
+
+
 class Station:
-    """
-    A class to access Station data and metadata via the NOAA Tides & Currents
-    APIs.
+    """noaa_coops Station class to interact with NOAA CO-OPS APIs.
 
-    For data retrieval API, see https://tidesandcurrents.noaa.gov/api/.
-    For metadata API, see: https://tidesandcurrents.noaa.gov/mdapi/latest/
-    For data inventory info, see: https://opendap.co-ops.nos.noaa.gov/axis/
+    Supported APIs:
+    - Data retrieval API, see https://tidesandcurrents.noaa.gov/api/
+    - Metadata API, see: https://tidesandcurrents.noaa.gov/mdapi/latest/
+    - Data inventory API, see: https://opendap.co-ops.nos.noaa.gov/axis/
+
+    Stations are identified by a unique station ID (see
+    https://tidesandcurrents.noaa.gov/ to find stations and their IDs). Stations
+    have:
+    - metadata
+    - data inventory
+    - data (observed or predicted)
     """
 
-    def __init__(self, stationid, units="metric"):
-        self.stationid = stationid
+    def __init__(self, id: str, units: str = "metric"):
+        """Initialize Station object.
+
+        Args:
+            id (str): The Station's ID. See
+                https://tidesandcurrents.noaa.gov/ to find stations and their IDs
+            units (str): The units data should be reported in.
+                Defaults to "metric".
+        """
+        self.id = id
         self.units = units
-        self.get_metadata(self.stationid)
+        self.get_metadata()
 
         try:
-            self.get_data_inventory(self.stationid)
+            self.get_data_inventory()
         except:  # noqa: E722
             pass
 
-    def get_data_inventory(self, stationid):
-        """
-        Get data inventory for station with water level & meteorological data.
-        Data inventory is fetched from NOAA CO-OPS SOAP Web Services, see:
-        https://opendap.co-ops.nos.noaa.gov/axis/
-        """
+    def get_data_inventory(self):
+        """Get data inventory for Station and append to Station object.
 
+        Data inventory is fetched from the NOAA CO-OPS SOAP Web Service
+        (https://opendap.co-ops.nos.noaa.gov/axis/).
+        """
         wsdl = (
             "https://opendap.co-ops.nos.noaa.gov/axis/webservices/"
             "datainventory/wsdl/DataInventory.wsdl"
         )
         client = zeep.Client(wsdl=wsdl)
-        response = client.service.getDataInventory(str(self.stationid))["parameter"]
+        response = client.service.getDataInventory(self.id)["parameter"]
         names = [x["name"] for x in response]
         starts = [x["first"] for x in response]
         ends = [x["last"] for x in response]
@@ -59,12 +116,8 @@ class Station:
 
         self.data_inventory = inventory_dict
 
-    def get_metadata(self, stationid):
-        """
-        Build URL for metadata API request. When a Station object is
-        initialized, fill out metadata automatically.
-        """
-
+    def get_metadata(self):
+        """Get metadata for Station and append to Station object."""
         metadata_base_url = (
             "https://api.tidesandcurrents.noaa.gov/mdapi/" "prod/webapi/stations/"
         )
@@ -77,11 +130,7 @@ class Station:
         )
         units_for_url = "?units=" + self.units
         metadata_url = (
-            metadata_base_url
-            + str(self.stationid)
-            + extension
-            + metadata_expand
-            + units_for_url
+            metadata_base_url + self.id + extension + metadata_expand + units_for_url
         )
 
         # Get response from Metadata API
@@ -184,18 +233,36 @@ class Station:
 
     def _build_query_url(
         self,
-        begin_date,
-        end_date,
-        product,
-        datum=None,
-        bin_num=None,
-        interval=None,
-        units="metric",
-        time_zone="gmt",
-    ):
-        """
-        Build an URL to be used to fetch data from the NOAA CO-OPS data API
-        (see https://tidesandcurrents.noaa.gov/api/)
+        begin_date: str,
+        end_date: str,
+        product: str,
+        datum: Optional[str] = None,
+        bin_num: Optional[int] = None,
+        interval: Optional[Union[str, int]] = None,
+        units: Optional[str] = "metric",
+        time_zone: Optional[str] = "gmt",
+    ) -> str:
+        """Build query URL for NOAA CO-OPS API.
+
+        See: https://tidesandcurrents.noaa.gov/api/
+
+        Args:
+            begin_date (str): Start date of the data to be fetched.
+            end_date (str): End date of the data to be fetched.
+            product (str): Data product to be fetched.
+            datum (str, optional): Datum to use for water level products.
+            bin_num (int, optional): Bin to use for current products. Defaults to None.
+            interval (Union[str, int], optional): Time interval of fetched data.
+                Defaults to None.
+            units (str, optional): Units of fetched data. Defaults to "metric".
+            time_zone (str, optional): Time zone used when returning fetched data.
+                Defaults to "gmt".
+
+        Raises:
+            ValueError: One of the specified arguments is invalid.
+
+        Returns:
+            str: Query URL for NOAA CO-OPS API.
         """
         base_url = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?"
 
@@ -212,7 +279,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "datum": datum,
                     "units": units,
@@ -233,7 +300,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "datum": datum,
                     "units": units,
@@ -253,7 +320,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "datum": datum,
                     "units": units,
@@ -269,7 +336,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "datum": datum,
                     "units": units,
@@ -283,7 +350,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "datum": datum,
                     "interval": interval,
@@ -306,7 +373,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "bin": str(bin_num),
                     "units": units,
@@ -323,7 +390,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "units": units,
                     "time_zone": time_zone,
@@ -335,7 +402,7 @@ class Station:
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
-                    "station": self.stationid,
+                    "station": self.id,
                     "product": product,
                     "interval": interval,
                     "units": units,
@@ -349,13 +416,22 @@ class Station:
 
         return query_url
 
-    def _url2pandas(self, data_url, product, num_request_blocks):
-        """
-        Takes in a provided URL using the NOAA CO-OPS API conventions
-        (see https://tidesandcurrents.noaa.gov/api/) and converts the
-        corresponding JSON data into a pandas dataframe.
-        """
+    def _url2pandas(
+        self, data_url: str, product: str, num_request_blocks: int
+    ) -> pd.DataFrame:
+        """Fetch data from NOAA CO-OPS API based on URL. Returns as Pandas DataFrame.
 
+        Args:
+            data_url (str): The URL to fetch data from.
+            product (str): The data product being fetched.
+            num_request_blocks (int): The number of blocks of data requested.
+
+        Raises:
+            ValueError: An error occurred when fetching data from the NOAA CO-OPS API.
+
+        Returns:
+            DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
+        """
         response = requests.get(data_url)  # Get JSON data from URL
         json_dict = response.json()  # Create a dictionary from JSON data
 
@@ -368,7 +444,7 @@ class Station:
             "requested time."
         )
 
-        # Handle .get_data() request size & errors from COOPS API, cases below:
+        # Handle .get_data() request size & errors from CO-OPS API, cases below:
         # 1. .get_data() makes a large request (i.e. >1 block requests)
         #    and an error occurs in one of the individual blocks of data
 
@@ -420,53 +496,55 @@ class Station:
 
             return df
 
-    def _parse_known_date_formats(self, dt_string):
-        """Attempt to parse CO-OPS accepted date formats."""
+    def _parse_known_date_formats(self, dt_string: str):
+        """Parse known date formats.
+
+        Args:
+            dt_string (str): The date string to parse.
+
+        Raises:
+            ValueError: Invalid date format was provided.
+
+        Returns:
+            datetime: The parsed date.
+        """
         for fmt in ("%Y%m%d", "%Y%m%d %H:%M", "%m/%d/%Y", "%m/%d/%Y %H:%M"):
             try:
                 return datetime.strptime(dt_string, fmt)
             except ValueError:
-                pass
-        raise ValueError(
-            "No valid date format found."
-            "See https://tidesandcurrents.noaa.gov/api/ "
-            "for list of accepted date formats."
-        )
+                raise ValueError(
+                    "No valid date format found."
+                    "See https://tidesandcurrents.noaa.gov/api/ "
+                    "for list of accepted date formats."
+                )
 
     def get_data(
         self,
-        begin_date,
-        end_date,
-        product,
-        datum=None,
-        bin_num=None,
-        interval=None,
-        units="metric",
-        time_zone="gmt",
-    ):
-        """
-        Function to get data from NOAA CO-OPS API and convert it to a pandas
-        dataframe for convenient analysis.
+        begin_date: str,
+        end_date: str,
+        product: str,
+        datum: Optional[str] = None,
+        bin_num: Optional[int] = None,
+        interval: Optional[Union[str, int]] = None,
+        units: Optional[str] = "metric",
+        time_zone: Optional[str] = "gmt",
+    ) -> pd.DataFrame:
+        """Fetch data from NOAA CO-OPS API and convert to a Pandas DataFrame.
 
-        Info on the NOOA CO-OPS API can be found at:
-        https://tidesandcurrents.noaa.gov/api/
+        Args:
+            begin_date (str): Start date of the data to be fetched.
+            end_date (str): End date of the data to be fetched.
+            product (str): Data product to be fetched.
+            datum (str, optional): Datum to use for water level products.
+            bin_num (int, optional): Bin to use for current products. Defaults to None.
+            interval (Union[str, int], optional): Time interval of fetched data.
+                Defaults to None.
+            units (str, optional): Units of fetched data. Defaults to "metric".
+            time_zone (str, optional): Time zone used when returning fetched data.
+                Defaults to "gmt".
 
-        Arguments listed below generally follow the same (or similar) format.
-
-        Arguments:
-        begin_date -- the starting date of request
-                    (yyyyMMdd, yyyyMMdd HH:mm, MM/dd/yyyy,
-                    or MM/dd/yyyy HH:mm), string
-        end_date -- the ending date of request
-                    (yyyyMMdd, yyyyMMdd HH:mm, MM/dd/yyyy,
-                    or MM/dd/yyyy HH:mm), string
-        stationid -- station at which you want data, string
-        product -- the product type you would like, string
-        datum -- datum to be used for water level data, string (default None)
-        bin_num -- bin number you want currents data at, int (default None)
-        interval -- the interval you would like data returned, string
-        units -- units to be used for data output, string (default metric)
-        time_zone -- time zone to be used for data output, string (default gmt)
+        Returns:
+            DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
         # Convert dates to datetime objects so deltas can be calculated
         begin_datetime = self._parse_known_date_formats(begin_date)
@@ -862,7 +940,7 @@ if __name__ == "__main__":
     from pprint import pprint as pp
 
     # DEBUGGING
-    seattle = Station(9447130)  # water levels
+    seattle = Station(id="9447130")  # water levels
 
     print("Test that metadata is working:")
     pp(seattle.metadata)

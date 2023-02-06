@@ -2,5 +2,10 @@
     "cSpell.words": [
         "NOAA",
         "stationid"
-    ]
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
