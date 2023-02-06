@@ -7,7 +7,12 @@ on:
 jobs:
   build-n-publish:
     name: Build and publish python package to PyPi
-    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-latest']
+        python-version: ['3.8', '3.9', '3.10']
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
