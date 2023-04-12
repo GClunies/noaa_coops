@@ -512,11 +512,12 @@ class Station:
             try:
                 return datetime.strptime(dt_string, fmt)
             except ValueError:
-                raise ValueError(
-                    "No valid date format found."
-                    "See https://tidesandcurrents.noaa.gov/api/ "
-                    "for list of accepted date formats."
-                )
+                pass
+        raise ValueError(
+            "No valid date format found."
+            "See https://tidesandcurrents.noaa.gov/api/ "
+            "for list of accepted date formats."
+        )
 
     def get_data(
         self,
