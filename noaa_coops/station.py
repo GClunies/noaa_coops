@@ -7,6 +7,7 @@ from typing import Optional, Union
 import pandas as pd
 import requests
 import zeep
+from requests import Response
 
 
 class COOPSAPIError(Exception):
@@ -38,23 +39,25 @@ def get_stations_from_bbox(
     Returns:
         list[str]: A list of station IDs.
     """
+    station_list = []
     data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
     response = requests.get(data_url)
     json_dict = response.json()
-
-    station_list = []
 
     if len(lat_coords) != 2 or len(lon_coords) != 2:
         raise ValueError("lat_coords and lon_coords must be of length 2.")
 
     # Ensure lat_coords and lon_coords are in the correct order
-    if lat_coords[0] > lat_coords[1]:
-        lat_coords[0], lat_coords[1] = lat_coords[1], lat_coords[0]
+    lat_coords = sorted(lat_coords)
+    lon_coords = sorted(lon_coords)
 
-    if lon_coords[0] > lon_coords[1]:
-        lon_coords[0], lon_coords[1] = lon_coords[1], lon_coords[0]
+    # if lat_coords[0] > lat_coords[1]:
+    #     lat_coords[0], lat_coords[1] = lat_coords[1], lat_coords[0]
 
-    # Search through stations and append to station_list if within bounding box
+    # if lon_coords[0] > lon_coords[1]:
+    #     lon_coords[0], lon_coords[1] = lon_coords[1], lon_coords[0]
+
+    # Find stations in bounding box
     for station_dict in json_dict["stations"]:
         if lon_coords[0] < station_dict["lng"] < lon_coords[1]:
             if lat_coords[0] < station_dict["lat"] < lat_coords[1]:
@@ -291,9 +294,6 @@ class Station:
                     "format": "json",
                 }
 
-                if interval is not None:
-                    parameters["interval"] = interval
-
         elif product == "hourly_height":
             if datum is None:
                 raise ValueError(
@@ -390,7 +390,7 @@ class Station:
 
         return request_url
 
-    def _request_data(self, data_url: str, product: str) -> pd.DataFrame:
+    def _make_api_request(self, data_url: str, product: str) -> pd.DataFrame:
         """Request data from CO-OPS API, handle response, return data as a DataFrame.
 
         Args:
@@ -440,7 +440,10 @@ class Station:
         """
         for fmt in ("%Y%m%d", "%Y%m%d %H:%M", "%m/%d/%Y", "%m/%d/%Y %H:%M"):
             try:
-                return datetime.strptime(dt_string, fmt)
+                date_time = datetime.strptime(dt_string, fmt)
+                # Standardize date format to yyyyMMdd HH:mm for all requests
+                str_yyyyMMdd_HHmm = date_time.strftime("%Y%m%d %H:%M")
+                return datetime, str_yyyyMMdd_HHmm
             except ValueError:
                 match = False  # Flag indicating no match for current format
                 pass
@@ -451,6 +454,121 @@ class Station:
                 "See https://tidesandcurrents.noaa.gov/api/ "
                 "for list of accepted date formats."
             )
+
+    def _check_request_params(
+        self,
+        begin_date: str,
+        end_date: str,
+        product: str,
+        datum: Optional[str] = None,
+        bin_num: Optional[int] = None,
+        interval: Optional[Union[str, int]] = None,
+        units: Optional[str] = "metric",
+        time_zone: Optional[str] = "gmt",
+    ):
+        """Check that request parameters are valid.
+
+        Args:
+            begin_date (str): Start date of the data to be fetched.
+            end_date (str): End date of the data to be fetched.
+            product (str): Data product to be fetched.
+            datum (str, optional): Datum to use for water level products.
+            bin_num (int, optional): Bin to use for current products. Defaults to None.
+            interval (Union[str, int], optional): Time interval of fetched data.
+                Defaults to None
+            units (str, optional): Units to use for fetched data. Defaults to "metric".
+            time_zone (str, optional): Time zone to use for fetched data.
+                Defaults to "gmt".
+
+        Raises:
+            ValueError: Invalid request parameters were provided.
+        """
+        if product not in [
+            "water_level",
+            "hourly_height",
+            "high_low",
+            "daily_mean",
+            "monthly_mean",
+            "one_minute_water_level",
+            "predictions",
+            "datums",
+            "air_gap",
+            "air_temperature",
+            "water_temperature",
+            "wind",
+            "air_pressure",
+            "conductivity",
+            "visibility",
+            "humidity",
+            "salinity",
+            "currents",
+            "currents_predictions",
+            "ofs_water_level",
+        ]:
+            raise ValueError(
+                f"Invalid product '{product}' provided. See"
+                " https://api.tidesandcurrents.noaa.gov/api/prod/#products "
+                "for list of available products"
+            )
+
+        if product == "water_level":
+            if interval is not None:
+                raise ValueError(
+                    "`interval` parameter is not supported for `water_level` product. "
+                    "See https://tidesandcurrents.noaa.gov/api/#interval "
+                    "for list of available intervals.\n\n"
+                    "To fetch hourly water level data, use the `hourly_height` product."
+                )
+
+            if datum is None:
+                raise ValueError(
+                    "No datum specified for water level data. See"
+                    " https://api.tidesandcurrents.noaa.gov/api/prod/#datum "
+                    "for list of available datums"
+                )
+            elif datum not in [
+                "CRD",
+                "IGLD",
+                "LWD",
+                "MHHW",
+                "MHW",
+                "MTL",
+                "MSL",
+                "MLW",
+                "MLLW",
+                "NAVD",
+                "STND",
+            ]:
+                raise ValueError(
+                    f"Invalid datum '{datum}' provided. See"
+                    " https://tidesandcurrents.noaa.gov/api/#datum "
+                    "for list of available datums"
+                )
+
+        elif product == "currents":
+            if bin_num is None:
+                raise ValueError(
+                    "No bin specified for current data. Bin info can be "
+                    "found on the station info page"
+                    " (e.g., https://tidesandcurrents.noaa.gov/cdata/StationInfo?id=PUG1515)"  # noqa
+                )
+
+        if units not in ["english", "metric"]:
+            raise ValueError(
+                f"Invalid units '{units}' provided. See"
+                " https://tidesandcurrents.noaa.gov/api/#units "
+                "for list of available units"
+            )
+
+        if time_zone not in ["gmt", "lst", "lst_ldt"]:
+            raise ValueError(
+                f"Invalid time zone '{time_zone}' provided. See"
+                " https://tidesandcurrents.noaa.gov/api/#timezones "
+                "for list of available time zones"
+            )
+
+        # TODO - more logic to check for valid params based on the details here
+        # https://api.tidesandcurrents.noaa.gov/api/prod/#products
 
     def get_data(
         self,
@@ -483,34 +601,18 @@ class Station:
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        begin_datetime = self._parse_known_date_formats(begin_date)
-        end_datetime = self._parse_known_date_formats(end_date)
-        delta = end_datetime - begin_datetime
+        # Parse user provided dates, convert to datetime for block size calcs
+        begin_dt, begin_str = self._parse_known_date_formats(begin_date)
+        end_dt, end_str = self._parse_known_date_formats(end_date)
+        delta = end_dt - begin_dt
 
-        # If the length of the data request is less or equal to 31 days,
-        # make a single request to the API
-        if delta.days <= 31:
-            data_url = self._build_request_url(
-                begin_datetime.strftime("%Y%m%d %H:%M"),
-                end_datetime.strftime("%Y%m%d %H:%M"),
-                product,
-                datum,
-                bin_num,
-                interval,
-                units,
-                time_zone,
-            )
-
-            df = self._request_data(data_url, product, num_request_blocks=1)
-
-        # If the length of the data request is < 365 days AND the product is
-        # hourly_height or high_low, make a single request to the API
-        elif delta.days <= 365 and (
-            product == "hourly_height" or product == "high_low"
+        # Make a single request to the API (aka small data request)
+        if delta.days <= 31 or (
+            delta.days <= 365 and (product == "hourly_height" or product == "high_low")
         ):
             data_url = self._build_request_url(
-                begin_date,
-                end_date,
+                begin_dt.strftime("%Y%m%d %H:%M"),
+                end_dt.strftime("%Y%m%d %H:%M"),
                 product,
                 datum,
                 bin_num,
@@ -518,63 +620,24 @@ class Station:
                 units,
                 time_zone,
             )
-            df = self._request_data(data_url, product, num_request_blocks=1)
+            df = self._make_api_request(data_url, product, num_request_blocks=1)
 
-        # If the data request is greater than 365 days AND the product is
-        # hourly_height or high_low, make multiple requests to the API in 365 day blocks
-        elif product == "hourly_height" or product == "high_low":
-            df = pd.DataFrame([])
-            num_365day_blocks = int(math.floor(delta.days / 365))
-            no_data_errors = []
-
-            # Loop through 365 day blocks, update request params accordingly
-            for i in range(num_365day_blocks + 1):
-                begin_datetime_loop = begin_datetime + timedelta(days=(i * 365))
-                end_datetime_loop = begin_datetime_loop + timedelta(days=365)
-                end_datetime_loop = (
-                    end_datetime
-                    if end_datetime_loop > end_datetime
-                    else end_datetime_loop
-                )
-                data_url = self._build_request_url(
-                    begin_datetime_loop.strftime("%Y%m%d"),
-                    end_datetime_loop.strftime("%Y%m%d"),
-                    product,
-                    datum,
-                    bin_num,
-                    interval,
-                    units,
-                    time_zone,
-                )
-
-                try:
-                    df_block = self._request_data(data_url, product)
-                    df = pd.concat([df, df_block])
-                except COOPSAPIError as e:
-                    err_msg = (
-                        f"Error when requesting data in block "
-                        f"[begin_datetime_loop, end_datetime_loop]: {e.message}"
-                    )
-                    no_data_errors.append(err_msg)
-
-        # If any other product is requested for >31 days, make multiple requests to the
-        # API in 31 day blocks
+        # Break requests into 'blocks' due to API constraints (aka large data request)
         else:
+            block_size = (
+                365 if product == "hourly_height" or product == "high_low" else 31
+            )
+            num_blocks = int(math.floor(delta.days / block_size))
             df = pd.DataFrame([])
-            num_31day_blocks = int(math.floor(delta.days / 31))
-            no_data_errors = []
+            block_errors = []
 
-            for i in range(num_31day_blocks + 1):
-                begin_datetime_loop = begin_datetime + timedelta(days=(i * 31))
-                end_datetime_loop = begin_datetime_loop + timedelta(days=31)
-                end_datetime_loop = (
-                    end_datetime
-                    if end_datetime_loop > end_datetime
-                    else end_datetime_loop
-                )
+            for i in range(num_blocks + 1):
+                begin_dt_loop = begin_dt + timedelta(days=(i * block_size))
+                end_dt_loop = begin_dt_loop + timedelta(days=block_size)
+                end_dt_loop = end_dt if end_dt_loop > end_dt else end_dt_loop
                 data_url = self._build_request_url(
-                    begin_datetime_loop.strftime("%Y%m%d"),
-                    end_datetime_loop.strftime("%Y%m%d"),
+                    begin_dt_loop.strftime("%Y%m%d %H:%M"),
+                    end_dt_loop.strftime("%Y%m%d %H:%M"),
                     product,
                     datum,
                     bin_num,
@@ -582,30 +645,120 @@ class Station:
                     units,
                     time_zone,
                 )
+                df_block = self._make_api_request(data_url, product)
+                df = pd.concat([df, df_block])
 
-                try:
-                    df_block = self._request_data(data_url, product)
-                    df = pd.concat([df, df_block])
-                except COOPSAPIError as e:
-                    err_msg = (
-                        f"Error when requesting data in block "
-                        f"[begin_datetime_loop, end_datetime_loop]: {e.message}"
-                    )
-                    no_data_errors.append(err_msg)
+        # # If the length of the data request is less or equal to 31 days,
+        # # make a single request to the API
+        # if delta.days <= 31:
+        #     data_url = self._build_request_url(
+        #         begin_dt.strftime("%Y%m%d %H:%M"),
+        #         end_dt.strftime("%Y%m%d %H:%M"),
+        #         product,
+        #         datum,
+        #         bin_num,
+        #         interval,
+        #         units,
+        #         time_zone,
+        #     )
 
-        if df.empty:
-            raise COOPSAPIError(
-                "No data returned from NOAA CO-OPS API.\n\n"
-                "    Request parameters:\n"
-                f"        begin_date: {begin_date}\n"
-                f"        end_date: {end_date}\n"
-                f"        product: {product}\n"
-                f"        datum: {datum}\n"
-                f"        bin_num: {bin_num}\n"
-                f"        interval: {interval}\n"
-                f"        units: {units}\n"
-                f"        time_zone: {time_zone}\n"
-            )
+        #     df = self._make_api_request(data_url, product, num_request_blocks=1)
+
+        # # If the length of the data request is < 365 days AND the product is
+        # # hourly_height or high_low, make a single request to the API
+        # elif delta.days <= 365 and (
+        #     product == "hourly_height" or product == "high_low"
+        # ):
+        #     data_url = self._build_request_url(
+        #         begin_date,
+        #         end_date,
+        #         product,
+        #         datum,
+        #         bin_num,
+        #         interval,
+        #         units,
+        #         time_zone,
+        #     )
+        #     df = self._make_api_request(data_url, product, num_request_blocks=1)
+
+        # # If the data request is greater than 365 days AND the product is
+        # # hourly_height or high_low, make multiple requests to the API in 365 day blocks
+        # elif product == "hourly_height" or product == "high_low":
+        #     df = pd.DataFrame([])
+        #     num_365day_blocks = int(math.floor(delta.days / 365))
+        #     block_errors = []
+
+        #     # Loop through 365 day blocks, update request params accordingly
+        #     for i in range(num_365day_blocks + 1):
+        #         begin_dt_loop = begin_dt + timedelta(days=(i * 365))
+        #         end_dt_loop = begin_dt_loop + timedelta(days=365)
+        #         end_dt_loop = end_dt if end_dt_loop > end_dt else end_dt_loop
+        #         data_url = self._build_request_url(
+        #             begin_dt_loop.strftime("%Y%m%d"),
+        #             end_dt_loop.strftime("%Y%m%d"),
+        #             product,
+        #             datum,
+        #             bin_num,
+        #             interval,
+        #             units,
+        #             time_zone,
+        #         )
+
+        #         try:
+        #             df_block = self._make_api_request(data_url, product)
+        #             df = pd.concat([df, df_block])
+        #         except COOPSAPIError as e:
+        #             err_msg = (
+        #                 f"Error when requesting data in block "
+        #                 f"[begin_dt_loop, end_dt_loop]: {e.message}"
+        #             )
+        #             block_errors.append(err_msg)
+
+        # # If any other product is requested for >31 days, make multiple requests to the
+        # # API in 31 day blocks
+        # else:
+        #     df = pd.DataFrame([])
+        #     num_31day_blocks = int(math.floor(delta.days / 31))
+        #     block_errors = []
+
+        #     for i in range(num_31day_blocks + 1):
+        #         begin_dt_loop = begin_dt + timedelta(days=(i * 31))
+        #         end_dt_loop = begin_dt_loop + timedelta(days=31)
+        #         end_dt_loop = end_dt if end_dt_loop > end_dt else end_dt_loop
+        #         data_url = self._build_request_url(
+        #             begin_dt_loop.strftime("%Y%m%d"),
+        #             end_dt_loop.strftime("%Y%m%d"),
+        #             product,
+        #             datum,
+        #             bin_num,
+        #             interval,
+        #             units,
+        #             time_zone,
+        #         )
+
+        #         try:
+        #             df_block = self._make_api_request(data_url, product)
+        #             df = pd.concat([df, df_block])
+        #         except COOPSAPIError as e:
+        #             err_msg = (
+        #                 f"Error when requesting data in block "
+        #                 f"[begin_dt_loop, end_dt_loop]: {e.message}"
+        #             )
+        #             block_errors.append(err_msg)
+
+        # if df.empty:
+        #     raise COOPSAPIError(
+        #         "No data returned from NOAA CO-OPS API.\n\n"
+        #         "    Request parameters:\n"
+        #         f"        begin_date: {begin_date}\n"
+        #         f"        end_date: {end_date}\n"
+        #         f"        product: {product}\n"
+        #         f"        datum: {datum}\n"
+        #         f"        bin_num: {bin_num}\n"
+        #         f"        interval: {interval}\n"
+        #         f"        units: {units}\n"
+        #         f"        time_zone: {time_zone}\n"
+        #     )
 
         # Rename output DataFrame columns based on requested product
         # and convert to useable data types
@@ -881,7 +1034,7 @@ class Station:
 
         self.data = df
 
-        return df, no_data_errors
+        return df, block_errors
 
 
 if __name__ == "__main__":
