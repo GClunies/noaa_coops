@@ -10,6 +10,21 @@ import zeep
 from pandas import json_normalize
 
 
+class COOPSAPIError(Exception):
+    """Raised when a NOAA CO-OPS API request returns an error."""
+
+    def __init__(self, message: str, error: dict) -> None:
+        """Initialize COOPSAPIError.
+
+        Args:
+            message (str): The error message.
+            error (dict): The error dict returned by the NOAA CO-OPS API.
+        """
+        self.message = message
+        self.error = error
+        super().__init__(self.message)
+
+
 def get_stations_from_bbox(
     lat_coords: list[float, float],
     lon_coords: list[float, float],
@@ -100,13 +115,9 @@ class Station:
         names = [x["name"] for x in response]
         starts = [x["first"] for x in response]
         ends = [x["last"] for x in response]
-
-        unique_names = []
-        for name in names:
-            if name not in unique_names:
-                unique_names.append(name)
-
+        unique_names = list(set(names))
         inventory_dict = {}
+
         for name in unique_names:
             idxs = [i for i, x in enumerate(names) if x == name]
             inventory_dict[name] = {
@@ -132,14 +143,11 @@ class Station:
         metadata_url = (
             metadata_base_url + self.id + extension + metadata_expand + units_for_url
         )
-
-        # Get response from Metadata API
         response = requests.get(metadata_url)
         json_dict = response.json()
         station_metadata = json_dict["stations"][0]
 
-        # Determine station type, then assign class attributes accordingly from
-        # metadata
+        # Set class attributes base on provided metadata
         if "datums" in station_metadata:  # if True --> water levels
             self.metadata = station_metadata
             self.affiliations = station_metadata["affiliations"]
@@ -231,7 +239,7 @@ class Station:
             self.notices = station_metadata["notices"]
             self.tide_type = station_metadata["tideType"]
 
-    def _build_query_url(
+    def _build_request_url(
         self,
         begin_date: str,
         end_date: str,
@@ -242,7 +250,7 @@ class Station:
         units: Optional[str] = "metric",
         time_zone: Optional[str] = "gmt",
     ) -> str:
-        """Build query URL for NOAA CO-OPS API.
+        """Build a request URL for the NOAA CO-OPS API.
 
         See: https://tidesandcurrents.noaa.gov/api/
 
@@ -262,11 +270,10 @@ class Station:
             ValueError: One of the specified arguments is invalid.
 
         Returns:
-            str: Query URL for NOAA CO-OPS API.
+            str: Request URL for NOAA CO-OPS API.
         """
         base_url = "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?"
 
-        # If the data product is water levels, check that a datum is specified
         if product == "water_level":
             if datum is None:
                 raise ValueError(
@@ -275,7 +282,6 @@ class Station:
                     "for list of available datums"
                 )
             else:
-                # Compile parameter string for use in URL
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
@@ -287,6 +293,9 @@ class Station:
                     "application": "noaa_coops",
                     "format": "json",
                 }
+
+                if interval is not None:
+                    parameters["interval"] = interval
 
         elif product == "hourly_height":
             if datum is None:
@@ -296,7 +305,6 @@ class Station:
                     "for list of available datums"
                 )
             else:
-                # Compile parameter string for use in URL
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
@@ -308,6 +316,7 @@ class Station:
                     "application": "noaa_coops",
                     "format": "json",
                 }
+
         elif product == "high_low":
             if datum is None:
                 raise ValueError(
@@ -316,7 +325,6 @@ class Station:
                     "for list of available datums"
                 )
             else:
-                # Compile parameter string for use in URL
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
@@ -330,37 +338,21 @@ class Station:
                 }
 
         elif product == "predictions":
-            # If no interval provided, return 6-min predictions data
-            if interval is None:
-                # Compile parameter string for use in URL
-                parameters = {
-                    "begin_date": begin_date,
-                    "end_date": end_date,
-                    "station": self.id,
-                    "product": product,
-                    "datum": datum,
-                    "units": units,
-                    "time_zone": time_zone,
-                    "application": "noaa_coops",
-                    "format": "json",
-                }
+            parameters = {
+                "begin_date": begin_date,
+                "end_date": end_date,
+                "station": self.id,
+                "product": product,
+                "datum": datum,
+                "units": units,
+                "time_zone": time_zone,
+                "application": "noaa_coops",
+                "format": "json",
+            }
 
-            else:
-                # Compile parameter string, including interval, for use in URL
-                parameters = {
-                    "begin_date": begin_date,
-                    "end_date": end_date,
-                    "station": self.id,
-                    "product": product,
-                    "datum": datum,
-                    "interval": interval,
-                    "units": units,
-                    "time_zone": time_zone,
-                    "application": "noaa_coops",
-                    "format": "json",
-                }
+            if interval is not None:
+                parameters["interval"] = interval
 
-        # If the data product is currents, check that a bin number is specified
         elif product == "currents":
             if bin_num is None:
                 raise ValueError(
@@ -369,7 +361,6 @@ class Station:
                     " (e.g., https://tidesandcurrents.noaa.gov/cdata/StationInfo?id=PUG1515)"  # noqa
                 )
             else:
-                # Compile parameter string for use in URL
                 parameters = {
                     "begin_date": begin_date,
                     "end_date": end_date,
@@ -382,44 +373,36 @@ class Station:
                     "format": "json",
                 }
 
-        # For all other data types (e.g., meteoroligcal conditions)
-        else:
-            # If no interval provided, return 6-min met data
-            if interval is None:
-                # Compile parameter string for use in URL
-                parameters = {
-                    "begin_date": begin_date,
-                    "end_date": end_date,
-                    "station": self.id,
-                    "product": product,
-                    "units": units,
-                    "time_zone": time_zone,
-                    "application": "noaa_coops",
-                    "format": "json",
-                }
-            else:
-                # Compile parameter string, including interval, for use in URL
-                parameters = {
-                    "begin_date": begin_date,
-                    "end_date": end_date,
-                    "station": self.id,
-                    "product": product,
-                    "interval": interval,
-                    "units": units,
-                    "time_zone": time_zone,
-                    "application": "noaa_coops",
-                    "format": "json",
-                }
+        else:  # All other data types (e.g., meteoroligcal conditions)
+            parameters = {
+                "begin_date": begin_date,
+                "end_date": end_date,
+                "station": self.id,
+                "product": product,
+                "interval": interval,
+                "units": units,
+                "time_zone": time_zone,
+                "application": "noaa_coops",
+                "format": "json",
+            }
 
-        # Build URL with requests library
-        query_url = requests.Request("GET", base_url, params=parameters).prepare().url
+            if interval is not None:
+                parameters["interval"] = interval
 
-        return query_url
+        request_url = requests.Request("GET", base_url, params=parameters).prepare().url
+
+        return request_url
 
     def _url2pandas(
         self, data_url: str, product: str, num_request_blocks: int
     ) -> pd.DataFrame:
-        """Fetch data from NOAA CO-OPS API based on URL. Returns as Pandas DataFrame.
+        """Request data from CO-OPS API and handle response. Return data in DataFrame.
+
+        Handles 4 scenarios based on the original request from the end user:
+            1. Single 'block' request, no error in response from API
+            2. Single 'block' request, error in response from API
+            3. Multiple 'block' request, no error in response from API
+            4. Multiple 'block' request, error in response from API
 
         Args:
             data_url (str): The URL to fetch data from.
@@ -427,77 +410,49 @@ class Station:
             num_request_blocks (int): The number of blocks of data requested.
 
         Raises:
-            ValueError: An error occurred when fetching data from the NOAA CO-OPS API.
+            COOPSAPIError: Error occurred while fetching data from the NOAA CO-OPS API.
 
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        response = requests.get(data_url)  # Get JSON data from URL
-        json_dict = response.json()  # Create a dictionary from JSON data
-
-        df = pd.DataFrame()  # Initialize a empty DataFrame
-
-        # Error when the requested begin_date and/or end_date doesn't have data
-        large_data_gap_error = (
+        df = pd.DataFrame()
+        response = requests.get(data_url)
+        json_dict = response.json()
+        no_data_error = (  # Error message when no data is found
             "No data was found. This product may not be "
             "offered at this station at the "
             "requested time."
         )
 
-        # Handle .get_data() request size & errors from CO-OPS API, cases below:
-        # 1. .get_data() makes a large request (i.e. >1 block requests)
-        #    and an error occurs in one of the individual blocks of data
+        if "error" not in json_dict:  # Case 1 or 3 (no error in response)
+            key = "predictions" if product == "predictions" else "data"
+            df = json_normalize(json_dict[key])
 
-        # 2. .get_data() makes a large request (i.e. >1 block requests) and
-        #    an error does not occur in one of the individual blocks of data
+            return df
 
-        # 3. .get_data() makes a small request (i.e. 1 request)
-        #    and an error occurs in the data requested
-
-        # 4. .get_data() makes a small request (i.e. 1 request)
-        #    and an error does not occur in the data requested
-
-        # Case 1
-        if (num_request_blocks > 1) and ("error" in json_dict):
-            error_message = json_dict["error"].get("message", "Error retrieving data")
-            error_message = error_message.lstrip()
-            error_message = error_message.rstrip()
-
-            if error_message == large_data_gap_error:
-                return df  # Return the empty DataFrame
-            else:
-                raise ValueError(
-                    json_dict["error"].get("message", "Error retrieving data")
+        else:  # Case 2 or 4 (error in response)
+            if num_request_blocks == 1:
+                error_message = (
+                    json_dict["error"]
+                    .get("message", "Error retrieving data")
+                    .lstrip()
+                    .rstrip()
                 )
-
-        # Case 2
-        elif (num_request_blocks > 1) and ("error" not in json_dict):
-            if product == "predictions":
-                key = "predictions"
+                raise COOPSAPIError(error_message, json_dict["error"])
             else:
-                key = "data"
-
-            df = json_normalize(json_dict[key])  # Parse JSON dict to dataframe
-
-            return df
-
-        # Case 3
-        elif (num_request_blocks == 1) and ("error" in json_dict):
-            raise ValueError(json_dict["error"].get("message", "Error retrieving data"))
-
-        # Case 4
-        else:
-            if product == "predictions":
-                key = "predictions"
-            else:
-                key = "data"
-
-            df = json_normalize(json_dict[key])  # Parse JSON dict to dataframe
-
-            return df
+                if json_dict["error"]["message"] == no_data_error:
+                    return df
+                else:
+                    error_message = (
+                        json_dict["error"]
+                        .get("message", "Error retrieving data")
+                        .lstrip()
+                        .rstrip()
+                    )
+                    raise COOPSAPIError(error_message, json_dict["error"])
 
     def _parse_known_date_formats(self, dt_string: str):
-        """Parse known date formats.
+        """Parse known date formats and return a datetime object.
 
         Args:
             dt_string (str): The date string to parse.
@@ -512,12 +467,15 @@ class Station:
             try:
                 return datetime.strptime(dt_string, fmt)
             except ValueError:
+                match = False  # Flag indicating no match for current format
                 pass
-        raise ValueError(
-            "No valid date format found."
-            "See https://tidesandcurrents.noaa.gov/api/ "
-            "for list of accepted date formats."
-        )
+
+        if not match:  # No match after trying all formats
+            raise ValueError(
+                f"Invalid date format '{dt_string}' provided."
+                "See https://tidesandcurrents.noaa.gov/api/ "
+                "for list of accepted date formats."
+            )
 
     def get_data(
         self,
@@ -547,15 +505,14 @@ class Station:
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        # Convert dates to datetime objects so deltas can be calculated
         begin_datetime = self._parse_known_date_formats(begin_date)
         end_datetime = self._parse_known_date_formats(end_date)
         delta = end_datetime - begin_datetime
 
-        # If the length of our data request is less or equal to 31 days,
-        # we can pull the data from API in one request
+        # If the length of the data request is less or equal to 31 days,
+        # make a single request to the API
         if delta.days <= 31:
-            data_url = self._build_query_url(
+            data_url = self._build_request_url(
                 begin_datetime.strftime("%Y%m%d %H:%M"),
                 end_datetime.strftime("%Y%m%d %H:%M"),
                 product,
@@ -568,13 +525,12 @@ class Station:
 
             df = self._url2pandas(data_url, product, num_request_blocks=1)
 
-        # If the length of the user specified data request is < 365 days
-        # AND the product is hourly_height or high_low, we can pull data
-        # directly from the API in one request
+        # If the length of the data request is < 365 days AND the product is
+        # hourly_height or high_low, make a single request to the API
         elif delta.days <= 365 and (
             product == "hourly_height" or product == "high_low"
         ):
-            data_url = self._build_query_url(
+            data_url = self._build_request_url(
                 begin_date,
                 end_date,
                 product,
@@ -584,33 +540,24 @@ class Station:
                 units,
                 time_zone,
             )
-
             df = self._url2pandas(data_url, product, num_request_blocks=1)
 
-        # If the length of the user specified data request is greater than 365
-        # days AND the product is hourly_height or high_low, we need to load
-        # data from the API in 365 day blocks.
+        # If the data request is greater than 365 days AND the product is
+        # hourly_height or high_low, make multiple requests to the API in 365 day blocks
         elif product == "hourly_height" or product == "high_low":
-            # Find the number of 365 day blocks in our desired period,
-            # constrain the upper limit of index in the for loop to follow
+            df = pd.DataFrame([])
             num_365day_blocks = int(math.floor(delta.days / 365))
 
-            df = pd.DataFrame([])  # Empty dataframe for data from API requests
-
-            # Loop through in 365 day blocks,
-            # adjust the begin_datetime and end_datetime accordingly,
-            # make a request to the NOAA CO-OPS API
+            # Loop through 365 day blocks, update request params accordingly
             for i in range(num_365day_blocks + 1):
                 begin_datetime_loop = begin_datetime + timedelta(days=(i * 365))
                 end_datetime_loop = begin_datetime_loop + timedelta(days=365)
-
-                # If end_datetime_loop of the current 365 day block is greater
-                # than end_datetime specified by user, use end_datetime
-                if end_datetime_loop > end_datetime:
-                    end_datetime_loop = end_datetime
-
-                # Build url for each API request as we proceed through the loop
-                data_url = self._build_query_url(
+                end_datetime_loop = (
+                    end_datetime
+                    if end_datetime_loop > end_datetime
+                    else end_datetime_loop
+                )
+                data_url = self._build_request_url(
                     begin_datetime_loop.strftime("%Y%m%d"),
                     end_datetime_loop.strftime("%Y%m%d"),
                     product,
@@ -620,35 +567,24 @@ class Station:
                     units,
                     time_zone,
                 )
+                df_block = self._url2pandas(data_url, product, num_365day_blocks)
+                df = pd.concat([df, df_block])
 
-                # Get dataframe for block and append to time series df
-                df_new = self._url2pandas(data_url, product, num_365day_blocks)
-                df = pd.concat([df, df_new])
-
-        # If the length of the user specified data request is greater than 31
-        # days for any other products, we need to load data from the API in 31
-        # day blocks
+        # If any other product is requested for >31 days, make multiple requests to the
+        # API in 31 day blocks
         else:
-            # Find the number of 31 day blocks in our desired period,
-            # constrain the upper limit of index in the for loop to follow
+            df = pd.DataFrame([])
             num_31day_blocks = int(math.floor(delta.days / 31))
 
-            df = pd.DataFrame([])  # Empty dataframe for data from API requests
-
-            # Loop through in 31 day blocks,
-            # adjust the begin_datetime and end_datetime accordingly,
-            # make a request to the NOAA CO-OPS API
             for i in range(num_31day_blocks + 1):
                 begin_datetime_loop = begin_datetime + timedelta(days=(i * 31))
                 end_datetime_loop = begin_datetime_loop + timedelta(days=31)
-
-                # If end_datetime_loop of the current 31 day block is greater
-                # than end_datetime specified by user, use end_datetime
-                if end_datetime_loop > end_datetime:
-                    end_datetime_loop = end_datetime
-
-                # Build URL for each API request as we proceed through the loop
-                data_url = self._build_query_url(
+                end_datetime_loop = (
+                    end_datetime
+                    if end_datetime_loop > end_datetime
+                    else end_datetime_loop
+                )
+                data_url = self._build_request_url(
                     begin_datetime_loop.strftime("%Y%m%d"),
                     end_datetime_loop.strftime("%Y%m%d"),
                     product,
@@ -658,12 +594,10 @@ class Station:
                     units,
                     time_zone,
                 )
+                df_block = self._url2pandas(data_url, product, num_31day_blocks)
+                df = pd.concat([df, df_block])
 
-                # Get dataframe for block and append to time series df
-                df_new = self._url2pandas(data_url, product, num_31day_blocks)
-                df = pd.concat([df, df_new])
-
-        # Rename output dataframe columns based on requested product
+        # Rename output DataFrame columns based on requested product
         # and convert to useable data types
         if product == "water_level":
             # Rename columns for clarity
@@ -692,7 +626,7 @@ class Station:
                     "f": "flags",
                     "s": "sigma",
                     "t": "date_time",
-                    "v": "water_level",
+                    "v": "hourly_height",
                 },
                 inplace=True,
             )
@@ -716,7 +650,7 @@ class Station:
                 inplace=True,
             )
 
-            # Separate to high and low dataframes
+            # Separate to high and low DataFrames
             df_HH = df[df["high_low"] == "HH"].copy()
             df_HH.rename(
                 columns={
@@ -769,7 +703,7 @@ class Station:
             df_LL["date_time"] = dates_LL
             df_LL.index = df_LL["date_time"]
 
-            # Remove flags and combine to single dataframe
+            # Remove flags and combine to single DataFrame
             df_HH = df_HH.drop(columns=["flags", "high_low"])
             df_H = df_H.drop(columns=["flags", "high_low", "date_time"])
             df_L = df_L.drop(columns=["flags", "high_low", "date_time"])
@@ -812,7 +746,7 @@ class Station:
             if interval == "h" or interval is None:
                 # Rename columns for clarity
                 df.rename(
-                    columns={"t": "date_time", "v": "predicted_wl"},
+                    columns={"t": "date_time", "v": "predictions"},
                     inplace=True,
                 )
 
@@ -827,7 +761,7 @@ class Station:
                 df.rename(
                     columns={
                         "t": "date_time",
-                        "v": "predicted_wl",
+                        "v": "predictions",
                         "type": "hi_lo",
                     },
                     inplace=True,
@@ -868,8 +802,8 @@ class Station:
                     "d": "dir",
                     "dr": "compass",
                     "f": "flags",
-                    "g": "gust_spd",
-                    "s": "spd",
+                    "g": "gust_speed",
+                    "s": "wind_speed",
                     "t": "date_time",
                 },
                 inplace=True,
@@ -885,7 +819,7 @@ class Station:
         elif product == "air_pressure":
             # Rename columns for clarity
             df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "air_press"},
+                columns={"f": "flags", "t": "date_time", "v": "air_pressure"},
                 inplace=True,
             )
 
@@ -899,7 +833,7 @@ class Station:
         elif product == "air_temperature":
             # Rename columns for clarity
             df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "air_temp"},
+                columns={"f": "flags", "t": "date_time", "v": "air_temperature"},
                 inplace=True,
             )
 
@@ -913,7 +847,7 @@ class Station:
         elif product == "water_temperature":
             # Rename columns for clarity
             df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "water_temp"},
+                columns={"f": "flags", "t": "date_time", "v": "water_temperature"},
                 inplace=True,
             )
 
@@ -938,31 +872,69 @@ class Station:
 
 
 if __name__ == "__main__":
-    from pprint import pprint as pp
-
     # DEBUGGING
-    seattle = Station(id="9447130")  # water levels
+    # from pprint import pprint
 
-    print("Test that metadata is working:")
-    pp(seattle.metadata)
-    print("\n" * 2)
+    # import noaa_coops as nc
 
-    print("Test that attributes are populated from metadata:")
-    pp(seattle.sensors)
-    print("\n" * 2)
+    # station = nc.Station("8771510")
 
-    print("Test that data_inventory is working:")
-    pp(seattle.data_inventory)
-    print("\n" * 2)
+    # print(f"CO-OPS MetaData API Station ID: {station.id}")
+    # print(f"CO-OPS MetaData API Station Name: {station.name}")
+    # print("CO-OPS MetaData API Station Products: ")
+    # pprint(station.products, indent=4)
+    # print("\n")
 
-    print("Test water level station request:")
-    sea_data = seattle.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-    pp(sea_data.head())
-    print("\n" * 2)
+    # data1 = station.get_data(
+    #     begin_date="19951201 00:00",
+    #     end_date="19960131 00:00",
+    #     product="water_level",
+    #     datum="MSL",
+    #     interval="h",
+    #     units="english",
+    #     time_zone="gmt",
+    # )
+    # pprint(data1)
+    # print("\n")
+
+    # data2 = station.get_data(
+    #     begin_date="19951201 00:00",
+    #     end_date="19951210 00:00",
+    #     product="water_level",
+    #     datum="MSL",
+    #     interval="h",
+    #     units="english",
+    #     time_zone="gmt",
+    # )
+    # pprint(data2)
+    # print("\n")
+
+    # print(
+    #     "CO-OPS SOAP Data Inventory: ",
+    # )
+    # pprint(station.data_inventory, indent=4, compact=True, width=100)
+    # print("\n")
+
+    # seattle = Station(id="9447130")  # water levels
+    # print("Test that metadata is working:")
+    # pprint(seattle.metadata)
+    # print("\n" * 2)
+    # print("Test that attributes are populated from metadata:")
+    # pprint(seattle.sensors)
+    # print("\n" * 2)
+    # print("Test that data_inventory is working:")
+    # pprint(seattle.data_inventory)
+    # print("\n" * 2)
+    # print("Test water level station request:")
+    # sea_data = seattle.get_data(
+    #     begin_date="20150101",
+    #     end_date="20150331",
+    #     product="water_level",
+    #     datum="MLLW",
+    #     units="metric",
+    #     time_zone="gmt",
+    # )
+    # pprint(sea_data.head())
+    # print("\n" * 2)
+
+    pass

@@ -137,5 +137,6 @@ dmypy.json
 # macOS stuff
 .DS_Store
 
-# VSCode dev tools
+# VSCode
+.vscode
 .VSCodeCounter/

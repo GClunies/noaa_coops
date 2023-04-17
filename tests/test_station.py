@@ -4,6 +4,7 @@ import pandas as pd
 import pytest
 
 import noaa_coops as nc
+from noaa_coops.station import COOPSAPIError
 
 
 def test_station_metadata():
@@ -49,7 +50,7 @@ def test_invalid_datum():
     """Test error handling."""
     seattle = nc.Station(id="9447130")
 
-    with pytest.raises(ValueError):
+    with pytest.raises(COOPSAPIError):
         seattle.get_data(
             begin_date="20150101",
             end_date="20150331",
@@ -70,13 +71,19 @@ def test_stations_from_bbox():
     assert stations == ["8516945", "8518750", "8519483", "8531680"]
 
 
-def test_stations_from_bbox_invalid_lat():
+def test_stations_from_bbox_invalid_coorsds():
     """Test error is raised when invalid lat_coords passed.""" ""
 
     with pytest.raises(ValueError):
         nc.get_stations_from_bbox(
             lat_coords=[40.389, 40.9397, 99.0],
             lon_coords=[-74.4751, -73.7432],
+        )
+
+    with pytest.raises(ValueError):
+        nc.get_stations_from_bbox(
+            lat_coords=[40.389, 40.9397],
+            lon_coords=[-74.4751, -73.7432, -76.1234],
         )
 
 
