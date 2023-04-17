@@ -7,13 +7,12 @@ from typing import Optional, Union
 import pandas as pd
 import requests
 import zeep
-from pandas import json_normalize
 
 
 class COOPSAPIError(Exception):
     """Raised when a NOAA CO-OPS API request returns an error."""
 
-    def __init__(self, message: str, error: dict) -> None:
+    def __init__(self, message: str) -> None:
         """Initialize COOPSAPIError.
 
         Args:
@@ -21,7 +20,6 @@ class COOPSAPIError(Exception):
             error (dict): The error dict returned by the NOAA CO-OPS API.
         """
         self.message = message
-        self.error = error
         super().__init__(self.message)
 
 
@@ -91,8 +89,8 @@ class Station:
             units (str): The units data should be reported in.
                 Defaults to "metric".
         """
-        self.id = id
-        self.units = units
+        self.id: str = str(id)
+        self.units: str = units
         self.get_metadata()
 
         try:
@@ -393,21 +391,12 @@ class Station:
 
         return request_url
 
-    def _url2pandas(
-        self, data_url: str, product: str, num_request_blocks: int
-    ) -> pd.DataFrame:
-        """Request data from CO-OPS API and handle response. Return data in DataFrame.
-
-        Handles 4 scenarios based on the original request from the end user:
-            1. Single 'block' request, no error in response from API
-            2. Single 'block' request, error in response from API
-            3. Multiple 'block' request, no error in response from API
-            4. Multiple 'block' request, error in response from API
+    def _request_data(self, data_url: str, product: str) -> pd.DataFrame:
+        """Request data from CO-OPS API, handle response, return data as a DataFrame.
 
         Args:
             data_url (str): The URL to fetch data from.
             product (str): The data product being fetched.
-            num_request_blocks (int): The number of blocks of data requested.
 
         Raises:
             COOPSAPIError: Error occurred while fetching data from the NOAA CO-OPS API.
@@ -415,41 +404,28 @@ class Station:
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        df = pd.DataFrame()
-        response = requests.get(data_url)
-        json_dict = response.json()
-        no_data_error = (  # Error message when no data is found
-            "No data was found. This product may not be "
-            "offered at this station at the "
-            "requested time."
-        )
+        res = requests.get(data_url)
 
-        if "error" not in json_dict:  # Case 1 or 3 (no error in response)
-            key = "predictions" if product == "predictions" else "data"
-            df = json_normalize(json_dict[key])
+        if res.status_code != 200:
+            raise COOPSAPIError(
+                message=(
+                    f"CO-OPS API returned an error. Status Code: "
+                    f"{res.status_code}. Reason: {res.reason}\n"
+                ),
+            )
 
-            return df
+        json_dict = res.json()
 
-        else:  # Case 2 or 4 (error in response)
-            if num_request_blocks == 1:
-                error_message = (
-                    json_dict["error"]
-                    .get("message", "Error retrieving data")
-                    .lstrip()
-                    .rstrip()
-                )
-                raise COOPSAPIError(error_message, json_dict["error"])
-            else:
-                if json_dict["error"]["message"] == no_data_error:
-                    return df
-                else:
-                    error_message = (
-                        json_dict["error"]
-                        .get("message", "Error retrieving data")
-                        .lstrip()
-                        .rstrip()
-                    )
-                    raise COOPSAPIError(error_message, json_dict["error"])
+        if "error" in json_dict:  # API can return an error even if status code is 200
+            raise COOPSAPIError(
+                message=(
+                    f"CO-OPS API returned an error: {json_dict['error']['message']}"
+                ),
+            )
+
+        key = "predictions" if product == "predictions" else "data"
+
+        return pd.json_normalize(json_dict[key])
 
     def _parse_known_date_formats(self, dt_string: str):
         """Parse known date formats and return a datetime object.
@@ -523,7 +499,7 @@ class Station:
                 time_zone,
             )
 
-            df = self._url2pandas(data_url, product, num_request_blocks=1)
+            df = self._request_data(data_url, product, num_request_blocks=1)
 
         # If the length of the data request is < 365 days AND the product is
         # hourly_height or high_low, make a single request to the API
@@ -540,13 +516,14 @@ class Station:
                 units,
                 time_zone,
             )
-            df = self._url2pandas(data_url, product, num_request_blocks=1)
+            df = self._request_data(data_url, product, num_request_blocks=1)
 
         # If the data request is greater than 365 days AND the product is
         # hourly_height or high_low, make multiple requests to the API in 365 day blocks
         elif product == "hourly_height" or product == "high_low":
             df = pd.DataFrame([])
             num_365day_blocks = int(math.floor(delta.days / 365))
+            errors = []
 
             # Loop through 365 day blocks, update request params accordingly
             for i in range(num_365day_blocks + 1):
@@ -567,14 +544,23 @@ class Station:
                     units,
                     time_zone,
                 )
-                df_block = self._url2pandas(data_url, product, num_365day_blocks)
-                df = pd.concat([df, df_block])
+
+                try:
+                    df_block = self._request_data(data_url, product)
+                    df = pd.concat([df, df_block])
+                except COOPSAPIError as e:
+                    err_msg = (
+                        f"Error when requesting data in block "
+                        f"[begin_datetime_loop, end_datetime_loop]: {e.message}"
+                    )
+                    errors.append(err_msg)
 
         # If any other product is requested for >31 days, make multiple requests to the
         # API in 31 day blocks
         else:
             df = pd.DataFrame([])
             num_31day_blocks = int(math.floor(delta.days / 31))
+            errors = []
 
             for i in range(num_31day_blocks + 1):
                 begin_datetime_loop = begin_datetime + timedelta(days=(i * 31))
@@ -594,8 +580,30 @@ class Station:
                     units,
                     time_zone,
                 )
-                df_block = self._url2pandas(data_url, product, num_31day_blocks)
-                df = pd.concat([df, df_block])
+
+                try:
+                    df_block = self._request_data(data_url, product)
+                    df = pd.concat([df, df_block])
+                except COOPSAPIError as e:
+                    err_msg = (
+                        f"Error when requesting data in block "
+                        f"[begin_datetime_loop, end_datetime_loop]: {e.message}"
+                    )
+                    errors.append(err_msg)
+
+        if df.empty:
+            raise COOPSAPIError(
+                "No data returned from NOAA CO-OPS API.\n\n"
+                "    Request parameters:\n"
+                f"        begin_date: {begin_date}\n"
+                f"        end_date: {end_date}\n"
+                f"        product: {product}\n"
+                f"        datum: {datum}\n"
+                f"        bin_num: {bin_num}\n"
+                f"        interval: {interval}\n"
+                f"        units: {units}\n"
+                f"        time_zone: {time_zone}\n"
+            )
 
         # Rename output DataFrame columns based on requested product
         # and convert to useable data types
@@ -866,25 +874,26 @@ class Station:
         if ((product == "water_level") | (product == "currents")) & (interval == "h"):
             df = df.resample("H").first()  # Only return the hourly data
 
-        df.drop_duplicates()  # Handle duplicates due to overlapping requests
+        # Handle duplicates due to overlapping requests
+        df.drop_duplicates(inplace=True)
+
         self.data = df
-        return df
+
+        return df, errors
 
 
 if __name__ == "__main__":
     # DEBUGGING
-    # from pprint import pprint
+    from pprint import pprint
 
-    # import noaa_coops as nc
+    import noaa_coops as nc
 
     # station = nc.Station("8771510")
-
     # print(f"CO-OPS MetaData API Station ID: {station.id}")
     # print(f"CO-OPS MetaData API Station Name: {station.name}")
     # print("CO-OPS MetaData API Station Products: ")
     # pprint(station.products, indent=4)
     # print("\n")
-
     # data1 = station.get_data(
     #     begin_date="19951201 00:00",
     #     end_date="19960131 00:00",
@@ -896,7 +905,6 @@ if __name__ == "__main__":
     # )
     # pprint(data1)
     # print("\n")
-
     # data2 = station.get_data(
     #     begin_date="19951201 00:00",
     #     end_date="19951210 00:00",
@@ -908,13 +916,11 @@ if __name__ == "__main__":
     # )
     # pprint(data2)
     # print("\n")
-
     # print(
     #     "CO-OPS SOAP Data Inventory: ",
     # )
     # pprint(station.data_inventory, indent=4, compact=True, width=100)
     # print("\n")
-
     # seattle = Station(id="9447130")  # water levels
     # print("Test that metadata is working:")
     # pprint(seattle.metadata)
@@ -937,4 +943,13 @@ if __name__ == "__main__":
     # pprint(sea_data.head())
     # print("\n" * 2)
 
-    pass
+    sta = nc.Station(8638610)
+    print(sta.lat_lon)
+    data_wl = sta.get_data(
+        begin_date="19940526",
+        end_date="19950526",
+        product="water_level",
+        datum="NAVD",
+        units="english",
+        time_zone="lst",
+    )
