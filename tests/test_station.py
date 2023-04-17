@@ -29,7 +29,7 @@ def test_station_inventory():
 def test_station_data():
     """Test that the station data is returned."""
     seattle = nc.Station(id="9447130")
-    df = seattle.get_data(
+    df, no_data_errors = seattle.get_data(
         begin_date="20150101",
         end_date="20150331",
         product="water_level",
@@ -44,6 +44,7 @@ def test_station_data():
     assert sample["sigma"][0] == 0.023
     assert sample["flags"][0] == "0,0,0,0"
     assert sample["QC"][0] == "v"
+    assert no_data_errors == []
 
 
 def test_invalid_datum():

@@ -17,7 +17,6 @@ class COOPSAPIError(Exception):
 
         Args:
             message (str): The error message.
-            error (dict): The error dict returned by the NOAA CO-OPS API.
         """
         self.message = message
         super().__init__(self.message)
@@ -478,6 +477,9 @@ class Station:
             time_zone (str, optional): Time zone used when returning fetched data.
                 Defaults to "gmt".
 
+        Raises:
+            COOPSAPIError: Error occurred while fetching data from the NOAA CO-OPS API.
+
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
@@ -523,7 +525,7 @@ class Station:
         elif product == "hourly_height" or product == "high_low":
             df = pd.DataFrame([])
             num_365day_blocks = int(math.floor(delta.days / 365))
-            errors = []
+            no_data_errors = []
 
             # Loop through 365 day blocks, update request params accordingly
             for i in range(num_365day_blocks + 1):
@@ -553,14 +555,14 @@ class Station:
                         f"Error when requesting data in block "
                         f"[begin_datetime_loop, end_datetime_loop]: {e.message}"
                     )
-                    errors.append(err_msg)
+                    no_data_errors.append(err_msg)
 
         # If any other product is requested for >31 days, make multiple requests to the
         # API in 31 day blocks
         else:
             df = pd.DataFrame([])
             num_31day_blocks = int(math.floor(delta.days / 31))
-            errors = []
+            no_data_errors = []
 
             for i in range(num_31day_blocks + 1):
                 begin_datetime_loop = begin_datetime + timedelta(days=(i * 31))
@@ -589,7 +591,7 @@ class Station:
                         f"Error when requesting data in block "
                         f"[begin_datetime_loop, end_datetime_loop]: {e.message}"
                     )
-                    errors.append(err_msg)
+                    no_data_errors.append(err_msg)
 
         if df.empty:
             raise COOPSAPIError(
@@ -879,7 +881,7 @@ class Station:
 
         self.data = df
 
-        return df, errors
+        return df, no_data_errors
 
 
 if __name__ == "__main__":
