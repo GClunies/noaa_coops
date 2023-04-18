@@ -7,7 +7,6 @@ from typing import Optional, Union
 import pandas as pd
 import requests
 import zeep
-from requests import Response
 
 
 class COOPSAPIError(Exception):
@@ -467,11 +466,9 @@ class Station:
         units: Optional[str] = "metric",
         time_zone: Optional[str] = "gmt",
     ):
-        """Check that request parameters are valid.
+        """Check that requested product parameters are valid.
 
         Args:
-            begin_date (str): Start date of the data to be fetched.
-            end_date (str): End date of the data to be fetched.
             product (str): Data product to be fetched.
             datum (str, optional): Datum to use for water level products.
             bin_num (int, optional): Bin to use for current products. Defaults to None.
@@ -642,9 +639,6 @@ class Station:
                 " https://tidesandcurrents.noaa.gov/api/prod/#timezones "
                 "for list of available time zones"
             )
-
-        # TODO - more logic to check for valid params based on the details here
-        # https://api.tidesandcurrents.noaa.gov/api/prod/#products
 
     def get_data(
         self,
@@ -1005,70 +999,61 @@ class Station:
 
 if __name__ == "__main__":
     # DEBUGGING
-    from pprint import pprint
+    # from pprint import pprint
 
-    import noaa_coops as nc
+    # import noaa_coops as nc
 
-    station = nc.Station("8771510")
-    print(f"CO-OPS MetaData API Station ID: {station.id}")
-    print(f"CO-OPS MetaData API Station Name: {station.name}")
-    print("CO-OPS MetaData API Station Products: ")
-    pprint(station.products, indent=4)
-    print("\n")
-    data1 = station.get_data(
-        begin_date="19951201 00:00",
-        end_date="19960131 00:00",
-        product="water_level",
-        datum="MSL",
-        units="english",
-        time_zone="gmt",
-    )
-    pprint(data1)
-    print("\n")
-    data2 = station.get_data(
-        begin_date="19951201 00:00",
-        end_date="19951210 00:00",
-        product="water_level",
-        datum="MSL",
-        units="english",
-        time_zone="gmt",
-    )
-    pprint(data2)
-    print("\n")
-    print(
-        "CO-OPS SOAP Data Inventory: ",
-    )
-    pprint(station.data_inventory, indent=4, compact=True, width=100)
-    print("\n")
-    seattle = Station(id="9447130")  # water levels
-    print("Test that metadata is working:")
-    pprint(seattle.metadata)
-    print("\n" * 2)
-    print("Test that attributes are populated from metadata:")
-    pprint(seattle.sensors)
-    print("\n" * 2)
-    print("Test that data_inventory is working:")
-    pprint(seattle.data_inventory)
-    print("\n" * 2)
-    print("Test water level station request:")
-    sea_data = seattle.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-    pprint(sea_data.head())
-    print("\n" * 2)
-
-    # sta = nc.Station(8638610)
-    # print(sta.lat_lon)
-    # data_wl = sta.get_data(
-    #     begin_date="19940526",
-    #     end_date="19950526",
+    # station = nc.Station("8771510")
+    # print(f"CO-OPS MetaData API Station ID: {station.id}")
+    # print(f"CO-OPS MetaData API Station Name: {station.name}")
+    # print("CO-OPS MetaData API Station Products: ")
+    # pprint(station.products, indent=4)
+    # print("\n")
+    # data1 = station.get_data(
+    #     begin_date="19951201 00:00",
+    #     end_date="19960131 00:00",
     #     product="water_level",
-    #     datum="NAVD",
+    #     datum="MSL",
     #     units="english",
-    #     time_zone="lst",
+    #     time_zone="gmt",
     # )
+    # pprint(data1)
+    # print("\n")
+    # data2 = station.get_data(
+    #     begin_date="19951201 00:00",
+    #     end_date="19951210 00:00",
+    #     product="water_level",
+    #     datum="MSL",
+    #     units="english",
+    #     time_zone="gmt",
+    # )
+    # pprint(data2)
+    # print("\n")
+    # print(
+    #     "CO-OPS SOAP Data Inventory: ",
+    # )
+    # pprint(station.data_inventory, indent=4, compact=True, width=100)
+    # print("\n")
+    # seattle = Station(id="9447130")  # water levels
+    # print("Test that metadata is working:")
+    # pprint(seattle.metadata)
+    # print("\n" * 2)
+    # print("Test that attributes are populated from metadata:")
+    # pprint(seattle.sensors)
+    # print("\n" * 2)
+    # print("Test that data_inventory is working:")
+    # pprint(seattle.data_inventory)
+    # print("\n" * 2)
+    # print("Test water level station request:")
+    # sea_data = seattle.get_data(
+    #     begin_date="20150101",
+    #     end_date="20150331",
+    #     product="water_level",
+    #     datum="MLLW",
+    #     units="metric",
+    #     time_zone="gmt",
+    # )
+    # pprint(sea_data.head())
+    # print("\n" * 2)
+
+    pass
