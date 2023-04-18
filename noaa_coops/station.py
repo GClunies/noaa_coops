@@ -449,7 +449,6 @@ class Station:
                 return date_time, str_yyyyMMdd_HHmm
             except ValueError:
                 match = False  # Flag indicating no match for current format
-                pass
 
         if not match:  # No match after trying all formats
             raise ValueError(
@@ -665,6 +664,9 @@ class Station:
             units (str, optional): Units of fetched data. Defaults to "metric".
             time_zone (str, optional): Time zone used when returning fetched data.
                 Defaults to "gmt".
+
+        Raises:
+            COOPSAPIError: Raised when NOAA CO-OPS API returns an error.
 
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
@@ -1066,5 +1068,3 @@ if __name__ == "__main__":
     # )
     # pprint(sea_data.head())
     # print("\n" * 2)
-
-    pass
