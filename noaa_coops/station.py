@@ -676,7 +676,7 @@ class Station:
         end_dt, end_str = self._parse_known_date_formats(end_date)
         delta = end_dt - begin_dt
 
-        # Query params fit within *single block* API constraints
+        # Query params fit within *single block* API request
         if delta.days <= 31 or (
             delta.days <= 365 and (product == "hourly_height" or product == "high_low")
         ):
@@ -692,7 +692,7 @@ class Station:
             )
             df = self._make_api_request(data_url, product)
 
-        # Query params require *multiple block* API constraints
+        # Query params require *multiple block* API request
         else:
             block_size = (
                 365 if product == "hourly_height" or product == "high_low" else 31
