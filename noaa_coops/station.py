@@ -418,8 +418,9 @@ class Station:
 
             if product == "water_level":
                 err_msg += (
-                    "\n\nNOTE: `water_levels` product is only available from 1996 "
-                    "and onwards."
+                    "\n\nNOTE: The requested product `water_levels` is only available "
+                    "from 1996 and onwards. Try using `hourly_height` or `high_low` "
+                    "products instead."
                 )
 
             raise COOPSAPIError(message=err_msg)
@@ -699,7 +700,6 @@ class Station:
             )
             num_blocks = int(math.floor(delta.days / block_size))
             df = pd.DataFrame([])
-            block_errors = []
 
             for i in range(num_blocks + 1):
                 begin_dt_loop = begin_dt + timedelta(days=(i * block_size))
@@ -715,8 +715,18 @@ class Station:
                     units,
                     time_zone,
                 )
-                df_block = self._make_api_request(data_url, product)
+                try:
+                    df_block = self._make_api_request(data_url, product)
+                except COOPSAPIError:
+                    continue  # Skip block if no data returned (e.g, station was down)
+
                 df = pd.concat([df, df_block])
+
+        if df.empty:
+            raise COOPSAPIError(
+                f"No data returned for {product} product between "
+                f"{begin_str} and {end_str}"
+            )
 
         # Rename output DataFrame columns based on requested product
         # and convert to useable data types
@@ -989,46 +999,47 @@ class Station:
         if ((product == "water_level") | (product == "currents")) & (interval == "h"):
             df = df.resample("H").first()  # Only return the hourly data
 
-        # Handle duplicates due to overlapping requests
-        df.drop_duplicates(inplace=True)
+        # Final cleanup of data as a failsafe
+        df.drop_duplicates(inplace=True)  # Drop any duplicate rows
+        # df.dropna(axis=0, how="all", inplace=True)  # Drop any empty rows
 
         self.data = df
 
-        return df, block_errors
+        return df
 
 
 if __name__ == "__main__":
     # DEBUGGING
-    # from pprint import pprint
+    from pprint import pprint
 
-    # import noaa_coops as nc
+    import noaa_coops as nc
 
-    # station = nc.Station("8771510")
+    station = nc.Station("8771510")
     # print(f"CO-OPS MetaData API Station ID: {station.id}")
     # print(f"CO-OPS MetaData API Station Name: {station.name}")
     # print("CO-OPS MetaData API Station Products: ")
     # pprint(station.products, indent=4)
     # print("\n")
-    # data1 = station.get_data(
-    #     begin_date="19951201 00:00",
-    #     end_date="19960131 00:00",
-    #     product="water_level",
-    #     datum="MSL",
-    #     units="english",
-    #     time_zone="gmt",
-    # )
-    # pprint(data1)
-    # print("\n")
-    # data2 = station.get_data(
-    #     begin_date="19951201 00:00",
-    #     end_date="19951210 00:00",
-    #     product="water_level",
-    #     datum="MSL",
-    #     units="english",
-    #     time_zone="gmt",
-    # )
-    # pprint(data2)
-    # print("\n")
+    data1 = station.get_data(
+        begin_date="19951201 00:00",
+        end_date="19951231 00:00",
+        product="hourly_height",
+        datum="MSL",
+        units="english",
+        time_zone="gmt",
+    )
+    pprint(data1)
+    print("\n")
+    data2 = station.get_data(
+        begin_date="19951201 00:00",
+        end_date="19951231 00:00",
+        product="water_level",
+        datum="MSL",
+        units="english",
+        time_zone="gmt",
+    )
+    pprint(data2)
+    print("\n")
     # print(
     #     "CO-OPS SOAP Data Inventory: ",
     # )
