@@ -524,7 +524,7 @@ class Station:
                     " https://api.tidesandcurrents.noaa.gov/api/prod/#datum "
                     "for list of available datums"
                 )
-            elif datum not in [
+            elif str.upper(datum) not in [
                 "CRD",
                 "IGLD",
                 "LWD",
@@ -548,7 +548,11 @@ class Station:
                 raise ValueError(
                     f"`interval` parameter is not supported for `{product}` product. "
                     "See https://tidesandcurrents.noaa.gov/api/prod/#interval "
-                    "for details."
+                    "for details. These products have the following intervals "
+                    "that cannot be modified:\n"
+                    "    one_minute_water_level: 1 minute\n"
+                    "    water_level: 6 minutes\n"
+                    "    hourly_height: 1 hour\n"
                 )
 
         if product == "predictions":
@@ -730,281 +734,14 @@ class Station:
                 f"{begin_str} and {end_str}"
             )
 
-        # Rename output DataFrame columns based on requested product
-        # and convert to useable data types
-        if product == "water_level":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "f": "flags",
-                    "q": "QC",
-                    "s": "sigma",
-                    "t": "date_time",
-                    "v": "water_level",
-                },
-                inplace=True,
-            )
+        df.index = pd.to_datetime(df["t"])
+        df = df.drop(columns=["t"])
 
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["flags", "QC", "date_time"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
+        # Try to convert strings to numeric values where possible
+        for col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="ignore")
 
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "hourly_height":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "f": "flags",
-                    "s": "sigma",
-                    "t": "date_time",
-                    "v": "hourly_height",
-                },
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["flags", "date_time"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "high_low":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "f": "flags",
-                    "ty": "high_low",
-                    "t": "date_time",
-                    "v": "water_level",
-                },
-                inplace=True,
-            )
-
-            # Separate to high and low DataFrames
-            df_HH = df[df["high_low"] == "HH"].copy()
-            df_HH.rename(
-                columns={
-                    "date_time": "date_time_HH",
-                    "water_level": "HH_water_level",
-                },
-                inplace=True,
-            )
-
-            # Note trailing space to match API format
-            df_H = df[df["high_low"] == "H "].copy()
-            df_H.rename(
-                columns={
-                    "date_time": "date_time_H",
-                    "water_level": "H_water_level",
-                },
-                inplace=True,
-            )
-
-            # Note trailing space to match API format
-            df_L = df[df["high_low"].str.contains("L ")].copy()
-            df_L.rename(
-                columns={
-                    "date_time": "date_time_L",
-                    "water_level": "L_water_level",
-                },
-                inplace=True,
-            )
-
-            df_LL = df[df["high_low"].str.contains("LL")].copy()
-            df_LL.rename(
-                columns={
-                    "date_time": "date_time_LL",
-                    "water_level": "LL_water_level",
-                },
-                inplace=True,
-            )
-
-            # Extract dates (without time) for each entry
-            dates_HH = [x.date() for x in pd.to_datetime(df_HH["date_time_HH"])]
-            dates_H = [x.date() for x in pd.to_datetime(df_H["date_time_H"])]
-            dates_L = [x.date() for x in pd.to_datetime(df_L["date_time_L"])]
-            dates_LL = [x.date() for x in pd.to_datetime(df_LL["date_time_LL"])]
-
-            # Set indices to datetime
-            df_HH["date_time"] = dates_HH
-            df_HH.index = df_HH["date_time"]
-            df_H["date_time"] = dates_H
-            df_H.index = df_H["date_time"]
-            df_L["date_time"] = dates_L
-            df_L.index = df_L["date_time"]
-            df_LL["date_time"] = dates_LL
-            df_LL.index = df_LL["date_time"]
-
-            # Remove flags and combine to single DataFrame
-            df_HH = df_HH.drop(columns=["flags", "high_low"])
-            df_H = df_H.drop(columns=["flags", "high_low", "date_time"])
-            df_L = df_L.drop(columns=["flags", "high_low", "date_time"])
-            df_LL = df_LL.drop(columns=["flags", "high_low", "date_time"])
-
-            # Keep only one instance per date (based on max/min)
-            maxes = df_HH.groupby(df_HH.index).HH_water_level.transform(max)
-            df_HH = df_HH.loc[df_HH.HH_water_level == maxes]
-            maxes = df_H.groupby(df_H.index).H_water_level.transform(max)
-            df_H = df_H.loc[df_H.H_water_level == maxes]
-            mins = df_L.groupby(df_L.index).L_water_level.transform(max)
-            df_L = df_L.loc[df_L.L_water_level == mins]
-            mins = df_LL.groupby(df_LL.index).LL_water_level.transform(max)
-            df_LL = df_LL.loc[df_LL.LL_water_level == mins]
-
-            df = df_HH.join(df_H, how="outer")
-            df = df.join(df_L, how="outer")
-            df = df.join(df_LL, how="outer")
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(
-                [
-                    "date_time",
-                    "date_time_HH",
-                    "date_time_H",
-                    "date_time_L",
-                    "date_time_LL",
-                ]
-            )
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df.index)
-            df["date_time_HH"] = pd.to_datetime(df["date_time_HH"])
-            df["date_time_H"] = pd.to_datetime(df["date_time_H"])
-            df["date_time_L"] = pd.to_datetime(df["date_time_L"])
-            df["date_time_LL"] = pd.to_datetime(df["date_time_LL"])
-
-        elif product == "predictions":
-            if interval == "h" or interval is None:
-                # Rename columns for clarity
-                df.rename(
-                    columns={"t": "date_time", "v": "predictions"},
-                    inplace=True,
-                )
-
-                # Convert columns to numeric values
-                data_cols = df.columns.drop(["date_time"])
-                df[data_cols] = df[data_cols].apply(
-                    pd.to_numeric, axis=1, errors="coerce"
-                )
-
-            elif interval == "hilo":
-                # Rename columns for clarity
-                df.rename(
-                    columns={
-                        "t": "date_time",
-                        "v": "predictions",
-                        "type": "hi_lo",
-                    },
-                    inplace=True,
-                )
-
-                # Convert columns to numeric values
-                data_cols = df.columns.drop(["date_time", "hi_lo"])
-                df[data_cols] = df[data_cols].apply(
-                    pd.to_numeric, axis=1, errors="coerce"
-                )
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "currents":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "b": "bin",
-                    "d": "direction",
-                    "s": "speed",
-                    "t": "date_time",
-                },
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "wind":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "d": "dir",
-                    "dr": "compass",
-                    "f": "flags",
-                    "g": "gust_speed",
-                    "s": "wind_speed",
-                    "t": "date_time",
-                },
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags", "compass"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "air_pressure":
-            # Rename columns for clarity
-            df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "air_pressure"},
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "air_temperature":
-            # Rename columns for clarity
-            df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "air_temperature"},
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "water_temperature":
-            # Rename columns for clarity
-            df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "water_temperature"},
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        # Set datetime to index (for use in resampling)
-        df.index = df["date_time"]
-        df = df.drop(columns=["date_time"])
-
-        # Handle hourly requests for water_level and currents data
-        if ((product == "water_level") | (product == "currents")) & (interval == "h"):
-            df = df.resample("H").first()  # Only return the hourly data
-
-        # Final cleanup of data as a failsafe
         df.drop_duplicates(inplace=True)  # Drop any duplicate rows
-        # df.dropna(axis=0, how="all", inplace=True)  # Drop any empty rows
-
         self.data = df
 
         return df
@@ -1016,55 +753,54 @@ if __name__ == "__main__":
 
     import noaa_coops as nc
 
-    station = nc.Station("8771510")
-    # print(f"CO-OPS MetaData API Station ID: {station.id}")
-    # print(f"CO-OPS MetaData API Station Name: {station.name}")
-    # print("CO-OPS MetaData API Station Products: ")
-    # pprint(station.products, indent=4)
-    # print("\n")
-    data1 = station.get_data(
-        begin_date="19951201 00:00",
-        end_date="19951231 00:00",
-        product="hourly_height",
-        datum="MSL",
-        units="english",
-        time_zone="gmt",
-    )
-    pprint(data1)
-    print("\n")
-    data2 = station.get_data(
-        begin_date="19951201 00:00",
-        end_date="19951231 00:00",
-        product="water_level",
-        datum="MSL",
-        units="english",
-        time_zone="gmt",
-    )
-    pprint(data2)
-    print("\n")
-    # print(
-    #     "CO-OPS SOAP Data Inventory: ",
-    # )
-    # pprint(station.data_inventory, indent=4, compact=True, width=100)
-    # print("\n")
-    # seattle = Station(id="9447130")  # water levels
+    station = nc.Station(id="9447130")  # Seattle, WA
+
     # print("Test that metadata is working:")
-    # pprint(seattle.metadata)
+    # pprint(station.metadata)
     # print("\n" * 2)
+
     # print("Test that attributes are populated from metadata:")
-    # pprint(seattle.sensors)
+    # pprint(station.sensors)
     # print("\n" * 2)
+
     # print("Test that data_inventory is working:")
-    # pprint(seattle.data_inventory)
+    # pprint(station.data_inventory, indent=4, compact=True, width=100)
     # print("\n" * 2)
-    # print("Test water level station request:")
-    # sea_data = seattle.get_data(
-    #     begin_date="20150101",
-    #     end_date="20150331",
-    #     product="water_level",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt",
-    # )
-    # pprint(sea_data.head())
-    # print("\n" * 2)
+
+    print("6-min water level station request:")
+    data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="water_level",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+    pprint(data.head())
+    print("\n" * 2)
+
+    print("1-hr water level station request (SHOULD NOT WORK):")
+    data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="water_level",
+        interval="h",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+    pprint(data.head())
+    print("\n" * 2)
+
+    print("high-low request:")
+    data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="high_low",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+    pprint(data.head())
+    print("\n" * 2)
+    pprint(data.loc["2015"])
