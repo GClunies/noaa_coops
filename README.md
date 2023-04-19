@@ -85,7 +85,7 @@ Available data products can be found in NOAA CO-OPS Data API docs.
 
 Station data can be fetched using the `.get_data` method on a `Station` object. Data is returned as a Pandas [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) for ease of use and analysis. DataFrame columns are named according to the NOAA CO-OPS API [docs](https://api.tidesandcurrents.noaa.gov/api/prod/responseHelp.html), with the `t` column (timestamp) set as the DataFrame index.
 
-The example below fetches water level data from the Seattle station (id=9447130) for a 1 month period. The [web output](https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130&units=metric&bdate=20150101&edate=20150131&timezone=GMT&datum=MLLW) is shown below the code as a reference.
+The example below fetches water level data from the Seattle station (id=9447130) for a 1 month period. The corresponding [web output](https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130&units=metric&bdate=20150101&edate=20150131&timezone=GMT&datum=MLLW) is shown below the code as a reference.
 
 ```python
 >>> from noaa_coops import Station
