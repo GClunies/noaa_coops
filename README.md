@@ -20,7 +20,7 @@ Data is accessed via `Station` class objects. Each station is uniquely identifie
 >>> seattle = Station(id="9447130")  # Create Station object for Seattle (ID = 9447130)
 ```
 
-Stations can be found with the Tides & Currents [mapping interface](https://tidesandcurrents.noaa.gov/) or the `get_stations_from_bbox` function, which searches a bounding box for stations and returns their IDs (if found).
+Stations and their IDs can be found using the Tides & Currents [mapping interface](https://tidesandcurrents.noaa.gov/). Alternatively, you can search for stations in a bounding box using the `get_stations_from_bbox` function, which will return a list of stations found in the box (if any).
 ```python
 >>> from pprint import pprint
 >>> from noaa_coops import Station, get_stations_from_bbox
@@ -32,7 +32,7 @@ Stations can be found with the Tides & Currents [mapping interface](https://tide
 'Kings Point'
 ```
 
-#### Metadata
+### Metadata
 Station metadata is stored in the `.metadata` attribute of a `Station` object. Additionally, the keys of the metadata attribute dictionary are also assigned as attributes of the station object itself.
 
 ```python
@@ -47,7 +47,7 @@ Station metadata is stored in the `.metadata` attribute of a `Station` object. A
 -122.339167
 ```
 
-#### Data Inventory
+### Data Inventory
 A description of a Station's data products and available dates can be accessed via the `.data_inventory` attribute of a `Station` object.
 
 ```python
@@ -74,40 +74,31 @@ A description of a Station's data products and available dates can be accessed v
  'Wind': {'end_date': '2019-01-02 18:36', 'start_date': '1991-11-09 00:00'}}
 ```
 
-#### Data
-Station data can be fetched using the `.get_data` method on a `Station` object. Data is returned as Pandas DataFrames for ease of use and analysis. Available data products can be found in [NOAA CO-OPS Data API](https://tidesandcurrents.noaa.gov/api/#products) docs.
+### Data Retrieval
+Available data products can be found in NOAA CO-OPS Data API docs.
 
-`noaa_coops` currently supports the following data products:
-- Currents
-- Observed water levels
-- Observed daily high and low water levels (use `product="high_low"`)
-- Predicted water levels
-- Predicted high and low water levels
-- Winds
-- Air pressure
-- Air temperature
-- Water temperature
+Station data can be fetched using the `.get_data` method on a `Station` object. Data is returned as a Pandas [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) for ease of use and analysis. DataFrame columns are named according to the NOAA CO-OPS API [docs](https://api.tidesandcurrents.noaa.gov/api/prod/responseHelp.html), with the `t` column (timestamp) set as the DataFrame index.
 
-The example below fetches water level data from the Seattle station for a 3 month period.
+The example below fetches water level data from the Seattle station (id=9447130) for a 1 month period. The [web output](https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130&units=metric&bdate=20150101&edate=20150131&timezone=GMT&datum=MLLW) is shown below the code as a reference.
 
 ```python
 >>> from noaa_coops import Station
 >>> seattle = Station(id="9447130")
 >>> df_water_levels = seattle.get_data(
 ...     begin_date="20150101",
-...     end_date="20150331",
+...     end_date="20150131",
 ...     product="water_level",
 ...     datum="MLLW",
 ...     units="metric",
 ...     time_zone="gmt")
 >>> df_water_levels.head()
-                     water_level  sigma    flags QC
-date_time
-2015-01-01 00:00:00        1.799  0.023  0,0,0,0  v
-2015-01-01 00:06:00        1.718  0.018  0,0,0,0  v
-2015-01-01 00:12:00        1.639  0.013  0,0,0,0  v
-2015-01-01 00:18:00        1.557  0.012  0,0,0,0  v
-2015-01-01 00:24:00        1.473  0.014  0,0,0,0  v
+                         v      s        f  q
+t
+2015-01-01 00:00:00  1.799  0.023  0,0,0,0  v
+2015-01-01 00:06:00  1.718  0.018  0,0,0,0  v
+2015-01-01 00:12:00  1.639  0.013  0,0,0,0  v
+2015-01-01 00:18:00  1.557  0.012  0,0,0,0  v
+2015-01-01 00:24:00  1.473  0.014  0,0,0,0  v
 
 ```
 

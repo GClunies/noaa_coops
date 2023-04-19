@@ -7,21 +7,18 @@ from typing import Optional, Union
 import pandas as pd
 import requests
 import zeep
-from pandas import json_normalize
 
 
 class COOPSAPIError(Exception):
     """Raised when a NOAA CO-OPS API request returns an error."""
 
-    def __init__(self, message: str, error: dict) -> None:
+    def __init__(self, message: str) -> None:
         """Initialize COOPSAPIError.
 
         Args:
             message (str): The error message.
-            error (dict): The error dict returned by the NOAA CO-OPS API.
         """
         self.message = message
-        self.error = error
         super().__init__(self.message)
 
 
@@ -41,23 +38,25 @@ def get_stations_from_bbox(
     Returns:
         list[str]: A list of station IDs.
     """
+    station_list = []
     data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
     response = requests.get(data_url)
     json_dict = response.json()
-
-    station_list = []
 
     if len(lat_coords) != 2 or len(lon_coords) != 2:
         raise ValueError("lat_coords and lon_coords must be of length 2.")
 
     # Ensure lat_coords and lon_coords are in the correct order
-    if lat_coords[0] > lat_coords[1]:
-        lat_coords[0], lat_coords[1] = lat_coords[1], lat_coords[0]
+    lat_coords = sorted(lat_coords)
+    lon_coords = sorted(lon_coords)
 
-    if lon_coords[0] > lon_coords[1]:
-        lon_coords[0], lon_coords[1] = lon_coords[1], lon_coords[0]
+    # if lat_coords[0] > lat_coords[1]:
+    #     lat_coords[0], lat_coords[1] = lat_coords[1], lat_coords[0]
 
-    # Search through stations and append to station_list if within bounding box
+    # if lon_coords[0] > lon_coords[1]:
+    #     lon_coords[0], lon_coords[1] = lon_coords[1], lon_coords[0]
+
+    # Find stations in bounding box
     for station_dict in json_dict["stations"]:
         if lon_coords[0] < station_dict["lng"] < lon_coords[1]:
             if lat_coords[0] < station_dict["lat"] < lat_coords[1]:
@@ -91,8 +90,8 @@ class Station:
             units (str): The units data should be reported in.
                 Defaults to "metric".
         """
-        self.id = id
-        self.units = units
+        self.id: str = str(id)
+        self.units: str = units
         self.get_metadata()
 
         try:
@@ -278,7 +277,7 @@ class Station:
             if datum is None:
                 raise ValueError(
                     "No datum specified for water level data. See"
-                    " https://tidesandcurrents.noaa.gov/api/#datum "
+                    " https://tidesandcurrents.noaa.gov/api/prod/#datum "
                     "for list of available datums"
                 )
             else:
@@ -294,14 +293,11 @@ class Station:
                     "format": "json",
                 }
 
-                if interval is not None:
-                    parameters["interval"] = interval
-
         elif product == "hourly_height":
             if datum is None:
                 raise ValueError(
                     "No datum specified for water level data. See"
-                    " https://tidesandcurrents.noaa.gov/api/#datum "
+                    " https://tidesandcurrents.noaa.gov/api/prod/#datum "
                     "for list of available datums"
                 )
             else:
@@ -321,7 +317,7 @@ class Station:
             if datum is None:
                 raise ValueError(
                     "No datum specified for water level data. See"
-                    " https://tidesandcurrents.noaa.gov/api/#datum "
+                    " https://tidesandcurrents.noaa.gov/api/prod/#datum "
                     "for list of available datums"
                 )
             else:
@@ -379,7 +375,6 @@ class Station:
                 "end_date": end_date,
                 "station": self.id,
                 "product": product,
-                "interval": interval,
                 "units": units,
                 "time_zone": time_zone,
                 "application": "noaa_coops",
@@ -393,21 +388,12 @@ class Station:
 
         return request_url
 
-    def _url2pandas(
-        self, data_url: str, product: str, num_request_blocks: int
-    ) -> pd.DataFrame:
-        """Request data from CO-OPS API and handle response. Return data in DataFrame.
-
-        Handles 4 scenarios based on the original request from the end user:
-            1. Single 'block' request, no error in response from API
-            2. Single 'block' request, error in response from API
-            3. Multiple 'block' request, no error in response from API
-            4. Multiple 'block' request, error in response from API
+    def _make_api_request(self, data_url: str, product: str) -> pd.DataFrame:
+        """Request data from CO-OPS API, handle response, return data as a DataFrame.
 
         Args:
             data_url (str): The URL to fetch data from.
             product (str): The data product being fetched.
-            num_request_blocks (int): The number of blocks of data requested.
 
         Raises:
             COOPSAPIError: Error occurred while fetching data from the NOAA CO-OPS API.
@@ -415,41 +401,33 @@ class Station:
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        df = pd.DataFrame()
-        response = requests.get(data_url)
-        json_dict = response.json()
-        no_data_error = (  # Error message when no data is found
-            "No data was found. This product may not be "
-            "offered at this station at the "
-            "requested time."
-        )
+        res = requests.get(data_url)
 
-        if "error" not in json_dict:  # Case 1 or 3 (no error in response)
-            key = "predictions" if product == "predictions" else "data"
-            df = json_normalize(json_dict[key])
+        if res.status_code != 200:
+            raise COOPSAPIError(
+                message=(
+                    f"CO-OPS API returned an error. Status Code: "
+                    f"{res.status_code}. Reason: {res.reason}\n"
+                ),
+            )
 
-            return df
+        json_dict = res.json()
 
-        else:  # Case 2 or 4 (error in response)
-            if num_request_blocks == 1:
-                error_message = (
-                    json_dict["error"]
-                    .get("message", "Error retrieving data")
-                    .lstrip()
-                    .rstrip()
+        if "error" in json_dict:  # API can return an error even if status code is 200
+            err_msg = f"CO-OPS API returned an error: {json_dict['error']['message']}"
+
+            if product == "water_level":
+                err_msg += (
+                    "\n\nNOTE: The requested product `water_levels` is only available "
+                    "from 1996 and onwards. Try using `hourly_height` or `high_low` "
+                    "products instead."
                 )
-                raise COOPSAPIError(error_message, json_dict["error"])
-            else:
-                if json_dict["error"]["message"] == no_data_error:
-                    return df
-                else:
-                    error_message = (
-                        json_dict["error"]
-                        .get("message", "Error retrieving data")
-                        .lstrip()
-                        .rstrip()
-                    )
-                    raise COOPSAPIError(error_message, json_dict["error"])
+
+            raise COOPSAPIError(message=err_msg)
+
+        key = "predictions" if product == "predictions" else "data"
+
+        return pd.json_normalize(json_dict[key])
 
     def _parse_known_date_formats(self, dt_string: str):
         """Parse known date formats and return a datetime object.
@@ -465,16 +443,205 @@ class Station:
         """
         for fmt in ("%Y%m%d", "%Y%m%d %H:%M", "%m/%d/%Y", "%m/%d/%Y %H:%M"):
             try:
-                return datetime.strptime(dt_string, fmt)
+                date_time = datetime.strptime(dt_string, fmt)
+                # Standardize date format to yyyyMMdd HH:mm for all requests
+                str_yyyyMMdd_HHmm = date_time.strftime("%Y%m%d %H:%M")
+                return date_time, str_yyyyMMdd_HHmm
             except ValueError:
                 match = False  # Flag indicating no match for current format
-                pass
 
         if not match:  # No match after trying all formats
             raise ValueError(
                 f"Invalid date format '{dt_string}' provided."
                 "See https://tidesandcurrents.noaa.gov/api/ "
                 "for list of accepted date formats."
+            )
+
+    def _check_product_params(
+        self,
+        product: str,
+        datum: Optional[str] = None,
+        bin_num: Optional[int] = None,
+        interval: Optional[Union[str, int]] = None,
+        units: Optional[str] = "metric",
+        time_zone: Optional[str] = "gmt",
+    ):
+        """Check that requested product parameters are valid.
+
+        Args:
+            product (str): Data product to be fetched.
+            datum (str, optional): Datum to use for water level products.
+            bin_num (int, optional): Bin to use for current products. Defaults to None.
+            interval (Union[str, int], optional): Time interval of fetched data.
+                Defaults to None
+            units (str, optional): Units to use for fetched data. Defaults to "metric".
+            time_zone (str, optional): Time zone to use for fetched data.
+                Defaults to "gmt".
+
+        Raises:
+            ValueError: Invalid request parameters were provided.
+        """
+        if product not in [
+            "water_level",
+            "hourly_height",
+            "high_low",
+            "daily_mean",
+            "monthly_mean",
+            "one_minute_water_level",
+            "predictions",
+            "datums",
+            "air_gap",
+            "air_temperature",
+            "water_temperature",
+            "wind",
+            "air_pressure",
+            "conductivity",
+            "visibility",
+            "humidity",
+            "salinity",
+            "currents",
+            "currents_predictions",
+            "ofs_water_level",
+        ]:
+            raise ValueError(
+                f"Invalid product '{product}' provided. See"
+                " https://api.tidesandcurrents.noaa.gov/api/prod/#products "
+                "for list of available products"
+            )
+
+        if product in [
+            "water_level",
+            "hourly_height",
+            "high_low",
+            "daily_mean",
+            "monthly_mean",
+            "one_minute_water_level",
+            "predictions",
+        ]:
+            if datum is None:
+                raise ValueError(
+                    "No datum specified for water level data. See"
+                    " https://api.tidesandcurrents.noaa.gov/api/prod/#datum "
+                    "for list of available datums"
+                )
+            elif str.upper(datum) not in [
+                "CRD",
+                "IGLD",
+                "LWD",
+                "MHHW",
+                "MHW",
+                "MTL",
+                "MSL",
+                "MLW",
+                "MLLW",
+                "NAVD",
+                "STND",
+            ]:
+                raise ValueError(
+                    f"Invalid datum '{datum}' provided. See"
+                    " https://tidesandcurrents.noaa.gov/api/prod/#datum "
+                    "for list of available datums"
+                )
+
+        if product in ["water_level", "hourly_height", "one_minute_water_level"]:
+            if interval is not None:
+                raise ValueError(
+                    f"`interval` parameter is not supported for `{product}` product. "
+                    "See https://tidesandcurrents.noaa.gov/api/prod/#interval "
+                    "for details. These products have the following intervals "
+                    "that cannot be modified:\n"
+                    "    one_minute_water_level: 1 minute\n"
+                    "    water_level: 6 minutes\n"
+                    "    hourly_height: 1 hour\n"
+                )
+
+        if product == "predictions":
+            if interval is not None and str(interval) not in [
+                "h",
+                "1",
+                "5",
+                "10",
+                "15",
+                "30",
+                "60",
+                "hilo",
+            ]:
+                raise ValueError(
+                    f"`interval` parameter {interval} is not supported for "
+                    "`predictions` product. See "
+                    "https://tidesandcurrents.noaa.gov/api/prod/#interval "
+                    "for list of available intervals."
+                )
+
+        if product == "currents":
+            if bin_num is None:
+                raise ValueError(
+                    "No `bin_num` specified for `currents` product. Bin info can be "
+                    "found on the station info page"
+                    " (e.g., https://tidesandcurrents.noaa.gov/cdata/StationInfo?id=PUG1515)"  # noqa
+                )
+
+            if interval is not None and str(interval) not in ["6", "h"]:
+                raise ValueError(
+                    f"`interval` parameter {interval} is not supported for `currents` "
+                    "product. See https://tidesandcurrents.noaa.gov/api/prod/#interval "
+                    "for list of available intervals."
+                )
+
+        if product == "currents_predictions":
+            if bin_num is None:
+                raise ValueError(
+                    "No `bin_num` specified for `currents_predictions` data. Bin info "
+                    "can be found on the station info page"
+                    " (e.g., https://tidesandcurrents.noaa.gov/cdata/StationInfo?id=PUG1515)"  # noqa
+                )
+
+            if interval is not None and str(interval) not in [
+                "h",
+                "1",
+                "6",
+                "10",
+                "30",
+                "60",
+                "max_slack",
+            ]:
+                raise ValueError(
+                    f"`interval` parameter {interval} is not supported for "
+                    "`currents_predictions` product. "
+                    "See https://tidesandcurrents.noaa.gov/api/prod/#interval "
+                    "for list of available intervals."
+                )
+
+        if product in [
+            "air_temperature",
+            "water_temperature",
+            "wind",
+            "air_pressure",
+            "conductivity",
+            "visibility",
+            "humidity",
+            "salinity",
+        ]:
+            if interval is not None and str(interval) not in ["h", "6"]:
+                raise ValueError(
+                    f"`interval` parameter {interval} is not supported for "
+                    f"`{product}` product. See "
+                    "https://tidesandcurrents.noaa.gov/api/prod/#interval "
+                    "for list of available intervals."
+                )
+
+        if units not in ["english", "metric"]:
+            raise ValueError(
+                f"Invalid units '{units}' provided. See"
+                " https://tidesandcurrents.noaa.gov/api/prod/#units "
+                "for list of available units"
+            )
+
+        if time_zone not in ["gmt", "lst", "lst_ldt"]:
+            raise ValueError(
+                f"Invalid time zone '{time_zone}' provided. See"
+                " https://tidesandcurrents.noaa.gov/api/prod/#timezones "
+                "for list of available time zones"
             )
 
     def get_data(
@@ -502,37 +669,27 @@ class Station:
             time_zone (str, optional): Time zone used when returning fetched data.
                 Defaults to "gmt".
 
+        Raises:
+            COOPSAPIError: Raised when NOAA CO-OPS API returns an error.
+
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        begin_datetime = self._parse_known_date_formats(begin_date)
-        end_datetime = self._parse_known_date_formats(end_date)
-        delta = end_datetime - begin_datetime
+        # Check for valid params
+        self._check_product_params(product, datum, bin_num, interval, units, time_zone)
 
-        # If the length of the data request is less or equal to 31 days,
-        # make a single request to the API
-        if delta.days <= 31:
-            data_url = self._build_request_url(
-                begin_datetime.strftime("%Y%m%d %H:%M"),
-                end_datetime.strftime("%Y%m%d %H:%M"),
-                product,
-                datum,
-                bin_num,
-                interval,
-                units,
-                time_zone,
-            )
+        # Parse user provided dates, convert to datetime for block size calcs
+        begin_dt, begin_str = self._parse_known_date_formats(begin_date)
+        end_dt, end_str = self._parse_known_date_formats(end_date)
+        delta = end_dt - begin_dt
 
-            df = self._url2pandas(data_url, product, num_request_blocks=1)
-
-        # If the length of the data request is < 365 days AND the product is
-        # hourly_height or high_low, make a single request to the API
-        elif delta.days <= 365 and (
-            product == "hourly_height" or product == "high_low"
+        # Query params fit within *single block* API request
+        if delta.days <= 31 or (
+            delta.days <= 365 and (product == "hourly_height" or product == "high_low")
         ):
             data_url = self._build_request_url(
-                begin_date,
-                end_date,
+                begin_dt.strftime("%Y%m%d %H:%M"),
+                end_dt.strftime("%Y%m%d %H:%M"),
                 product,
                 datum,
                 bin_num,
@@ -540,53 +697,23 @@ class Station:
                 units,
                 time_zone,
             )
-            df = self._url2pandas(data_url, product, num_request_blocks=1)
+            df = self._make_api_request(data_url, product)
 
-        # If the data request is greater than 365 days AND the product is
-        # hourly_height or high_low, make multiple requests to the API in 365 day blocks
-        elif product == "hourly_height" or product == "high_low":
-            df = pd.DataFrame([])
-            num_365day_blocks = int(math.floor(delta.days / 365))
-
-            # Loop through 365 day blocks, update request params accordingly
-            for i in range(num_365day_blocks + 1):
-                begin_datetime_loop = begin_datetime + timedelta(days=(i * 365))
-                end_datetime_loop = begin_datetime_loop + timedelta(days=365)
-                end_datetime_loop = (
-                    end_datetime
-                    if end_datetime_loop > end_datetime
-                    else end_datetime_loop
-                )
-                data_url = self._build_request_url(
-                    begin_datetime_loop.strftime("%Y%m%d"),
-                    end_datetime_loop.strftime("%Y%m%d"),
-                    product,
-                    datum,
-                    bin_num,
-                    interval,
-                    units,
-                    time_zone,
-                )
-                df_block = self._url2pandas(data_url, product, num_365day_blocks)
-                df = pd.concat([df, df_block])
-
-        # If any other product is requested for >31 days, make multiple requests to the
-        # API in 31 day blocks
+        # Query params require *multiple block* API request
         else:
+            block_size = (
+                365 if product == "hourly_height" or product == "high_low" else 31
+            )
+            num_blocks = int(math.floor(delta.days / block_size))
             df = pd.DataFrame([])
-            num_31day_blocks = int(math.floor(delta.days / 31))
 
-            for i in range(num_31day_blocks + 1):
-                begin_datetime_loop = begin_datetime + timedelta(days=(i * 31))
-                end_datetime_loop = begin_datetime_loop + timedelta(days=31)
-                end_datetime_loop = (
-                    end_datetime
-                    if end_datetime_loop > end_datetime
-                    else end_datetime_loop
-                )
+            for i in range(num_blocks + 1):
+                begin_dt_loop = begin_dt + timedelta(days=(i * block_size))
+                end_dt_loop = begin_dt_loop + timedelta(days=block_size)
+                end_dt_loop = end_dt if end_dt_loop > end_dt else end_dt_loop
                 data_url = self._build_request_url(
-                    begin_datetime_loop.strftime("%Y%m%d"),
-                    end_datetime_loop.strftime("%Y%m%d"),
+                    begin_dt_loop.strftime("%Y%m%d %H:%M"),
+                    end_dt_loop.strftime("%Y%m%d %H:%M"),
                     product,
                     datum,
                     bin_num,
@@ -594,347 +721,86 @@ class Station:
                     units,
                     time_zone,
                 )
-                df_block = self._url2pandas(data_url, product, num_31day_blocks)
+                try:
+                    df_block = self._make_api_request(data_url, product)
+                except COOPSAPIError:
+                    continue  # Skip block if no data returned (e.g, station was down)
+
                 df = pd.concat([df, df_block])
 
-        # Rename output DataFrame columns based on requested product
-        # and convert to useable data types
-        if product == "water_level":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "f": "flags",
-                    "q": "QC",
-                    "s": "sigma",
-                    "t": "date_time",
-                    "v": "water_level",
-                },
-                inplace=True,
+        if df.empty:
+            raise COOPSAPIError(
+                f"No data returned for {product} product between "
+                f"{begin_str} and {end_str}"
             )
 
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["flags", "QC", "date_time"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
+        df.index = pd.to_datetime(df["t"])
+        df = df.drop(columns=["t"])
 
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
+        # Try to convert strings to numeric values where possible
+        for col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="ignore")
 
-        elif product == "hourly_height":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "f": "flags",
-                    "s": "sigma",
-                    "t": "date_time",
-                    "v": "hourly_height",
-                },
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["flags", "date_time"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "high_low":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "f": "flags",
-                    "ty": "high_low",
-                    "t": "date_time",
-                    "v": "water_level",
-                },
-                inplace=True,
-            )
-
-            # Separate to high and low DataFrames
-            df_HH = df[df["high_low"] == "HH"].copy()
-            df_HH.rename(
-                columns={
-                    "date_time": "date_time_HH",
-                    "water_level": "HH_water_level",
-                },
-                inplace=True,
-            )
-
-            df_H = df[df["high_low"] == "H "].copy()
-            df_H.rename(
-                columns={
-                    "date_time": "date_time_H",
-                    "water_level": "H_water_level",
-                },
-                inplace=True,
-            )
-
-            df_L = df[df["high_low"].str.contains("L ")].copy()
-            df_L.rename(
-                columns={
-                    "date_time": "date_time_L",
-                    "water_level": "L_water_level",
-                },
-                inplace=True,
-            )
-
-            df_LL = df[df["high_low"].str.contains("LL")].copy()
-            df_LL.rename(
-                columns={
-                    "date_time": "date_time_LL",
-                    "water_level": "LL_water_level",
-                },
-                inplace=True,
-            )
-
-            # Extract dates (without time) for each entry
-            dates_HH = [x.date() for x in pd.to_datetime(df_HH["date_time_HH"])]
-            dates_H = [x.date() for x in pd.to_datetime(df_H["date_time_H"])]
-            dates_L = [x.date() for x in pd.to_datetime(df_L["date_time_L"])]
-            dates_LL = [x.date() for x in pd.to_datetime(df_LL["date_time_LL"])]
-
-            # Set indices to datetime
-            df_HH["date_time"] = dates_HH
-            df_HH.index = df_HH["date_time"]
-            df_H["date_time"] = dates_H
-            df_H.index = df_H["date_time"]
-            df_L["date_time"] = dates_L
-            df_L.index = df_L["date_time"]
-            df_LL["date_time"] = dates_LL
-            df_LL.index = df_LL["date_time"]
-
-            # Remove flags and combine to single DataFrame
-            df_HH = df_HH.drop(columns=["flags", "high_low"])
-            df_H = df_H.drop(columns=["flags", "high_low", "date_time"])
-            df_L = df_L.drop(columns=["flags", "high_low", "date_time"])
-            df_LL = df_LL.drop(columns=["flags", "high_low", "date_time"])
-
-            # Keep only one instance per date (based on max/min)
-            maxes = df_HH.groupby(df_HH.index).HH_water_level.transform(max)
-            df_HH = df_HH.loc[df_HH.HH_water_level == maxes]
-            maxes = df_H.groupby(df_H.index).H_water_level.transform(max)
-            df_H = df_H.loc[df_H.H_water_level == maxes]
-            mins = df_L.groupby(df_L.index).L_water_level.transform(max)
-            df_L = df_L.loc[df_L.L_water_level == mins]
-            mins = df_LL.groupby(df_LL.index).LL_water_level.transform(max)
-            df_LL = df_LL.loc[df_LL.LL_water_level == mins]
-
-            df = df_HH.join(df_H, how="outer")
-            df = df.join(df_L, how="outer")
-            df = df.join(df_LL, how="outer")
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(
-                [
-                    "date_time",
-                    "date_time_HH",
-                    "date_time_H",
-                    "date_time_L",
-                    "date_time_LL",
-                ]
-            )
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df.index)
-            df["date_time_HH"] = pd.to_datetime(df["date_time_HH"])
-            df["date_time_H"] = pd.to_datetime(df["date_time_H"])
-            df["date_time_L"] = pd.to_datetime(df["date_time_L"])
-            df["date_time_LL"] = pd.to_datetime(df["date_time_LL"])
-
-        elif product == "predictions":
-            if interval == "h" or interval is None:
-                # Rename columns for clarity
-                df.rename(
-                    columns={"t": "date_time", "v": "predictions"},
-                    inplace=True,
-                )
-
-                # Convert columns to numeric values
-                data_cols = df.columns.drop(["date_time"])
-                df[data_cols] = df[data_cols].apply(
-                    pd.to_numeric, axis=1, errors="coerce"
-                )
-
-            elif interval == "hilo":
-                # Rename columns for clarity
-                df.rename(
-                    columns={
-                        "t": "date_time",
-                        "v": "predictions",
-                        "type": "hi_lo",
-                    },
-                    inplace=True,
-                )
-
-                # Convert columns to numeric values
-                data_cols = df.columns.drop(["date_time", "hi_lo"])
-                df[data_cols] = df[data_cols].apply(
-                    pd.to_numeric, axis=1, errors="coerce"
-                )
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "currents":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "b": "bin",
-                    "d": "direction",
-                    "s": "speed",
-                    "t": "date_time",
-                },
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "wind":
-            # Rename columns for clarity
-            df.rename(
-                columns={
-                    "d": "dir",
-                    "dr": "compass",
-                    "f": "flags",
-                    "g": "gust_speed",
-                    "s": "wind_speed",
-                    "t": "date_time",
-                },
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags", "compass"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "air_pressure":
-            # Rename columns for clarity
-            df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "air_pressure"},
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "air_temperature":
-            # Rename columns for clarity
-            df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "air_temperature"},
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        elif product == "water_temperature":
-            # Rename columns for clarity
-            df.rename(
-                columns={"f": "flags", "t": "date_time", "v": "water_temperature"},
-                inplace=True,
-            )
-
-            # Convert columns to numeric values
-            data_cols = df.columns.drop(["date_time", "flags"])
-            df[data_cols] = df[data_cols].apply(pd.to_numeric, axis=1, errors="coerce")
-
-            # Convert date & time strings to datetime objects
-            df["date_time"] = pd.to_datetime(df["date_time"])
-
-        # Set datetime to index (for use in resampling)
-        df.index = df["date_time"]
-        df = df.drop(columns=["date_time"])
-
-        # Handle hourly requests for water_level and currents data
-        if ((product == "water_level") | (product == "currents")) & (interval == "h"):
-            df = df.resample("H").first()  # Only return the hourly data
-
-        df.drop_duplicates()  # Handle duplicates due to overlapping requests
+        df.drop_duplicates(inplace=True)  # Drop any duplicate rows
         self.data = df
+
         return df
 
 
 if __name__ == "__main__":
     # DEBUGGING
-    # from pprint import pprint
+    from pprint import pprint
 
-    # import noaa_coops as nc
+    import noaa_coops as nc
 
-    # station = nc.Station("8771510")
+    station = nc.Station(id="9447130")  # Seattle, WA
 
-    # print(f"CO-OPS MetaData API Station ID: {station.id}")
-    # print(f"CO-OPS MetaData API Station Name: {station.name}")
-    # print("CO-OPS MetaData API Station Products: ")
-    # pprint(station.products, indent=4)
-    # print("\n")
-
-    # data1 = station.get_data(
-    #     begin_date="19951201 00:00",
-    #     end_date="19960131 00:00",
-    #     product="water_level",
-    #     datum="MSL",
-    #     interval="h",
-    #     units="english",
-    #     time_zone="gmt",
-    # )
-    # pprint(data1)
-    # print("\n")
-
-    # data2 = station.get_data(
-    #     begin_date="19951201 00:00",
-    #     end_date="19951210 00:00",
-    #     product="water_level",
-    #     datum="MSL",
-    #     interval="h",
-    #     units="english",
-    #     time_zone="gmt",
-    # )
-    # pprint(data2)
-    # print("\n")
-
-    # print(
-    #     "CO-OPS SOAP Data Inventory: ",
-    # )
-    # pprint(station.data_inventory, indent=4, compact=True, width=100)
-    # print("\n")
-
-    # seattle = Station(id="9447130")  # water levels
     # print("Test that metadata is working:")
-    # pprint(seattle.metadata)
-    # print("\n" * 2)
-    # print("Test that attributes are populated from metadata:")
-    # pprint(seattle.sensors)
-    # print("\n" * 2)
-    # print("Test that data_inventory is working:")
-    # pprint(seattle.data_inventory)
-    # print("\n" * 2)
-    # print("Test water level station request:")
-    # sea_data = seattle.get_data(
-    #     begin_date="20150101",
-    #     end_date="20150331",
-    #     product="water_level",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt",
-    # )
-    # pprint(sea_data.head())
+    # pprint(station.metadata)
     # print("\n" * 2)
 
-    pass
+    # print("Test that attributes are populated from metadata:")
+    # pprint(station.sensors)
+    # print("\n" * 2)
+
+    # print("Test that data_inventory is working:")
+    # pprint(station.data_inventory, indent=4, compact=True, width=100)
+    # print("\n" * 2)
+
+    print("6-min water level station request:")
+    data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="water_level",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+    pprint(data.head())
+    print("\n" * 2)
+
+    print("1-hr water level station request (SHOULD NOT WORK):")
+    data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="water_level",
+        interval="h",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+    pprint(data.head())
+    print("\n" * 2)
+
+    print("high-low request:")
+    data = station.get_data(
+        begin_date="20150101",
+        end_date="20150331",
+        product="high_low",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+    pprint(data.head())
+    print("\n" * 2)
+    pprint(data.loc["2015"])

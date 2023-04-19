@@ -4,7 +4,6 @@ import pandas as pd
 import pytest
 
 import noaa_coops as nc
-from noaa_coops.station import COOPSAPIError
 
 
 def test_station_metadata():
@@ -31,7 +30,7 @@ def test_station_data():
     seattle = nc.Station(id="9447130")
     df = seattle.get_data(
         begin_date="20150101",
-        end_date="20150331",
+        end_date="20150131",
         product="water_level",
         datum="MLLW",
         units="metric",
@@ -40,22 +39,22 @@ def test_station_data():
     sample = df.head(1)
 
     assert sample.index[0] == pd.to_datetime("2015-01-01 00:00:00")
-    assert sample["water_level"][0] == 1.799
-    assert sample["sigma"][0] == 0.023
-    assert sample["flags"][0] == "0,0,0,0"
-    assert sample["QC"][0] == "v"
+    assert sample["v"][0] == 1.799
+    assert sample["s"][0] == 0.023
+    assert sample["f"][0] == "0,0,0,0"
+    assert sample["q"][0] == "v"
 
 
 def test_invalid_datum():
     """Test error handling."""
     seattle = nc.Station(id="9447130")
 
-    with pytest.raises(COOPSAPIError):
+    with pytest.raises(ValueError):
         seattle.get_data(
             begin_date="20150101",
             end_date="20150331",
             product="water_level",
-            datum="navd88",  # Invalid datum
+            datum="navd88",  # Invalid datum (should be navd or NAVD)
             units="metric",
             time_zone="gmt",
         )
