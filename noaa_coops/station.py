@@ -741,7 +741,7 @@ class Station:
         for col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="ignore")
 
-        df.drop_duplicates(inplace=True)  # Drop any duplicate rows
+        df = df[~df.index.duplicated(keep="first")]
         self.data = df
 
         return df
@@ -753,7 +753,33 @@ if __name__ == "__main__":
 
     import noaa_coops as nc
 
-    station = nc.Station(id="9447130")  # Seattle, WA
+    station = nc.Station(id="8775241")
+
+    df = station.get_data(
+        begin_date="20230320 00:00",
+        end_date="20230421 00:00",
+        product="predictions",
+        datum="MSL",
+        interval="h",
+        units="english",
+        time_zone="gmt",
+    )
+
+    pprint(df.head())
+    print("\n" * 2)
+
+    pprint(df.tail())
+    print("\n" * 2)
+
+    print(df.info())
+
+    df.to_csv("debug.csv")
+
+    # station = nc.Station(id="9447130")  # Seattle, WA
+
+    # Test replicating the data seen on the station page:
+    # https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130&units=metric&bdate=20220101&edate=20220430&timezone=GMT&datum=MLLW&interval=h&action=
+    # 2022-01-01 00:00:00, 2022-04-30 23:00:00, 1-hr, MLLW, GMT, metric
 
     # print("Test that metadata is working:")
     # pprint(station.metadata)
@@ -767,40 +793,55 @@ if __name__ == "__main__":
     # pprint(station.data_inventory, indent=4, compact=True, width=100)
     # print("\n" * 2)
 
-    print("6-min water level station request:")
-    data = station.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-    pprint(data.head())
-    print("\n" * 2)
+    # print("6-min water level station request:")
+    # data = station.get_data(
+    #     begin_date="20220101 00:00",
+    #     end_date="20220430 23:00",
+    #     product="hourly_height",
+    #     datum="MLLW",
+    #     units="metric",
+    #     time_zone="gmt",
+    # )
+    # pprint(data.head())
+    # print("\n" * 2)
 
-    print("1-hr water level station request (SHOULD NOT WORK):")
-    data = station.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="water_level",
-        interval="h",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-    pprint(data.head())
-    print("\n" * 2)
+    # pprint(data.tail())
+    # print("\n" * 2)
 
-    print("high-low request:")
-    data = station.get_data(
-        begin_date="20150101",
-        end_date="20150331",
-        product="high_low",
-        datum="MLLW",
-        units="metric",
-        time_zone="gmt",
-    )
-    pprint(data.head())
-    print("\n" * 2)
-    pprint(data.loc["2015"])
+    # print("6-min water level station request:")
+    # data = station.get_data(
+    #     begin_date="20150101",
+    #     end_date="20150331",
+    #     product="water_level",
+    #     datum="MLLW",
+    #     units="metric",
+    #     time_zone="gmt",
+    # )
+    # pprint(data.head())
+    # print("\n" * 2)
+
+    # print("1-hr water level station request (SHOULD NOT WORK):")
+    # data = station.get_data(
+    #     begin_date="20150101",
+    #     end_date="20150331",
+    #     product="water_level",
+    #     interval="h",
+    #     datum="MLLW",
+    #     units="metric",
+    #     time_zone="gmt",
+    # )
+    # pprint(data.head())
+    # print("\n" * 2)
+
+    # print("high-low request:")
+    # data = station.get_data(
+    #     begin_date="20150101",
+    #     end_date="20150331",
+    #     product="high_low",
+    #     datum="MLLW",
+    #     units="metric",
+    #     time_zone="gmt",
+    # )
+    # pprint(data.head())
+    # print("\n" * 2)
+    # pprint(data.loc["2015"])

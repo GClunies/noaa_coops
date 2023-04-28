@@ -140,3 +140,6 @@ dmypy.json
 # VSCode
 .vscode
 .VSCodeCounter/
+
+# noaa_coops
+debug.csv
