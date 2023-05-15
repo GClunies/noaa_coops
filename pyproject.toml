@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "noaa-coops"
-version = "0.3.1"
+version = "0.3.2"
 description = "Python wrapper for NOAA Tides & Currents Data and Metadata."
 authors = ["Greg Clunies <greg.clunies@gmail.com>"]
 license = "Apache-2.0"
@@ -12,7 +12,6 @@ packages = [{include = "noaa_coops"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.28.2"
-numpy = "^1.24.1"
 pandas = "^1.5.3"
 zeep = "^4.2.1"
 
