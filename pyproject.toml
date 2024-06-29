@@ -2,55 +2,28 @@
 name = "noaa-coops"
 version = "0.3.2"
 description = "Python wrapper for NOAA Tides & Currents Data and Metadata."
-authors = ["Greg Clunies <greg.clunies@gmail.com>"]
+authors = ["Gregory Clunies <greg.clunies@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-repository = "https://github.com/GClunies/noaa_coops"
-keywords = ["noaa", "coops", "tides", "currents", "weather", "api"]
-packages = [{include = "noaa_coops"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-requests = "^2.28.2"
-pandas = "^1.5.3"
+python = "^3.9"
+requests = "^2.32.3"
+pandas = "^2.2.2"
 zeep = "^4.2.1"
 
 [tool.poetry.group.dev.dependencies]
-autoflake = "^2.0.1"
-black = "^23.1.0"
-flake8 = {version = "^6", python = "^3.8.1"}
-isort = "^5.12.0"
-pytest = "^7.2.1"
-tox = "^4.4.4"
+pytest = "^8.2.2"
+mypy = "^1.10.1"
+tox = "^4.15.1"
+ruff = "^0.5.0"
 make = "^0.1.6.post2"
-flake8-docstrings = "^1.7.0"
-darglint = "^1.8.1"
-toml = "^0.10.2"
-reuse = "^1.1.1"
+reuse = "^3.0.2"
+pytest-cov = "^5.0.0"
 
-[tool.black]
-line-length = 88
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.git
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
-
-[tool.isort]
-known_first_party = 'noaa_coops'
-multi_line_output = 3
-lines_after_imports = 2
-force_grid_wrap = 0
-combine_as_imports = true
-include_trailing_comma = true
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -61,18 +34,11 @@ testpaths = ["tests"]
 legacy_tox_ini = """
 [tox]
 isolated_build = true
-envlist = py38,py39,py310
+envlist = py39,py310,py311
+
 [testenv]
-whitelist_externals = poetry
 allowlist_externals = poetry
 commands =
     poetry install -v
     poetry run pytest tests/
-[flake8]
-exclude =
-  tests
 """
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"

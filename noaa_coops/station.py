@@ -751,9 +751,7 @@ if __name__ == "__main__":
     # DEBUGGING
     from pprint import pprint
 
-    import noaa_coops as nc
-
-    station = nc.Station(id="8775241")
+    station = Station(id="8775241")
 
     df = station.get_data(
         begin_date="20230320 00:00",
