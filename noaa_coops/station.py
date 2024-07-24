@@ -739,7 +739,10 @@ class Station:
 
         # Try to convert strings to numeric values where possible
         for col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors="ignore")
+            try:
+                df[col] = pd.to_numeric(df[col])
+            except ValueError:
+                df[col] = df[col]
 
         df = df[~df.index.duplicated(keep="first")]
         self.data = df
