@@ -3,13 +3,11 @@ all: format lint
 
 .PHONY: format
 format:
-	@autoflake --remove-all-unused-imports --remove-unused-variables --ignore-init-module-imports --recursive --in-place .
-	@isort .
-	@black .
+	@ruff format .
 
 .PHONY: lint
 lint:
-	@flake8 ./noaa_coops ./tests
+	@ruff check ./noaa_coops/ ./tests/
 
 # @black --check .
 
