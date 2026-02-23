@@ -121,7 +121,7 @@ poetry install
 ```
 
 ### TODO
-Click [here](https://github.com/GClunies/noaa_coops/issues) for a list of existing issues and to submit a new one.
+Click [here](https://github.com/Tjima/noaa_coops_dev/issues) for a list of existing issues and to submit a new one.
 
 ### Contribution
 Contributions are welcome, feel free to submit a pull request.
