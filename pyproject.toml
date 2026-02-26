@@ -8,9 +8,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-requests = "^2.32.3"
-pandas = "^2.2.2"
-zeep = "^4.2.1"
+requests = ">=2.32.3"
+pandas = ">=2.2.2"
+zeep = ">=4.2.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
