@@ -41,6 +41,12 @@ def get_stations_from_bbox(
     station_list = []
     data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
     response = requests.get(data_url)
+
+    if response.status_code != 200:
+        raise COOPSAPIError(
+             f"Failed to fetch station list. Status code: {response.status_code}"
+    )
+
     json_dict = response.json()
 
     if len(lat_coords) != 2 or len(lon_coords) != 2:
