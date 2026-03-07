@@ -145,6 +145,11 @@ class Station:
         response = requests.get(metadata_url)
         json_dict = response.json()
         station_metadata = json_dict["stations"][0]
+        # Expose additional useful metadata fields
+        self.details = station_metadata.get("details", {})
+        self.bins = station_metadata.get("bins", [])
+        self.deployments = station_metadata.get("deployments", [])
+
 
         # Set class attributes base on provided metadata
         if "datums" in station_metadata:  # if True --> water levels
