@@ -47,7 +47,7 @@ search by bounding box:
 ...     lon_coords=[-74.4751, -73.7432],
 ... )
 >>> stations
-['8516945', '8518750', '8519483', '8531680']
+['8516945', '8518750', '8531680']
 >>> Station(id="8516945").name
 'Kings Point'
 ```
@@ -64,7 +64,7 @@ also promoted to top-level attributes on the `Station` object:
 >>> seattle.state
 'WA'
 >>> seattle.lat_lon
-{'lat': 47.601944, 'lon': -122.339167}
+{'lat': 47.60264, 'lon': -122.3393}
 ```
 
 ### Data inventory
