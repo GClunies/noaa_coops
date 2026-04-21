@@ -384,7 +384,7 @@ class Station:
             }
 
             if interval is not None:
-                parameters["interval"] = interval
+                parameters["interval"] = str(interval)
 
         elif product == "currents":
             if bin_num is None:
@@ -419,10 +419,11 @@ class Station:
             }
 
             if interval is not None:
-                parameters["interval"] = interval
+                parameters["interval"] = str(interval)
 
         request_url = requests.Request("GET", base_url, params=parameters).prepare().url
-
+        if request_url is None:
+            raise COOPSAPIError(f"Failed to build request URL for product {product!r}")
         return request_url
 
     def _make_api_request(self, data_url: str, product: str) -> pd.DataFrame:
