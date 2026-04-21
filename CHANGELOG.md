@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- SOAP `DataInventory` calls now go through a dedicated retrying
+  `requests.Session` (`_SOAP_SESSION`) that retries POST as well as GET on
+  transient failures (`429`/`5xx`). Gives the data-inventory path the same
+  resiliency the REST path already had.
+
 ## [0.5.0]
 
 Major modernization release. Every layer of the project was touched — build

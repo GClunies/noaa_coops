@@ -18,7 +18,7 @@ import zeep
 
 from noaa_coops._endpoints import DATA_GETTER_URL, INVENTORY_WSDL_URL
 from noaa_coops._exceptions import COOPSAPIError
-from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION
+from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION, _SOAP_SESSION
 from noaa_coops._metadata import populate_metadata
 from noaa_coops._parsing import normalize_data_frame, parse_known_date_formats
 from noaa_coops._products import build_request_params, validate_params
@@ -96,7 +96,8 @@ class Station:
         coverage, so this path uses SOAP. Best-effort: failures degrade to
         an empty dict and log a warning (see :meth:`__init__`).
         """
-        client = zeep.Client(wsdl=INVENTORY_WSDL_URL)
+        transport = zeep.Transport(session=_SOAP_SESSION)
+        client = zeep.Client(wsdl=INVENTORY_WSDL_URL, transport=transport)
         response = client.service.getDataInventory(self.id)
         # zeep marshals SOAP complex types into CompoundValue objects that
         # support `[]` subscript but NOT `.get()`. Use subscript + catch
