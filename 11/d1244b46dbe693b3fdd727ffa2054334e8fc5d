@@ -1,0 +1,29 @@
+.github/workflows/publish.yml
+  c062d56232e88d55 1-131
+.github/workflows/test-publish.yml
+  c062d56232e88d55 1-82
+.pre-commit-config.yaml
+  c062d56232e88d55 1-17
+.github/dependabot.yml
+  c062d56232e88d55 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "11d1244b46dbe693b3fdd727ffa2054334e8fc5d",
+  "prompts": {
+    "c062d56232e88d55": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fc33e061-7478-4028-9cc2-cd53a192ab99",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 249,
+      "total_deletions": 2,
+      "accepted_lines": 247,
+      "overriden_lines": 0
+    }
+  }
+}
