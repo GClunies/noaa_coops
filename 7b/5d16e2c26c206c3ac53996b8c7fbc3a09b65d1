@@ -1,0 +1,21 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "7b5d16e2c26c206c3ac53996b8c7fbc3a09b65d1",
+  "prompts": {
+    "c062d56232e88d55": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fc33e061-7478-4028-9cc2-cd53a192ab99",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 142,
+      "total_deletions": 975,
+      "accepted_lines": 2531,
+      "overriden_lines": 0
+    }
+  }
+}
