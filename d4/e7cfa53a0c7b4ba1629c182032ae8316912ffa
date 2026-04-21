@@ -1,0 +1,23 @@
+README.md
+  f921a4f4e922bd1f 22-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "d4e7cfa53a0c7b4ba1629c182032ae8316912ffa",
+  "prompts": {
+    "f921a4f4e922bd1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "67512b38-b6b9-4512-ba49-91a98a81fd95",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 0,
+      "accepted_lines": 6,
+      "overriden_lines": 0
+    }
+  }
+}
