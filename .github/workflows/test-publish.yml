@@ -1,0 +1,82 @@
+name: Test Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version from __init__.py
+        id: version
+        run: |
+          VERSION=$(grep '__version__' noaa_coops/__init__.py | sed 's/.*"\(.*\)"/\1/')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Detected version: $VERSION"
+
+      - name: Validate semver
+        run: |
+          if ! echo "${{ steps.version.outputs.version }}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Version in noaa_coops/__init__.py must be semver (e.g. 0.6.0), got: ${{ steps.version.outputs.version }}"
+            exit 1
+          fi
+
+      - name: Check tag does not already exist
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "::error::Tag v${{ steps.version.outputs.version }} already exists. Bump the version in noaa_coops/__init__.py first."
+            exit 1
+          fi
+
+  test:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - name: Run tests
+        run: |
+          uv sync --locked --all-extras --group dev
+          uv run pytest -m "not live"
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - name: Build package
+        run: uv build
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish-testpypi:
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: astral-sh/setup-uv@v4
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
+      - name: Verify install from TestPyPI
+        run: |
+          sleep 10
+          uv venv /tmp/verify-env
+          uv pip install --python /tmp/verify-env/bin/python --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ noaa-coops==${{ needs.validate.outputs.version }}
+          /tmp/verify-env/bin/python -c "from noaa_coops import __version__; assert __version__ == '${{ needs.validate.outputs.version }}', f'Version mismatch: {__version__}'"

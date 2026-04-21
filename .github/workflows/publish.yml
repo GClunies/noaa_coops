@@ -1,0 +1,131 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version from __init__.py
+        id: version
+        run: |
+          VERSION=$(grep '__version__' noaa_coops/__init__.py | sed 's/.*"\(.*\)"/\1/')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Detected version: $VERSION"
+
+      - name: Validate semver
+        run: |
+          if ! echo "${{ steps.version.outputs.version }}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::Version in noaa_coops/__init__.py must be semver (e.g. 0.6.0), got: ${{ steps.version.outputs.version }}"
+            exit 1
+          fi
+
+      - name: Check tag does not already exist
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "::error::Tag v${{ steps.version.outputs.version }} already exists. Bump the version in noaa_coops/__init__.py first."
+            exit 1
+          fi
+
+  test:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - name: Run tests
+        run: |
+          uv sync --locked --all-extras --group dev
+          uv run pytest -m "not live"
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - name: Build package
+        run: uv build
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish-pypi:
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: astral-sh/setup-uv@v4
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
+      - name: Verify install from PyPI
+        run: |
+          sleep 10
+          uv venv /tmp/verify-env
+          uv pip install --python /tmp/verify-env/bin/python noaa-coops==${{ needs.validate.outputs.version }}
+          /tmp/verify-env/bin/python -c "from noaa_coops import __version__; assert __version__ == '${{ needs.validate.outputs.version }}', f'Version mismatch: {__version__}'"
+
+  release:
+    needs: [validate, publish-pypi]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$PREV_TAG" ]; then
+            RANGE="HEAD"
+          else
+            RANGE="${PREV_TAG}..HEAD"
+          fi
+          {
+            echo "body<<CHANGELOG_EOF"
+            echo "## What's Changed"
+            echo ""
+            git log "$RANGE" --pretty=format:"- %s (%h)" --no-merges
+            echo ""
+            echo ""
+            echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG:-initial}...v${{ needs.validate.outputs.version }}"
+            echo "CHANGELOG_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create git tag
+        run: |
+          git tag "v${{ needs.validate.outputs.version }}"
+          git push origin "v${{ needs.validate.outputs.version }}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.validate.outputs.version }}
+          name: v${{ needs.validate.outputs.version }}
+          body: ${{ steps.changelog.outputs.body }}
+          files: dist/*
