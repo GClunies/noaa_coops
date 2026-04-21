@@ -19,7 +19,8 @@ import requests
 import zeep
 
 import noaa_coops as nc
-from noaa_coops.station import COOPSAPIError, DEFAULT_TIMEOUT, Station
+from noaa_coops._http import DEFAULT_TIMEOUT
+from noaa_coops.station import COOPSAPIError, Station
 
 
 # ---------------------------------------------------------------------------
@@ -124,7 +125,7 @@ def test_default_timeout_constant_exists() -> None:
 
 def test_get_stations_from_bbox_passes_timeout(bbox_response: MagicMock) -> None:
     """get_stations_from_bbox must pass timeout= to requests.get."""
-    with patch("noaa_coops.station.requests.get") as mock_get:
+    with patch("noaa_coops.station._SESSION.get") as mock_get:
         mock_get.return_value = bbox_response
         nc.get_stations_from_bbox(lat_coords=[40.0, 41.5], lon_coords=[-74.5, -73.5])
     _assert_timeout(mock_get)
@@ -133,7 +134,7 @@ def test_get_stations_from_bbox_passes_timeout(bbox_response: MagicMock) -> None
 def test_get_metadata_passes_timeout(metadata_response: MagicMock) -> None:
     """Station.__init__ -> get_metadata must pass timeout= to requests.get."""
     with (
-        patch("noaa_coops.station.requests.get") as mock_get,
+        patch("noaa_coops.station._SESSION.get") as mock_get,
         patch("noaa_coops.station.zeep.Client") as mock_zeep,
     ):
         mock_get.return_value = metadata_response
@@ -152,7 +153,7 @@ def test_make_api_request_passes_timeout() -> None:
     mock_resp.status_code = 200
     mock_resp.json.return_value = {"data": [{"t": "2015-01-01 00:00", "v": "1.5"}]}
 
-    with patch("noaa_coops.station.requests.get") as mock_get:
+    with patch("noaa_coops.station._SESSION.get") as mock_get:
         mock_get.return_value = mock_resp
         station._make_api_request("https://example.com/data", "water_level")
 
@@ -179,7 +180,7 @@ def test_inventory_handles_missing_parameter_key(
     mock_client.service = mock_service
 
     with (
-        patch("noaa_coops.station.requests.get") as mock_get,
+        patch("noaa_coops.station._SESSION.get") as mock_get,
         patch("noaa_coops.station.zeep.Client", return_value=mock_client),
     ):
         mock_get.return_value = metadata_response
@@ -203,7 +204,7 @@ def test_inventory_swallows_zeep_errors_gracefully(
 ) -> None:
     """Zeep errors (transport, fault, parse) degrade to an empty dict sentinel."""
     with (
-        patch("noaa_coops.station.requests.get") as mock_get,
+        patch("noaa_coops.station._SESSION.get") as mock_get,
         patch("noaa_coops.station.zeep.Client") as mock_zeep,
     ):
         mock_get.return_value = metadata_response
@@ -219,7 +220,7 @@ def test_inventory_swallows_requests_errors_gracefully(
 ) -> None:
     """If the underlying requests layer raises, inventory fetch degrades."""
     with (
-        patch("noaa_coops.station.requests.get") as mock_get,
+        patch("noaa_coops.station._SESSION.get") as mock_get,
         patch("noaa_coops.station.zeep.Client") as mock_zeep,
     ):
         mock_get.return_value = metadata_response
@@ -243,7 +244,7 @@ def test_inventory_does_not_swallow_system_exceptions(
     """KeyboardInterrupt / SystemExit must propagate, not be absorbed."""
     expected_type = type(system_exc)
     with (
-        patch("noaa_coops.station.requests.get") as mock_get,
+        patch("noaa_coops.station._SESSION.get") as mock_get,
         patch("noaa_coops.station.zeep.Client") as mock_zeep,
     ):
         mock_get.return_value = metadata_response
@@ -258,7 +259,7 @@ def test_inventory_logs_warning_on_failure(
 ) -> None:
     """Inventory fetch failures emit a WARNING (not DEBUG, not silent)."""
     with (
-        patch("noaa_coops.station.requests.get") as mock_get,
+        patch("noaa_coops.station._SESSION.get") as mock_get,
         patch("noaa_coops.station.zeep.Client") as mock_zeep,
         caplog.at_level(logging.WARNING, logger="noaa_coops.station"),
     ):
@@ -281,7 +282,7 @@ def test_bbox_raises_on_http_error() -> None:
     bad_resp.status_code = 503
     bad_resp.reason = "Service Unavailable"
 
-    with patch("noaa_coops.station.requests.get") as mock_get:
+    with patch("noaa_coops.station._SESSION.get") as mock_get:
         mock_get.return_value = bad_resp
         with pytest.raises(COOPSAPIError):
             nc.get_stations_from_bbox(
@@ -297,7 +298,7 @@ def test_make_api_request_raises_on_http_error() -> None:
     bad_resp.status_code = 500
     bad_resp.reason = "Internal Server Error"
 
-    with patch("noaa_coops.station.requests.get") as mock_get:
+    with patch("noaa_coops.station._SESSION.get") as mock_get:
         mock_get.return_value = bad_resp
         with pytest.raises(COOPSAPIError):
             station._make_api_request("https://example.com/data", "water_level")
