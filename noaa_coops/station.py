@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import math
+import warnings
 from datetime import datetime, timedelta
 from typing import Optional, Union
 
@@ -9,10 +10,11 @@ import pandas as pd
 import requests
 import zeep
 
-logger = logging.getLogger(__name__)
+from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION
 
-DEFAULT_TIMEOUT: tuple[float, float] = (5.0, 30.0)
-"""Default (connect, read) timeout tuple for NOAA API calls, in seconds."""
+__all__ = ["DEFAULT_TIMEOUT"]
+
+logger = logging.getLogger(__name__)
 
 
 class COOPSAPIError(Exception):
@@ -46,7 +48,7 @@ def get_stations_from_bbox(
     """
     station_list = []
     data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
-    response = requests.get(data_url, timeout=DEFAULT_TIMEOUT)
+    response = _SESSION.get(data_url, timeout=DEFAULT_TIMEOUT)
 
     if response.status_code != 200:
         raise COOPSAPIError(
@@ -175,7 +177,7 @@ class Station:
         metadata_url = (
             metadata_base_url + self.id + extension + metadata_expand + units_for_url
         )
-        response = requests.get(metadata_url, timeout=DEFAULT_TIMEOUT)
+        response = _SESSION.get(metadata_url, timeout=DEFAULT_TIMEOUT)
         json_dict = response.json()
         station_metadata = json_dict["stations"][0]
         # Expose additional useful metadata fields
@@ -439,7 +441,7 @@ class Station:
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        res = requests.get(data_url, timeout=DEFAULT_TIMEOUT)
+        res = _SESSION.get(data_url, timeout=DEFAULT_TIMEOUT)
 
         if res.status_code != 200:
             raise COOPSAPIError(
@@ -743,7 +745,8 @@ class Station:
                 365 if product == "hourly_height" or product == "high_low" else 31
             )
             num_blocks = int(math.floor(delta.days / block_size))
-            df = pd.DataFrame([])
+            blocks: list[pd.DataFrame] = []
+            missing_blocks: list[dict[str, str]] = []
 
             for i in range(num_blocks + 1):
                 begin_dt_loop = begin_dt + timedelta(days=(i * block_size))
@@ -760,11 +763,39 @@ class Station:
                     time_zone,
                 )
                 try:
-                    df_block = self._make_api_request(data_url, product)
-                except COOPSAPIError:
-                    continue  # Skip block if no data returned (e.g, station was down)
+                    blocks.append(self._make_api_request(data_url, product))
+                except COOPSAPIError as exc:
+                    # Don't silently drop failed blocks — surface them as
+                    # warnings + DataFrame.attrs so downstream analysis code
+                    # can see there are real gaps in what was returned.
+                    missing_blocks.append(
+                        {
+                            "begin": begin_dt_loop.isoformat(),
+                            "end": end_dt_loop.isoformat(),
+                            "error": str(exc),
+                        }
+                    )
+                    logger.warning(
+                        "Block %d/%d (%s → %s) failed: %s",
+                        i + 1,
+                        num_blocks + 1,
+                        begin_dt_loop.date(),
+                        end_dt_loop.date(),
+                        exc,
+                    )
 
-                df = pd.concat([df, df_block])
+            df = pd.concat(blocks) if blocks else pd.DataFrame()
+            if missing_blocks:
+                # attrs must be assigned AFTER the final concat (concat
+                # discards intermediate attrs).
+                df.attrs["missing_blocks"] = missing_blocks
+                warnings.warn(
+                    f"{len(missing_blocks)} of {num_blocks + 1} blocks failed "
+                    f"for product {product!r}. See df.attrs['missing_blocks'] "
+                    f"for per-block error details.",
+                    RuntimeWarning,
+                    stacklevel=2,
+                )
 
         if df.empty:
             raise COOPSAPIError(
