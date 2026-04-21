@@ -1,0 +1,31 @@
+tests/conftest.py
+  c062d56232e88d55 1-49
+.github/workflows/nightly.yml
+  c062d56232e88d55 1-72
+tests/test_station.py
+  c062d56232e88d55 1-14,21-23,34-36,39-40,43-45,58-60,63-65,73,79-81,86-90,93-94
+noaa_coops/station.py
+  c062d56232e88d55 148-154
+tests/test_validators.py
+  c062d56232e88d55 1-244
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "dd2b0ac20f7049608f2557e5ae122458f4ac476e",
+  "prompts": {
+    "c062d56232e88d55": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fc33e061-7478-4028-9cc2-cd53a192ab99",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 420,
+      "total_deletions": 31,
+      "accepted_lines": 416,
+      "overriden_lines": 0
+    }
+  }
+}
