@@ -1,103 +1,95 @@
 # noaa_coops
 
-[![PyPI](https://img.shields.io/pypi/v/noaa_coops.svg)](https://pypi.python.org/pypi/noaa-coops)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noaa_coops.svg)](https://pypi.python.org/pypi/noaa-coops)
+[![CI](https://github.com/GClunies/noaa_coops/actions/workflows/pull_request.yml/badge.svg)](https://github.com/GClunies/noaa_coops/actions/workflows/pull_request.yml)
+[![PyPI](https://img.shields.io/pypi/v/noaa-coops.svg)](https://pypi.python.org/pypi/noaa-coops)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noaa-coops.svg)](https://pypi.python.org/pypi/noaa-coops)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://github.com/GClunies/noaa_coops/blob/master/LICENSE)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/GClunies/noaa_coops/master.svg)](https://results.pre-commit.ci/latest/github/GClunies/noaa_coops/master)
 
-A Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesandcurrents.noaa.gov/api/)
-and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
+A Python wrapper for the NOAA CO-OPS Tides & Currents
+[Data](https://tidesandcurrents.noaa.gov/api/) and
+[Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
 ## Installation
-This package is distributed via [PyPi](https://pypi.org/project/noaa-coops/) and can be installed using , `pip`, `poetry`, etc.
-```bash
-# Install with pip
-❯ pip install noaa_coops
 
-# Install with poetry
-❯ poetry add noaa_coops
+Supported on Python **3.10, 3.11, 3.12, and 3.13**.
+
+```bash
+uv add noaa-coops
 ```
 
-## Getting Started
+## Getting started
 
 ### Stations
-Data is accessed via `Station` class objects. Each station is uniquely identified by an `id`. To initialize a `Station` object, run:
+
+Data is accessed via `Station` objects identified by a NOAA station `id`:
 
 ```python
 >>> from noaa_coops import Station
->>> seattle = Station(id="9447130")  # Create Station object for Seattle (ID = 9447130)
+>>> seattle = Station(id="9447130")  # Seattle, WA
 ```
 
-Stations and their IDs can be found using the Tides & Currents [mapping interface](https://tidesandcurrents.noaa.gov/). Alternatively, you can search for stations in a bounding box using the `get_stations_from_bbox` function, which will return a list of stations found in the box (if any).
+Find station IDs via the NOAA
+[Tides & Currents mapping interface](https://tidesandcurrents.noaa.gov/) or
+search by bounding box:
+
 ```python
->>> from pprint import pprint
->>> from noaa_coops import Station, get_stations_from_bbox
->>> stations = get_stations_from_bbox(lat_coords=[40.389, 40.9397], lon_coords=[-74.4751, -73.7432])
->>> pprint(stations)
+>>> from noaa_coops import get_stations_from_bbox, Station
+>>> stations = get_stations_from_bbox(
+...     lat_coords=[40.389, 40.9397],
+...     lon_coords=[-74.4751, -73.7432],
+... )
+>>> stations
 ['8516945', '8518750', '8519483', '8531680']
->>> station_one = Station(id="8516945")
->>> pprint(station_one.name)
+>>> Station(id="8516945").name
 'Kings Point'
 ```
 
 ### Metadata
-Station metadata is stored in the `.metadata` attribute of a `Station` object. Additionally, the keys of the metadata attribute dictionary are also assigned as attributes of the station object itself.
+
+Station metadata lives on the `.metadata` attribute, and individual fields are
+also promoted to top-level attributes on the `Station` object:
 
 ```python
->>> from pprint import pprint
->>> from noaa_coops import Station
 >>> seattle = Station(id="9447130")
->>> pprint(list(seattle.metadata.items())[:5])                   # Print first 3 items in metadata
-[('tidal', True), ('greatlakes', False), ('shefcode', 'EBSW1')]  # Metadata dictionary can be very long
->>> pprint(seattle.lat_lon['lat'])                               # Print latitude
-47.601944
->>> pprint(seattle.lat_lon['lon'])                               # Print longitude
--122.339167
+>>> seattle.name
+'Seattle'
+>>> seattle.state
+'WA'
+>>> seattle.lat_lon
+{'lat': 47.601944, 'lon': -122.339167}
 ```
 
-### Data Inventory
-A description of a Station's data products and available dates can be accessed via the `.data_inventory` attribute of a `Station` object.
+### Data inventory
+
+Per-product first/last observation dates:
 
 ```python
->>> from noaa_coops import Station
->>> from pprint import pprint
->>> seattle = Station(id="9447130")
->>> pprint(seattle.data_inventory)
-{'Air Temperature': {'end_date': '2019-01-02 18:36',
-                     'start_date': '1991-11-09 01:00'},
- 'Barometric Pressure': {'end_date': '2019-01-02 18:36',
-                         'start_date': '1991-11-09 00:00'},
- 'Preliminary 6-Minute Water Level': {'end_date': '2023-02-05 19:54',
-                                      'start_date': '2001-01-01 00:00'},
- 'Verified 6-Minute Water Level': {'end_date': '2022-12-31 23:54',
-                                   'start_date': '1995-06-01 00:00'},
- 'Verified High/Low Water Level': {'end_date': '2022-12-31 23:54',
-                                   'start_date': '1977-10-18 02:18'},
- 'Verified Hourly Height Water Level': {'end_date': '2022-12-31 23:00',
-                                        'start_date': '1899-01-01 00:00'},
- 'Verified Monthly Mean Water Level': {'end_date': '2022-12-31 23:54',
-                                       'start_date': '1898-12-01 00:00'},
- 'Water Temperature': {'end_date': '2019-01-02 18:36',
-                       'start_date': '1991-11-09 00:00'},
- 'Wind': {'end_date': '2019-01-02 18:36', 'start_date': '1991-11-09 00:00'}}
+>>> seattle.data_inventory["Wind"]
+{'start_date': '1991-11-09 00:00', 'end_date': '...'}
 ```
 
-### Data Retrieval
-Available data products can be found in NOAA CO-OPS Data API docs.
+> **Note:** The data inventory comes from NOAA's legacy SOAP endpoint and is
+> best-effort. If the service is unreachable, `data_inventory` is set to `{}`
+> and a warning is logged — `Station()` construction still succeeds.
 
-Station data can be fetched using the `.get_data` method on a `Station` object. Data is returned as a Pandas [DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) for ease of use and analysis. DataFrame columns are named according to the NOAA CO-OPS API [docs](https://api.tidesandcurrents.noaa.gov/api/prod/responseHelp.html), with the `t` column (timestamp) set as the DataFrame index.
+### Data retrieval
 
-The example below fetches water level data from the Seattle station (id=9447130) for a 1 month period. The corresponding [web output](https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130&units=metric&bdate=20150101&edate=20150131&timezone=GMT&datum=MLLW) is shown below the code as a reference.
+Data is returned as a pandas `DataFrame` indexed by timestamp. Column names
+mirror NOAA's [response format](https://api.tidesandcurrents.noaa.gov/api/prod/responseHelp.html).
 
 ```python
->>> from noaa_coops import Station
 >>> seattle = Station(id="9447130")
->>> df_water_levels = seattle.get_data(
+>>> df = seattle.get_data(
 ...     begin_date="20150101",
 ...     end_date="20150131",
 ...     product="water_level",
 ...     datum="MLLW",
 ...     units="metric",
-...     time_zone="gmt")
->>> df_water_levels.head()
+...     time_zone="gmt",
+... )
+>>> df.head()
                          v      s        f  q
 t
 2015-01-01 00:00:00  1.799  0.023  0,0,0,0  v
@@ -105,23 +97,51 @@ t
 2015-01-01 00:12:00  1.639  0.013  0,0,0,0  v
 2015-01-01 00:18:00  1.557  0.012  0,0,0,0  v
 2015-01-01 00:24:00  1.473  0.014  0,0,0,0  v
-
 ```
 
-![image](https://user-images.githubusercontent.com/28986302/233147224-765fbe05-372c-40f3-8bbe-4102536e7ff3.png)
+![Water levels chart](https://user-images.githubusercontent.com/28986302/233147224-765fbe05-372c-40f3-8bbe-4102536e7ff3.png)
 
+Multi-month and multi-year ranges are automatically split into 31-day (or
+365-day for `hourly_height` / `high_low`) blocks and concatenated. If NOAA
+fails to return data for a block, you get a partial DataFrame along with a
+`RuntimeWarning` and a `df.attrs["missing_blocks"]` list describing which
+ranges failed — downstream code can detect gaps instead of silently averaging
+across them.
 
-## Development
+### Supported arguments
 
-### Requirements
-This package and its dependencies are managed using [poetry](https://python-poetry.org/). To install the development environment for `noaa_coops`, first install poetry, then run (inside the repo):
+Values accepted by `Station.get_data(...)` — see
+[NOAA's API docs](https://api.tidesandcurrents.noaa.gov/api/prod/#products) for
+the authoritative reference.
 
-```bash
-poetry install
-```
+| Argument    | Accepted values                                                                                                                                                                                     |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `product`   | `water_level`, `hourly_height`, `high_low`, `daily_mean`, `monthly_mean`, `one_minute_water_level`, `predictions`, `datums`, `air_gap`, `air_temperature`, `water_temperature`, `wind`, `air_pressure`, `conductivity`, `visibility`, `humidity`, `salinity`, `currents`, `currents_predictions`, `ofs_water_level` |
+| `datum`     | `CRD`, `IGLD`, `LWD`, `MHHW`, `MHW`, `MTL`, `MSL`, `MLW`, `MLLW`, `NAVD`, `STND` (case-insensitive). **Required** for water-level products.                                                         |
+| `units`     | `metric`, `english`                                                                                                                                                                                 |
+| `time_zone` | `gmt`, `lst`, `lst_ldt`                                                                                                                                                                             |
+| `bin_num`   | Integer. **Required** for `currents` and `currents_predictions`. Find values on each station's info page.                                                                                           |
+| `interval`  | Product-specific. `predictions`: `h`, `1`, `5`, `10`, `15`, `30`, `60`, `hilo`. `currents`: `6`, `h`. `currents_predictions`: `h`, `1`, `6`, `10`, `30`, `60`, `max_slack`. Forbidden on `water_level`, `hourly_height`, `one_minute_water_level`. |
 
-### TODO
-Click [here](https://github.com/GClunies/noaa_coops/issues) for a list of existing issues and to submit a new one.
+### Accepted date formats
 
-### Contribution
-Contributions are welcome, feel free to submit a pull request.
+`begin_date` and `end_date` accept any of:
+
+- `"20150101"` — `%Y%m%d`
+- `"20150101 12:34"` — `%Y%m%d %H:%M`
+- `"01/15/2015"` — `%m/%d/%Y`
+- `"01/15/2015 23:59"` — `%m/%d/%Y %H:%M`
+
+## API etiquette
+
+NOAA's CO-OPS APIs are public and free. There are no enforced rate limits but
+please be reasonable — avoid tight loops against a single station and cache
+results when you can. This library uses connection pooling and automatic
+retries on transient failures (429 / 5xx) via a module-level
+`requests.Session`.
+
+## Contributing
+
+Bug reports, feature requests, and PRs welcome. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for dev-environment setup and the release
+workflow.
