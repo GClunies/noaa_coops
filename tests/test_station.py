@@ -1,9 +1,12 @@
-from __future__ import absolute_import
-
 import pandas as pd
 import pytest
 
 import noaa_coops as nc
+
+# All tests in this module hit the live NOAA CO-OPS API and require network
+# access. They are gated by the `live` marker; default `pytest` runs skip them.
+# Tier 3 of the modernization plan records VCR cassettes so these can run offline.
+pytestmark = pytest.mark.live
 
 
 def test_station_metadata():
@@ -70,9 +73,8 @@ def test_stations_from_bbox():
     assert stations == ["8516945", "8518750", "8519483", "8531680"]
 
 
-def test_stations_from_bbox_invalid_coorsds():
-    """Test error is raised when invalid lat_coords passed.""" ""
-
+def test_stations_from_bbox_invalid_coords():
+    """Error is raised when lat_coords or lon_coords are not of length 2."""
     with pytest.raises(ValueError):
         nc.get_stations_from_bbox(
             lat_coords=[40.389, 40.9397, 99.0],
@@ -83,14 +85,4 @@ def test_stations_from_bbox_invalid_coorsds():
         nc.get_stations_from_bbox(
             lat_coords=[40.389, 40.9397],
             lon_coords=[-74.4751, -73.7432, -76.1234],
-        )
-
-
-def test_stations_from_bbox_invalid_lon():
-    """Test error is raised when invalid lon_coords passed.""" ""
-
-    with pytest.raises(ValueError):
-        nc.get_stations_from_bbox(
-            lat_coords=[40.389, 40.9397],
-            lon_coords=[-74.4751, -73.7432, 100.0],
         )
