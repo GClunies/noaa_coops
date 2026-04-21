@@ -1,0 +1,1216 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels?units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"tidal\": true,\n      \"greatlakes\": false,\n      \"shefcode\":
+        \"EBSW1\",\n      \"details\": {\n        \"id\": \"9447130\",\n        \"established\":
+        \"1899-01-01 00:00:00\",\n        \"removed\": \"\",\n        \"noaachart\":
+        \"18450\",\n        \"timemeridian\": -120,\n        \"timezone\": -8.0,\n
+        \       \"origyear\": \"1988-09-13 00:00:00\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/details.json\"\n
+        \     },\n      \"sensors\": {\n        \"units\": \"feet\",\n        \"sensors\":
+        [\n          {\n            \"status\": 1,\n            \"refdatum\": \"MSL\",\n
+        \           \"sensorID\": \"F1\",\n            \"name\": \"Barometric Pressure\",\n
+        \           \"elevation\": 18.2221,\n            \"message\": \"\",\n            \"dcp\":
+        1\n          },\n          {\n            \"status\": 1,\n            \"refdatum\":
+        \"MSL\",\n            \"sensorID\": \"site\",\n            \"name\": \"site\",\n
+        \           \"elevation\": 12.480629,\n            \"message\": \"\",\n            \"dcp\":
+        0\n          },\n          {\n            \"status\": 1,\n            \"refdatum\":
+        \"\",\n            \"sensorID\": \"U1\",\n            \"name\": \"Tsunami
+        WL\",\n            \"elevation\": null,\n            \"message\": \"\",\n
+        \           \"dcp\": 1\n          },\n          {\n            \"status\":
+        1,\n            \"refdatum\": \"\",\n            \"sensorID\": \"Y1\",\n            \"name\":
+        \"Microwave WL\",\n            \"elevation\": null,\n            \"message\":
+        \"\",\n            \"dcp\": 1\n          }\n        ],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/sensors.json\"\n
+        \     },\n      \"floodlevels\": {\n        \"nos_minor\": 21.39,\n        \"nos_moderate\":
+        22.26,\n        \"nos_major\": 23.59,\n        \"nws_minor\": 21.40,\n        \"nws_moderate\":
+        22.30,\n        \"nws_major\": 22.70,\n        \"action\": null,\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/floodlevels.json\"\n
+        \     },\n      \"datums\": {\n        \"accepted\": \"Apr 17 2003\",\n        \"superseded\":
+        \"\",\n        \"epoch\": \"1983-2001\",\n        \"units\": \"feet\",\n        \"OrthometricDatum\":
+        \"NAVD88\",\n        \"datums\": [\n          {\n            \"name\": \"STND\",\n
+        \           \"description\": \"Station Datum\",\n            \"value\": 0.0\n
+        \         },\n          {\n            \"name\": \"MHHW\",\n            \"description\":
+        \"Mean Higher-High Water\",\n            \"value\": 19.3\n          },\n          {\n
+        \           \"name\": \"MHW\",\n            \"description\": \"Mean High Water\",\n
+        \           \"value\": 18.43\n          },\n          {\n            \"name\":
+        \"DTL\",\n            \"description\": \"Mean Diurnal Tide Level\",\n            \"value\":
+        13.62\n          },\n          {\n            \"name\": \"MTL\",\n            \"description\":
+        \"Mean Tide Level\",\n            \"value\": 14.6\n          },\n          {\n
+        \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
+        \           \"value\": 14.58\n          },\n          {\n            \"name\":
+        \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
+        10.77\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 7.94\n          },\n          {\n
+        \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
+        Range\",\n            \"value\": 11.36\n          },\n          {\n            \"name\":
+        \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
+        7.66\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.87\n          },\n
+        \         {\n            \"name\": \"DLQ\",\n            \"description\":
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 2.84\n          },\n
+        \         {\n            \"name\": \"HWI\",\n            \"description\":
+        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 0.4\n
+        \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
+        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 6.64\n
+        \         },\n          {\n            \"name\": \"NAVD88\",\n            \"description\":
+        \"North American Vertical Datum of 1988\",\n            \"value\": 10.28\n
+        \         }\n        ],\n        \"LAT\": 3.638,\n        \"LATdate\": \"20260615\",\n
+        \       \"LATtime\": \"18:36\",\n        \"HAT\": 21.174,\n        \"HATdate\":
+        \"20140104\",\n        \"HATtime\": \"15:24\",\n        \"min\": 2.9,\n        \"mindate\":
+        \"19160104\",\n        \"mintime\": \"00:00\",\n        \"max\": 23.061,\n
+        \       \"maxdate\": \"20221227\",\n        \"maxtime\": \"16:42\",\n        \"disclaimers\":
+        {\n          \"disclaimers\": [],\n          \"self\": null\n        },\n
+        \       \"DatumAnalysisPeriod\": [\n          \"01/01/1983 - 12/31/2001\"\n
+        \       ],\n        \"NGSLink\": \"\",\n        \"ctrlStation\": \"\",\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/datums.json\"\n
+        \     },\n      \"supersededdatums\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/supersededdatums.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"feet\",\n
+        \       \"HarmonicConstituents\": [\n          {\n            \"number\":
+        1,\n            \"name\": \"M2\",\n            \"description\": \"Principal
+        lunar semidiurnal constituent\",\n            \"amplitude\": 3.49,\n            \"phase_GMT\":
+        10.8,\n            \"phase_local\": 138.9,\n            \"speed\": 28.984104,\n
+        \           \"comments\": \"Vector Averaged from 5 one year analyses 2000-2024.
+        \ SSA and SA from 20 year analyses (2000-2024).\"\n          },\n          {\n
+        \           \"number\": 2,\n            \"name\": \"S2\",\n            \"description\":
+        \"Principal solar semidiurnal constituent\",\n            \"amplitude\": 0.88,\n
+        \           \"phase_GMT\": 36.8,\n            \"phase_local\": 156.8,\n            \"speed\":
+        30.0,\n            \"comments\": \"Vector Averaged from 5 one year analyses
+        2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n          },\n
+        \         {\n            \"number\": 3,\n            \"name\": \"N2\",\n            \"description\":
+        \"Larger lunar elliptic semidiurnal constituent\",\n            \"amplitude\":
+        0.7,\n            \"phase_GMT\": 341.1,\n            \"phase_local\": 113.6,\n
+        \           \"speed\": 28.43973,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 4,\n            \"name\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"amplitude\":
+        2.74,\n            \"phase_GMT\": 276.8,\n            \"phase_local\": 156.5,\n
+        \           \"speed\": 15.041069,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 5,\n            \"name\":
+        \"M4\",\n            \"description\": \"Shallow water overtides of principal
+        lunar constituent\",\n            \"amplitude\": 0.07,\n            \"phase_GMT\":
+        200.7,\n            \"phase_local\": 97.0,\n            \"speed\": 57.96821,\n
+        \           \"comments\": \"Vector Averaged from 5 one year analyses 2000-2024.
+        \ SSA and SA from 20 year analyses (2000-2024).\"\n          },\n          {\n
+        \           \"number\": 6,\n            \"name\": \"O1\",\n            \"description\":
+        \"Lunar diurnal constituent\",\n            \"amplitude\": 1.51,\n            \"phase_GMT\":
+        254.6,\n            \"phase_local\": 143.1,\n            \"speed\": 13.943035,\n
+        \           \"comments\": \"Vector Averaged from 5 one year analyses 2000-2024.
+        \ SSA and SA from 20 year analyses (2000-2024).\"\n          },\n          {\n
+        \           \"number\": 7,\n            \"name\": \"M6\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"amplitude\":
+        0.03,\n            \"phase_GMT\": 312.8,\n            \"phase_local\": 337.2,\n
+        \           \"speed\": 86.95232,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 8,\n            \"name\":
+        \"MK3\",\n            \"description\": \"Shallow water terdiurnal\",\n            \"amplitude\":
+        0.12,\n            \"phase_GMT\": 79.3,\n            \"phase_local\": 87.1,\n
+        \           \"speed\": 44.025173,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 9,\n            \"name\":
+        \"S4\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        254.3,\n            \"phase_local\": 134.3,\n            \"speed\": 60.0,\n
+        \           \"comments\": \"Vector Averaged from 5 one year analyses 2000-2024.
+        \ SSA and SA from 20 year analyses (2000-2024).\"\n          },\n          {\n
+        \           \"number\": 10,\n            \"name\": \"MN4\",\n            \"description\":
+        \"Shallow water quarter diurnal constituent\",\n            \"amplitude\":
+        0.03,\n            \"phase_GMT\": 172.7,\n            \"phase_local\": 73.3,\n
+        \           \"speed\": 57.423832,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 11,\n            \"name\":
+        \"NU2\",\n            \"description\": \"Larger lunar evectional constituent\",\n
+        \           \"amplitude\": 0.14,\n            \"phase_GMT\": 355.5,\n            \"phase_local\":
+        127.4,\n            \"speed\": 28.512583,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 12,\n            \"name\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 90.0,\n            \"comments\":
+        \"Vector Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20
+        year analyses (2000-2024).\"\n          },\n          {\n            \"number\":
+        13,\n            \"name\": \"MU2\",\n            \"description\": \"Variational
+        constituent\",\n            \"amplitude\": 0.11,\n            \"phase_GMT\":
+        238.9,\n            \"phase_local\": 15.1,\n            \"speed\": 27.968208,\n
+        \           \"comments\": \"Vector Averaged from 5 one year analyses 2000-2024.
+        \ SSA and SA from 20 year analyses (2000-2024).\"\n          },\n          {\n
+        \           \"number\": 14,\n            \"name\": \"2N2\",\n            \"description\":
+        \"Lunar elliptical semidiurnal second-order constituent\",\n            \"amplitude\":
+        0.08,\n            \"phase_GMT\": 313.1,\n            \"phase_local\": 89.9,\n
+        \           \"speed\": 27.895355,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 15,\n            \"name\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"amplitude\":
+        0.1,\n            \"phase_GMT\": 330.2,\n            \"phase_local\": 201.1,\n
+        \           \"speed\": 16.139101,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 16,\n            \"name\":
+        \"LAM2\",\n            \"description\": \"Smaller lunar evectional constituent\",\n
+        \           \"amplitude\": 0.07,\n            \"phase_GMT\": 49.9,\n            \"phase_local\":
+        174.3,\n            \"speed\": 29.455626,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 17,\n            \"name\":
+        \"S1\",\n            \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
+        0.07,\n            \"phase_GMT\": 45.0,\n            \"phase_local\": 285.0,\n
+        \           \"speed\": 15.0,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 18,\n            \"name\":
+        \"M1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.08,\n            \"phase_GMT\": 304.1,\n            \"phase_local\":
+        188.2,\n            \"speed\": 14.496694,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 19,\n            \"name\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.14,\n            \"phase_GMT\": 313.4,\n            \"phase_local\":
+        188.7,\n            \"speed\": 15.5854435,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 20,\n            \"name\":
+        \"MM\",\n            \"description\": \"Lunar monthly constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 0.5443747,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 21,\n            \"name\":
+        \"SSA\",\n            \"description\": \"Solar semiannual constituent\",\n
+        \           \"amplitude\": 0.08,\n            \"phase_GMT\": 217.0,\n            \"phase_local\":
+        216.3,\n            \"speed\": 0.0821373,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 22,\n            \"name\":
+        \"SA\",\n            \"description\": \"Solar annual constituent\",\n            \"amplitude\":
+        0.23,\n            \"phase_GMT\": 283.2,\n            \"phase_local\": 282.9,\n
+        \           \"speed\": 0.0410686,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 23,\n            \"name\":
+        \"MSF\",\n            \"description\": \"Lunisolar synodic fortnightly constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 1.0158958,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 24,\n            \"name\":
+        \"MF\",\n            \"description\": \"Lunisolar fortnightly constituent\",\n
+        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 157.0,\n            \"phase_local\":
+        148.2,\n            \"speed\": 1.0980331,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 25,\n            \"name\":
+        \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
+        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 245.0,\n            \"phase_local\":
+        137.2,\n            \"speed\": 13.471515,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 26,\n            \"name\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.24,\n            \"phase_GMT\": 248.9,\n            \"phase_local\":
+        141.7,\n            \"speed\": 13.398661,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 27,\n            \"name\":
+        \"T2\",\n            \"description\": \"Larger solar elliptic constituent\",\n
+        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 38.0,\n            \"phase_local\":
+        158.4,\n            \"speed\": 29.958933,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 28,\n            \"name\":
+        \"R2\",\n            \"description\": \"Smaller solar elliptic constituent\",\n
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 11.2,\n            \"phase_local\":
+        130.8,\n            \"speed\": 30.041067,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 29,\n            \"name\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"amplitude\":
+        0.03,\n            \"phase_GMT\": 265.5,\n            \"phase_local\": 162.7,\n
+        \           \"speed\": 12.854286,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 30,\n            \"name\":
+        \"P1\",\n            \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
+        0.84,\n            \"phase_GMT\": 276.2,\n            \"phase_local\": 156.5,\n
+        \           \"speed\": 14.958931,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 31,\n            \"name\":
+        \"2SM2\",\n            \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"amplitude\": 0.03,\n            \"phase_GMT\": 284.4,\n            \"phase_local\":
+        36.3,\n            \"speed\": 31.015896,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 32,\n            \"name\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 178.0,\n            \"phase_local\":
+        190.2,\n            \"speed\": 43.47616,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 33,\n            \"name\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"amplitude\": 0.16,\n            \"phase_GMT\":
+        58.7,\n            \"phase_local\": 182.5,\n            \"speed\": 29.528479,\n
+        \           \"comments\": \"Vector Averaged from 5 one year analyses 2000-2024.
+        \ SSA and SA from 20 year analyses (2000-2024).\"\n          },\n          {\n
+        \           \"number\": 34,\n            \"name\": \"2MK3\",\n            \"description\":
+        \"Shallow water terdiurnal constituent\",\n            \"amplitude\": 0.11,\n
+        \           \"phase_GMT\": 48.5,\n            \"phase_local\": 65.1,\n            \"speed\":
+        42.92714,\n            \"comments\": \"Vector Averaged from 5 one year analyses
+        2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n          },\n
+        \         {\n            \"number\": 35,\n            \"name\": \"K2\",\n
+        \           \"description\": \"Lunisolar semidiurnal constituent\",\n            \"amplitude\":
+        0.26,\n            \"phase_GMT\": 37.7,\n            \"phase_local\": 157.0,\n
+        \           \"speed\": 30.082138,\n            \"comments\": \"Vector Averaged
+        from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses (2000-2024).\"\n
+        \         },\n          {\n            \"number\": 36,\n            \"name\":
+        \"M8\",\n            \"description\": \"Shallow water eighth diurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 204.4,\n            \"phase_local\":
+        356.9,\n            \"speed\": 115.93642,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          },\n          {\n            \"number\": 37,\n            \"name\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"amplitude\": 0.04,\n            \"phase_GMT\": 229.3,\n            \"phase_local\":
+        117.4,\n            \"speed\": 58.984104,\n            \"comments\": \"Vector
+        Averaged from 5 one year analyses 2000-2024.  SSA and SA from 20 year analyses
+        (2000-2024).\"\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/harcon.json\"\n
+        \     },\n      \"benchmarks\": {\n        \"benchmarks\": [\n          {\n
+        \           \"designation\": \"944 7130 TIDAL 13\",\n            \"vm\": 1132,\n
+        \           \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\\r\\n\\r\\nThe primary bench mark is set in the top
+        of the sea wall between Pier 51 and Pier 52, on the west side of Alaskan Way
+        at the inshore end of the Washington State Ferries slip on the south side
+        of Colman Ferry Terminal Building, at the north end of the concrete fence
+        along the top of the sea wall, on the south side of the ferry automobile exit
+        lane, and 11.5 feet (3.5 m) north of the extended building line on the north
+        side of Columbia Street.  NOTE: The bench mark is dished out and the north
+        end of the disk is considered the high point.\",\n            \"published\":
+        false,\n            \"stamping\": \"13 1922\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1922-02-10\",\n            \"agency\": \"NGS or
+        CGS (USC&GS)\",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Sea wall\",\n            \"opusPid\": null,\n            \"idbPid\": \"SY0287\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 7\",\n            \"vm\":
+        1133,\n            \"lat\": 47.604416,\n            \"lng\": -122.3373,\n
+        \           \"description\": \"The primary bench mark is set vertically in
+        the SW granite cornerstone of the National Building located on the NE corner
+        of the intersection of the  Western Avenue and Madison Street, 4 m (12 ft)
+        north of the south curb of Madison Street, 1 m (2 ft) east of the west edge
+        of a column, and is 0.91 m (3.0 ft) above the concrete sidewalk.\",\n            \"published\":
+        true,\n            \"stamping\": \"NO 7\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1912-03-10\",\n            \"agency\": \"US Coast
+        and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\": \"10\",\n
+        \           \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"36\",\n            \"settingClass\":
+        \"Massive structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Granite wall\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"SY0289\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"G\",\n            \"monumentCondDescr\": \"Good\",\n
+        \           \"verified\": true,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 11\",\n            \"vm\":
+        1135,\n            \"lat\": 47.60378,\n            \"lng\": -122.33867,\n
+        \           \"description\": \"The bench mark is set in a concrete deck nearly
+        opposite the foot of Madison Avenue, between Pier 53 and Pier 54 (Ivars Fish
+        Bar), 12.34 m (40.5 ft) NE of the Fire Station N0 5 office door, 5 m (15 ft)
+        west of the west curb of Alaska Way, 3.66 m (12.0 ft) south of the south end
+        of the concrete railing, and 0.3 m (1 ft) west of the sidewalk. The bench
+        mark is flush with the ground, beneath a standard NGS access cover.\",\n            \"published\":
+        true,\n            \"stamping\": \"NO 11 1917\",\n            \"alias\": \"11\",\n
+        \           \"dateEst\": \"1917-11-30\",\n            \"agency\": \"US Coast
+        and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\": \"10\",\n
+        \           \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"30\",\n            \"settingClass\":
+        \"Light structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Concrete deck\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"SY0290\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"N\",\n            \"monumentCondDescr\": \"Not
+        recovered, not found,\",\n            \"verified\": false,\n            \"display\":
+        true,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"944 7130 TIDAL 14\",\n            \"vm\": 1136,\n            \"lat\": 47.602444,\n
+        \           \"lng\": -122.336525,\n            \"description\": \"The bench
+        mark is set vertically in the west face of the NW corner of the Polson Building
+        (71 Columbia Street) near the SE corner of the Alaskan Way and Columbia Street,
+        34.90 m (114.5 ft) SE of the easternmost Alaska Way/Columbia Street post,
+        23.17 m (76.0 ft) west of the centerline of the north entrance to the Polson
+        Building, 4 m (13 ft) south of teh south curb of Columbia Street, 0.34 m (1.1
+        feet) south of the NW corner of the Polson Building, and 0.73 m (2.4 ft) above
+        the pavement.\",\n            \"published\": true,\n            \"stamping\":
+        \"14 1922\",\n            \"alias\": null,\n            \"dateEst\": \"1922-02-10\",\n
+        \           \"agency\": \"US Coast and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"36\",\n            \"settingClass\":
+        \"Massive structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Building\",\n            \"opusPid\": null,\n            \"idbPid\": \"SY0286\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 16\",\n            \"vm\":
+        1137,\n            \"lat\": 47.6017,\n            \"lng\": -122.337,\n            \"description\":
+        \"The bench mark is a disk set in the top of the sea wall on the west side
+        of Alaskan Way south of the foot of Yesler Way, 37.19 m (122.0 ft) south of
+        the Yesler Way/Alaskan Way street post on the west side of Alaskan Way, 12.34
+        m (40.5 ft) west of the center line of Alaskan Way, 7.19 m (23.6 ft) north
+        of the NW corner of a round water main cover, and 0.15 m (0.5 ft) seaward
+        of concrete railing.\",\n            \"published\": false,\n            \"stamping\":
+        \"16 1922\",\n            \"alias\": null,\n            \"dateEst\": \"1922-02-10\",\n
+        \           \"agency\": \"U. S. Coast & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"37\",\n            \"settingClass\":
+        \"Massive retaining walls\",\n            \"settingClassDescr\": \"Sea wall\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": \"SY0284\",\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"X\",\n
+        \           \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 17\",\n            \"vm\":
+        1138,\n            \"lat\": 47.60128,\n            \"lng\": -122.33559,\n
+        \           \"description\": \"The bench mark is set vertically in the west
+        face of the north end of the Prudential Building at 112 South Alaskan Way,
+        on the east side of Alaskan Way between Yesler Way and Washington Street,
+        set squarely in the center of the brick face of the pillar formed by the north
+        wall of the building, 14.60 m (47.9 ft) NW of the eastern viaduct footing
+        marked \\\"99\\\", 9.39 m (30.8 ft) north from the center of door number 114,
+        7.19 m (23.6 ft) of the door labled 110, and 1.80 m (5.9 ft) above ground
+        level.\",\n            \"published\": true,\n            \"stamping\": \"17
+        1922\",\n            \"alias\": null,\n            \"dateEst\": \"1922-02-10\",\n
+        \           \"agency\": \"US Coast and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"40\",\n            \"settingClass\":
+        \"Massive structures with deep foundations\",\n            \"settingClassDescr\":
+        \"Building\",\n            \"opusPid\": null,\n            \"idbPid\": \"SY0283\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 23\",\n            \"vm\":
+        1140,\n            \"lat\": 47.603806,\n            \"lng\": -122.33667,\n
+        \           \"description\": \"The bench mark is set flush in the top of the
+        concrete bulkhead retaining wall projecting out from the foundation on the
+        west side of the Federal Office Building (909 1st Avenue), on the south side
+        of the auto-garage entrance, 34 m (110 ft) north of the intersection of Western
+        Avenue and Marion Street, 25 m (81 ft) north of a fire hydrant at teh NE corner
+        of Marion Street and Western Avenue, and 0.21 m (0.7 ft) from the buildings
+        main wall.\",\n            \"published\": true,\n            \"stamping\":
+        \"23 1954\",\n            \"alias\": \"\",\n            \"dateEst\": \"1954-05-20\",\n
+        \           \"agency\": \"US Coast and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"36\",\n            \"settingClass\":
+        \"Massive structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Concrete bulkhead\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL BASIC\",\n            \"vm\":
+        1146,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is dropped.\\r\\n\\r\\nThe bench mark is set near the approximate
+        center of Prefontaine Triangle (bounded by 3rd Avenue, Jefferson Street, and
+        Yesler Way), on a 2.0 foot (0.6 m) concrete monument, (monument is set on
+        a concrete foundation with a depth of 5.5 feet (1.7 m)). NOTE: The bench mark
+        is also known as BASIC 1929.\",\n            \"published\": false,\n            \"stamping\":
+        null,\n            \"alias\": \"BASIC 1929\",\n            \"dateEst\": null,\n
+        \           \"agency\": \" \",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        null,\n            \"opusPid\": null,\n            \"idbPid\": \"SY0328\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"CITY 1\",\n            \"vm\":
+        1147,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is dropped.\\r\\n\\r\\nThe bench mark is in the top west corner of
+        the first west granite step of the south entrance to the Pioneer Building,
+        near the intersection of James Street, 1st Avenue and Yesler Way, 20.9 feet
+        (6.4 m) NW of the NW curb of the street, 16.0 feet (4.9 m) NE of the NE curb
+        of the street, 5.8 feet (1.8 m) west of the center of the entrance to the
+        building, and 0.2 foot (0.1 m) south of the face of a granite column base
+        inscribed City Datum Elev 18.79.  NOTE: The bench mark is also noted as 8
+        (City 1).\",\n            \"published\": false,\n            \"stamping\":
+        null,\n            \"alias\": \"8 (CITY 1)\",\n            \"dateEst\": null,\n
+        \           \"agency\": \" \",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        \"30\",\n            \"settingClass\": \"Light structures (other than those
+        listed below)\",\n            \"settingClassDescr\": \"GRANITE STEP OF A BUILDING\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": \"SY0282\",\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"X\",\n
+        \           \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 D\",\n            \"vm\":
+        1148,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The mark is sinking and is dropped from the leveling network.\\r\\n\\r\\nThe
+        bench mark is a disk set in the concrete support for a metal walkway for the
+        ferry terminal building, 31.39 m (103 ft) east of the easternmost track of
+        the railroad, 6.04 m (19.8 ft) south of the centerline of Marion Street, 4.12
+        m (13.5 ft) NW of the NW corner of Victors' Sport Bar at 75 Marion Street,
+        and 0.18 m (0.6 ft) east of the west side of the support.\",\n            \"published\":
+        false,\n            \"stamping\": \"7130 D 1989\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1989-03-31\",\n            \"agency\": \"National
+        Ocean Service (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"34\",\n            \"settingClass\": \"Footings/foundation walls of small/medium
+        structures\",\n            \"settingClassDescr\": \"Concrete footing\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"P\",\n
+        \           \"monumentCondDescr\": \"Poor, Disturbed, Mutilate\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 E\",\n            \"vm\":
+        1149,\n            \"lat\": 47.602585,\n            \"lng\": -122.33925,\n
+        \           \"description\": \"The bench mark is set on the top SE side of
+        the base of the concrete pillar (labeled 'Bremerton Freight') at the north
+        side of the entrance to the Slip #2 Ferry Dock, 10 m (33 ft) east of the north
+        security fence post of Slip #2, 2.32 m (7.6 ft) SE of the SE corner of the
+        storage room building housing tide station equipment, and 0.15 m (0.5 ft)
+        above grade.\",\n            \"published\": true,\n            \"stamping\":
+        \"7130 E 1990\",\n            \"alias\": null,\n            \"dateEst\": \"1990-11-14\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete footing\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"N\",\n            \"monumentCondDescr\": \"Not recovered, not found,\",\n
+        \           \"verified\": false,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"TBM 944 7130 AQUATRAK\",\n            \"vm\":
+        3111,\n            \"lat\": 47.60264,\n            \"lng\": -122.33931,\n
+        \           \"description\": \"**The Aquatrak was removed 1/2/2019 (during
+        government shutdown) due to construction. Closing levels unable to be performed
+        ** \\r\\n\\r\\nAquatrak leveling point\",\n            \"published\": false,\n
+        \           \"stamping\": null,\n            \"alias\": null,\n            \"dateEst\":
+        \"1988-12-13\",\n            \"agency\": \"National Ocean Survey (NOS)\",\n
+        \           \"monumentTypeId\": \"44\",\n            \"monumentType\": \"Z\",\n
+        \           \"monumentTypeDescr\": \"See descriptive text\",\n            \"settingClassId\":
+        \"0\",\n            \"settingClass\": \"Unspecified (see descriptive text)\",\n
+        \           \"settingClassDescr\": \"Aquatrak leveling point\",\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"X\",\n            \"monumentCondDescr\":
+        \"Destroyed\",\n            \"verified\": false,\n            \"display\":
+        false,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"944 7130 F 1992\",\n            \"vm\": 6422,\n            \"lat\": 47.605,\n
+        \           \"lng\": -122.338,\n            \"description\": \"The BM is destroyed.\",\n
+        \           \"published\": false,\n            \"stamping\": \"7130 F 1992\",\n
+        \           \"alias\": null,\n            \"dateEst\": \"1992-02-12\",\n            \"agency\":
+        \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"5\",\n
+        \           \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": null,\n            \"settingClass\":
+        null,\n            \"settingClassDescr\": \"CONCRETE BASE FOR CONCRETE SUPPORT
+        FOR HIGHWAY\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 G\",\n            \"vm\":
+        6423,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\\r\\n\\r\\nThe bench mark is a disk set in a seawall
+        on the west side of Alaskan Way, at the foot of Columbia Street at the inshore
+        end of the Washington State Ferries Slip on south side of the Coleman ferry
+        terminal building between Piers #50 and Pier #51, 7.89 m (25.9 ft) NW of the
+        NW corner of a light post at the west end of Columbia Street, 9.39 m (30.8
+        ft) SSW from a walk down walk sign at a pedestrian down ramp at the ferry
+        terminal, and 0.90 m (3.0 ft) east of a chain link fence.\",\n            \"published\":
+        false,\n            \"stamping\": \"7130 G 1993\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1993-04-06\",\n            \"agency\": \"National
+        Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        \"Sea wall\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 H\",\n            \"vm\":
+        6424,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The bench mark is a disk set in the concrete base of the most NE (marked
+        100) of four concrete supports (for Highway 99) that surround the intersection
+        of South Washington Street and Alaska Way South, 76.20 m (250.0 ft) SW of
+        bench mark 17 1922, 8 m (26 ft) north of the centerline of South Washington
+        Street, 0.37 m (1.2 ft) west of the four metal pipes, and 1.10 m (3.6 ft)
+        above ground level.\",\n            \"published\": true,\n            \"stamping\":
+        \"7130 H 1993\",\n            \"alias\": null,\n            \"dateEst\": \"1993-04-06\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete footing\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 A\",\n            \"vm\":
+        8667,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\",\n            \"published\": false,\n            \"stamping\":
+        \"7130 A 1980\",\n            \"alias\": null,\n            \"dateEst\": \"1980-03-15\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"46\",\n            \"settingClass\":
+        \"Copper-clad steel rod\",\n            \"settingClassDescr\": \"Copper-clad
+        steel rod\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 17.53,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 B\",\n            \"vm\":
+        8674,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\",\n            \"published\": false,\n            \"stamping\":
+        \"7130 B 1980\",\n            \"alias\": null,\n            \"dateEst\": \"1980-03-15\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"46\",\n            \"settingClass\":
+        \"Copper-clad steel rod\",\n            \"settingClassDescr\": \"Copper-clad
+        steel rod\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 4.27,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 C\",\n            \"vm\":
+        8675,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\",\n            \"published\": false,\n            \"stamping\":
+        \"7130 C 1980\",\n            \"alias\": null,\n            \"dateEst\": \"1980-03-15\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"46\",\n            \"settingClass\":
+        \"Copper-clad steel rod\",\n            \"settingClassDescr\": \"Copper-clad
+        steel rod\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 14.48,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 25\",\n            \"vm\":
+        8676,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\",\n            \"published\": false,\n            \"stamping\":
+        \"TIDAL 25 1972\",\n            \"alias\": null,\n            \"dateEst\":
+        \"1972-02-02\",\n            \"agency\": \"National Ocean Survey (NOS)\",\n
+        \           \"monumentTypeId\": \"5\",\n            \"monumentType\": \"DB\",\n
+        \           \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        \"CONCRETE DIVIDER\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 TIDAL 24\",\n            \"vm\":
+        8677,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"The BM is destroyed.\",\n            \"published\": false,\n            \"stamping\":
+        \"TIDAL 24 1972\",\n            \"alias\": null,\n            \"dateEst\":
+        \"1972-02-02\",\n            \"agency\": \"National Ocean Survey (NOS)\",\n
+        \           \"monumentTypeId\": \"5\",\n            \"monumentType\": \"DB\",\n
+        \           \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        \"Concrete base foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 L\",\n            \"vm\":
+        13959,\n            \"lat\": 47.605,\n            \"lng\": -122.338,\n            \"description\":
+        \"Mark is sinking and dropped from the leveling scheme.\\r\\n\\r\\nThe bench
+        mark is a disk set in a 2-foot high concrete wall near the intersection of
+        Alaskan Way and Madison Street, 15.60 m (51.2 ft) north of Madison Street,
+        9.80 m (32.2 ft) NW of SW corner of parking garage, and 0.30 m (1.0 ft) north
+        of south end of wall.\",\n            \"published\": false,\n            \"stamping\":
+        \"7130 L 1998\",\n            \"alias\": null,\n            \"dateEst\": \"1998-03-24\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"32\",\n            \"settingClass\":
+        \"Retaining walls\",\n            \"settingClassDescr\": \"Concrete wall\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"P\",\n
+        \           \"monumentCondDescr\": \"Poor, Disturbed, Mutilate\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 M\",\n            \"vm\":
+        16689,\n            \"lat\": 47.60086,\n            \"lng\": -122.33622,\n
+        \           \"description\": \"2021: Not accessible due to fence\\nThe bench
+        mark is set in top of a seawall on Alaska Way South, just west of second upright
+        north of south end of concrete guard rail, 8 m (26 ft) south of street lamp
+        105, 4.40 m (14.4 ft) west of the curb of south side of Alaska Way South,
+        1.4 m (4.6 ft) north of the Washington street public boat landing structure,
+        \ 0.18 m (0.6 ft) east of the face of the seawall, and 0.1 m (0.3 ft) west
+        of first column north of the south end of the concrete guard rail.\",\n            \"published\":
+        true,\n            \"stamping\": \"7130 M 2002\",\n            \"alias\":
+        \"\",\n            \"dateEst\": \"2002-05-20\",\n            \"agency\": \"National
+        Ocean Service (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Sea wall\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"O\",\n            \"monumentCondDescr\": \"See Descriptive Text\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 N\",\n            \"vm\":
+        16690,\n            \"lat\": 47.60339,\n            \"lng\": -122.3375,\n
+        \           \"description\": \"The bench mark is set in the SE corner of the
+        elevated loading dock near the SW corner of the Maritime Building at 920 Alaska
+        Way South, 4.36 m (14.3 ft) north of SW corner of the building, 2.62 m (8.6
+        ft) east of the west edge of the loading dock, 2.07 m (6.8 ft) south of south
+        side of door to 902 Alaska Way South, and 0.60 m (2.0 ft) above the parking
+        lot grade.\",\n            \"published\": true,\n            \"stamping\":
+        \"7130 N 2002\",\n            \"alias\": null,\n            \"dateEst\": \"2002-05-20\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"36\",\n            \"settingClass\":
+        \"Massive structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Loading dock\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"N\",\n            \"monumentCondDescr\": \"Not recovered, not found,\",\n
+        \           \"verified\": false,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 DAVE\",\n            \"vm\":
+        16691,\n            \"lat\": 47.601807,\n            \"lng\": -122.33867,\n
+        \           \"description\": \"The bench mark is set inside a 4-inch PVC pipe
+        near the SW corner of the Seattle Ferry Terminal pier, 12.70 m (41.7 ft) east
+        of the SW corner of the pier, 6.70 m (22.0 ft) SW of a 12\\\" drain in the
+        center of a car lane, 1.1 m (3.6 ft) north of south pier face, and 0.25 m
+        (0.8 ft) below pier grade, in a 4\\\" PVC hand hole.\",\n            \"published\":
+        true,\n            \"stamping\": \"DAVE 1998\",\n            \"alias\": null,\n
+        \           \"dateEst\": null,\n            \"agency\": \"Washington State
+        Department of Transportation\",\n            \"monumentTypeId\": \"5\",\n
+        \           \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"38\",\n            \"settingClass\":
+        \"Abutments and piers of large bridges\",\n            \"settingClassDescr\":
+        \"Pier\",\n            \"opusPid\": \"BBDL91\",\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"N\",\n            \"monumentCondDescr\": \"Not recovered, not found,\",\n
+        \           \"verified\": false,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 P\",\n            \"vm\":
+        17661,\n            \"lat\": 47.601612,\n            \"lng\": -122.33675,\n
+        \           \"description\": \"The benchmark is located on the seawall at
+        the south side of the entrance to the Ferry Terminal at Pier 50, 16.00 m (52.5
+        ft) south of the end of a divider strip for the entrance road to terminal;
+        4.80 m (15.8 ft) west of west curb on Alaskan Way; and 0.98 m (3.2 ft) north
+        of northern most concrete post on seawall.\",\n            \"published\":
+        false,\n            \"stamping\": \"7130 P 2004\",\n            \"alias\":
+        null,\n            \"dateEst\": \"2004-07-15\",\n            \"agency\": \"National
+        Ocean Service (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Seawall\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 PIER 50\",\n            \"vm\":
+        22151,\n            \"lat\": 47.60161,\n            \"lng\": -122.33675,\n
+        \           \"description\": \"The bench mark is set in concrete atop a massive
+        sea wall, 130 m (416.5 ft) south of the Seattle State Ferries Terminal building,
+        60 m (196.9 ft) west of the NW corner of a brick building at 1 Yesler Way,
+        \ 14.0 m (45.9 ft) SE of the median at the south entrance/exit of the Seattle
+        Ferry Terminal at the south corner of Yesler Way and Alaskan Way intersection,
+        0.15 m (0.5 ft) NE of the curb at the SE end of the crosswalk at the south
+        entrance/exit to Seattle Ferry Terminal at the south corner of Yesler Way
+        and Alaskan Way intersection.\",\n            \"published\": false,\n            \"stamping\":
+        \"2015 PIER 50\",\n            \"alias\": \"\",\n            \"dateEst\":
+        \"2015-01-30\",\n            \"agency\": \"Washington Department of Transportation\",\n
+        \           \"monumentTypeId\": \"6\",\n            \"monumentType\": \"DD\",\n
+        \           \"monumentTypeDescr\": \"Survey disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Top of sea wall\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"DR3077\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"N\",\n            \"monumentCondDescr\": \"Not
+        recovered, not found,\",\n            \"verified\": false,\n            \"display\":
+        true,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"944 7130 1997 SFD\",\n            \"vm\": 22860,\n            \"lat\": 47.603806,\n
+        \           \"lng\": -122.33864,\n            \"description\": \"The bench
+        mark is a disk set in concrete atop a massive sea wall, 57.8 m (189.6 ft)
+        north of the NW corner of Maritime Building 906 at the intersection of Madison
+        Street and Alaskan Way, 26.0 m (85.3 ft) SE of Ivars Fish Bar, 14.2 m (46.6
+        ft) east of the NE corner of Seattle Fire Department Station 5,  and 4.6 m
+        (15.1 ft) south of metal light pole #6 at the north crosswalk of the Madison
+        Street and Alaskan Way intersection.\",\n            \"published\": false,\n
+        \           \"stamping\": \"2017 SFD\",\n            \"alias\": \"\",\n            \"dateEst\":
+        null,\n            \"agency\": \"Washington Department of Transportation\",\n
+        \           \"monumentTypeId\": \"20\",\n            \"monumentType\": \"DV\",\n
+        \           \"monumentTypeDescr\": \"Vertical Control disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Top of sea wewall\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"N\",\n            \"monumentCondDescr\": \"Not recovered, not found,\",\n
+        \           \"verified\": false,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"TBM 944 71303 MWWL\",\n            \"vm\":
+        22861,\n            \"lat\": 47.60194,\n            \"lng\": -122.33917,\n
+        \           \"description\": \"2023: MWWL relocated and re-assigned to DCP1\\nLeveling
+        point of the temporary MWWL sensor (DCP3)\",\n            \"published\": false,\n
+        \           \"stamping\": \"\",\n            \"alias\": \"\",\n            \"dateEst\":
+        \"2018-09-07\",\n            \"agency\": \"National Ocean Service (NOS)\",\n
+        \           \"monumentTypeId\": \"44\",\n            \"monumentType\": \"Z\",\n
+        \           \"monumentTypeDescr\": \"See descriptive text\",\n            \"settingClassId\":
+        \"0\",\n            \"settingClass\": \"Unspecified (see descriptive text)\",\n
+        \           \"settingClassDescr\": \"MWWL leveling point\",\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"X\",\n            \"monumentCondDescr\":
+        \"Destroyed\",\n            \"verified\": false,\n            \"display\":
+        false,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"944 7130 S\",\n            \"vm\": 24850,\n            \"lat\": 47.60247,\n
+        \           \"lng\": -122.33742,\n            \"description\": \"The bench
+        mark is a brass disk set flush on a 1.1 x 0.8 m concrete I-beam foundation
+        tie, located 27 m (88.6 ft) north of overhead walkway at Columbia street,
+        22.5 m (73.8 ft) south of WSF elevators entrance, 8.6 m (28.2 ft) west of
+        east curb of Alaska way, 2.4 m east of SE corner of WSF passenger entrance
+        to Bremerton, Bainbridge Island ferries, 0.2 m (0.7 ft) SE of SE corner of
+        I-beam, 0.2 m (0.7ft) above the sidewalk.\",\n            \"published\": false,\n
+        \           \"stamping\": \"7130 S 2023\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"2023-09-27\",\n            \"agency\": \"National
+        Ocean Service\",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        \"36\",\n            \"settingClass\": \"Massive structures (other than those
+        listed below)\",\n            \"settingClassDescr\": \"Concrete I-beam fountation
+        for a building\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 R\",\n            \"vm\":
+        24851,\n            \"lat\": 47.602665,\n            \"lng\": -122.33828,\n
+        \           \"description\": \"The bench mark is a brass disk set flush on
+        a 0.5 m x 0.5 m concrete foundation tie, located 77.6 m (254.6 ft) east of
+        east side of WSF facilities building, 30.0 m (98.4 ft) WSW of WSF passenger
+        entrance gate, 2.0 m (6.6 ft) south of lane 38, 0.9 m (2.9 ft) west of second
+        concrete column, and 0.1 m (0.33 ft) SW of a yellow bollard.\",\n            \"published\":
+        false,\n            \"stamping\": \"7130 R 2023\",\n            \"alias\":
+        \"\",\n            \"dateEst\": \"2023-09-27\",\n            \"agency\": \"National
+        Ocean Service\",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        \"35\",\n            \"settingClass\": \"Mat foundations\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"944 7130 Q\",\n            \"vm\":
+        24852,\n            \"lat\": 47.602585,\n            \"lng\": -122.3393,\n
+        \           \"description\": \"The bench mark is a brass disk set flush on
+        a 0.5 m x 0.5 m concrete foundation tie, located 15.5 m (50.8 ft) south of
+        SE corner of WSF facilities building, 10.1 m (33.1 ft) west of the centerline
+        of the ferry loading lane, 8.2 m (26.9 ft) east of the west dock face at terminal
+        2, 1 m (3.3 ft) west of concrete column, and 0.1 m (0.33 ft) SW of a yellow
+        bollard.\",\n            \"published\": false,\n            \"stamping\":
+        \"7130 Q 2023\",\n            \"alias\": \"\",\n            \"dateEst\": \"2023-09-27\",\n
+        \           \"agency\": \"National Ocean Service\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"35\",\n            \"settingClass\":
+        \"Mat foundations\",\n            \"settingClassDescr\": \"Concrete foundation\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"TBM 944 71301 MWWL LP\",\n            \"vm\": 24853,\n            \"lat\":
+        47.6025,\n            \"lng\": -122.33945,\n            \"description\": null,\n
+        \           \"published\": false,\n            \"stamping\": null,\n            \"alias\":
+        null,\n            \"dateEst\": \"2023-09-27\",\n            \"agency\": null,\n
+        \           \"monumentTypeId\": null,\n            \"monumentType\": null,\n
+        \           \"monumentTypeDescr\": null,\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        null,\n            \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": false,\n
+        \           \"display\": false,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          }\n        ],\n        \"to_reach\":
+        \"To reach the tidal bench marks from the Seattle Post Office at Third and
+        Union Streets, proceed west on Union Street for one block, then right (south)
+        on Second Avenue for three blocks, then right (west) on Madison Street for
+        three blocks, then left (south) on Alaskan Way to just before the second traffic
+        light (at the intersection of Columbia Street and Alaskan Way), then turn
+        right (west) into the ferry terminal parking lot. The tidal bench marks are
+        near the ferry terminal. The tide guage is located in the ferry terminal building
+        in a room adjacent to and north of the Bremerton Ferry loading ramp (Slip
+        #2).\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/benchmarks.json\"\n
+        \     },\n      \"tidePredOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/tidepredoffsets.json\"\n
+        \     },\n      \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/ofsmapoffsets.json\"\n
+        \     },\n      \"state\": \"WA\",\n      \"timezone\": \"PST\",\n      \"timezonecorr\":
+        -8,\n      \"observedst\": true,\n      \"stormsurge\": false,\n      \"nearby\":
+        {\n        \"count\": 25,\n        \"units\": null,\n        \"stations\":
+        [\n          {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 0.0,\n            \"id\": \"9447130\",\n            \"name\":
+        \"Seattle, WA\",\n            \"lat\": 47.60263888888889,\n            \"lng\":
+        -122.3393055555556,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 15.299679,\n            \"id\": \"9445958\",\n            \"name\":
+        \"Bremerton, WA\",\n            \"lat\": 47.56169891357422,\n            \"lng\":
+        -122.62300109863281,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9445958.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        22.962059,\n            \"id\": \"9446482\",\n            \"name\": \"Tacoma
+        MET, WA\",\n            \"lat\": 47.27583333333333,\n            \"lng\":
+        -122.4177777777778,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9446482.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 23.542261,\n            \"id\": \"9446484\",\n            \"name\":
+        \"Tacoma, WA\",\n            \"lat\": 47.266700744628906,\n            \"lng\":
+        -122.41329956054688,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9446484.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 41.610386,\n            \"id\": \"9444900\",\n            \"name\":
+        \"Port Townsend, WA\",\n            \"lat\": 48.11122222222222,\n            \"lng\":
+        -122.7596777777778,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9444900.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 68.600716,\n            \"id\": \"9444090\",\n            \"name\":
+        \"Port Angeles, WA\",\n            \"lat\": 48.125,\n            \"lng\":
+        -123.44000244140625,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9444090.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 74.26814,\n            \"id\": \"9449880\",\n            \"name\":
+        \"Friday Harbor, WA\",\n            \"lat\": 48.54527777777778,\n            \"lng\":
+        -123.0125,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9449880.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological,Physical\",\n            \"distance\":
+        89.659645,\n            \"id\": \"9449419\",\n            \"name\": \"Cherry
+        Point South Dock, WA\",\n            \"lat\": 48.86,\n            \"lng\":
+        -122.757,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9449419.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 89.86228,\n            \"id\": \"9449424\",\n            \"name\":
+        \"Cherry Point, WA\",\n            \"lat\": 48.86271666666666,\n            \"lng\":
+        -122.7585833333333,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9449424.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        90.04332,\n            \"id\": \"9449427\",\n            \"name\": \"Cherry
+        Point North Dock, WA\",\n            \"lat\": 48.86430555555555,\n            \"lng\":
+        -122.76425,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9449427.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 105.29426,\n            \"id\": \"9441102\",\n            \"name\":
+        \"Westport, WA\",\n            \"lat\": 46.90431,\n            \"lng\": -124.1050833331214,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9441102.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 106.14874,\n            \"id\": \"9440910\",\n            \"name\":
+        \"Toke Point, WA\",\n            \"lat\": 46.7075,\n            \"lng\": -123.9669444,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440910.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        106.722626,\n            \"id\": \"9439179\",\n            \"name\": \"Crims
+        Island, 1 nm E of, OR\",\n            \"lat\": 46.17461111111111,\n            \"lng\":
+        -123.1063333333333,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9439179.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        106.84763,\n            \"id\": \"9440488\",\n            \"name\": \"South
+        of Fisher Island, WA\",\n            \"lat\": 46.15944444444445,\n            \"lng\":
+        -123.0630555555556,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440488.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 108.42462,\n            \"id\": \"9440422\",\n            \"name\":
+        \"Longview, WA\",\n            \"lat\": 46.10609817504883,\n            \"lng\":
+        -122.9542007446289,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440422.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        109.46142,\n            \"id\": \"9440569\",\n            \"name\": \"Skamokawa,
+        WA\",\n            \"lat\": 46.27030555555555,\n            \"lng\": -123.4565,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440569.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        114.575554,\n            \"id\": \"9439099\",\n            \"name\": \"Wauna,
+        OR\",\n            \"lat\": 46.15999984741211,\n            \"lng\": -123.40499877929688,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9439099.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological\",\n
+        \           \"distance\": 114.73118,\n            \"id\": \"9440357\",\n            \"name\":
+        \"TEMCO Kalama Terminal, WA\",\n            \"lat\": 45.986698150634766,\n
+        \           \"lng\": -122.83670043945312,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440357.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        122.49659,\n            \"id\": \"9439201\",\n            \"name\": \"St Helens,
+        OR\",\n            \"lat\": 45.8650016784668,\n            \"lng\": -122.7969970703125,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9439201.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 122.60672,\n            \"id\": \"9439040\",\n            \"name\":
+        \"Astoria, OR\",\n            \"lat\": 46.207305908203125,\n            \"lng\":
+        -123.76830291748047,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9439040.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 123.58399,\n            \"id\": \"9442396\",\n            \"name\":
+        \"La Push, Quillayute River, WA\",\n            \"lat\": 47.91283611111111,\n
+        \           \"lng\": -124.6357388888889,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9442396.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        128.54839,\n            \"id\": \"9440581\",\n            \"name\": \"Cape
+        Disappointment, WA\",\n            \"lat\": 46.28102777777778,\n            \"lng\":
+        -124.0462777777778,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440581.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 131.1227,\n            \"id\": \"9443090\",\n            \"name\":
+        \"Neah Bay, WA\",\n            \"lat\": 48.37072222222222,\n            \"lng\":
+        -124.6015888888889,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9443090.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        137.53217,\n            \"id\": \"9440083\",\n            \"name\": \"Vancouver,
+        WA\",\n            \"lat\": 45.63117222222222,\n            \"lng\": -122.6957722222222,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9440083.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 164.43332,\n            \"id\": \"9437540\",\n            \"name\":
+        \"Garibaldi, OR\",\n            \"lat\": 45.55453,\n            \"lng\": -123.9189444443915,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9437540.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          }\n
+        \       ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/nearby.json\"\n
+        \     },\n      \"forecast\": true,\n      \"outlook\": true,\n      \"HTFhistorical\":
+        true,\n      \"HTFmonthly\": true,\n      \"nonNavigational\": false,\n      \"id\":
+        \"9447130\",\n      \"name\": \"Seattle\",\n      \"lat\": 47.60264,\n      \"lng\":
+        -122.3393,\n      \"affiliations\": \"NWLON\",\n      \"portscode\": null,\n
+        \     \"products\": {\n        \"products\": [\n          {\n            \"name\":
+        \"Water Levels\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130\"\n
+        \         },\n          {\n            \"name\": \"Reports\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/reports.html?id=9447130\"\n          },\n
+        \         {\n            \"name\": \"Tide Predictions\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=9447130\"\n
+        \         },\n          {\n            \"name\": \"Meteorological\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/met.html?id=9447130\"\n          },\n
+        \         {\n            \"name\": \"OFS\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/ofs/ofs_station.html?stname=Seattle&ofs=ssc&stnid=9447130&subdomain=0_cp\"\n
+        \         },\n          {\n            \"name\": \"Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=9447130\"\n          },\n
+        \         {\n            \"name\": \"Superseded  Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=9447130&type=superseded\"\n
+        \         },\n          {\n            \"name\": \"Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=9447130\"\n          },\n
+        \         {\n            \"name\": \"Superseded Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=9447130&epoch=1\"\n          },\n
+        \         {\n            \"name\": \"Harmonic\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/harcon.html?id=9447130\"\n
+        \         },\n          {\n            \"name\": \"Inundation Analysis\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/inundationanalysis/analysisParams.html?station=9447130\"\n
+        \         },\n          {\n            \"name\": \"Sea Level Trends\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/sltrends/sltrends_station.shtml?id=9447130\"\n
+        \         },\n          {\n            \"name\": \"Extreme Water Levels\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/est/est_station.shtml?stnid=9447130\"\n
+        \         },\n          {\n            \"name\": \"Physical Oceanagraphy\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/physocean.html?id=9447130\"\n
+        \         },\n          {\n            \"name\": \"Coastal Inundation Dashboard\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/inundationdb/inundation.html?id=9447130\"\n
+        \         },\n          {\n            \"name\": \"Annual High Tide Flood
+        Outlook\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/high-tide-flooding/annual-outlook.html?station=9447130\"\n
+        \         },\n          {\n            \"name\": \"Monthly High Tide Flood
+        Outlook\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/high-tide-flooding/monthly-outlook.html?station=9447130\"\n
+        \         },\n          {\n            \"name\": \"OFS Code\",\n            \"value\":
+        \"ssc\"\n          },\n          {\n            \"name\": \"OFS Name\",\n
+        \           \"value\": \"Salish Sea and Columbia River\"\n          }\n        ],\n
+        \       \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/products.json\"\n
+        \     },\n      \"disclaimers\": {\n        \"disclaimers\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/disclaimers.json\"\n
+        \     },\n      \"notices\": {\n        \"notices\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/notices.json\"\n
+        \     },\n      \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130.json\",\n
+        \     \"expand\": \"details,sensors,floodlevels,datums,harcon,tidepredoffsets,ofsmapoffsets,products,disclaimers,notices\",\n
+        \     \"tideType\": \"Mixed\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Apr 2026 17:25:17 GMT
+      content-length:
+      - '81000'
+      x-amz-apigw-id:
+      - cLjnsESQIAMERlA=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Tue, 21 Apr 2026 17:24:30 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - e868b5ca-761a-4ddf-949c-3c17dc0eda85
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl/DataInventory.wsdl
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<wsdl:definitions targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:apachesoap=\"http://xml.apache.org/xml-soap\" xmlns:impl=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:intf=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:wsdlsoap=\"http://schemas.xmlsoap.org/wsdl/soap/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n<!--WSDL created by Apache
+        Axis version: 1.4\nBuilt on Apr 22, 2006 (06:55:48 PDT)-->\n <wsdl:types>\n
+        \ <schema elementFormDefault=\"qualified\" targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns=\"http://www.w3.org/2001/XMLSchema\">\n   <element name=\"Parameters\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"stationId\" type=\"xsd:string\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n   <complexType name=\"location\">\n
+        \   <sequence>\n     <element name=\"lat\" type=\"xsd:string\"/>\n     <element
+        name=\"long\" nillable=\"true\" type=\"xsd:string\"/>\n     <element name=\"state\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"metadata\">\n    <sequence>\n     <element name=\"location\" type=\"impl:location\"/>\n
+        \    <element name=\"date_established\" type=\"xsd:string\"/>\n     <element
+        name=\"shef_id\" type=\"xsd:string\"/>\n     <element name=\"deployment_designation\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"parameter\">\n    <sequence/>\n    <attribute name=\"first\" type=\"xsd:string\"/>\n
+        \   <attribute name=\"last\" type=\"xsd:string\"/>\n    <attribute name=\"name\"
+        type=\"xsd:string\"/>\n   </complexType>\n   <complexType name=\"station\">\n
+        \   <sequence>\n     <element name=\"metadata\" type=\"impl:metadata\"/>\n
+        \    <element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"parameter\" type=\"impl:parameter\"/>\n
+        \   </sequence>\n    <attribute name=\"ID\" type=\"xsd:string\"/>\n    <attribute
+        name=\"name\" type=\"xsd:string\"/>\n   </complexType>\n   <element name=\"DataInventory\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"station\" type=\"impl:station\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n  </schema>\n </wsdl:types>\n\n
+        \  <wsdl:message name=\"getDataInventoryResponse\">\n\n      <wsdl:part element=\"impl:DataInventory\"
+        name=\"DataInventory\"/>\n\n   </wsdl:message>\n\n   <wsdl:message name=\"getDataInventoryRequest\">\n\n
+        \     <wsdl:part element=\"impl:Parameters\" name=\"Parameters\"/>\n\n   </wsdl:message>\n\n
+        \  <wsdl:portType name=\"DataInventoryPortType\">\n\n      <wsdl:operation
+        name=\"getDataInventory\" parameterOrder=\"Parameters\">\n\n         <wsdl:input
+        message=\"impl:getDataInventoryRequest\" name=\"getDataInventoryRequest\"/>\n\n
+        \        <wsdl:output message=\"impl:getDataInventoryResponse\" name=\"getDataInventoryResponse\"/>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:portType>\n\n   <wsdl:binding name=\"DataInventorySoapBinding\"
+        type=\"impl:DataInventoryPortType\">\n\n      <wsdlsoap:binding style=\"document\"
+        transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n\n      <wsdl:operation
+        name=\"getDataInventory\">\n\n         <wsdlsoap:operation soapAction=\"\"/>\n\n
+        \        <wsdl:input name=\"getDataInventoryRequest\">\n\n            <wsdlsoap:body
+        use=\"literal\"/>\n\n         </wsdl:input>\n\n         <wsdl:output name=\"getDataInventoryResponse\">\n\n
+        \           <wsdlsoap:body use=\"literal\"/>\n\n         </wsdl:output>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:binding>\n\n   <wsdl:service name=\"DataInventoryService\">\n\n
+        \     <wsdl:port binding=\"impl:DataInventorySoapBinding\" name=\"DataInventory\">\n\n
+        \        <wsdlsoap:address location=\"https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory\"/>\n\n
+        \     </wsdl:port>\n\n   </wsdl:service>\n\n</wsdl:definitions>"
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3712'
+      Content-Type:
+      - text/xml
+      Date:
+      - Tue, 21 Apr 2026 17:25:18 GMT
+      ETag:
+      - W/"3712-1673306860000"
+      Last-Modified:
+      - Mon, 09 Jan 2023 23:27:40 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Body><ns0:Parameters
+      xmlns:ns0="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><ns0:stationId>9447130</ns0:stationId></ns0:Parameters></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '323'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '""'
+    method: POST
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><DataInventory
+        xmlns="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><station
+        ID="9447130" name="Seattle"><metadata><location><lat>47.6026</lat><long>-122.3393</long><state>WA</state></location><date_established>1899-01-01</date_established><shef_id>EBSW1</shef_id><deployment_designation>NWLON</deployment_designation></metadata><parameter
+        first="1991-11-09 00:00" last="2019-01-02 18:36" name="Wind"/><parameter first="1991-11-09
+        01:00" last="2019-01-02 18:36" name="Air Temperature"/><parameter first="1991-11-09
+        00:00" last="2019-01-02 18:36" name="Water Temperature"/><parameter first="2023-09-28
+        00:00" last="2026-04-21 17:18" name="Water Temperature"/><parameter first="1991-11-09
+        00:00" last="2019-01-02 18:36" name="Barometric Pressure"/><parameter first="2023-09-28
+        00:00" last="2026-04-21 17:18" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-04-21 17:18" name="Preliminary 6-Minute Water Level"/><parameter
+        first="1995-06-01 00:00" last="2026-03-31 23:54" name="Verified 6-Minute Water
+        Level"/><parameter first="1899-01-01 08:00" last="2026-03-31 23:00" name="Verified
+        Hourly Height Water Level"/><parameter first="1977-10-18 10:18" last="1977-11-15
+        11:12" name="Verified High/Low Water Level"/><parameter first="1978-03-01
+        10:54" last="1978-04-13 05:18" name="Verified High/Low Water Level"/><parameter
+        first="1979-10-01 14:24" last="2026-03-31 23:54" name="Verified High/Low Water
+        Level"/><parameter first="1898-12-01 00:00" last="2026-03-31 23:54" name="Verified
+        Monthly Mean Water Level"/></station></DataInventory></soapenv:Body></soapenv:Envelope>
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/xml;charset=utf-8
+      Date:
+      - Tue, 21 Apr 2026 17:25:18 GMT
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: ''
+version: 1
