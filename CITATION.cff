@@ -2,13 +2,14 @@ cff-version: 1.2.0
 title: noaa_coops
 message: "If you use this software, please cite it as below."
 type: software
+version: "0.5.0"
 authors:
   - family-names: Clunies
     given-names: Gregory
     github: GClunies
 repository-code: "https://github.com/GClunies/noaa_coops"
 url: "https://github.com/GClunies/noaa_coops"
-license: LICENSE
+license: Apache-2.0
 abstract: >
   A Python wrapper for the NOAA CO-OPS Tides & Currents data APIs,
   enabling easy access to oceanographic and tidal data.
