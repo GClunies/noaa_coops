@@ -1,8 +1,8 @@
-"""Unit tests for `_check_product_params` and `_parse_known_date_formats`.
+"""Unit tests for the declarative product registry + date parser.
 
-Both methods raise ValueError before any HTTP call, so these tests run
-fully offline with no mocking — just construct a bare Station and
-exercise the methods directly.
+These exercise the helpers directly via the `_products` and `_parsing`
+modules. No HTTP, no mocks -- the validators raise ValueError before
+any network call.
 """
 
 from __future__ import annotations
@@ -11,19 +11,12 @@ from datetime import datetime
 
 import pytest
 
-from noaa_coops.station import Station
-
-
-def _bare_station() -> Station:
-    """Build a Station without running __init__ (no HTTP)."""
-    s = Station.__new__(Station)
-    s.id = "9447130"
-    s.units = "metric"
-    return s
+from noaa_coops._parsing import parse_known_date_formats
+from noaa_coops._products import validate_params
 
 
 # ---------------------------------------------------------------------------
-# _check_product_params: product validation
+# validate_params: product validation
 # ---------------------------------------------------------------------------
 
 
@@ -46,7 +39,6 @@ def _bare_station() -> Station:
 )
 def test_valid_products_accepted(product: str) -> None:
     """Every documented product passes validation (with appropriate datum)."""
-    station = _bare_station()
     # Products that require a datum get MLLW; others get None.
     datum_required = {
         "water_level",
@@ -58,7 +50,7 @@ def test_valid_products_accepted(product: str) -> None:
         "predictions",
     }
     datum = "MLLW" if product in datum_required else None
-    station._check_product_params(
+    validate_params(
         product=product,
         datum=datum,
         bin_num=None,
@@ -69,9 +61,8 @@ def test_valid_products_accepted(product: str) -> None:
 
 
 def test_unknown_product_rejected() -> None:
-    station = _bare_station()
     with pytest.raises(ValueError, match="Invalid product"):
-        station._check_product_params(
+        validate_params(
             product="not_a_real_product",
             datum=None,
             bin_num=None,
@@ -82,7 +73,7 @@ def test_unknown_product_rejected() -> None:
 
 
 # ---------------------------------------------------------------------------
-# _check_product_params: datum
+# validate_params: datum
 # ---------------------------------------------------------------------------
 
 
@@ -90,8 +81,7 @@ def test_unknown_product_rejected() -> None:
     "datum", ["MHHW", "MHW", "MTL", "MSL", "MLW", "MLLW", "NAVD", "STND", "IGLD", "LWD"]
 )
 def test_valid_datums_accepted(datum: str) -> None:
-    station = _bare_station()
-    station._check_product_params(
+    validate_params(
         product="water_level",
         datum=datum,
         bin_num=None,
@@ -102,9 +92,8 @@ def test_valid_datums_accepted(datum: str) -> None:
 
 
 def test_missing_datum_for_water_level_rejected() -> None:
-    station = _bare_station()
     with pytest.raises(ValueError, match="No datum"):
-        station._check_product_params(
+        validate_params(
             product="water_level",
             datum=None,
             bin_num=None,
@@ -116,9 +105,7 @@ def test_missing_datum_for_water_level_rejected() -> None:
 
 def test_lowercase_datum_accepted() -> None:
     """Datums are normalized to uppercase before validation, so `mllw` is valid."""
-    station = _bare_station()
-    # No raise
-    station._check_product_params(
+    validate_params(
         product="water_level",
         datum="mllw",
         bin_num=None,
@@ -129,11 +116,10 @@ def test_lowercase_datum_accepted() -> None:
 
 
 def test_unknown_datum_rejected() -> None:
-    station = _bare_station()
     with pytest.raises(ValueError, match="Invalid datum"):
-        station._check_product_params(
+        validate_params(
             product="water_level",
-            datum="nope",  # not in the allowlist
+            datum="nope",
             bin_num=None,
             interval=None,
             units="metric",
@@ -142,14 +128,13 @@ def test_unknown_datum_rejected() -> None:
 
 
 # ---------------------------------------------------------------------------
-# _check_product_params: units + time_zone
+# validate_params: units + time_zone
 # ---------------------------------------------------------------------------
 
 
 @pytest.mark.parametrize("units", ["metric", "english"])
 def test_valid_units_accepted(units: str) -> None:
-    station = _bare_station()
-    station._check_product_params(
+    validate_params(
         product="water_temperature",
         datum=None,
         bin_num=None,
@@ -160,9 +145,8 @@ def test_valid_units_accepted(units: str) -> None:
 
 
 def test_invalid_units_rejected() -> None:
-    station = _bare_station()
     with pytest.raises(ValueError, match="[Uu]nit"):
-        station._check_product_params(
+        validate_params(
             product="water_temperature",
             datum=None,
             bin_num=None,
@@ -174,8 +158,7 @@ def test_invalid_units_rejected() -> None:
 
 @pytest.mark.parametrize("time_zone", ["gmt", "lst", "lst_ldt"])
 def test_valid_time_zones_accepted(time_zone: str) -> None:
-    station = _bare_station()
-    station._check_product_params(
+    validate_params(
         product="water_temperature",
         datum=None,
         bin_num=None,
@@ -186,20 +169,19 @@ def test_valid_time_zones_accepted(time_zone: str) -> None:
 
 
 def test_invalid_time_zone_rejected() -> None:
-    station = _bare_station()
     with pytest.raises(ValueError, match="[Tt]ime [Zz]one"):
-        station._check_product_params(
+        validate_params(
             product="water_temperature",
             datum=None,
             bin_num=None,
             interval=None,
             units="metric",
-            time_zone="utc",  # must be gmt, lst, or lst_ldt
+            time_zone="utc",
         )
 
 
 # ---------------------------------------------------------------------------
-# _parse_known_date_formats
+# parse_known_date_formats
 # ---------------------------------------------------------------------------
 
 
@@ -215,8 +197,7 @@ def test_invalid_time_zone_rejected() -> None:
 def test_parse_known_date_formats_accepts_all_documented_formats(
     input_str: str, expected_dt: datetime
 ) -> None:
-    station = _bare_station()
-    dt, fmt_str = station._parse_known_date_formats(input_str)
+    dt, fmt_str = parse_known_date_formats(input_str)
     assert dt == expected_dt
     # Second return value is always the canonical "%Y%m%d %H:%M" form
     assert fmt_str == expected_dt.strftime("%Y%m%d %H:%M")
@@ -228,17 +209,16 @@ def test_parse_known_date_formats_accepts_all_documented_formats(
         "not-a-date",
         "2015-01-01",  # ISO dashes not supported
         "15/01/2015",  # day-first not supported
-        "",  # empty string — covers the latent UnboundLocalError path
+        "",  # empty string -- covers the historical UnboundLocalError path
     ],
 )
 def test_parse_known_date_formats_rejects_invalid(bad_input: str) -> None:
     """Invalid dates raise ValueError, never UnboundLocalError.
 
-    The empty-string case exercises the historical ``match`` flag bug:
-    before the fix, a string that fails on the first format iteration
-    without ever reaching the flag assignment would raise UnboundLocalError
-    instead of a proper ValueError.
+    The empty-string case is a regression guard: before the Tier 4
+    rewrite, a `match = False` flag set only in the `except` branch
+    could leave the flag unbound if the loop never hit the except --
+    which could raise UnboundLocalError on certain edge cases.
     """
-    station = _bare_station()
     with pytest.raises(ValueError):
-        station._parse_known_date_formats(bad_input)
+        parse_known_date_formats(bad_input)
