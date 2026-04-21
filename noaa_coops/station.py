@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import math
 from datetime import datetime, timedelta
 from typing import Optional, Union
@@ -7,6 +8,11 @@ from typing import Optional, Union
 import pandas as pd
 import requests
 import zeep
+
+logger = logging.getLogger(__name__)
+
+DEFAULT_TIMEOUT: tuple[float, float] = (5.0, 30.0)
+"""Default (connect, read) timeout tuple for NOAA API calls, in seconds."""
 
 
 class COOPSAPIError(Exception):
@@ -40,12 +46,12 @@ def get_stations_from_bbox(
     """
     station_list = []
     data_url = "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json"
-    response = requests.get(data_url)
+    response = requests.get(data_url, timeout=DEFAULT_TIMEOUT)
 
     if response.status_code != 200:
         raise COOPSAPIError(
-             f"Failed to fetch station list. Status code: {response.status_code}"
-    )
+            f"Failed to fetch station list. Status code: {response.status_code}"
+        )
 
     json_dict = response.json()
 
@@ -87,6 +93,10 @@ class Station:
     - data (observed or predicted)
     """
 
+    # Per-product SOAP data inventory: {product_name: {"start_date": ..., "end_date": ...}}
+    # Always set by __init__; empty dict `{}` indicates SOAP fetch failed.
+    data_inventory: dict[str, dict[str, str]]
+
     def __init__(self, id: str, units: str = "metric"):
         """Initialize Station object.
 
@@ -102,8 +112,24 @@ class Station:
 
         try:
             self.get_data_inventory()
-        except:  # noqa: E722
-            pass
+        except (
+            requests.RequestException,
+            zeep.exceptions.Error,
+            AttributeError,
+            TypeError,
+        ) as exc:
+            # Data inventory is best-effort metadata. If the SOAP endpoint is
+            # unreachable, returns a fault, or raises a built-in from zeep's
+            # parsing internals (malformed WSDL, missing attributes), degrade
+            # gracefully rather than failing Station construction.
+            # KeyboardInterrupt / SystemExit are intentionally NOT caught —
+            # those must propagate.
+            self.data_inventory = {}
+            logger.warning(
+                "Data inventory fetch failed for station %s: %s",
+                self.id,
+                exc,
+            )
 
     def get_data_inventory(self):
         """Get data inventory for Station and append to Station object.
@@ -116,10 +142,11 @@ class Station:
             "datainventory/wsdl/DataInventory.wsdl"
         )
         client = zeep.Client(wsdl=wsdl)
-        response = client.service.getDataInventory(self.id)["parameter"]
-        names = [x["name"] for x in response]
-        starts = [x["first"] for x in response]
-        ends = [x["last"] for x in response]
+        response = client.service.getDataInventory(self.id)
+        parameters = response.get("parameter") or []
+        names = [x["name"] for x in parameters]
+        starts = [x["first"] for x in parameters]
+        ends = [x["last"] for x in parameters]
         unique_names = list(set(names))
         inventory_dict = {}
 
@@ -135,7 +162,7 @@ class Station:
     def get_metadata(self):
         """Get metadata for Station and append to Station object."""
         metadata_base_url = (
-            "https://api.tidesandcurrents.noaa.gov/mdapi/" "prod/webapi/stations/"
+            "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/"
         )
         extension = ".json"
         metadata_expand = (
@@ -148,14 +175,13 @@ class Station:
         metadata_url = (
             metadata_base_url + self.id + extension + metadata_expand + units_for_url
         )
-        response = requests.get(metadata_url)
+        response = requests.get(metadata_url, timeout=DEFAULT_TIMEOUT)
         json_dict = response.json()
         station_metadata = json_dict["stations"][0]
         # Expose additional useful metadata fields
         self.details = station_metadata.get("details", {})
         self.bins = station_metadata.get("bins", [])
         self.deployments = station_metadata.get("deployments", [])
-
 
         # Set class attributes base on provided metadata
         if "datums" in station_metadata:  # if True --> water levels
@@ -358,7 +384,7 @@ class Station:
             }
 
             if interval is not None:
-                parameters["interval"] = interval
+                parameters["interval"] = str(interval)
 
         elif product == "currents":
             if bin_num is None:
@@ -393,10 +419,11 @@ class Station:
             }
 
             if interval is not None:
-                parameters["interval"] = interval
+                parameters["interval"] = str(interval)
 
         request_url = requests.Request("GET", base_url, params=parameters).prepare().url
-
+        if request_url is None:
+            raise COOPSAPIError(f"Failed to build request URL for product {product!r}")
         return request_url
 
     def _make_api_request(self, data_url: str, product: str) -> pd.DataFrame:
@@ -412,7 +439,7 @@ class Station:
         Returns:
             DataFrame: Pandas DataFrame containing data from NOAA CO-OPS API.
         """
-        res = requests.get(data_url)
+        res = requests.get(data_url, timeout=DEFAULT_TIMEOUT)
 
         if res.status_code != 200:
             raise COOPSAPIError(
@@ -759,101 +786,3 @@ class Station:
         self.data = df
 
         return df
-
-
-if __name__ == "__main__":
-    # DEBUGGING
-    from pprint import pprint
-
-    station = Station(id="8775241")
-
-    df = station.get_data(
-        begin_date="20230320 00:00",
-        end_date="20230421 00:00",
-        product="predictions",
-        datum="MSL",
-        interval="h",
-        units="english",
-        time_zone="gmt",
-    )
-
-    pprint(df.head())
-    print("\n" * 2)
-
-    pprint(df.tail())
-    print("\n" * 2)
-
-    print(df.info())
-
-    df.to_csv("debug.csv")
-
-    # station = nc.Station(id="9447130")  # Seattle, WA
-
-    # Test replicating the data seen on the station page:
-    # https://tidesandcurrents.noaa.gov/waterlevels.html?id=9447130&units=metric&bdate=20220101&edate=20220430&timezone=GMT&datum=MLLW&interval=h&action=
-    # 2022-01-01 00:00:00, 2022-04-30 23:00:00, 1-hr, MLLW, GMT, metric
-
-    # print("Test that metadata is working:")
-    # pprint(station.metadata)
-    # print("\n" * 2)
-
-    # print("Test that attributes are populated from metadata:")
-    # pprint(station.sensors)
-    # print("\n" * 2)
-
-    # print("Test that data_inventory is working:")
-    # pprint(station.data_inventory, indent=4, compact=True, width=100)
-    # print("\n" * 2)
-
-    # print("6-min water level station request:")
-    # data = station.get_data(
-    #     begin_date="20220101 00:00",
-    #     end_date="20220430 23:00",
-    #     product="hourly_height",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt",
-    # )
-    # pprint(data.head())
-    # print("\n" * 2)
-
-    # pprint(data.tail())
-    # print("\n" * 2)
-
-    # print("6-min water level station request:")
-    # data = station.get_data(
-    #     begin_date="20150101",
-    #     end_date="20150331",
-    #     product="water_level",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt",
-    # )
-    # pprint(data.head())
-    # print("\n" * 2)
-
-    # print("1-hr water level station request (SHOULD NOT WORK):")
-    # data = station.get_data(
-    #     begin_date="20150101",
-    #     end_date="20150331",
-    #     product="water_level",
-    #     interval="h",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt",
-    # )
-    # pprint(data.head())
-    # print("\n" * 2)
-
-    # print("high-low request:")
-    # data = station.get_data(
-    #     begin_date="20150101",
-    #     end_date="20150331",
-    #     product="high_low",
-    #     datum="MLLW",
-    #     units="metric",
-    #     time_zone="gmt",
-    # )
-    # pprint(data.head())
-    # print("\n" * 2)
-    # pprint(data.loc["2015"])

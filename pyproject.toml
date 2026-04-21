@@ -1,44 +1,68 @@
-[tool.poetry]
+[project]
 name = "noaa-coops"
-version = "0.4.0"
+version = "0.5.0"
 description = "Python wrapper for NOAA Tides & Currents Data and Metadata."
-authors = ["Gregory Clunies <greg.clunies@gmail.com>"]
-license = "Apache-2.0"
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Gregory Clunies", email = "greg.clunies@gmail.com" },
+]
+requires-python = ">=3.9"
+keywords = ["noaa", "tides", "currents", "oceanography", "co-ops", "api"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+]
+dependencies = [
+    "requests>=2.32.3",
+    "pandas>=2.2.2",
+    "zeep>=4.2.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-requests = ">=2.32.3"
-pandas = ">=2.2.2"
-zeep = ">=4.2.1"
+[project.urls]
+Homepage = "https://github.com/GClunies/noaa_coops"
+Repository = "https://github.com/GClunies/noaa_coops"
+Issues = "https://github.com/GClunies/noaa_coops/issues"
+Changelog = "https://github.com/GClunies/noaa_coops/blob/main/CHANGELOG.md"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.2.2"
-mypy = "^1.10.1"
-tox = "^4.15.1"
-ruff = "^0.5.0"
-make = "^0.1.6.post2"
-reuse = "^3.0.2"
-pytest-cov = "^5.0.0"
+[dependency-groups]
+dev = [
+    "pytest>=8.2.2",
+    "pytest-cov>=5.0.0",
+    "mypy>=1.10.1",
+    "ruff>=0.5.0",
+    "pandas-stubs>=2.2.0",
+    "types-requests>=2.32.0",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "noaa_coops/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["noaa_coops"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-vv -p no:warnings --cov=reflekt tests/"
+addopts = "-v -p no:warnings --cov=noaa_coops --cov-report=term-missing -m 'not live'"
 testpaths = ["tests"]
+markers = [
+    "live: tests that hit the live NOAA API (requires network; opt-in via -m live)",
+]
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-isolated_build = true
-envlist = py39,py310,py311
-
-[testenv]
-allowlist_externals = poetry
-commands =
-    poetry install -v
-    poetry run pytest tests/
-"""
+[tool.mypy]
+check_untyped_defs = true
+python_version = "3.9"
