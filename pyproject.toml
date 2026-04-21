@@ -8,14 +8,13 @@ license-files = ["LICENSE"]
 authors = [
     { name = "Gregory Clunies", email = "greg.clunies@gmail.com" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = ["noaa", "tides", "currents", "oceanography", "co-ops", "api"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -44,6 +43,8 @@ dev = [
     "pandas-stubs>=2.2.0",
     "types-requests>=2.32.0",
     "responses>=0.26.0",
+    "pytest-recording>=0.13.4",
+    "vcrpy>=8.0",  # 8+ requires Python 3.10; has the VCRHTTPResponse fix for urllib3 2.x
 ]
 
 [build-system]
@@ -66,4 +67,4 @@ markers = [
 
 [tool.mypy]
 check_untyped_defs = true
-python_version = "3.9"
+python_version = "3.10"

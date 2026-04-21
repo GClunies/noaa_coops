@@ -145,7 +145,13 @@ class Station:
         )
         client = zeep.Client(wsdl=wsdl)
         response = client.service.getDataInventory(self.id)
-        parameters = response.get("parameter") or []
+        # zeep marshals SOAP complex types into CompoundValue objects that
+        # support `[]` subscript but NOT `.get()`. Use subscript + catch
+        # missing-key / wrong-shape cases uniformly.
+        try:
+            parameters = response["parameter"] or []
+        except (KeyError, TypeError):
+            parameters = []
         names = [x["name"] for x in parameters]
         starts = [x["first"] for x in parameters]
         ends = [x["last"] for x in parameters]
