@@ -1,0 +1,25 @@
+noaa_coops/station.py
+  0c5c67e90af2be4e 11,33-39,71-77
+tests/test_http.py
+  0c5c67e90af2be4e 274-304
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "263317b33149354f672e608ce04c169f4ed1715f",
+  "prompts": {
+    "0c5c67e90af2be4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89968822-fdb7-4762-8409-1587bf309139",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 46,
+      "total_deletions": 0,
+      "accepted_lines": 46,
+      "overriden_lines": 0
+    }
+  }
+}
