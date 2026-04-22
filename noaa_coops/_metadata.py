@@ -20,6 +20,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from noaa_coops._endpoints import METADATA_BASE_URL
+from noaa_coops._exceptions import COOPSAPIError
 from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION
 
 if TYPE_CHECKING:
@@ -68,6 +69,16 @@ def populate_metadata(station: Station, units: str) -> None:
         f"?units={units}"
     )
     response = _SESSION.get(url, timeout=DEFAULT_TIMEOUT)
+
+    # NOAA's mdapi occasionally 5xx's after retries are exhausted (504s during
+    # the nightly canary). Surface that as COOPSAPIError instead of a
+    # confusing JSONDecodeError from trying to parse an HTML error page.
+    if response.status_code != 200:
+        raise COOPSAPIError(
+            f"Failed to fetch station metadata for id={station.id}. "
+            f"Status code: {response.status_code}. Reason: {response.reason}"
+        )
+
     payload = response.json()
     md = payload["stations"][0]
 

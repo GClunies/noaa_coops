@@ -136,6 +136,37 @@ def test_bbox_request_retries_on_transient_failure() -> None:
 
 
 # ---------------------------------------------------------------------------
+# Metadata endpoint surfaces 5xx as COOPSAPIError, not JSONDecodeError
+# ---------------------------------------------------------------------------
+
+
+METADATA_URL_RE = re.compile(
+    r"https://api\.tidesandcurrents\.noaa\.gov/mdapi/prod/webapi/stations/.*"
+)
+
+
+@responses.activate
+def test_metadata_504_raises_coops_error_not_json_error() -> None:
+    """A NOAA mdapi 504 after retries surfaces as COOPSAPIError, not JSONDecodeError.
+
+    Regression for the nightly canary that returned an HTML 504 body and
+    tripped ``response.json()`` with a confusing decode error.
+    """
+    # More than Retry.total=3 attempts; all 504 with an HTML body.
+    for _ in range(5):
+        responses.add(
+            responses.GET,
+            METADATA_URL_RE,
+            status=504,
+            body="<html><body>504 Gateway Time-out</body></html>",
+            content_type="text/html",
+        )
+
+    with pytest.raises(COOPSAPIError, match="504"):
+        nc.Station(id="9447130")
+
+
+# ---------------------------------------------------------------------------
 # Session sanity
 # ---------------------------------------------------------------------------
 
