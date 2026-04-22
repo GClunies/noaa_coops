@@ -3,9 +3,9 @@
 [![CI](https://github.com/GClunies/noaa_coops/actions/workflows/pull_request.yml/badge.svg)](https://github.com/GClunies/noaa_coops/actions/workflows/pull_request.yml)
 [![PyPI](https://img.shields.io/pypi/v/noaa-coops.svg)](https://pypi.python.org/pypi/noaa-coops)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/noaa-coops.svg)](https://pypi.python.org/pypi/noaa-coops)
-[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://github.com/GClunies/noaa_coops/blob/master/LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://github.com/GClunies/noaa_coops/blob/main/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/GClunies/noaa_coops/master.svg)](https://results.pre-commit.ci/latest/github/GClunies/noaa_coops/master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/GClunies/noaa_coops/main.svg)](https://results.pre-commit.ci/latest/github/GClunies/noaa_coops/main)
 
 A Python wrapper for the NOAA CO-OPS Tides & Currents
 [Data](https://tidesandcurrents.noaa.gov/api/) and

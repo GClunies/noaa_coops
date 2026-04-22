@@ -64,7 +64,7 @@ Releases are cut manually via the GitHub Actions UI.
 1. Bump `__version__` in `noaa_coops/__init__.py` (e.g. `0.5.0` → `0.6.0`).
 2. Update `CHANGELOG.md` — move the **Unreleased** section under the new
    version with today's date, and start a fresh `## [Unreleased]` header.
-3. PR, review, merge to `master`.
+3. PR, review, merge to `main`.
 4. Actions → **Test Publish** → *Run workflow*. Confirms the wheel installs
    cleanly from TestPyPI.
 5. Actions → **Publish** → *Run workflow*. Publishes to PyPI, creates the
