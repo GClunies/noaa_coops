@@ -74,7 +74,7 @@ def demo_get_data(seattle: Station) -> None:
 
 
 def demo_currents() -> None:
-    section("6. get_data — Oakland currents (examples/currents_example.py)")
+    section("6. get_data — Oakland currents (s09010, bin 2)")
     # Use a two-day window ending yesterday (UTC) so the demo stays fresh
     # against NOAA's rolling real-time currents availability.
     end = datetime.now(timezone.utc).date() - timedelta(days=1)
