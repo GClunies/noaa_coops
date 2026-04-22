@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 import math
+import re
 import warnings
 from datetime import datetime, timedelta
 from typing import Optional, Union
@@ -29,6 +30,13 @@ __all__ = ["COOPSAPIError", "DEFAULT_TIMEOUT", "Station"]
 
 logger = logging.getLogger(__name__)
 
+# NOAA's SOAP DataInventory service accepts only 7-digit numeric station IDs
+# (water-level / tide stations). Currents / PORTS stations use alphanumeric
+# IDs like ``"s09010"`` and ``"PUG1515"`` -- the SOAP endpoint rejects these
+# deterministically with a ``Wrong Station ID`` fault. Skip the call for
+# non-eligible IDs instead of logging a warning on every ``Station(...)``.
+_SOAP_INVENTORY_ID_PATTERN = re.compile(r"^\d{7}$")
+
 
 class Station:
     """NOAA CO-OPS station client.
@@ -45,7 +53,11 @@ class Station:
     """
 
     # Per-product SOAP data inventory: {product_name: {"start_date": ..., "end_date": ...}}
-    # Always set by __init__; empty dict `{}` indicates SOAP fetch failed.
+    # Always set by __init__. An empty dict ``{}`` means either (a) the
+    # station ID is not eligible for SOAP DataInventory -- NOAA only
+    # supports 7-digit numeric IDs there, so currents/PORTS stations like
+    # ``s09010`` always produce ``{}`` by design -- or (b) an eligible ID
+    # had a transient SOAP failure (network error, malformed response).
     data_inventory: dict[str, dict[str, str]]
 
     def __init__(self, id: str, units: str = "metric") -> None:
@@ -59,6 +71,24 @@ class Station:
         self.id: str = str(id)
         self.units: str = units
         self.get_metadata()
+
+        if not _SOAP_INVENTORY_ID_PATTERN.match(self.id):
+            # SOAP DataInventory requires a 7-digit numeric ID. Alphanumeric
+            # currents/PORTS IDs (e.g. "s09010") get an empty inventory by
+            # design -- no SOAP endpoint exists for them. Log at INFO so
+            # anyone wondering why ``data_inventory`` is empty sees the
+            # reason when they bump their log level, without warning-level
+            # noise for every currents Station(...) call.
+            self.data_inventory = {}
+            logger.info(
+                "Station %s uses a non-7-digit ID; NOAA's SOAP "
+                "DataInventory service only supports water-level/met "
+                "stations with 7-digit numeric IDs, so data_inventory "
+                "will be empty. This is expected for currents/PORTS "
+                "stations.",
+                self.id,
+            )
+            return
 
         try:
             self.get_data_inventory()

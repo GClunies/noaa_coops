@@ -271,6 +271,46 @@ def test_inventory_logs_warning_on_failure(
     assert warnings, "No warning emitted on inventory fetch failure"
 
 
+@pytest.mark.parametrize(
+    "station_id",
+    [
+        pytest.param("s09010", id="alphanumeric-currents"),
+        pytest.param("PUG1515", id="alphanumeric-ports"),
+        pytest.param("123456", id="six-digit-numeric"),
+        pytest.param("12345678", id="eight-digit-numeric"),
+    ],
+)
+def test_inventory_skipped_for_non_7digit_ids(
+    station_id: str, caplog: pytest.LogCaptureFixture
+) -> None:
+    """Non-7-digit IDs skip the SOAP call -- no network, no WARNING, one INFO.
+
+    NOAA's SOAP DataInventory service only accepts 7-digit numeric IDs and
+    rejects everything else with a deterministic "Wrong Station ID" fault.
+    Constructing a Station with such an ID must not call zeep and must not
+    emit a WARNING (avoids noise for every currents/PORTS station), but
+    should emit a single INFO-level message so users who raise their log
+    level can see why data_inventory is empty.
+    """
+    with (
+        patch("noaa_coops.station.populate_metadata"),
+        patch("noaa_coops.station.zeep.Client") as mock_zeep,
+        caplog.at_level(logging.INFO, logger="noaa_coops.station"),
+    ):
+        station = nc.Station(id=station_id)
+
+    assert station.data_inventory == {}
+    assert not mock_zeep.called, "SOAP client must not be instantiated"
+
+    records = [r for r in caplog.records if r.name == "noaa_coops.station"]
+    assert not any(r.levelno >= logging.WARNING for r in records), (
+        "Skip path must not emit WARNING or higher"
+    )
+    info_records = [r for r in records if r.levelno == logging.INFO]
+    assert len(info_records) == 1, "Expected exactly one INFO message on skip"
+    assert station_id in info_records[0].getMessage()
+
+
 # ---------------------------------------------------------------------------
 # COOPSAPIError on HTTP non-200 (regression)
 # ---------------------------------------------------------------------------
