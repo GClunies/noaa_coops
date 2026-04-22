@@ -1,0 +1,27 @@
+CONTRIBUTING.md
+  1767959f0f22381b 67
+README.md
+  1767959f0f22381b 6,8
+.github/workflows/pull_request.yml
+  1767959f0f22381b 4,6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "3093bc78fbac1908eca25286dbe1be0a381ad7d4",
+  "prompts": {
+    "1767959f0f22381b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dfe377fd-c22b-4fdf-b4cd-303beefb70a8",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 5,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    }
+  }
+}
