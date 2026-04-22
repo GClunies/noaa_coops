@@ -1,0 +1,38 @@
+tests/test_retry.py
+  6f4a3bd9821db589 139-168
+noaa_coops/_metadata.py
+  6f4a3bd9821db589 23,72-81
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "64f30af2a9711bfd6ccbbac2500dd079bb85b6b7",
+  "prompts": {
+    "0c5c67e90af2be4e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89968822-fdb7-4762-8409-1587bf309139",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 19,
+      "total_deletions": 19,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    },
+    "6f4a3bd9821db589": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29c25b62-2b11-426c-a707-ce0831f0751d",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 42,
+      "total_deletions": 0,
+      "accepted_lines": 42,
+      "overriden_lines": 0
+    }
+  }
+}
