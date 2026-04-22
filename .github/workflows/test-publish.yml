@@ -34,6 +34,16 @@ jobs:
             exit 1
           fi
 
+      - name: Check version not already on TestPyPI
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          STATUS=$(curl -sS -o /dev/null -w "%{http_code}" "https://test.pypi.org/pypi/noaa-coops/$VERSION/json")
+          if [ "$STATUS" = "200" ]; then
+            echo "::error::Version $VERSION is already published to TestPyPI. Bump the version in noaa_coops/__init__.py."
+            exit 1
+          fi
+          echo "Version $VERSION is not yet on TestPyPI (HTTP $STATUS)."
+
   test:
     needs: validate
     runs-on: ubuntu-latest
@@ -74,6 +84,7 @@ jobs:
         with:
           password: ${{ secrets.TEST_PYPI_TOKEN }}
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
       - name: Verify install from TestPyPI
         run: |
           sleep 10
