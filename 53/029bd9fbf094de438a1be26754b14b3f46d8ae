@@ -1,0 +1,25 @@
+examples/readme_demo.py
+  e6bba734882e2ab9 1-103
+README.md
+  e6bba734882e2ab9 10,15-16,117,120
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.2",
+  "base_commit_sha": "53029bd9fbf094de438a1be26754b14b3f46d8ae",
+  "prompts": {
+    "e6bba734882e2ab9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "81a86ef1-b83e-4900-83fd-838723337e94",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Gregory Clunies",
+      "messages": [],
+      "total_additions": 110,
+      "total_deletions": 8,
+      "accepted_lines": 108,
+      "overriden_lines": 0
+    }
+  }
+}
