@@ -9,7 +9,7 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -38,8 +38,8 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
       - name: Run tests
         run: |
           uv sync --locked --all-extras --group dev
@@ -49,12 +49,12 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v4
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
       - name: Build package
         run: uv build
       - name: Upload dist
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
@@ -64,11 +64,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download dist
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v7
       - name: Publish to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
@@ -78,5 +78,5 @@ jobs:
         run: |
           sleep 10
           uv venv /tmp/verify-env
-          uv pip install --python /tmp/verify-env/bin/python --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ noaa-coops==${{ needs.validate.outputs.version }}
+          uv pip install --python /tmp/verify-env/bin/python --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match noaa-coops==${{ needs.validate.outputs.version }}
           /tmp/verify-env/bin/python -c "from noaa_coops import __version__; assert __version__ == '${{ needs.validate.outputs.version }}', f'Version mismatch: {__version__}'"

@@ -37,6 +37,10 @@ _DEFAULT_RETRY = Retry(
     raise_on_status=False,
 )
 
+# SOAP variant: identical policy, but also retries POST since the
+# DataInventory service is read-only and idempotent despite using POST.
+_SOAP_RETRY = _DEFAULT_RETRY.new(allowed_methods=frozenset(["GET", "POST"]))
+
 
 def _build_session() -> requests.Session:
     """Construct the module-level session. Factored out so tests can rebuild it."""
@@ -47,5 +51,17 @@ def _build_session() -> requests.Session:
     return session
 
 
+def _build_soap_session() -> requests.Session:
+    """Build a session that also retries POST — required for SOAP."""
+    session = requests.Session()
+    adapter = HTTPAdapter(max_retries=_SOAP_RETRY)
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
 _SESSION: requests.Session = _build_session()
 """Module-level HTTP session used by every request in this package."""
+
+_SOAP_SESSION: requests.Session = _build_soap_session()
+"""Session used exclusively by the zeep SOAP transport for DataInventory."""
