@@ -53,7 +53,11 @@ class Station:
     """
 
     # Per-product SOAP data inventory: {product_name: {"start_date": ..., "end_date": ...}}
-    # Always set by __init__; empty dict `{}` indicates SOAP fetch failed.
+    # Always set by __init__. An empty dict ``{}`` means either (a) the
+    # station ID is not eligible for SOAP DataInventory -- NOAA only
+    # supports 7-digit numeric IDs there, so currents/PORTS stations like
+    # ``s09010`` always produce ``{}`` by design -- or (b) an eligible ID
+    # had a transient SOAP failure (network error, malformed response).
     data_inventory: dict[str, dict[str, str]]
 
     def __init__(self, id: str, units: str = "metric") -> None:
@@ -70,9 +74,20 @@ class Station:
 
         if not _SOAP_INVENTORY_ID_PATTERN.match(self.id):
             # SOAP DataInventory requires a 7-digit numeric ID. Alphanumeric
-            # currents/PORTS IDs (e.g. "s09010") get an empty inventory
-            # silently -- no wasted network call, no warning spam.
+            # currents/PORTS IDs (e.g. "s09010") get an empty inventory by
+            # design -- no SOAP endpoint exists for them. Log at INFO so
+            # anyone wondering why ``data_inventory`` is empty sees the
+            # reason when they bump their log level, without warning-level
+            # noise for every currents Station(...) call.
             self.data_inventory = {}
+            logger.info(
+                "Station %s uses a non-7-digit ID; NOAA's SOAP "
+                "DataInventory service only supports water-level/met "
+                "stations with 7-digit numeric IDs, so data_inventory "
+                "will be empty. This is expected for currents/PORTS "
+                "stations.",
+                self.id,
+            )
             return
 
         try:
