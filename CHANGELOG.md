@@ -7,14 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-### Changed
-
-- SOAP `DataInventory` calls now go through a dedicated retrying
-  `requests.Session` (`_SOAP_SESSION`) that retries POST as well as GET on
-  transient failures (`429`/`5xx`). Gives the data-inventory path the same
-  resiliency the REST path already had.
-
-## [0.5.0]
+## [0.5.0] - 2026-04-22
 
 Major modernization release. Every layer of the project was touched — build
 system, CI/CD, internal structure, testing, and docs. Behavior for existing
@@ -74,9 +67,23 @@ changes are called out under *Changed* below.
   classifiers, keywords, and `[project.urls]` so the PyPI page renders useful
   metadata.
 - **`station.data_inventory` is always set.** An empty dict `{}` now
-  indicates the SOAP fetch failed, rather than the attribute being unset.
-  Callers using `hasattr(station, 'data_inventory')` should switch to
+  indicates either (a) the station ID is not eligible for SOAP
+  `DataInventory` — NOAA only supports 7-digit numeric IDs, so
+  currents/PORTS stations like `s09010` always produce `{}` by design —
+  or (b) an eligible ID had a transient SOAP failure. Callers using
+  `hasattr(station, 'data_inventory')` should switch to
   `if not station.data_inventory:`.
+- **SOAP `DataInventory` retries transient failures.** Calls now go through
+  a dedicated `requests.Session` (`_SOAP_SESSION`) that retries POST as
+  well as GET on `429`/`5xx` responses. Gives the data-inventory path the
+  same resiliency the REST path already had.
+- **Skip SOAP `DataInventory` for non-7-digit station IDs.**
+  `Station.__init__` now short-circuits the SOAP call for alphanumeric
+  currents/PORTS IDs (e.g. `s09010`, `PUG1515`) that NOAA's SOAP service
+  would reject deterministically with a `Wrong Station ID` fault. Emits a
+  single `logging.INFO` message explaining the skip so users debugging an
+  empty `data_inventory` can see it's expected, without warning-level
+  noise on every currents `Station(...)`.
 
 ### Fixed
 
@@ -94,6 +101,10 @@ changes are called out under *Changed* below.
   loop that raises `ValueError` after exhausting all known formats.
 - **`stale --cov=reflekt` config.** pytest coverage was pointing at the
   wrong project. Fixed to `--cov=noaa_coops`.
+- **`examples/readme_demo.py` currents demo.** Replaced the hardcoded
+  `20210414-15` window (for which NOAA no longer returns data at station
+  `s09010`) with a computed two-day UTC window ending yesterday, so the
+  demo stays fresh against NOAA's rolling real-time availability.
 
 ### Removed
 
@@ -106,6 +117,10 @@ changes are called out under *Changed* below.
   `if __name__ == "__main__":` debug block in `station.py`.
 - **Third-party publish action.** Replaced `JRubics/poetry-publish` with the
   PyPA-official `pypa/gh-action-pypi-publish`.
+- **`examples/currents_example.py`** — consolidated into
+  `examples/readme_demo.py`, which already exercised the same Oakland
+  currents scenario. `readme_demo.py` is now the single entry point for the
+  full feature set.
 
 ## [0.4.0] - 2023-xx-xx
 
