@@ -7,13 +7,13 @@ A Python wrapper for the NOAA CO-OPS Tides &amp; Currents [Data](https://tidesan
 and [Metadata](https://tidesandcurrents.noaa.gov/mdapi/latest/) APIs.
 
 ## Installation
-This package is distributed via [PyPi](https://pypi.org/project/noaa-coops/) and can be installed using , `pip`, `poetry`, etc.
+This package is distributed via [PyPi](https://pypi.org/project/noaa-coops/) and can be installed using `pip`, `uv`, etc.
 ```bash
 # Install with pip
 ❯ pip install noaa_coops
 
-# Install with poetry
-❯ poetry add noaa_coops
+# Install with uv
+❯ uv add noaa_coops
 ```
 
 ## Getting Started
@@ -114,10 +114,10 @@ t
 ## Development
 
 ### Requirements
-This package and its dependencies are managed using [poetry](https://python-poetry.org/). To install the development environment for `noaa_coops`, first install poetry, then run (inside the repo):
+This package and its dependencies are managed using [uv](https://docs.astral.sh/uv/). To install the development environment for `noaa_coops`, first install uv, then run (inside the repo):
 
 ```bash
-poetry install
+uv sync
 ```
 
 ### TODO
