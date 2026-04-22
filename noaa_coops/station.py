@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import logging
 import math
+import re
 import warnings
 from datetime import datetime, timedelta
 from typing import Optional, Union
@@ -28,6 +29,13 @@ from noaa_coops._products import build_request_params, validate_params
 __all__ = ["COOPSAPIError", "DEFAULT_TIMEOUT", "Station"]
 
 logger = logging.getLogger(__name__)
+
+# NOAA's SOAP DataInventory service accepts only 7-digit numeric station IDs
+# (water-level / tide stations). Currents / PORTS stations use alphanumeric
+# IDs like ``"s09010"`` and ``"PUG1515"`` -- the SOAP endpoint rejects these
+# deterministically with a ``Wrong Station ID`` fault. Skip the call for
+# non-eligible IDs instead of logging a warning on every ``Station(...)``.
+_SOAP_INVENTORY_ID_PATTERN = re.compile(r"^\d{7}$")
 
 
 class Station:
@@ -59,6 +67,13 @@ class Station:
         self.id: str = str(id)
         self.units: str = units
         self.get_metadata()
+
+        if not _SOAP_INVENTORY_ID_PATTERN.match(self.id):
+            # SOAP DataInventory requires a 7-digit numeric ID. Alphanumeric
+            # currents/PORTS IDs (e.g. "s09010") get an empty inventory
+            # silently -- no wasted network call, no warning spam.
+            self.data_inventory = {}
+            return
 
         try:
             self.get_data_inventory()
