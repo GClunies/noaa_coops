@@ -11,6 +11,7 @@ Usage:
 # attributes at runtime, so static attribute checks don't apply here.
 # pyright: reportAttributeAccessIssue=false
 
+from datetime import datetime, timedelta, timezone
 from pprint import pprint
 
 from noaa_coops import Station, get_stations_from_bbox
@@ -74,10 +75,14 @@ def demo_get_data(seattle: Station) -> None:
 
 def demo_currents() -> None:
     section("6. get_data — Oakland currents (examples/currents_example.py)")
+    # Use a two-day window ending yesterday (UTC) so the demo stays fresh
+    # against NOAA's rolling real-time currents availability.
+    end = datetime.now(timezone.utc).date() - timedelta(days=1)
+    begin = end - timedelta(days=1)
     station = Station("s09010")
     df = station.get_data(
-        begin_date="20210414",
-        end_date="20210415",
+        begin_date=begin.strftime("%Y%m%d"),
+        end_date=end.strftime("%Y%m%d"),
         product="currents",
         bin_num=2,
         units="metric",
