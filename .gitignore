@@ -143,3 +143,15 @@ dmypy.json
 
 # noaa_coops
 debug.csv
+
+# Flywheel / Claude session state (transient, not source of truth)
+.flywheel/
+docs/**/*.state.md
+docs/**/*.baseline.md
+
+
+# Local planning/research artifacts (not committed)
+docs/plans/
+docs/research/
+docs/reviews/
+docs/solutions/
