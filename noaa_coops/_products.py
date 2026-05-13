@@ -52,7 +52,7 @@ DATUM_REQUIRED: frozenset[str] = frozenset(
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
-        "daily_max_min" 
+        "daily_max_min",
     }
 )
 
