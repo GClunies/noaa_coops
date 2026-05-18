@@ -22,6 +22,7 @@ ALL_PRODUCTS: frozenset[str] = frozenset(
         "hourly_height",
         "high_low",
         "daily_mean",
+        "daily_max_min",
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
@@ -51,6 +52,7 @@ DATUM_REQUIRED: frozenset[str] = frozenset(
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
+        "daily_max_min",
     }
 )
 
@@ -68,6 +70,30 @@ ALLOWED_INTERVALS: dict[str, frozenset[str]] = {
     "predictions": frozenset({"h", "1", "5", "10", "15", "30", "60", "hilo"}),
     "currents": frozenset({"6", "h"}),
     "currents_predictions": frozenset({"h", "1", "6", "10", "30", "60", "max_slack"}),
+}
+
+#: Maximum date range in days per product for a single API request.
+PRODUCT_LIMITS: dict[str, int] = {
+    "water_level": 31,
+    "hourly_height": 365,
+    "high_low": 365,
+    "daily_mean": 3655,
+    "daily_max_min": 3655,
+    "monthly_mean": 73000,
+    "one_minute_water_level": 4,
+    "predictions": 365,
+    "air_gap": 31,
+    "air_temperature": 31,
+    "water_temperature": 31,
+    "wind": 31,
+    "air_pressure": 31,
+    "conductivity": 31,
+    "visibility": 31,
+    "humidity": 31,
+    "salinity": 31,
+    "currents": 31,
+    "currents_predictions": 31,
+    "ofs_water_level": 31,
 }
 
 
