@@ -53,6 +53,7 @@ DATUM_REQUIRED: frozenset[str] = frozenset(
         "one_minute_water_level",
         "predictions",
         "daily_max_min",
+        "ofs_water_level",
     }
 )
 
