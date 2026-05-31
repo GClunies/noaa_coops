@@ -102,6 +102,7 @@ def test_missing_datum_for_water_level_rejected() -> None:
             time_zone="gmt",
         )
 
+
 def test_missing_datum_for_ofs_water_level_rejected() -> None:
     with pytest.raises(ValueError, match="No datum"):
         validate_params(
@@ -112,6 +113,7 @@ def test_missing_datum_for_ofs_water_level_rejected() -> None:
             units="metric",
             time_zone="gmt",
         )
+
 
 def test_lowercase_datum_accepted() -> None:
     """Datums are normalized to uppercase before validation, so `mllw` is valid."""
