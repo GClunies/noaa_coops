@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 - Add `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED`; add `PRODUCT_LIMITS` dict to `_products.py`
+- Enforce datum validation for `ofs_water_level` product
 
 ### Changed
 

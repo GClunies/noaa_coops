@@ -155,3 +155,6 @@ docs/plans/
 docs/research/
 docs/reviews/
 docs/solutions/
+
+# Test files
+test.ipynb
