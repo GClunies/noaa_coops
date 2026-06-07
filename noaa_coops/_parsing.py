@@ -44,7 +44,8 @@ def parse_known_date_formats(dt_string: str) -> tuple[datetime, str]:
 def normalize_data_frame(df: pd.DataFrame) -> pd.DataFrame:
     """Shape the raw datagetter response into a time-indexed DataFrame.
 
-    - Converts the ``"t"`` column to ``DatetimeIndex``.
+    - Converts the available time columns ("t", "Time", "year"/"month", 
+      or standardized "date"/"time") to a proper DatetimeIndex.
     - Coerces numeric-looking string columns to numbers.
     - Drops duplicate timestamps (keeping the first occurrence).
 
@@ -54,8 +55,32 @@ def normalize_data_frame(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         DataFrame indexed by timestamp with numeric columns where possible.
     """
-    df.index = pd.to_datetime(df["t"])
-    df = df.drop(columns=["t"])
+    # Check which time format NOAA sent
+    if "t" in df.columns:
+        df.index = pd.to_datetime(df["t"])
+        df = df.drop(columns=["t"])
+        
+    elif "Time" in df.columns:
+        df.index = pd.to_datetime(df["Time"])
+        df = df.drop(columns=["Time"])
+        
+    elif "year" in df.columns and "month" in df.columns:
+        # Concatenate year and month strings and convert to a real datetime index
+        date_strings = df["year"].astype(str) + "-" + df["month"].astype(str)
+        df.index = pd.to_datetime(date_strings)
+        df = df.drop(columns=["year", "month"])
+    
+    # For daily max/min (keys standardized in _make_api_request)
+    elif "date" in df.columns and "time" in df.columns:
+        date_strings = df["date"].astype(str) + " " + df["time"].astype(str)
+        df.index = pd.to_datetime(date_strings)
+        df = df.drop(columns=["date", "time"])
+        
+    else:
+        raise KeyError(
+            "Could not find recognizable time columns ('t', 'Time', or 'year'/'month' or 'date6Max' or 'dateHourly') "
+            "in the NOAA API response."
+        )
 
     for col in df.columns:
         try:

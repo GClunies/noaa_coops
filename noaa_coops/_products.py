@@ -14,6 +14,7 @@ VALID_DATUMS: frozenset[str] = frozenset(
 )
 VALID_UNITS: frozenset[str] = frozenset({"metric", "english"})
 VALID_TIME_ZONES: frozenset[str] = frozenset({"gmt", "lst", "lst_ldt"})
+VALID_MAX_MIN_TYPES: frozenset[str] = frozenset({"max", "min"})
 
 #: Every product NOAA exposes through the datagetter endpoint.
 ALL_PRODUCTS: frozenset[str] = frozenset(
@@ -71,6 +72,7 @@ ALLOWED_INTERVALS: dict[str, frozenset[str]] = {
     "predictions": frozenset({"h", "1", "5", "10", "15", "30", "60", "hilo"}),
     "currents": frozenset({"6", "h"}),
     "currents_predictions": frozenset({"h", "1", "6", "10", "30", "60", "max_slack"}),
+    "daily_max_min": frozenset({"6", "h"}),
 }
 
 #: Maximum date range in days per product for a single API request.
@@ -95,6 +97,7 @@ PRODUCT_LIMITS: dict[str, int] = {
     "currents": 31,
     "currents_predictions": 31,
     "ofs_water_level": 31,
+    "default":31,
 }
 
 
@@ -105,6 +108,7 @@ PRODUCT_LIMITS: dict[str, int] = {
 
 def validate_params(
     product: str,
+    max_min_type: Optional[str],
     datum: Optional[str],
     bin_num: Optional[int],
     interval: Optional[Union[str, int]],
@@ -116,6 +120,28 @@ def validate_params(
     Raises ``ValueError`` on the first failure. Called before any HTTP
     request is made.
     """
+    if product not in ALL_PRODUCTS:
+        raise ValueError(
+            f"Invalid product '{product}' provided. See "
+            "https://api.tidesandcurrents.noaa.gov/api/prod/#products "
+            "for list of available products"
+        )
+
+    # -------------------------------------------------------------
+    # Validate max_min_type
+    # -------------------------------------------------------------
+    if max_min_type is not None:
+        if product != "daily_max_min":
+            raise ValueError(
+                f"The `max_min_type` parameter is only supported for the "
+                f"`daily_max_min` product, but you requested `{product}`."
+            )
+        if max_min_type.lower() not in VALID_MAX_MIN_TYPES:
+            raise ValueError(
+                f"Invalid max_min_type '{max_min_type}' provided. "
+                f"Must be one of: {sorted(VALID_MAX_MIN_TYPES)}"
+            )
+    
     if product not in ALL_PRODUCTS:
         raise ValueError(
             f"Invalid product '{product}' provided. See "
@@ -187,6 +213,7 @@ def build_request_params(
     begin_date: str,
     end_date: str,
     product: str,
+    max_min_type: Optional[str],
     datum: Optional[str],
     bin_num: Optional[int],
     interval: Optional[Union[str, int]],
@@ -206,6 +233,8 @@ def build_request_params(
         "application": "noaa_coops",
         "format": "json",
     }
+    if max_min_type is not None:
+        params["max_min_type"] = max_min_type 
 
     if units is not None:
         params["units"] = units
