@@ -97,7 +97,7 @@ PRODUCT_LIMITS: dict[str, int] = {
     "currents": 31,
     "currents_predictions": 31,
     "ofs_water_level": 31,
-    "default":31,
+    "default": 31,
 }
 
 
@@ -141,13 +141,6 @@ def validate_params(
                 f"Invalid max_min_type '{max_min_type}' provided. "
                 f"Must be one of: {sorted(VALID_MAX_MIN_TYPES)}"
             )
-    
-    if product not in ALL_PRODUCTS:
-        raise ValueError(
-            f"Invalid product '{product}' provided. See "
-            "https://api.tidesandcurrents.noaa.gov/api/prod/#products "
-            "for list of available products"
-        )
 
     if product in DATUM_REQUIRED:
         if datum is None:
@@ -234,7 +227,7 @@ def build_request_params(
         "format": "json",
     }
     if max_min_type is not None:
-        params["max_min_type"] = max_min_type 
+        params["max_min_type"] = max_min_type
 
     if units is not None:
         params["units"] = units

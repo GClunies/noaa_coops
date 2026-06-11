@@ -194,14 +194,16 @@ class Station:
             ``product``. When partial failures occurred,
             ``df.attrs["missing_blocks"]`` lists them.
         """
-        validate_params(product, max_min_type, datum, bin_num, interval, units, time_zone)
+        validate_params(
+            product, max_min_type, datum, bin_num, interval, units, time_zone
+        )
 
         begin_dt, begin_str = parse_known_date_formats(begin_date)
         end_dt, end_str = parse_known_date_formats(end_date)
         delta = end_dt - begin_dt
 
-        if interval==None and product == 'daily_max_min':
-            interval ='h'
+        if interval is None and product == "daily_max_min":
+            interval = "h"
 
         single_block = delta.days <= 31 or (
             delta.days <= 365 and product in ("hourly_height", "high_low")
@@ -253,7 +255,7 @@ class Station:
         end_date: str,
         *,
         product: str,
-        max_min_type:Optional[str],
+        max_min_type: Optional[str],
         datum: Optional[str],
         bin_num: Optional[int],
         interval: Optional[Union[str, int]],
@@ -360,8 +362,8 @@ class Station:
     def _make_api_request(self, data_url: str, product: str) -> pd.DataFrame:
         """GET the datagetter endpoint and return the response JSON as a DataFrame.
 
-        Routes payload extraction based on the `product` type, flattening 
-        nested/heterogenous dictionaries (like `daily_max_min`) into a 
+        Routes payload extraction based on the `product` type, flattening
+        nested/heterogenous dictionaries (like `daily_max_min`) into a
         standardized column schema before passing to Pandas.
 
         Raises:
@@ -370,8 +372,8 @@ class Station:
             KeyError: If a recognizable data payload cannot be found.
         """
         res = _SESSION.get(data_url, timeout=DEFAULT_TIMEOUT)
-        
-        # Check the status code 
+
+        # Check the status code
         if res.status_code != 200:
             err_msg = (
                 f"CO-OPS API returned an error. Status Code: "
@@ -383,7 +385,7 @@ class Station:
                 if "error" in err_payload and "message" in err_payload["error"]:
                     err_msg += f"\nNOAA Message: {err_payload['error']['message']}"
             except Exception:
-                pass # If it's a 503 HTML page, just ignore and raise the base error
+                pass  # If it's a 503 HTML page, just ignore and raise the base error
             raise COOPSAPIError(message=err_msg + "\n")
         json_dict = res.json()
 
@@ -400,10 +402,10 @@ class Station:
         # ------------------------------------------------------------
         # Explicitly route the payload extraction based on the product
         # ------------------------------------------------------------
-        
+
         if product == "daily_max_min":
             if "data" not in json_dict or not isinstance(json_dict["data"], list):
-                 payload = []
+                payload = []
             else:
                 flattened_payload = []
                 for item in json_dict["data"]:
@@ -412,24 +414,34 @@ class Station:
                             # Standardize the varying NOAA keys using safe fallbacks
                             clean_record = {
                                 "record_type": "min" if "dailyMin" in key else "max",
-                                "date": record.get("date6Min", record.get("dateHourly")),
-                                "time": record.get("time6Min", record.get("timeHourly")),
-                                "value": record.get("value6Min", record.get("valueHourly")),
-                                "pcComplete": record.get("pcComplete6Min", record.get("pcCompleteHourly")),
-                                "flag": record.get("flag6Min", record.get("flagHourly")),
+                                "date": record.get(
+                                    "date6Min", record.get("dateHourly")
+                                ),
+                                "time": record.get(
+                                    "time6Min", record.get("timeHourly")
+                                ),
+                                "value": record.get(
+                                    "value6Min", record.get("valueHourly")
+                                ),
+                                "pcComplete": record.get(
+                                    "pcComplete6Min", record.get("pcCompleteHourly")
+                                ),
+                                "flag": record.get(
+                                    "flag6Min", record.get("flagHourly")
+                                ),
                             }
                             flattened_payload.append(clean_record)
                 payload = flattened_payload
 
         elif product == "predictions":
             payload = json_dict.get("predictions", [])
-            
+
         elif product == "currents_predictions":
             payload = json_dict.get("current_predictions", {}).get("cp", [])
-            
+
         elif "data" in json_dict:
             payload = json_dict["data"]
-            
+
         else:
             found_keys = list(json_dict.keys())
             raise KeyError(
@@ -438,6 +450,3 @@ class Station:
             )
 
         return pd.json_normalize(payload)
-
-
-
