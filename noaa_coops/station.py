@@ -200,6 +200,9 @@ class Station:
         end_dt, end_str = parse_known_date_formats(end_date)
         delta = end_dt - begin_dt
 
+        if interval==None and product == 'daily_max_min':
+            interval ='h'
+
         single_block = delta.days <= 31 or (
             delta.days <= 365 and product in ("hourly_height", "high_low")
         )
@@ -283,7 +286,7 @@ class Station:
         begin_dt: datetime,
         end_dt: datetime,
         product: str,
-        max_min_type=type,
+        max_min_type: Optional[str],
         datum: Optional[str],
         bin_num: Optional[int],
         interval: Optional[Union[str, int]],
@@ -314,7 +317,7 @@ class Station:
                 begin_loop.strftime("%Y%m%d %H:%M"),
                 end_loop.strftime("%Y%m%d %H:%M"),
                 product=product,
-                max_min_type=type,
+                max_min_type=max_min_type,
                 datum=datum,
                 bin_num=bin_num,
                 interval=interval,
@@ -384,6 +387,16 @@ class Station:
             raise COOPSAPIError(message=err_msg + "\n")
         json_dict = res.json()
 
+        if "error" in json_dict:
+            err_msg = f"CO-OPS API returned an error: {json_dict['error']['message']}"
+            if product == "water_level":
+                err_msg += (
+                    "\n\nNOTE: The requested product `water_level` is only "
+                    "available from 1996 and onwards. Try using `hourly_height` "
+                    "or `high_low` products instead."
+                )
+            raise COOPSAPIError(message=err_msg)
+
         # ------------------------------------------------------------
         # Explicitly route the payload extraction based on the product
         # ------------------------------------------------------------
@@ -398,7 +411,7 @@ class Station:
                         for record in records:
                             # Standardize the varying NOAA keys using safe fallbacks
                             clean_record = {
-                                "record_type": key,
+                                "record_type": "min" if "dailyMin" in key else "max",
                                 "date": record.get("date6Min", record.get("dateHourly")),
                                 "time": record.get("time6Min", record.get("timeHourly")),
                                 "value": record.get("value6Min", record.get("valueHourly")),
