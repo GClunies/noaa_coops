@@ -78,7 +78,7 @@ def normalize_data_frame(df: pd.DataFrame) -> pd.DataFrame:
 
     else:
         raise KeyError(
-            "Could not find recognizable time columns ('t', 'Time', or 'year'/'month' or 'date6Max' or 'dateHourly') "
+            "Could not find recognizable time columns ('t', 'Time', 'year'/'month', or 'date'/'time') "
             "in the NOAA API response."
         )
 
