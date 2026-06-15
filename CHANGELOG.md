@@ -6,8 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
-- Add `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED`; add `PRODUCT_LIMITS` dict to `_products.py`
-- Enforce datum validation for `ofs_water_level` product
+
+### Added
+- **`daily_max_min` product support:** `Station.get_data()` now accepts `product="daily_max_min"`.
+- Standardized API response handling for `daily_max_min` to unify 6-minute and hourly payloads into a consistent `(record_type, value, pcComplete, flag)` column schema.
+- Added `max_min_type` parameter to filter extrema (`"max"`, `"min"`, or `None` for both). 
+- `interval` now automatically defaults to `"h"` (hourly) when requesting `daily_max_min` to prevent mixed-interval responses.
+- Added `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED` registries, with strict parameter validation for `max_min_type`.
+- Added `PRODUCT_LIMITS` dictionary to `_products.py` to support future pagination and chunking limits.
+
+### Fixed
+- Improved API error handling in `_make_api_request`: Reinstated checks for HTTP 200 responses that contain an embedded `{"error": {"message": "..."}}` body, ensuring bad parameter requests fail fast with clear error messages rather than silently crashing the parser.
+- Enforced datum validation for the `ofs_water_level` product to ensure requests fail fast before hitting the API.
 
 ### Changed
 
