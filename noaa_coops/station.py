@@ -22,7 +22,7 @@ from noaa_coops._exceptions import COOPSAPIError
 from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION, _SOAP_SESSION
 from noaa_coops._metadata import populate_metadata
 from noaa_coops._parsing import normalize_data_frame, parse_known_date_formats
-from noaa_coops._products import build_request_params, validate_params
+from noaa_coops._products import PRODUCT_LIMITS, build_request_params, validate_params
 
 # Back-compat re-exports (callers did `from noaa_coops.station import COOPSAPIError`
 # for years; keep that path working after the Tier 4 split).
@@ -205,9 +205,8 @@ class Station:
         if interval is None and product == "daily_max_min":
             interval = "h"
 
-        single_block = delta.days <= 31 or (
-            delta.days <= 365 and product in ("hourly_height", "high_low")
-        )
+        max_days= PRODUCT_LIMITS.get(product,PRODUCT_LIMITS['default'])
+        single_block = delta.days <= max_days
 
         if single_block:
             data_url = self._build_request_url(
@@ -297,20 +296,21 @@ class Station:
     ) -> pd.DataFrame:
         """Fetch a date range that spans more than one NOAA block.
 
-        Loops over fixed-size blocks (31 or 365 days), accumulates
+        Loops over product-specific blocks (see ``PRODUCT_LIMITS`` in
+        ``_products.py`` for per-product day limits), accumulates
         successful block DataFrames into a list, concatenates once at
         the end (O(n) memory vs. the old O(n²) concat-in-loop pattern).
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = 365 if product in ("hourly_height", "high_low") else 31
+        block_size = PRODUCT_LIMITS.get(product, PRODUCT_LIMITS['default'])
         delta = end_dt - begin_dt
-        num_blocks = int(math.floor(delta.days / block_size))
+        num_blocks= int(math.ceil(delta.days / block_size))
 
         blocks: list[pd.DataFrame] = []
         missing_blocks: list[dict[str, str]] = []
 
-        for i in range(num_blocks + 1):
+        for i in range(num_blocks):
             begin_loop = begin_dt + timedelta(days=(i * block_size))
             end_loop = begin_loop + timedelta(days=block_size)
             end_loop = end_dt if end_loop > end_dt else end_loop
@@ -339,7 +339,7 @@ class Station:
                 logger.warning(
                     "Block %d/%d (%s → %s) failed: %s",
                     i + 1,
-                    num_blocks + 1,
+                    num_blocks,
                     begin_loop.date(),
                     end_loop.date(),
                     exc,
@@ -351,7 +351,7 @@ class Station:
             # discards intermediate attrs).
             df.attrs["missing_blocks"] = missing_blocks
             warnings.warn(
-                f"{len(missing_blocks)} of {num_blocks + 1} blocks failed "
+                f"{len(missing_blocks)} of {num_blocks} blocks failed "
                 f"for product {product!r}. See df.attrs['missing_blocks'] "
                 "for per-block error details.",
                 RuntimeWarning,
@@ -383,7 +383,7 @@ class Station:
             try:
                 err_payload = res.json()
                 if "error" in err_payload and "message" in err_payload["error"]:
-                    err_msg += f"\nNOAA Message: {err_payload['error']['message']}"
+                    err_msg += f" | NOAA Message: {err_payload['error']['message']}"
             except Exception:
                 pass  # If it's a 503 HTML page, just ignore and raise the base error
             raise COOPSAPIError(message=err_msg + "\n")
