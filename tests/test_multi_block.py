@@ -141,6 +141,7 @@ def test_multi_block_total_failure_raises() -> None:
             time_zone="gmt",
         )
 
+
 @responses.activate
 def test_ceil_fix_no_spurious_extra_block() -> None:
     """62-day range / 31-day block = exactly 2 blocks, not 3.

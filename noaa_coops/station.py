@@ -205,7 +205,7 @@ class Station:
         if interval is None and product == "daily_max_min":
             interval = "h"
 
-        max_days= PRODUCT_LIMITS.get(product,PRODUCT_LIMITS['default'])
+        max_days = PRODUCT_LIMITS.get(product, PRODUCT_LIMITS["default"])
         single_block = delta.days <= max_days
 
         if single_block:
@@ -303,9 +303,9 @@ class Station:
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = PRODUCT_LIMITS.get(product, PRODUCT_LIMITS['default'])
+        block_size = PRODUCT_LIMITS.get(product, PRODUCT_LIMITS["default"])
         delta = end_dt - begin_dt
-        num_blocks= int(math.ceil(delta.days / block_size))
+        num_blocks = int(math.ceil(delta.days / block_size))
 
         blocks: list[pd.DataFrame] = []
         missing_blocks: list[dict[str, str]] = []
