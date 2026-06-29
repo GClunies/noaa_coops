@@ -303,7 +303,7 @@ class Station:
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = PRODUCT_LIMITS.get(product, PRODUCT_LIMITS["default"])
+        block_size = PRODUCT_LIMITS.get(product)
         delta = end_dt - begin_dt
         num_blocks = int(math.ceil(delta.days / block_size))
 
