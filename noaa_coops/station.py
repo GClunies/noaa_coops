@@ -205,7 +205,7 @@ class Station:
         if interval is None and product == "daily_max_min":
             interval = "h"
 
-        max_days = PRODUCT_LIMITS.get(product, PRODUCT_LIMITS["default"])
+        max_days = PRODUCT_LIMITS.get(product)
         single_block = delta.days <= max_days
 
         if single_block:
