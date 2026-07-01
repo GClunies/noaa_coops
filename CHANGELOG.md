@@ -13,11 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Added `max_min_type` parameter to filter extrema (`"max"`, `"min"`, or `None` for both). 
 - `interval` now automatically defaults to `"h"` (hourly) when requesting `daily_max_min` to prevent mixed-interval responses.
 - Added `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED` registries, with strict parameter validation for `max_min_type`.
-- Added `PRODUCT_LIMITS` dictionary to `_products.py` to support future pagination and chunking limits.
+- Added `PRODUCT_LIMITS` dictionary to `_products.py` to support pagination and chunking limits.
 
 ### Fixed
 - Improved API error handling in `_make_api_request`: Reinstated checks for HTTP 200 responses that contain an embedded `{"error": {"message": "..."}}` body, ensuring bad parameter requests fail fast with clear error messages rather than silently crashing the parser.
 - Enforced datum validation for the `ofs_water_level` product to ensure requests fail fast before hitting the API.
+- `Station.get_data` uses `PRODUCT_LIMITS` for `_fetch_in_blocks` block sizing, so each product respects its own documented API date-range cap. Previously, all products used a hardcoded 31-day limit (except `hourly_height`/`high_low` at 365 days).
+- Fixed block-count calculation in `_fetch_in_blocks`: switching from `floor(n/block)+1` to `ceil(n/block)` eliminates a zero-length API call when the date range divided evenly by the block size.
 
 ### Changed
 
