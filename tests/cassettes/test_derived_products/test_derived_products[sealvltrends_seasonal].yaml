@@ -1,0 +1,1007 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels?units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"tidal\": true,\n      \"greatlakes\": false,\n      \"shefcode\":
+        \"NWWH1\",\n      \"details\": {\n        \"id\": \"1611400\",\n        \"established\":
+        \"1954-11-24 00:00:00\",\n        \"removed\": \"\",\n        \"noaachart\":
+        \"19383\",\n        \"timemeridian\": -150,\n        \"timezone\": -10.0,\n
+        \       \"origyear\": \"1991-02-16 00:00:00\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/details.json\"\n
+        \     },\n      \"sensors\": {\n        \"units\": \"feet\",\n        \"sensors\":
+        [\n          {\n            \"status\": 1,\n            \"refdatum\": \"Site
+        Elevation\",\n            \"sensorID\": \"C1\",\n            \"name\": \"Wind\",\n
+        \           \"elevation\": 27.85433,\n            \"message\": \"\",\n            \"dcp\":
+        3\n          },\n          {\n            \"status\": 1,\n            \"refdatum\":
+        \"Site Elevation\",\n            \"sensorID\": \"D1\",\n            \"name\":
+        \"Air Temperature\",\n            \"elevation\": 12.795276,\n            \"message\":
+        \"\",\n            \"dcp\": 3\n          },\n          {\n            \"status\":
+        1,\n            \"refdatum\": \"MLLW\",\n            \"sensorID\": \"E1\",\n
+        \           \"name\": \"Water Temperature\",\n            \"elevation\": -11.863517,\n
+        \           \"message\": \"\",\n            \"dcp\": 1\n          },\n          {\n
+        \           \"status\": 1,\n            \"refdatum\": \"MSL\",\n            \"sensorID\":
+        \"F1\",\n            \"name\": \"Barometric Pressure\",\n            \"elevation\":
+        9.891732,\n            \"message\": \"\",\n            \"dcp\": 3\n          },\n
+        \         {\n            \"status\": 1,\n            \"refdatum\": \"MSL\",\n
+        \           \"sensorID\": \"site\",\n            \"name\": \"site\",\n            \"elevation\":
+        4.9704723,\n            \"message\": \"\",\n            \"dcp\": 0\n          },\n
+        \         {\n            \"status\": 1,\n            \"refdatum\": \"\",\n
+        \           \"sensorID\": \"U1\",\n            \"name\": \"Tsunami WL\",\n
+        \           \"elevation\": null,\n            \"message\": \"\",\n            \"dcp\":
+        4\n          },\n          {\n            \"status\": 1,\n            \"refdatum\":
+        \"\",\n            \"sensorID\": \"Y1\",\n            \"name\": \"Microwave
+        WL\",\n            \"elevation\": null,\n            \"message\": \"\",\n
+        \           \"dcp\": 4\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/sensors.json\"\n
+        \     },\n      \"floodlevels\": {\n        \"nos_minor\": 5.11,\n        \"nos_moderate\":
+        6.80,\n        \"nos_major\": 8.03,\n        \"nws_minor\": 5.22,\n        \"nws_moderate\":
+        null,\n        \"nws_major\": null,\n        \"action\": null,\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/floodlevels.json\"\n
+        \     },\n      \"datums\": {\n        \"accepted\": \"Apr 17 2003\",\n        \"superseded\":
+        \"\",\n        \"epoch\": \"1983-2001\",\n        \"units\": \"feet\",\n        \"OrthometricDatum\":
+        \"Ortho\",\n        \"datums\": [\n          {\n            \"name\": \"STND\",\n
+        \           \"description\": \"Station Datum\",\n            \"value\": 0.0\n
+        \         },\n          {\n            \"name\": \"MHHW\",\n            \"description\":
+        \"Mean Higher-High Water\",\n            \"value\": 4.12\n          },\n          {\n
+        \           \"name\": \"MHW\",\n            \"description\": \"Mean High Water\",\n
+        \           \"value\": 3.71\n          },\n          {\n            \"name\":
+        \"DTL\",\n            \"description\": \"Mean Diurnal Tide Level\",\n            \"value\":
+        3.2\n          },\n          {\n            \"name\": \"MTL\",\n            \"description\":
+        \"Mean Tide Level\",\n            \"value\": 3.1\n          },\n          {\n
+        \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
+        \           \"value\": 3.11\n          },\n          {\n            \"name\":
+        \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
+        2.49\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 2.29\n          },\n          {\n
+        \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
+        Range\",\n            \"value\": 1.83\n          },\n          {\n            \"name\":
+        \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
+        1.22\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.41\n          },\n
+        \         {\n            \"name\": \"DLQ\",\n            \"description\":
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.2\n          },\n
+        \         {\n            \"name\": \"HWI\",\n            \"description\":
+        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 1.74\n
+        \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
+        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 7.97\n
+        \         }\n        ],\n        \"LAT\": 1.762,\n        \"LATdate\": \"20230121\",\n
+        \       \"LATtime\": \"06:06\",\n        \"HAT\": 4.915,\n        \"HATdate\":
+        \"20251205\",\n        \"HATtime\": \"14:18\",\n        \"min\": 1.201,\n
+        \       \"mindate\": \"19670524\",\n        \"mintime\": \"00:00\",\n        \"max\":
+        7.27,\n        \"maxdate\": \"19920911\",\n        \"maxtime\": \"15:30\",\n
+        \       \"disclaimers\": {\n          \"disclaimers\": [],\n          \"self\":
+        null\n        },\n        \"DatumAnalysisPeriod\": [\n          \"01/01/1983
+        - 12/31/2001\"\n        ],\n        \"NGSLink\": \"\",\n        \"ctrlStation\":
+        \"\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/datums.json\"\n
+        \     },\n      \"supersededdatums\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/supersededdatums.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"feet\",\n
+        \       \"HarmonicConstituents\": [\n          {\n            \"number\":
+        1,\n            \"name\": \"M2\",\n            \"description\": \"Principal
+        lunar semidiurnal constituent\",\n            \"amplitude\": 0.49,\n            \"phase_GMT\":
+        48.1,\n            \"phase_local\": 118.3,\n            \"speed\": 28.984104,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        2,\n            \"name\": \"S2\",\n            \"description\": \"Principal
+        solar semidiurnal constituent\",\n            \"amplitude\": 0.19,\n            \"phase_GMT\":
+        45.3,\n            \"phase_local\": 105.3,\n            \"speed\": 30.0,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        3,\n            \"name\": \"N2\",\n            \"description\": \"Larger lunar
+        elliptic semidiurnal constituent\",\n            \"amplitude\": 0.1,\n            \"phase_GMT\":
+        35.0,\n            \"phase_local\": 110.6,\n            \"speed\": 28.43973,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        4,\n            \"name\": \"K1\",\n            \"description\": \"Lunar diurnal
+        constituent\",\n            \"amplitude\": 0.48,\n            \"phase_GMT\":
+        230.3,\n            \"phase_local\": 79.8,\n            \"speed\": 15.041069,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        5,\n            \"name\": \"M4\",\n            \"description\": \"Shallow
+        water overtides of principal lunar constituent\",\n            \"amplitude\":
+        0.01,\n            \"phase_GMT\": 187.3,\n            \"phase_local\": 327.7,\n
+        \           \"speed\": 57.96821,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 6,\n            \"name\": \"O1\",\n            \"description\":
+        \"Lunar diurnal constituent\",\n            \"amplitude\": 0.28,\n            \"phase_GMT\":
+        221.3,\n            \"phase_local\": 81.9,\n            \"speed\": 13.943035,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        7,\n            \"name\": \"M6\",\n            \"description\": \"Shallow
+        water overtides of principal lunar constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 86.95232,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 8,\n            \"name\": \"MK3\",\n
+        \           \"description\": \"Shallow water terdiurnal\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 44.025173,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 9,\n            \"name\": \"S4\",\n            \"description\":
+        \"Shallow water overtides of principal solar constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 60.0,\n            \"comments\": \"Vector Average of
+        5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 10,\n            \"name\": \"MN4\",\n
+        \           \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 141.1,\n            \"phase_local\":
+        286.9,\n            \"speed\": 57.423832,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 11,\n            \"name\":
+        \"NU2\",\n            \"description\": \"Larger lunar evectional constituent\",\n
+        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 33.6,\n            \"phase_local\":
+        108.5,\n            \"speed\": 28.512583,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 12,\n            \"name\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 90.0,\n            \"comments\":
+        \"Vector Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 13,\n            \"name\":
+        \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"amplitude\":
+        0.01,\n            \"phase_GMT\": 357.4,\n            \"phase_local\": 77.7,\n
+        \           \"speed\": 27.968208,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 14,\n            \"name\": \"2N2\",\n
+        \           \"description\": \"Lunar elliptical semidiurnal second-order constituent\",\n
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 20.9,\n            \"phase_local\":
+        101.9,\n            \"speed\": 27.895355,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 15,\n            \"name\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"amplitude\":
+        0.02,\n            \"phase_GMT\": 255.0,\n            \"phase_local\": 93.6,\n
+        \           \"speed\": 16.139101,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 16,\n            \"name\": \"LAM2\",\n
+        \           \"description\": \"Smaller lunar evectional constituent\",\n            \"amplitude\":
+        0.01,\n            \"phase_GMT\": 54.8,\n            \"phase_local\": 120.2,\n
+        \           \"speed\": 29.455626,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 17,\n            \"name\": \"S1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 45.6,\n            \"phase_local\": 255.6,\n
+        \           \"speed\": 15.0,\n            \"comments\": \"Vector Average of
+        5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 18,\n            \"name\": \"M1\",\n
+        \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 241.5,\n            \"phase_local\":
+        96.5,\n            \"speed\": 14.496694,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 19,\n            \"name\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.03,\n            \"phase_GMT\": 246.3,\n            \"phase_local\":
+        90.5,\n            \"speed\": 15.5854435,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 20,\n            \"name\":
+        \"MM\",\n            \"description\": \"Lunar monthly constituent\",\n            \"amplitude\":
+        0.03,\n            \"phase_GMT\": 19.4,\n            \"phase_local\": 14.0,\n
+        \           \"speed\": 0.5443747,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 21,\n            \"name\": \"SSA\",\n
+        \           \"description\": \"Solar semiannual constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 0.0821373,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 22,\n            \"name\": \"SA\",\n
+        \           \"description\": \"Solar annual constituent\",\n            \"amplitude\":
+        0.17,\n            \"phase_GMT\": 181.1,\n            \"phase_local\": 180.7,\n
+        \           \"speed\": 0.0410686,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 23,\n            \"name\": \"MSF\",\n
+        \           \"description\": \"Lunisolar synodic fortnightly constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 1.0158958,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 24,\n            \"name\":
+        \"MF\",\n            \"description\": \"Lunisolar fortnightly constituent\",\n
+        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 49.6,\n            \"phase_local\":
+        38.6,\n            \"speed\": 1.0980331,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 25,\n            \"name\":
+        \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 217.3,\n            \"phase_local\":
+        82.5,\n            \"speed\": 13.471515,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 26,\n            \"name\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 212.4,\n            \"phase_local\":
+        78.4,\n            \"speed\": 13.398661,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 27,\n            \"name\":
+        \"T2\",\n            \"description\": \"Larger solar elliptic constituent\",\n
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 45.3,\n            \"phase_local\":
+        105.7,\n            \"speed\": 29.958933,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 28,\n            \"name\":
+        \"R2\",\n            \"description\": \"Smaller solar elliptic constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 102.3,\n            \"phase_local\":
+        161.9,\n            \"speed\": 30.041067,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 29,\n            \"name\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 223.2,\n            \"phase_local\": 94.6,\n
+        \           \"speed\": 12.854286,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 30,\n            \"name\": \"P1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
+        0.15,\n            \"phase_GMT\": 228.0,\n            \"phase_local\": 78.4,\n
+        \           \"speed\": 14.958931,\n            \"comments\": \"Vector Average
+        of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
+        \         {\n            \"number\": 31,\n            \"name\": \"2SM2\",\n
+        \           \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 209.4,\n            \"phase_local\":
+        259.3,\n            \"speed\": 31.015896,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 32,\n            \"name\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 167.3,\n            \"phase_local\":
+        92.6,\n            \"speed\": 43.47616,\n            \"comments\": \"Vector
+        Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
+        \         },\n          {\n            \"number\": 33,\n            \"name\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        30.2,\n            \"phase_local\": 94.9,\n            \"speed\": 29.528479,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        34,\n            \"name\": \"2MK3\",\n            \"description\": \"Shallow
+        water terdiurnal constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        256.2,\n            \"phase_local\": 186.9,\n            \"speed\": 42.92714,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        35,\n            \"name\": \"K2\",\n            \"description\": \"Lunisolar
+        semidiurnal constituent\",\n            \"amplitude\": 0.05,\n            \"phase_GMT\":
+        34.8,\n            \"phase_local\": 93.9,\n            \"speed\": 30.082138,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        36,\n            \"name\": \"M8\",\n            \"description\": \"Shallow
+        water eighth diurnal constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 115.93642,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
+        37,\n            \"name\": \"MS4\",\n            \"description\": \"Shallow
+        water quarter diurnal constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        206.8,\n            \"phase_local\": 337.0,\n            \"speed\": 58.984104,\n
+        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
+        and Mf from 18 years (1998-2018).\"\n          }\n        ],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/harcon.json\"\n
+        \     },\n      \"benchmarks\": {\n        \"benchmarks\": [\n          {\n
+        \           \"designation\": \"TBM 161 1400 Met SRM\",\n            \"vm\":
+        24606,\n            \"lat\": 0.0,\n            \"lng\": 0.0,\n            \"description\":
+        null,\n            \"published\": false,\n            \"stamping\": null,\n
+        \           \"alias\": null,\n            \"dateEst\": null,\n            \"agency\":
+        null,\n            \"monumentTypeId\": null,\n            \"monumentType\":
+        null,\n            \"monumentTypeDescr\": null,\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        null,\n            \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": false,\n
+        \           \"display\": false,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"TBM 161 1400 MWWL\",\n            \"vm\": 24854,\n            \"lat\": 0.0,\n
+        \           \"lng\": 0.0,\n            \"description\": null,\n            \"published\":
+        false,\n            \"stamping\": null,\n            \"alias\": null,\n            \"dateEst\":
+        null,\n            \"agency\": null,\n            \"monumentTypeId\": null,\n
+        \           \"monumentType\": null,\n            \"monumentTypeDescr\": null,\n
+        \           \"settingClassId\": null,\n            \"settingClass\": null,\n
+        \           \"settingClassDescr\": null,\n            \"opusPid\": null,\n
+        \           \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"G\",\n            \"monumentCondDescr\":
+        \"Good\",\n            \"verified\": false,\n            \"display\": false,\n
+        \           \"stateCode\": null,\n            \"elevation\": null,\n            \"datums\":
+        null\n          },\n          {\n            \"designation\": \"TBM 161 1400
+        AQUATRAK\",\n            \"vm\": 1429,\n            \"lat\": 21.954,\n            \"lng\":
+        -159.3561,\n            \"description\": null,\n            \"published\":
+        false,\n            \"stamping\": null,\n            \"alias\": null,\n            \"dateEst\":
+        \"1991-02-12\",\n            \"agency\": \"National Ocean Survey (NOS)\",\n
+        \           \"monumentTypeId\": \"44\",\n            \"monumentType\": \"Z\",\n
+        \           \"monumentTypeDescr\": \"See descriptive text\",\n            \"settingClassId\":
+        null,\n            \"settingClass\": null,\n            \"settingClassDescr\":
+        \"Aquatrak leveling point\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        false,\n            \"display\": false,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 A\",\n            \"vm\":
+        15,\n            \"lat\": 21.954279,\n            \"lng\": -159.35716,\n            \"description\":
+        \"Dropped from the network for instability 2021\\r\\nThe bench mark is set
+        flush in a concrete foundation of a bollard, 93.88 m (308.0 ft) west of the
+        west end of the Pier 2 transit shed, 25.30 m (83.0 ft) NW of the SW corner
+        of Pier 2, 13.11 m (43.0 ft) west of a light fixture of Pier 2, 4.12 m (13.5
+        ft) north of a concrete and rock sea wall, 0.76 m (2.5 ft) west of the center
+        of a bollard at ground level.\",\n            \"published\": true,\n            \"stamping\":
+        \"1400 A 1980\",\n            \"alias\": null,\n            \"dateEst\": \"1980-01-30\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"DL6025\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"P\",\n            \"monumentCondDescr\": \"Poor,
+        Disturbed, Mutilate\",\n            \"verified\": false,\n            \"display\":
+        false,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1400 NO 3\",\n            \"vm\": 7,\n            \"lat\": 21.9567,\n
+        \           \"lng\": -159.36,\n            \"description\": \"Dropped or Destroyed?
+        \\r\\n\\r\\nThe bench mark is set in the concrete abutment at the SE corner
+        of the old two lane divided bridge over Nawiliwili stream, 61.0 m (200 ft)
+        \ south of the side road leading to the Kauai Surf Hotel, 20.7 m (68 ft)  east
+        of the east side of the Highway 51 Bridge, and 0.6 m (2 ft) NE of the south
+        end of the bridge.\",\n            \"published\": false,\n            \"stamping\":
+        \"NO 3 1927\",\n            \"alias\": null,\n            \"dateEst\": \"1927-01-07\",\n
+        \           \"agency\": \"US Coast & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"38\",\n            \"settingClass\":
+        \"Abutments and piers of large bridges\",\n            \"settingClassDescr\":
+        \"Concrete abutment\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 G\",\n            \"vm\":
+        13457,\n            \"lat\": 21.954695,\n            \"lng\": -159.35503,\n
+        \           \"description\": \"The bench mark is set at the south end of the
+        concrete dock of Pier 1 at the \\\"478 ft\\\" mark, 47.55 m (156.0 ft) SW
+        of a light fixture #A4, 13.87 m (45.5 ft) SE of the SE corner of Matson Transit
+        Shed, and 0.30 m (1.0 ft) north of a double-headed black bollard at the south
+        edge of the pier.\",\n            \"published\": false,\n            \"stamping\":
+        \"1400 G 1997\",\n            \"alias\": null,\n            \"dateEst\": \"1997-01-29\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"36\",\n            \"settingClass\":
+        \"Massive structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Concrete dock\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400  WALL\",\n            \"vm\":
+        21,\n            \"lat\": 21.9567,\n            \"lng\": -159.36,\n            \"description\":
+        \"The bench mark is a disk set on a 0.61 m (2.0 ft) square concrete monument
+        on top of a seawall running along the north edge of the harbor, 23.01 m (75.5
+        ft) NW of the NW corner of a concrete tug boat pier, 22 m (72 ft) SE of the
+        center of a large yellow double bollard  in the middle of the container yard,
+        1 m (3 ft) north of the top of the seawall, and 0.15 m (0.5 ft) above grade.\",\n
+        \           \"published\": true,\n            \"stamping\": \"WALL\",\n            \"alias\":
+        null,\n            \"dateEst\": null,\n            \"agency\": \"US Army Corps
+        of Engineers (USE)\",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Concrete monument on sea wall\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 D\",\n            \"vm\":
+        18,\n            \"lat\": 21.9567,\n            \"lng\": -159.352,\n            \"description\":
+        \"The bench mark is a disk set in a park at the junction of State Hwy 58 and
+        Waapa Road. 125.3 m (411 ft) north of bench mark 1400 E 1983, 68.3 m (224
+        ft) south of the road leading to  the seawall, 51.2 m (168 ft) NW of the Navigation
+        range Marker located betweeen the two seawalls, 15.85 m (52.0 ft) west of
+        the west edge of the new seawall, and 0.76 m (2.5 ft) NW of a 1.2 m x1.2 m
+        x 0.6 m (4 ft x 4 ft x 2 ft) high witness post.  The bench mark is crimped
+        to the top of a 9/16 inch diameter stainless steel rod driven 4.3 m (14 ft)
+        to refusal, and protected by a 4 inch PVC pipe flush with the natural grade,\",\n
+        \           \"published\": false,\n            \"stamping\": \"1400 D 1983\",\n
+        \           \"alias\": null,\n            \"dateEst\": \"1983-02-11\",\n            \"agency\":
+        \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"10\",\n
+        \           \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"49\",\n            \"settingClass\":
+        \"Stainless steel rod\",\n            \"settingClassDescr\": \"Stainless steel
+        rod\",\n            \"opusPid\": null,\n            \"idbPid\": \"AA3583\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 4.3,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 F\",\n            \"vm\":
+        20,\n            \"lat\": 21.953083,\n            \"lng\": -159.3529,\n            \"description\":
+        \"The bench mark is set in the south end of the concrete breakwater in Nawiliwili
+        Harbor, 114 m (375 ft) SSE of the SE corner of the Pier 1 warehouse, 18 m
+        (59 ft) west of the US Corps of Engineers Nawiliwili Monument, 7 m (23 ft)
+        from the SW end of the breakwater, 0.46 m (1.5 ft) south of  the north corner
+        at the end of the breakwater, 0.34 m (1.1 ft) from the west edge of the breakwater,
+        and 1.07 m (3.5 ft) above the ground.\",\n            \"published\": true,\n
+        \           \"stamping\": \"1400 F 1991\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1991-02-21\",\n            \"agency\": \"National
+        Ocean Service (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"34\",\n            \"settingClass\": \"Footings/foundation walls of small/medium
+        structures\",\n            \"settingClassDescr\": \"Concrete breakwater\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": \"DL6026\",\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1400 B\",\n            \"vm\": 16,\n            \"lat\": 21.954971,\n
+        \           \"lng\": -159.35655,\n            \"description\": \"The bench
+        mark is set in the SW corner of a 1 m x 5 m (3 ft x 17 ft) concrete foundation
+        supporting a sugar gantry which leads to the Pier 2 transit shed, 29.26 m
+        (96.0 ft) NW of the NW corner of the Pier  2 transit shed, 13.72 m (45.0 ft)
+        NW of the centerline of Waapa Road, 9.45 m (31.0 ft) NE of the telephone pole
+        # D90 at the entrance gate to the Shell Oil Company plant, and 0.15 m (0.5
+        ft) above the ground.\",\n            \"published\": true,\n            \"stamping\":
+        \"1400 B 1980\",\n            \"alias\": null,\n            \"dateEst\": \"1980-01-30\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 NO 15\",\n            \"vm\":
+        14,\n            \"lat\": 21.9567,\n            \"lng\": -159.36,\n            \"description\":
+        \"The bench mark is a disk set in the concrete apron of the Pier No. 1, 10
+        m (32 ft) SE of the SW corner of Pier No. 1 transit shed, 3.66 m (12.0 ft)
+        east of number 400 on pier, 2.99 m (9.8 ft) west of the center of a bollard,
+        and 0.27 m (0.9 ft) north of the Pier No. 1 south edge.\",\n            \"published\":
+        false,\n            \"stamping\": \"NO 15 1974\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1974-04-16\",\n            \"agency\": \"US
+        Coast & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\": \"10\",\n
+        \           \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"31\",\n            \"settingClass\":
+        \"Pavements (street, sidewalk, curb, apron, etc.)\",\n            \"settingClassDescr\":
+        \"Concrete apron\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 BM 13\",\n            \"vm\":
+        12,\n            \"lat\": 21.9567,\n            \"lng\": -159.36,\n            \"description\":
+        \"The bench mark is a top of a 3/8-inch brass pin, 52 m (171 ft) east of the
+        east end of the Pier 1 warehouse, 39 m (129 ft) NW of the east end of the
+        east/west running yellow bulkhead which is at the south end of the container
+        yard, and 22.71 m (74.5 ft) NW of the eastern-most corner of Pier 1.  The
+        bench mark is 9 cm (0.3 ft) below ground level, top of a 3/8-inch brass pin
+        which projects 3 cm (0.1 ft) from 3-inch diameter pipe filled with concrete,
+        protected by a 7-inch diameter steel handhold cover labeled STREET SURVEY
+        MONUMENT.\",\n            \"published\": false,\n            \"stamping\":
+        null,\n            \"alias\": \"BM 13 1970\",\n            \"dateEst\": \"1970-10-17\",\n
+        \           \"agency\": \"Hawaiian State Department of Transportation\",\n
+        \           \"monumentTypeId\": \"27\",\n            \"monumentType\": \"I\",\n
+        \           \"monumentTypeDescr\": \"Metal Rod\",\n            \"settingClassId\":
+        \"20\",\n            \"settingClass\": \"Set into the top of a metal pipe
+        imbedded in a mass of concrete\",\n            \"settingClassDescr\": \"Concrete
+        filled pipe\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 L\",\n            \"vm\":
+        21922,\n            \"lat\": 21.954166,\n            \"lng\": -159.35777,\n
+        \           \"description\": \"The bench mark is a disc set into the top of
+        a 1.2 m (3.9 ft) x 1.2 m (3.9 ft) x 0.26 m (0.9 ft) high square cement block
+        that supports a 0.7 m (2.3 ft) tall, 100 cm (39 inches) diameter round ship
+        bollard, 26 m (85.3 ft) ESE of the W corner of a double bollard which is the
+        W bollard of pier 2, 18.2 m (59.7 ft) WSW of a light pole with 3 lights on
+        top, 9.6 m (31.5 ft) NW of edge of Nawiliwili harbor waterline, and 0.6 m
+        (2.0 ft) S of center of bollard labeled 'Schoellhorn Albrecht 51309 1007'\",\n
+        \           \"published\": false,\n            \"stamping\": \"1400 L 2016\",\n
+        \           \"alias\": null,\n            \"dateEst\": \"2016-01-13\",\n            \"agency\":
+        \"National Ocean Service\",\n            \"monumentTypeId\": \"5\",\n            \"monumentType\":
+        \"DB\",\n            \"monumentTypeDescr\": \"Bench Mark disk\",\n            \"settingClassId\":
+        \"7\",\n            \"settingClass\": \"Set into the top of a concrete monument\",\n
+        \           \"settingClassDescr\": \"Square cement block that supports a ship
+        bollard\",\n            \"opusPid\": null,\n            \"idbPid\": null,\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 TIDAL 14\",\n            \"vm\":
+        13,\n            \"lat\": 21.95583,\n            \"lng\": -159.3539,\n            \"description\":
+        \"The primary bench mark is a disk set flush in the western entrance to the
+        Pier 2 transit shed, 13.11 m (43.0 ft) south of the NW corner of the warehouse,
+        0.40 m (1.3 ft) south of the north edge of rollup door, and 0.27 m (0.9 ft)
+        south of the yellow cone.\",\n            \"published\": true,\n            \"stamping\":
+        \"NO 14 1974\",\n            \"alias\": null,\n            \"dateEst\": \"1974-04-16\",\n
+        \           \"agency\": \"US Coast and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"31\",\n            \"settingClass\":
+        \"Pavements (street, sidewalk, curb, apron, etc.)\",\n            \"settingClassDescr\":
+        \"Concrete apron\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 K\",\n            \"vm\":
+        18299,\n            \"lat\": 21.954918,\n            \"lng\": -159.35431,\n
+        \           \"description\": \"The bench mark is set in a concrete deck 100
+        m (300 ft) ESE of the Pier 2 transit shed, 49.50 m (162.40 ft) SE of the light
+        pole #A4, 46.85 m (153.7 ft) SW of the opposite light pole, 1.10 m (3.6 ft)
+        north of the pier face, and 0.63 m (2.1 ft) north of a large black double-headed
+        bollard.\",\n            \"published\": false,\n            \"stamping\":
+        \"1400 K 2007\",\n            \"alias\": null,\n            \"dateEst\": \"2007-01-25\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"7\",\n            \"settingClass\":
+        \"Set into the top of a concrete monument\",\n            \"settingClassDescr\":
+        \"Concrete monument\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 NO 10\",\n            \"vm\":
+        9,\n            \"lat\": 21.9567,\n            \"lng\": -159.36,\n            \"description\":
+        \"The bench mark is a disk set in the center of a 4-foot (1 m) square concrete
+        flagpole base SSE of the Coast Guard office, 58.5 feet (17.8 m) SE of Bench
+        Mark NO 5 1964, and 31 feet (9 m) west of the centerline of the road leading
+        to the jetty end.\",\n            \"published\": false,\n            \"stamping\":
+        \"NO 10 1964\",\n            \"alias\": null,\n            \"dateEst\": \"1964-05-21\",\n
+        \           \"agency\": \"US Coast & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 C\",\n            \"vm\":
+        17,\n            \"lat\": 21.95439,\n            \"lng\": -159.35822,\n            \"description\":
+        \"Dropped from the network for instability 2021\\r\\nThe bench mark is set
+        38.71 m (127.0 ft) NNW of the sea wall on the Nawiliwili Harbor, 17.37 m (57.0
+        ft) SW of a yellow fire plug stamped No. 5, 9.30 m (30.5 ft) NW of the center
+        line of the Waapa Road, 3.66 m (12.0 ft) SSW of the rock cliff surrounding
+        Nawiliwili Harbor, 0.61 m (2.0 ft) west of telephone pole #6, and 0.30 m (1.0
+        ft) SW of a standard NGS orange fiberglass witness post.  The bench mark is
+        set 9 cm (0.3 ft) above natural grade, crimped to the top of a stainless steel
+        rod driven to a depth of 4.3 m (14 ft) to refusal, and encased in a 4-inch
+        PVC pipe covered with a threaded PVC pipe cap.\",\n            \"published\":
+        true,\n            \"stamping\": \"1400 C 1983\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1983-02-11\",\n            \"agency\": \"National
+        Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"49\",\n            \"settingClass\": \"Stainless steel rod\",\n            \"settingClassDescr\":
+        \"Stainless steel rod\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 4.3,\n            \"monumentCond\":
+        \"O\",\n            \"monumentCondDescr\": \"See Descriptive Text\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 TIDAL 5\",\n            \"vm\":
+        8,\n            \"lat\": 21.954695,\n            \"lng\": -159.35347,\n            \"description\":
+        \"The bench mark is set in concrete walk leading to the abandoned pier, 42.00
+        m (138 ft) south of the wharf face line of Pier 1, 3.05 m (10.0 ft) west of
+        the west side of the abandoned harbor patrol building, and 0.15 m (0.5 ft)
+        from the west end of concrete walk.\",\n            \"published\": true,\n
+        \           \"stamping\": \"NO 5 1954\",\n            \"alias\": null,\n            \"dateEst\":
+        \"1954-11-26\",\n            \"agency\": \"US Coast and Geodetic Survey (USC&GS)\",\n
+        \           \"monumentTypeId\": \"10\",\n            \"monumentType\": \"DJ\",\n
+        \           \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"31\",\n            \"settingClass\": \"Pavements (street, sidewalk, curb,
+        apron, etc.)\",\n            \"settingClassDescr\": \"Concrete sidewalk\",\n
+        \           \"opusPid\": \"DK4804\",\n            \"idbPid\": \"DK4804\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 J\",\n            \"vm\":
+        16267,\n            \"lat\": 21.953583,\n            \"lng\": -159.35309,\n
+        \           \"description\": \"The bench mark is set flush in concrete pier
+        deck at the NW corner of Nawiliwili Park on the seawall, just south of the
+        cyclone fence surrounding the Port of Nawiliwili,12.89 m (42.3 ft) west of
+        the western gate post at the south entrance to Port of Nawiliwili, 6.71 m
+        (22.0 ft) east of the NW corner of the northernmost of two concrete finger
+        piers, and 0.24 m (0.8 ft) south of the green cyclone fence.\",\n            \"published\":
+        false,\n            \"stamping\": \"1400 J 1999\",\n            \"alias\":
+        null,\n            \"dateEst\": null,\n            \"agency\": \"National
+        Ocean Service (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"38\",\n            \"settingClass\": \"Abutments and piers of large bridges\",\n
+        \           \"settingClassDescr\": \"Concrete pier deck\",\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"G\",\n            \"monumentCondDescr\":
+        \"Good\",\n            \"verified\": true,\n            \"display\": true,\n
+        \           \"stateCode\": null,\n            \"elevation\": null,\n            \"datums\":
+        null\n          },\n          {\n            \"designation\": \"161 1400 GSL\",\n
+        \           \"vm\": 6143,\n            \"lat\": 21.9567,\n            \"lng\":
+        -159.36,\n            \"description\": \"The bench mark is a disk set in the
+        SW corner of a 2 m x 2 m (5 ft x 5 ft) concrete storm drain manhole pad, 38.56
+        m (126.5 ft) east of centerline of Waapa Road, 12.86 m (42.2 ft) south of
+        utility pole #2, and 5.88 m (19.3 ft) south of the centerline of a road leading
+        to the seawall.\",\n            \"published\": false,\n            \"stamping\":
+        \"GSL 1400 1988\",\n            \"alias\": null,\n            \"dateEst\":
+        null,\n            \"agency\": \"National Geodetic Survey (NGS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 NO 11\",\n            \"vm\":
+        10,\n            \"lat\": 21.9567,\n            \"lng\": -159.36,\n            \"description\":
+        \"The bench mark is set in the SW corner abutment of the Highway 51 Bridge
+        over Nawiliwili stream, 12.5 feet (3.8 m) north of the south end of the abutment,
+        2.5 feet (0.8 m) west of the west side of the bridge, and 0.5 foot (0.2 m)
+        from the NW corner of the abutment.\",\n            \"published\": false,\n
+        \           \"stamping\": \"NO 11 1967\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1967-07-11\",\n            \"agency\": \"US Coast
+        & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"38\",\n            \"settingClass\": \"Abutments and piers of large bridges\",\n
+        \           \"settingClassDescr\": \"Bridge abutment\",\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"X\",\n            \"monumentCondDescr\":
+        \"Destroyed\",\n            \"verified\": false,\n            \"display\":
+        true,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1400 TIDAL 12\",\n            \"vm\": 11,\n            \"lat\": 21.9567,\n
+        \           \"lng\": -159.36,\n            \"description\": \"The bench mark
+        is set on the extended centerline of State Highway 58 in the top of a 2.5
+        foot (0.8 m) wide seawall, 450 feet (137 m) east of the intersection of Highways
+        58 and 51, 174 feet (53 m) south of the first drain through the seawall south
+        of the north end, and 132 feet (40 m) north of the second drain south of the
+        north end of seawall.\",\n            \"published\": false,\n            \"stamping\":
+        \"NO 12 1969\",\n            \"alias\": null,\n            \"dateEst\": \"1969-09-13\",\n
+        \           \"agency\": \"US Coast & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"32\",\n            \"settingClass\":
+        \"Retaining walls\",\n            \"settingClassDescr\": \"Sea wall\",\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"X\",\n            \"monumentCondDescr\":
+        \"Destroyed\",\n            \"verified\": false,\n            \"display\":
+        true,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1400 H\",\n            \"vm\": 13458,\n            \"lat\": 21.955055,\n
+        \           \"lng\": -159.3537,\n            \"description\": \"The bench
+        mark is set at the NE corner of Pier 1 at the zero mark of the pier, 38.71
+        m (127.0 ft) SE of Light fixture #A3, 27.89 m (91.5 ft) NW of Light fixture
+        #A1, 6.86 m (22.5 ft) east of a black double-headed bollard, 0.91 m (3.0 ft)
+        north of south end of pier, and 1.0 m (3.3 ft) NW of the NE corner of Pier
+        1.\",\n            \"published\": false,\n            \"stamping\": \"1400
+        H 1997\",\n            \"alias\": null,\n            \"dateEst\": \"1997-01-29\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"36\",\n            \"settingClass\":
+        \"Massive structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Concrete pier\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1400 E\",\n            \"vm\":
+        19,\n            \"lat\": 21.9567,\n            \"lng\": -159.36,\n            \"description\":
+        \"The bench mark is a disk set in a park at the junction of State Hwy 58 and
+        Waapa Road, 125.3 m (411 ft) south of bench mark 1400 D 1983, 121.9 m (400
+        ft) NE of bench mark NO 5 1954, 91.4 m (300 ft) SSE of a large abandoned cylinder
+        storage tank, 78.6 m (258 ft) SW of the navigational marker located between
+        the two seawalls, 11.28 m (37.0 ft) west of the centerline of the paved road
+        adjacent to the new seawall, and 0.61 m (2.0 ft) west of a 0.6 m (2 ft) high
+        1.2 m x 1.2 m (4 ft x 4 ft) witness post.  The bench mark is crimped to the
+        top of a 9/16 inch diameter stainless steel rod driven 4.3 m (14 ft) to refusal,
+        and protected by a 4 inch PVC pipe flush with the natural grade,\",\n            \"published\":
+        false,\n            \"stamping\": \"1400 E 1983\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1983-02-11\",\n            \"agency\": \"National
+        Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"49\",\n            \"settingClass\": \"Stainless steel rod\",\n            \"settingClassDescr\":
+        \"Stainless steel rod\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"DL6026\",\n            \"stationId\": null,\n            \"vmDepth\": 4.3,\n
+        \           \"monumentCond\": \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n
+        \           \"verified\": false,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          }\n
+        \       ],\n        \"to_reach\": \"To reach the tidal bench marks, from the
+        Lihue Airport take a left on Ahukini Road (State Highway 57) and then go south
+        on Kapule Highway (State Highway 51), then proceed 2.4 km (1.5 mi) and turn
+        south on Rice Street.  Proceed 1.3 km (0.8 mi) and turn west on Waapa Road,
+        then proceed 0.3 km (0.2 mi) to the gate to Pier # 2, and turn south through
+        the gate to the Pier #2 Warehouse.  The bench marks are located along Waapa
+        Road and Kapule Highway (State Highway 51) in the vicinity of Pier # 2.  The
+        tide station is located in the NE corner of the Tug Pier west of the main
+        dock and warehouse.\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/benchmarks.json\"\n
+        \     },\n      \"tidePredOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/tidepredoffsets.json\"\n
+        \     },\n      \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/ofsmapoffsets.json\"\n
+        \     },\n      \"state\": \"HI\",\n      \"timezone\": \"HAST\",\n      \"timezonecorr\":
+        -10,\n      \"observedst\": false,\n      \"stormsurge\": false,\n      \"nearby\":
+        {\n        \"count\": 4,\n        \"units\": null,\n        \"stations\":
+        [\n          {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 0.0,\n            \"id\": \"1611400\",\n            \"name\":
+        \"Nawiliwili, HI\",\n            \"lat\": 21.9544,\n            \"lng\": -159.3561,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological\",\n
+        \           \"distance\": 84.197205,\n            \"id\": \"1612401\",\n            \"name\":
+        \"Pearl Harbor, HI\",\n            \"lat\": 21.36750030517578,\n            \"lng\":
+        -157.96389770507812,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1612401.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 90.483925,\n            \"id\": \"1612480\",\n            \"name\":
+        \"Mokuoloe, HI\",\n            \"lat\": 21.43305555555556,\n            \"lng\":
+        -157.79,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1612480.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 90.9583,\n            \"id\": \"1612340\",\n            \"name\":
+        \"Honolulu, HI\",\n            \"lat\": 21.30333333333334,\n            \"lng\":
+        -157.8645277777778,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1612340.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          }\n
+        \       ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/nearby.json\"\n
+        \     },\n      \"forecast\": false,\n      \"outlook\": true,\n      \"HTFhistorical\":
+        true,\n      \"HTFmonthly\": true,\n      \"nonNavigational\": false,\n      \"inundationdb\":
+        true,\n      \"id\": \"1611400\",\n      \"name\": \"Nawiliwili\",\n      \"lat\":
+        21.9544,\n      \"lng\": -159.3561,\n      \"affiliations\": \"NWLON\",\n
+        \     \"portscode\": null,\n      \"products\": {\n        \"products\": [\n
+        \         {\n            \"name\": \"Water Levels\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/waterlevels.html?id=1611400\"\n          },\n
+        \         {\n            \"name\": \"Reports\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/reports.html?id=1611400\"\n
+        \         },\n          {\n            \"name\": \"Tide Predictions\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611400\"\n
+        \         },\n          {\n            \"name\": \"Meteorological\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/met.html?id=1611400\"\n          },\n
+        \         {\n            \"name\": \"Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=1611400\"\n          },\n
+        \         {\n            \"name\": \"Superseded  Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=1611400&type=superseded\"\n
+        \         },\n          {\n            \"name\": \"Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=1611400\"\n          },\n
+        \         {\n            \"name\": \"Superseded Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=1611400&epoch=1\"\n          },\n
+        \         {\n            \"name\": \"Harmonic\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/harcon.html?id=1611400\"\n
+        \         },\n          {\n            \"name\": \"Inundation Analysis\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/inundationanalysis/analysisParams.html?station=1611400\"\n
+        \         },\n          {\n            \"name\": \"Sea Level Trends\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/sltrends/sltrends_station.shtml?id=1611400\"\n
+        \         },\n          {\n            \"name\": \"Extreme Water Levels\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/est/est_station.shtml?stnid=1611400\"\n
+        \         },\n          {\n            \"name\": \"Physical Oceanagraphy\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/physocean.html?id=1611400\"\n
+        \         },\n          {\n            \"name\": \"Coastal Inundation Dashboard\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/inundationdb/inundation.html?id=1611400\"\n
+        \         },\n          {\n            \"name\": \"Annual High Tide Flood
+        Outlook\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/high-tide-flooding/annual-outlook.html?station=1611400\"\n
+        \         },\n          {\n            \"name\": \"Monthly High Tide Flood
+        Outlook\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/high-tide-flooding/monthly-outlook.html?station=1611400\"\n
+        \         }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/products.json\"\n
+        \     },\n      \"disclaimers\": {\n        \"disclaimers\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/disclaimers.json\"\n
+        \     },\n      \"notices\": {\n        \"notices\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/notices.json\"\n
+        \     },\n      \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400.json\",\n
+        \     \"expand\": \"details,sensors,floodlevels,datums,harcon,tidepredoffsets,ofsmapoffsets,products,disclaimers,notices\",\n
+        \     \"tideType\": \"Mixed\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 17:06:38 GMT
+      content-length:
+      - '58889'
+      x-amz-apigw-id:
+      - A3cM4FzSoAMEh7Q=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Tue, 21 Jul 2026 17:06:38 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 69ed541e-8601-4d17-94b9-76f99e1a67ab
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl/DataInventory.wsdl
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<wsdl:definitions targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:apachesoap=\"http://xml.apache.org/xml-soap\" xmlns:impl=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:intf=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:wsdlsoap=\"http://schemas.xmlsoap.org/wsdl/soap/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n<!--WSDL created by Apache
+        Axis version: 1.4\nBuilt on Apr 22, 2006 (06:55:48 PDT)-->\n <wsdl:types>\n
+        \ <schema elementFormDefault=\"qualified\" targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns=\"http://www.w3.org/2001/XMLSchema\">\n   <element name=\"Parameters\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"stationId\" type=\"xsd:string\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n   <complexType name=\"location\">\n
+        \   <sequence>\n     <element name=\"lat\" type=\"xsd:string\"/>\n     <element
+        name=\"long\" nillable=\"true\" type=\"xsd:string\"/>\n     <element name=\"state\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"metadata\">\n    <sequence>\n     <element name=\"location\" type=\"impl:location\"/>\n
+        \    <element name=\"date_established\" type=\"xsd:string\"/>\n     <element
+        name=\"shef_id\" type=\"xsd:string\"/>\n     <element name=\"deployment_designation\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"parameter\">\n    <sequence/>\n    <attribute name=\"first\" type=\"xsd:string\"/>\n
+        \   <attribute name=\"last\" type=\"xsd:string\"/>\n    <attribute name=\"name\"
+        type=\"xsd:string\"/>\n   </complexType>\n   <complexType name=\"station\">\n
+        \   <sequence>\n     <element name=\"metadata\" type=\"impl:metadata\"/>\n
+        \    <element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"parameter\" type=\"impl:parameter\"/>\n
+        \   </sequence>\n    <attribute name=\"ID\" type=\"xsd:string\"/>\n    <attribute
+        name=\"name\" type=\"xsd:string\"/>\n   </complexType>\n   <element name=\"DataInventory\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"station\" type=\"impl:station\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n  </schema>\n </wsdl:types>\n\n
+        \  <wsdl:message name=\"getDataInventoryResponse\">\n\n      <wsdl:part element=\"impl:DataInventory\"
+        name=\"DataInventory\"/>\n\n   </wsdl:message>\n\n   <wsdl:message name=\"getDataInventoryRequest\">\n\n
+        \     <wsdl:part element=\"impl:Parameters\" name=\"Parameters\"/>\n\n   </wsdl:message>\n\n
+        \  <wsdl:portType name=\"DataInventoryPortType\">\n\n      <wsdl:operation
+        name=\"getDataInventory\" parameterOrder=\"Parameters\">\n\n         <wsdl:input
+        message=\"impl:getDataInventoryRequest\" name=\"getDataInventoryRequest\"/>\n\n
+        \        <wsdl:output message=\"impl:getDataInventoryResponse\" name=\"getDataInventoryResponse\"/>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:portType>\n\n   <wsdl:binding name=\"DataInventorySoapBinding\"
+        type=\"impl:DataInventoryPortType\">\n\n      <wsdlsoap:binding style=\"document\"
+        transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n\n      <wsdl:operation
+        name=\"getDataInventory\">\n\n         <wsdlsoap:operation soapAction=\"\"/>\n\n
+        \        <wsdl:input name=\"getDataInventoryRequest\">\n\n            <wsdlsoap:body
+        use=\"literal\"/>\n\n         </wsdl:input>\n\n         <wsdl:output name=\"getDataInventoryResponse\">\n\n
+        \           <wsdlsoap:body use=\"literal\"/>\n\n         </wsdl:output>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:binding>\n\n   <wsdl:service name=\"DataInventoryService\">\n\n
+        \     <wsdl:port binding=\"impl:DataInventorySoapBinding\" name=\"DataInventory\">\n\n
+        \        <wsdlsoap:address location=\"https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory\"/>\n\n
+        \     </wsdl:port>\n\n   </wsdl:service>\n\n</wsdl:definitions>"
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3712'
+      Content-Type:
+      - text/xml
+      Date:
+      - Tue, 21 Jul 2026 17:06:40 GMT
+      ETag:
+      - W/"3712-1673306860000"
+      Last-Modified:
+      - Mon, 09 Jan 2023 23:27:40 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Body><ns0:Parameters
+      xmlns:ns0="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><ns0:stationId>1611400</ns0:stationId></ns0:Parameters></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '323'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '""'
+    method: POST
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><DataInventory
+        xmlns="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><station
+        ID="1611400" name="Nawiliwili"><metadata><location><lat>21.9544</lat><long>-159.3561</long><state>HI</state></location><date_established>1954-11-24</date_established><shef_id>NWWH1</shef_id><deployment_designation>NWLON</deployment_designation></metadata><parameter
+        first="2009-01-16 20:42" last="2013-01-11 02:00" name="Wind"/><parameter first="2015-02-07
+        10:24" last="2026-07-21 17:00" name="Wind"/><parameter first="2009-01-16 20:42"
+        last="2013-01-11 02:36" name="Air Temperature"/><parameter first="2015-02-07
+        10:24" last="2026-07-21 17:00" name="Air Temperature"/><parameter first="1994-01-22
+        10:00" last="2026-07-21 17:00" name="Water Temperature"/><parameter first="2009-01-16
+        20:42" last="2013-01-11 02:36" name="Barometric Pressure"/><parameter first="2015-02-07
+        10:24" last="2026-07-21 17:00" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-21 17:00" name="Preliminary 6-Minute Water Level"/><parameter
+        first="1995-11-30 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
+        Level"/><parameter first="1954-11-27 10:00" last="2026-06-30 23:00" name="Verified
+        Hourly Height Water Level"/><parameter first="1979-02-01 10:18" last="2026-06-30
+        23:54" name="Verified High/Low Water Level"/><parameter first="1954-12-01
+        00:00" last="2007-10-31 23:54" name="Verified Monthly Mean Water Level"/><parameter
+        first="2008-02-01 00:00" last="2026-06-30 23:54" name="Verified Monthly Mean
+        Water Level"/></station></DataInventory></soapenv:Body></soapenv:Envelope>
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/xml;charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 17:06:42 GMT
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"SeaLvlTrends\": [\n    {\n      \"stationId\":
+        \"1611400\",\n      \"stationName\": \"Nawiliwili\",\n      \"affil\": \"US\",\n
+        \     \"trendUnits\": \"inches/decade\",\n      \"seasonalUnits\": \"inches\",\n
+        \     \"seasonalAverage\": 0.98,\n      \"latitude\": 21.9544,\n      \"longitude\":
+        -159.3561,\n      \"trendType\": \"SINGLE\",\n      \"autoregressive\": 0.66,\n
+        \     \"autoregressiveError\": 0.03,\n      \"trend\": 0.75,\n      \"trendError\":
+        0.07,\n      \"y2000_offset\": 0.0,\n      \"startDate\": \"01/15/1955\",\n
+        \     \"endDate\": \"12/15/2025\",\n      \"monthlyMeans\": \"https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400&details=monthlymeans&units=english&trendType=SINGLE\",\n
+        \     \"numberEvents\": 0,\n      \"events\": [],\n      \"seasonalCycleMonth\":
+        [\n        {\n          \"month\": 1,\n          \"seasonalVar\": -0.27,\n
+        \         \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
+        2,\n          \"seasonalVar\": -1.06,\n          \"seasonalErr\": 0.24\n        },\n
+        \       {\n          \"month\": 3,\n          \"seasonalVar\": -1.52,\n          \"seasonalErr\":
+        0.28\n        },\n        {\n          \"month\": 4,\n          \"seasonalVar\":
+        -1.7,\n          \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
+        5,\n          \"seasonalVar\": -1.66,\n          \"seasonalErr\": 0.24\n        },\n
+        \       {\n          \"month\": 6,\n          \"seasonalVar\": -1.13,\n          \"seasonalErr\":
+        0.24\n        },\n        {\n          \"month\": 7,\n          \"seasonalVar\":
+        0.44,\n          \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
+        8,\n          \"seasonalVar\": 1.38,\n          \"seasonalErr\": 0.24\n        },\n
+        \       {\n          \"month\": 9,\n          \"seasonalVar\": 2.31,\n          \"seasonalErr\":
+        0.24\n        },\n        {\n          \"month\": 10,\n          \"seasonalVar\":
+        2.01,\n          \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
+        11,\n          \"seasonalVar\": 0.97,\n          \"seasonalErr\": 0.24\n        },\n
+        \       {\n          \"month\": 12,\n          \"seasonalVar\": 0.23,\n          \"seasonalErr\":
+        0.24\n        }\n      ]\n    }\n  ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 17:06:43 GMT
+      content-length:
+      - '2042'
+      x-amz-apigw-id:
+      - A3cNmHBmoAMEkTw=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '2042'
+      x-amzn-Remapped-Date:
+      - Tue, 21 Jul 2026 17:06:43 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - d288f366-3019-478b-bd8a-6771f7c6f361
+    status:
+      code: 200
+      message: OK
+version: 1

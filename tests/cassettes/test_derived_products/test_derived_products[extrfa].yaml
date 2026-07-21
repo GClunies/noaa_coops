@@ -1,0 +1,786 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels?units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"tidal\": true,\n      \"greatlakes\": false,\n      \"shefcode\":
+        \"\",\n      \"details\": {\n        \"id\": \"1611347\",\n        \"established\":
+        \"1988-02-23 00:00:00\",\n        \"removed\": \"1997-02-12 00:00:00\",\n
+        \       \"noaachart\": \"19382\",\n        \"timemeridian\": -150,\n        \"timezone\":
+        -10.0,\n        \"origyear\": \"1996-01-22 23:00:00\",\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/details.json\"\n
+        \     },\n      \"sensors\": {\n        \"units\": \"feet\",\n        \"sensors\":
+        null,\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/sensors.json\"\n
+        \     },\n      \"floodlevels\": null,\n      \"datums\": {\n        \"accepted\":
+        \"Apr 17 2003\",\n        \"superseded\": \"\",\n        \"epoch\": \"1983-2001\",\n
+        \       \"units\": \"feet\",\n        \"OrthometricDatum\": \"Ortho\",\n        \"datums\":
+        [\n          {\n            \"name\": \"STND\",\n            \"description\":
+        \"Station Datum\",\n            \"value\": 0.0\n          },\n          {\n
+        \           \"name\": \"MHHW\",\n            \"description\": \"Mean Higher-High
+        Water\",\n            \"value\": 5.16\n          },\n          {\n            \"name\":
+        \"MHW\",\n            \"description\": \"Mean High Water\",\n            \"value\":
+        4.76\n          },\n          {\n            \"name\": \"DTL\",\n            \"description\":
+        \"Mean Diurnal Tide Level\",\n            \"value\": 4.24\n          },\n
+        \         {\n            \"name\": \"MTL\",\n            \"description\":
+        \"Mean Tide Level\",\n            \"value\": 4.13\n          },\n          {\n
+        \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
+        \           \"value\": 4.15\n          },\n          {\n            \"name\":
+        \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
+        3.51\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 3.32\n          },\n          {\n
+        \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
+        Range\",\n            \"value\": 1.84\n          },\n          {\n            \"name\":
+        \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
+        1.24\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.4\n          },\n
+        \         {\n            \"name\": \"DLQ\",\n            \"description\":
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.2\n          },\n
+        \         {\n            \"name\": \"HWI\",\n            \"description\":
+        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 1.49\n
+        \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
+        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 7.8\n
+        \         }\n        ],\n        \"LAT\": 2.677,\n        \"LATdate\": \"20250526\",\n
+        \       \"LATtime\": \"18:00\",\n        \"HAT\": 6.096,\n        \"HATdate\":
+        \"20251205\",\n        \"HATtime\": \"14:06\",\n        \"min\": 2.402,\n
+        \       \"mindate\": \"19910514\",\n        \"mintime\": \"18:54\",\n        \"max\":
+        9.13,\n        \"maxdate\": \"19920912\",\n        \"maxtime\": \"01:18\",\n
+        \       \"disclaimers\": {\n          \"disclaimers\": [],\n          \"self\":
+        null\n        },\n        \"DatumAnalysisPeriod\": [\n          \"01/01/1990
+        - 12/31/1996\"\n        ],\n        \"NGSLink\": \"\",\n        \"ctrlStation\":
+        \"1611400 Nawiliwili, HI\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/datums.json\"\n
+        \     },\n      \"supersededdatums\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/supersededdatums.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"feet\",\n
+        \       \"HarmonicConstituents\": [\n          {\n            \"number\":
+        1,\n            \"name\": \"M2\",\n            \"description\": \"Principal
+        lunar semidiurnal constituent\",\n            \"amplitude\": 0.52,\n            \"phase_GMT\":
+        44.1,\n            \"phase_local\": 114.3,\n            \"speed\": 28.984104,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 2,\n            \"name\": \"S2\",\n            \"description\":
+        \"Principal solar semidiurnal constituent\",\n            \"amplitude\": 0.22,\n
+        \           \"phase_GMT\": 38.3,\n            \"phase_local\": 98.3,\n            \"speed\":
+        30.0,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
+        \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 3,\n            \"name\": \"N2\",\n            \"description\":
+        \"Larger lunar elliptic semidiurnal constituent\",\n            \"amplitude\":
+        0.1,\n            \"phase_GMT\": 38.3,\n            \"phase_local\": 113.9,\n
+        \           \"speed\": 28.43973,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 4,\n            \"name\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"amplitude\":
+        0.54,\n            \"phase_GMT\": 226.5,\n            \"phase_local\": 76.1,\n
+        \           \"speed\": 15.041069,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 5,\n            \"name\":
+        \"M4\",\n            \"description\": \"Shallow water overtides of principal
+        lunar constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 57.96821,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 6,\n            \"name\": \"O1\",\n            \"description\":
+        \"Lunar diurnal constituent\",\n            \"amplitude\": 0.28,\n            \"phase_GMT\":
+        221.5,\n            \"phase_local\": 82.1,\n            \"speed\": 13.943035,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 7,\n            \"name\": \"M6\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 86.95232,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 8,\n            \"name\":
+        \"MK3\",\n            \"description\": \"Shallow water terdiurnal\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 44.025173,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 9,\n            \"name\":
+        \"S4\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 60.0,\n            \"comments\":
+        \"Mean of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year
+        analyses (1989-1996).\"\n          },\n          {\n            \"number\":
+        10,\n            \"name\": \"MN4\",\n            \"description\": \"Shallow
+        water quarter diurnal constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 57.423832,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 11,\n            \"name\": \"NU2\",\n            \"description\":
+        \"Larger lunar evectional constituent\",\n            \"amplitude\": 0.02,\n
+        \           \"phase_GMT\": 25.2,\n            \"phase_local\": 100.1,\n            \"speed\":
+        28.512583,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
+        \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 12,\n            \"name\": \"S6\",\n            \"description\":
+        \"Shallow water overtides of principal solar constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 90.0,\n            \"comments\": \"Mean of 5 NOS one
+        year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 13,\n            \"name\":
+        \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"amplitude\":
+        0.01,\n            \"phase_GMT\": 356.0,\n            \"phase_local\": 76.3,\n
+        \           \"speed\": 27.968208,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 14,\n            \"name\":
+        \"2N2\",\n            \"description\": \"Lunar elliptical semidiurnal second-order
+        constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        45.0,\n            \"phase_local\": 126.0,\n            \"speed\": 27.895355,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 15,\n            \"name\": \"OO1\",\n            \"description\":
+        \"Lunar diurnal\",\n            \"amplitude\": 0.02,\n            \"phase_GMT\":
+        263.1,\n            \"phase_local\": 101.7,\n            \"speed\": 16.139101,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 16,\n            \"name\": \"LAM2\",\n            \"description\":
+        \"Smaller lunar evectional constituent\",\n            \"amplitude\": 0.0,\n
+        \           \"phase_GMT\": 41.4,\n            \"phase_local\": 106.8,\n            \"speed\":
+        29.455626,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
+        \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 17,\n            \"name\": \"S1\",\n            \"description\":
+        \"Solar diurnal constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        0.0,\n            \"phase_local\": 0.0,\n            \"speed\": 15.0,\n            \"comments\":
+        \"Mean of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year
+        analyses (1989-1996).\"\n          },\n          {\n            \"number\":
+        18,\n            \"name\": \"M1\",\n            \"description\": \"Smaller
+        lunar elliptic diurnal constituent\",\n            \"amplitude\": 0.02,\n
+        \           \"phase_GMT\": 247.2,\n            \"phase_local\": 102.2,\n            \"speed\":
+        14.496694,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
+        \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 19,\n            \"name\": \"J1\",\n            \"description\":
+        \"Smaller lunar elliptic diurnal constituent\",\n            \"amplitude\":
+        0.04,\n            \"phase_GMT\": 237.6,\n            \"phase_local\": 81.7,\n
+        \           \"speed\": 15.5854435,\n            \"comments\": \"Mean of 5
+        NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 20,\n            \"name\":
+        \"MM\",\n            \"description\": \"Lunar monthly constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 0.5443747,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 21,\n            \"name\":
+        \"SSA\",\n            \"description\": \"Solar semiannual constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 0.0821373,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 22,\n            \"name\":
+        \"SA\",\n            \"description\": \"Solar annual constituent\",\n            \"amplitude\":
+        0.16,\n            \"phase_GMT\": 192.1,\n            \"phase_local\": 191.7,\n
+        \           \"speed\": 0.0410686,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 23,\n            \"name\":
+        \"MSF\",\n            \"description\": \"Lunisolar synodic fortnightly constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 1.0158958,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 24,\n            \"name\":
+        \"MF\",\n            \"description\": \"Lunisolar fortnightly constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 1.0980331,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 25,\n            \"name\":
+        \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 219.4,\n            \"phase_local\":
+        84.7,\n            \"speed\": 13.471515,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 26,\n            \"name\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 215.7,\n            \"phase_local\":
+        81.7,\n            \"speed\": 13.398661,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 27,\n            \"name\":
+        \"T2\",\n            \"description\": \"Larger solar elliptic constituent\",\n
+        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 38.2,\n            \"phase_local\":
+        98.6,\n            \"speed\": 29.958933,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 28,\n            \"name\":
+        \"R2\",\n            \"description\": \"Smaller solar elliptic constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 38.1,\n            \"phase_local\":
+        97.7,\n            \"speed\": 30.041067,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 29,\n            \"name\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"amplitude\":
+        0.01,\n            \"phase_GMT\": 216.4,\n            \"phase_local\": 87.9,\n
+        \           \"speed\": 12.854286,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 30,\n            \"name\":
+        \"P1\",\n            \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
+        0.17,\n            \"phase_GMT\": 223.3,\n            \"phase_local\": 73.7,\n
+        \           \"speed\": 14.958931,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 31,\n            \"name\":
+        \"2SM2\",\n            \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 31.015896,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 32,\n            \"name\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 43.47616,\n            \"comments\": \"Mean of
+        5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          },\n          {\n            \"number\": 33,\n            \"name\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        35.1,\n            \"phase_local\": 99.8,\n            \"speed\": 29.528479,\n
+        \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
+        from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 34,\n            \"name\": \"2MK3\",\n            \"description\":
+        \"Shallow water terdiurnal constituent\",\n            \"amplitude\": 0.0,\n
+        \           \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n            \"speed\":
+        42.92714,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
+        \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 35,\n            \"name\": \"K2\",\n            \"description\":
+        \"Lunisolar semidiurnal constituent\",\n            \"amplitude\": 0.06,\n
+        \           \"phase_GMT\": 34.0,\n            \"phase_local\": 93.2,\n            \"speed\":
+        30.082138,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
+        \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
+        \           \"number\": 36,\n            \"name\": \"M8\",\n            \"description\":
+        \"Shallow water eighth diurnal constituent\",\n            \"amplitude\":
+        0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\": 0.0,\n
+        \           \"speed\": 115.93642,\n            \"comments\": \"Mean of 5 NOS
+        one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
+        \         },\n          {\n            \"number\": 37,\n            \"name\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 0.0,\n            \"phase_local\":
+        0.0,\n            \"speed\": 58.984104,\n            \"comments\": \"Mean
+        of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
+        (1989-1996).\"\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/harcon.json\"\n
+        \     },\n      \"benchmarks\": {\n        \"benchmarks\": [\n          {\n
+        \           \"designation\": \"161 1347 TBM AQUATRAK\",\n            \"vm\":
+        12293,\n            \"lat\": 21.9033,\n            \"lng\": -129.592,\n            \"description\":
+        \"Aquatrak leveling point\",\n            \"published\": false,\n            \"stamping\":
+        null,\n            \"alias\": null,\n            \"dateEst\": null,\n            \"agency\":
+        \"National Ocean Service (NOS)\",\n            \"monumentTypeId\": \"44\",\n
+        \           \"monumentType\": \"Z\",\n            \"monumentTypeDescr\": \"See
+        descriptive text\",\n            \"settingClassId\": null,\n            \"settingClass\":
+        null,\n            \"settingClassDescr\": null,\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"G\",\n            \"monumentCondDescr\":
+        \"Good\",\n            \"verified\": false,\n            \"display\": false,\n
+        \           \"stateCode\": null,\n            \"elevation\": null,\n            \"datums\":
+        null\n          },\n          {\n            \"designation\": \"161 1347 A\",\n
+        \           \"vm\": 12294,\n            \"lat\": 21.9033,\n            \"lng\":
+        -159.592,\n            \"description\": \"The primary benck mark is a disk
+        set between two 6-inch diameter red steel posts that stand 1.52 m (5.0 ft)
+        high and protect an emergency fire pump station, 2.74 m (9.0 ft) east of the
+        large roll-up main entrance door of the State of Hawaii Port Allen transit
+        shed, and 1.25 m (4.1 ft) NE of a 10-inch diameter hole cut through the pier
+        deck which has a steel 8-inch pipe through it.\",\n            \"published\":
+        true,\n            \"stamping\": \"1347 A 1988\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1988-02-23\",\n            \"agency\": \"National
+        Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"38\",\n            \"settingClass\": \"Abutments and piers of large bridges\",\n
+        \           \"settingClassDescr\": \"Concrete pier\",\n            \"opusPid\":
+        null,\n            \"idbPid\": null,\n            \"stationId\": null,\n            \"vmDepth\":
+        0.0,\n            \"monumentCond\": \"G\",\n            \"monumentCondDescr\":
+        \"Good\",\n            \"verified\": true,\n            \"display\": true,\n
+        \           \"stateCode\": null,\n            \"elevation\": null,\n            \"datums\":
+        null\n          },\n          {\n            \"designation\": \"161 1347 B\",\n
+        \           \"vm\": 12295,\n            \"lat\": 21.9033,\n            \"lng\":
+        -159.592,\n            \"description\": \"The benck mark is a disk set 29.84
+        m (97.9 ft) NW of the southerly edge of the pier, 20.12 m (66.0 ft) SW of
+        a fire hydrant, 0.79 m (2.6 ft) south of the center of a steel bollard at
+        the NE inshore end of pier, and 0.79 m (2.6 ft) east of the NE corner of the
+        pier transit shed.\",\n            \"published\": true,\n            \"stamping\":
+        \"1347 B 1988\",\n            \"alias\": null,\n            \"dateEst\": \"1988-02-23\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"38\",\n            \"settingClass\":
+        \"Abutments and piers of large bridges\",\n            \"settingClassDescr\":
+        \"Concrete pier\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"AA3584\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"G\",\n            \"monumentCondDescr\": \"Good\",\n
+        \           \"verified\": true,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1347 PIER LANI 7\",\n            \"vm\":
+        12405,\n            \"lat\": 21.9033,\n            \"lng\": -159.592,\n            \"description\":
+        \"The benck mark is a disk set near the westerly corner of the Port Allen
+        pier, 8.26 m (27.1 ft) SE of the westerly corner, 2.74 m (9.0 ft) SW of the
+        westerly corner of a transit shed, and 1.22 m (4.0 ft) NE of the SW edge of
+        the pier.\",\n            \"published\": true,\n            \"stamping\":
+        \"PIER STATION PIER 7 1981\",\n            \"alias\": null,\n            \"dateEst\":
+        null,\n            \"agency\": \"US Army Corps of Engineers (USE)\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"35\",\n            \"settingClass\":
+        \"Mat foundations\",\n            \"settingClassDescr\": \"Concrete pier deck\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1347 TIDAL 1\",\n            \"vm\": 6449,\n            \"lat\": 21.9033,\n
+        \           \"lng\": -159.592,\n            \"description\": \"The bench mark
+        is a disk set in a concrete foundation for a derrick on an abandoned loading
+        wharf at the SW end of Eleele, near the inshore end on the NW side of breakwater,
+        at the east side of Hanapepe Bay, 122 m (400 ft) SE across the water from
+        present Port Allen Pier, 41 m (135 ft) SW of a stairway leading up to the
+        top of a small bluff, 29 m (96 ft) SW of inshore end of pier, 6 m (20 ft)
+        SW of an old engine hoist, 1.22 m (4.0 ft) NW of a concrete stairway leading
+        down to a lower level boat landing, 0.40 m (1.3 ft) SW of the edge of foundation,
+        and 0.21 m (0.7 ft) above the wharf level.\",\n            \"published\":
+        true,\n            \"stamping\": \"1 1926\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1926-05-20\",\n            \"agency\": \"US Coast
+        and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\": \"10\",\n
+        \           \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1347 TIDAL 35\",\n            \"vm\":
+        6451,\n            \"lat\": 21.9033,\n            \"lng\": -159.592,\n            \"description\":
+        \"The benck mark is a disk set in a 0.3 m (1 ft) diameter truncated concrete
+        cone extending 0.3 m (1 ft) above a 0.91 m (3.0 ft) diameter base on a bluff
+        at the inshore end of breakwater, 82.30 m (270.0 ft) WSW of gas storage tanks,
+        \ 9.60 m (31.5 ft) north of bench mark 3 1926, 8.23 m (27.0 ft) ENE of power
+        pole #9902, 4.57 m (15.0 ft) WNW of a right angle bend in gas mains, 3.81
+        m (12.5 ft) west of west one of a row of seven gas mains, and 0.21 m (0.7
+        ft) above the ground.\",\n            \"published\": true,\n            \"stamping\":
+        \"35\",\n            \"alias\": \"4\",\n            \"dateEst\": null,\n            \"agency\":
+        \"US Geological Survey (USGS)\",\n            \"monumentTypeId\": \"5\",\n
+        \           \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"7\",\n            \"settingClass\":
+        \"Set into the top of a concrete monument\",\n            \"settingClassDescr\":
+        \"Concrete monument\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1347 C\",\n            \"vm\":
+        12296,\n            \"lat\": 21.9033,\n            \"lng\": -159.592,\n            \"description\":
+        \"The benck mark is a disk set 11 m (36 ft) NW of the centerline of State
+        Highway 541 where it terminates at the dock, 10.39 m (34.1 ft) SW of utility
+        pole #9, 4.02 m (13.2 ft) south of the center of the steel pump housing, and
+        0.15 m (0.5 ft) from the southerly corner of a 3 m x 6 m (10 ft x 20 ft) concrete
+        slab of a sewage pumping station,\",\n            \"published\": true,\n            \"stamping\":
+        \"1347 C 1988\",\n            \"alias\": null,\n            \"dateEst\": \"1988-02-23\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"35\",\n            \"settingClass\":
+        \"Mat foundations\",\n            \"settingClassDescr\": \"Concrete slab\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1347 D\",\n            \"vm\": 12297,\n            \"lat\": 21.9033,\n
+        \           \"lng\": -159.592,\n            \"description\": \"The benck mark
+        is a disk set at the NE corner of an unused 15 m x 69 m (50 ft x 225 ft) concrete
+        foundation of former fish tank, 30.57 m (100.3 ft) SW of edge of a macadam
+        road, 19.42 m (63.7 ft) SE of the centerline of State Highway 541, 11.58 m
+        (38.0 ft) NW of the NW corner of a large aluminum sided commercial building,
+        and 0.76 m (2.5 ft) above ground level.\",\n            \"published\": true,\n
+        \           \"stamping\": \"1347 D 1988\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1988-02-23\",\n            \"agency\": \"National
+        Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"34\",\n            \"settingClass\": \"Footings/foundation walls of small/medium
+        structures\",\n            \"settingClassDescr\": \"Concrete foundation\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1347 E\",\n            \"vm\": 12403,\n            \"lat\": 21.9033,\n
+        \           \"lng\": -159.592,\n            \"description\": \"The benck mark
+        is a disk set in a concrete foundation at the south end of a small concrete
+        jetty, 22.25 m (73.0 ft) south of a light foundation on the jetty, 0.70 m
+        (2.3 ft) from the north edge of the foundation, 0.27 m (0.9 ft) from the east
+        edge of the foundation, and  0.70 m (2.3 ft) above the ground.\",\n            \"published\":
+        true,\n            \"stamping\": \"1347 E 1991\",\n            \"alias\":
+        null,\n            \"dateEst\": \"1991-02-21\",\n            \"agency\": \"National
+        Ocean Service (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"36\",\n            \"settingClass\": \"Massive structures (other than those
+        listed below)\",\n            \"settingClassDescr\": \"Concrete jetty foundation\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1347 TIDAL 3\",\n            \"vm\": 6450,\n            \"lat\": 21.9033,\n
+        \           \"lng\": -159.592,\n            \"description\": \"The benck mark
+        is a disk set in a concrete cornerstone at the west end of the ruins of a
+        warehouse foundation wall, on a bluff above the inshore end of breakwater,
+        82.30 m (270.0 ft) WSW of gas storage tanks, on the north edge of a cut through
+        which railway passed, 5.94 m (19.5 ft) SE of a power pole, 4.11 m (13.5 ft)
+        east of a top step of a stairway leading down to an old wharf, 0.46 m (1.5
+        ft) west of a wall foundation, and 0.91 m (3.0 ft) below the top of foundation.\",\n
+        \           \"published\": true,\n            \"stamping\": \"3 1926\",\n
+        \           \"alias\": null,\n            \"dateEst\": \"1926-05-20\",\n            \"agency\":
+        \"US Coast and Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"35\",\n            \"settingClass\":
+        \"Mat foundations\",\n            \"settingClassDescr\": \"Concrete slab\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": null,\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"161 1347 F\",\n            \"vm\": 12404,\n            \"lat\": 21.9033,\n
+        \           \"lng\": -159.592,\n            \"description\": \"The benck mark
+        is a disk set in a concrete ramp in the middle of a warehouse on the NW side
+        of Waialo Road, located on the west corner of a ramp leading to Car Crafts
+        at 4341 Waialo Road (located in the middle of the building flanked by C&S
+        Feed and Supply to the NE and Martin Steel Constructors, Inc. to the SW),
+        0.30 m (1 ft) from the building, 0.21 m (0.7 ft) from the SW edge of the ramp,
+        and 0.37 m (1.2 ft) above ground.\",\n            \"published\": true,\n            \"stamping\":
+        \"1347 F 1991\",\n            \"alias\": null,\n            \"dateEst\": \"1994-02-21\",\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"31\",\n            \"settingClass\":
+        \"Pavements (street, sidewalk, curb, apron, etc.)\",\n            \"settingClassDescr\":
+        \"Concrete ramp\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"161 1347 TIDAL 2\",\n            \"vm\":
+        6452,\n            \"lat\": 21.9033,\n            \"lng\": -159.592,\n            \"description\":
+        null,\n            \"published\": false,\n            \"stamping\": \"2 1926\",\n
+        \           \"alias\": null,\n            \"dateEst\": \"1926-05-20\",\n            \"agency\":
+        \"US Coast & Geodetic Survey (USC&GS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"34\",\n            \"settingClass\":
+        \"Footings/foundation walls of small/medium structures\",\n            \"settingClassDescr\":
+        \"Concrete foundation\",\n            \"opusPid\": null,\n            \"idbPid\":
+        null,\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"X\",\n            \"monumentCondDescr\": \"Destroyed\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          }\n
+        \       ],\n        \"to_reach\": \"To reach the tidal bench marks from the
+        airport in Kauai, turn left on to Highway 50 (west) and continue on Highway
+        50 for approximately 8 km (5 mi) until you reach Port Allen.  At Port Allen,
+        turn left on Highway 541 and go about 1.2 km (0.7 mi) to  the State of Hawaii
+        transit building on the pier.  The gauge was located inside the building and
+        the bench marks are located in the vicinity.\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/benchmarks.json\"\n
+        \     },\n      \"tidePredOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/tidepredoffsets.json\"\n
+        \     },\n      \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/ofsmapoffsets.json\"\n
+        \     },\n      \"state\": \"HI\",\n      \"timezone\": \"HAST\",\n      \"timezonecorr\":
+        -10,\n      \"observedst\": false,\n      \"stormsurge\": false,\n      \"nearby\":
+        {\n        \"count\": 4,\n        \"units\": null,\n        \"stations\":
+        [\n          {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 12.991749,\n            \"id\": \"1611400\",\n            \"name\":
+        \"Nawiliwili, HI\",\n            \"lat\": 21.9544,\n            \"lng\": -159.3561,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological\",\n
+        \           \"distance\": 93.89687,\n            \"id\": \"1612401\",\n            \"name\":
+        \"Pearl Harbor, HI\",\n            \"lat\": 21.36750030517578,\n            \"lng\":
+        -157.96389770507812,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1612401.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 100.50496,\n            \"id\": \"1612340\",\n            \"name\":
+        \"Honolulu, HI\",\n            \"lat\": 21.30333333333334,\n            \"lng\":
+        -157.8645277777778,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1612340.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 100.882355,\n            \"id\": \"1612480\",\n
+        \           \"name\": \"Mokuoloe, HI\",\n            \"lat\": 21.43305555555556,\n
+        \           \"lng\": -157.79,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1612480.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          }\n
+        \       ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/nearby.json\"\n
+        \     },\n      \"forecast\": false,\n      \"outlook\": false,\n      \"HTFhistorical\":
+        false,\n      \"HTFmonthly\": false,\n      \"nonNavigational\": false,\n
+        \     \"inundationdb\": false,\n      \"id\": \"1611347\",\n      \"name\":
+        \"PORT ALLEN, HANAPEPE BAY, KAUAI ISLAND\",\n      \"lat\": 21.9033,\n      \"lng\":
+        -159.592,\n      \"affiliations\": \"\",\n      \"portscode\": null,\n      \"products\":
+        {\n        \"products\": [\n          {\n            \"name\": \"Tide Predictions\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=1611347\"\n
+        \         },\n          {\n            \"name\": \"Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=1611347\"\n          },\n
+        \         {\n            \"name\": \"Superseded  Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=1611347&type=superseded\"\n
+        \         },\n          {\n            \"name\": \"Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=1611347\"\n          },\n
+        \         {\n            \"name\": \"Superseded Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=1611347&epoch=1\"\n          },\n
+        \         {\n            \"name\": \"Harmonic\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/harcon.html?id=1611347\"\n
+        \         },\n          {\n            \"name\": \"Inundation Analysis\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/inundationanalysis/analysisParams.html?station=1611347\"\n
+        \         }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/products.json\"\n
+        \     },\n      \"disclaimers\": {\n        \"disclaimers\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/disclaimers.json\"\n
+        \     },\n      \"notices\": {\n        \"notices\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/notices.json\"\n
+        \     },\n      \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347.json\",\n
+        \     \"expand\": \"details,sensors,floodlevels,datums,harcon,tidepredoffsets,ofsmapoffsets,products,disclaimers,notices\",\n
+        \     \"tideType\": \"Mixed Diurnal\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 09:16:15 GMT
+      content-length:
+      - '39702'
+      x-amz-apigw-id:
+      - A2XS-EPlIAMEElQ=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Tue, 21 Jul 2026 09:16:15 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 7fa69cf2-d650-4c86-871c-915c47e9307f
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl/DataInventory.wsdl
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<wsdl:definitions targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:apachesoap=\"http://xml.apache.org/xml-soap\" xmlns:impl=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:intf=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:wsdlsoap=\"http://schemas.xmlsoap.org/wsdl/soap/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n<!--WSDL created by Apache
+        Axis version: 1.4\nBuilt on Apr 22, 2006 (06:55:48 PDT)-->\n <wsdl:types>\n
+        \ <schema elementFormDefault=\"qualified\" targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns=\"http://www.w3.org/2001/XMLSchema\">\n   <element name=\"Parameters\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"stationId\" type=\"xsd:string\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n   <complexType name=\"location\">\n
+        \   <sequence>\n     <element name=\"lat\" type=\"xsd:string\"/>\n     <element
+        name=\"long\" nillable=\"true\" type=\"xsd:string\"/>\n     <element name=\"state\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"metadata\">\n    <sequence>\n     <element name=\"location\" type=\"impl:location\"/>\n
+        \    <element name=\"date_established\" type=\"xsd:string\"/>\n     <element
+        name=\"shef_id\" type=\"xsd:string\"/>\n     <element name=\"deployment_designation\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"parameter\">\n    <sequence/>\n    <attribute name=\"first\" type=\"xsd:string\"/>\n
+        \   <attribute name=\"last\" type=\"xsd:string\"/>\n    <attribute name=\"name\"
+        type=\"xsd:string\"/>\n   </complexType>\n   <complexType name=\"station\">\n
+        \   <sequence>\n     <element name=\"metadata\" type=\"impl:metadata\"/>\n
+        \    <element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"parameter\" type=\"impl:parameter\"/>\n
+        \   </sequence>\n    <attribute name=\"ID\" type=\"xsd:string\"/>\n    <attribute
+        name=\"name\" type=\"xsd:string\"/>\n   </complexType>\n   <element name=\"DataInventory\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"station\" type=\"impl:station\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n  </schema>\n </wsdl:types>\n\n
+        \  <wsdl:message name=\"getDataInventoryResponse\">\n\n      <wsdl:part element=\"impl:DataInventory\"
+        name=\"DataInventory\"/>\n\n   </wsdl:message>\n\n   <wsdl:message name=\"getDataInventoryRequest\">\n\n
+        \     <wsdl:part element=\"impl:Parameters\" name=\"Parameters\"/>\n\n   </wsdl:message>\n\n
+        \  <wsdl:portType name=\"DataInventoryPortType\">\n\n      <wsdl:operation
+        name=\"getDataInventory\" parameterOrder=\"Parameters\">\n\n         <wsdl:input
+        message=\"impl:getDataInventoryRequest\" name=\"getDataInventoryRequest\"/>\n\n
+        \        <wsdl:output message=\"impl:getDataInventoryResponse\" name=\"getDataInventoryResponse\"/>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:portType>\n\n   <wsdl:binding name=\"DataInventorySoapBinding\"
+        type=\"impl:DataInventoryPortType\">\n\n      <wsdlsoap:binding style=\"document\"
+        transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n\n      <wsdl:operation
+        name=\"getDataInventory\">\n\n         <wsdlsoap:operation soapAction=\"\"/>\n\n
+        \        <wsdl:input name=\"getDataInventoryRequest\">\n\n            <wsdlsoap:body
+        use=\"literal\"/>\n\n         </wsdl:input>\n\n         <wsdl:output name=\"getDataInventoryResponse\">\n\n
+        \           <wsdlsoap:body use=\"literal\"/>\n\n         </wsdl:output>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:binding>\n\n   <wsdl:service name=\"DataInventoryService\">\n\n
+        \     <wsdl:port binding=\"impl:DataInventorySoapBinding\" name=\"DataInventory\">\n\n
+        \        <wsdlsoap:address location=\"https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory\"/>\n\n
+        \     </wsdl:port>\n\n   </wsdl:service>\n\n</wsdl:definitions>"
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3712'
+      Content-Type:
+      - text/xml
+      Date:
+      - Tue, 21 Jul 2026 09:16:17 GMT
+      ETag:
+      - W/"3712-1673306860000"
+      Last-Modified:
+      - Mon, 09 Jan 2023 23:27:40 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Body><ns0:Parameters
+      xmlns:ns0="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><ns0:stationId>1611347</ns0:stationId></ns0:Parameters></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '323'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '""'
+    method: POST
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><DataInventory
+        xmlns="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><station
+        ID="1611347" name="PORT ALLEN, HANAPEPE BAY, KAUAI ISLAND"><metadata><location><lat>21.9033</lat><long>-159.5920</long><state>HI</state></location><date_established>1988-02-23</date_established><shef_id></shef_id><deployment_designation></deployment_designation></metadata><parameter
+        first="1991-06-01 00:00" last="1997-01-29 23:00" name="Wind"/><parameter first="1991-06-01
+        00:00" last="1992-09-23 01:00" name="Air Temperature"/><parameter first="1993-02-13
+        01:00" last="1997-01-29 23:00" name="Air Temperature"/><parameter first="1991-06-01
+        00:00" last="1997-01-29 23:00" name="Water Temperature"/><parameter first="1991-06-01
+        00:00" last="1997-01-29 23:00" name="Barometric Pressure"/><parameter first="1996-01-01
+        00:00" last="1997-01-29 21:54" name="Verified 6-Minute Water Level"/><parameter
+        first="1989-02-16 00:00" last="1997-01-29 21:00" name="Verified Hourly Height
+        Water Level"/><parameter first="1989-02-16 03:42" last="1997-01-29 21:54"
+        name="Verified High/Low Water Level"/><parameter first="1989-03-01 00:00"
+        last="1996-12-31 23:54" name="Verified Monthly Mean Water Level"/></station></DataInventory></soapenv:Body></soapenv:Envelope>
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/xml;charset=utf-8
+      Date:
+      - Tue, 21 Jul 2026 09:16:18 GMT
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/extrfa.json?station=1611347&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"ExtRfa\": [\n    {\n      \"stationId\": \"1611347\",\n
+        \     \"name\": \"PORT ALLEN, HANAPEPE BAY, KAUAI ISLAND\",\n      \"lat\":
+        \"21.9033\",\n      \"lon\": \"-159.5920\",\n      \"tidalEpoch\": \"1983-2001\",\n
+        \     \"gridNum\": 39509,\n      \"gridLat\": 21.5,\n      \"gridLong\": -159.5,\n
+        \     \"region\": \"PAC\",\n      \"localUIndex\": [\n        {\n          \"Uindex\":
+        0.233,\n          \"unit\": \"m\"\n        }\n      ],\n      \"localUTrend\":
+        [\n        {\n          \"Utrend\": 2.1,\n          \"unit\": \"mm\"\n        }\n
+        \     ],\n      \"startDate\": \"02/16/1989\",\n      \"endDate\": \"01/29/1997\",\n
+        \     \"validDays\": 2896,\n      \"totalDays\": 2905,\n      \"percentValidDays\":
+        99.7,\n      \"long_term_flag\": false,\n      \"short_term_flag\": true,\n
+        \     \"probabilitiesUnit\": \"m\",\n      \"ewlProbabilities\": [\n        {\n
+        \         \"rl\": \"0.1yr\",\n          \"value\": 0.23,\n          \"ci_low\":
+        0.18,\n          \"ci_high\": 0.28\n        },\n        {\n          \"rl\":
+        \"0.2yr\",\n          \"value\": 0.27,\n          \"ci_low\": 0.2,\n          \"ci_high\":
+        0.33\n        },\n        {\n          \"rl\": \"0.3yr\",\n          \"value\":
+        0.29,\n          \"ci_low\": 0.22,\n          \"ci_high\": 0.36\n        },\n
+        \       {\n          \"rl\": \"0.4yr\",\n          \"value\": 0.3,\n          \"ci_low\":
+        0.23,\n          \"ci_high\": 0.38\n        },\n        {\n          \"rl\":
+        \"0.5yr\",\n          \"value\": 0.32,\n          \"ci_low\": 0.24,\n          \"ci_high\":
+        0.39\n        },\n        {\n          \"rl\": \"0.6yr\",\n          \"value\":
+        0.32,\n          \"ci_low\": 0.24,\n          \"ci_high\": 0.41\n        },\n
+        \       {\n          \"rl\": \"0.7yr\",\n          \"value\": 0.33,\n          \"ci_low\":
+        0.25,\n          \"ci_high\": 0.42\n        },\n        {\n          \"rl\":
+        \"0.8yr\",\n          \"value\": 0.34,\n          \"ci_low\": 0.26,\n          \"ci_high\":
+        0.43\n        },\n        {\n          \"rl\": \"0.9yr\",\n          \"value\":
+        0.35,\n          \"ci_low\": 0.26,\n          \"ci_high\": 0.43\n        },\n
+        \       {\n          \"rl\": \"1yr\",\n          \"value\": 0.35,\n          \"ci_low\":
+        0.26,\n          \"ci_high\": 0.44\n        },\n        {\n          \"rl\":
+        \"1.1yr\",\n          \"value\": 0.36,\n          \"ci_low\": 0.27,\n          \"ci_high\":
+        0.45\n        },\n        {\n          \"rl\": \"1.2yr\",\n          \"value\":
+        0.36,\n          \"ci_low\": 0.27,\n          \"ci_high\": 0.46\n        },\n
+        \       {\n          \"rl\": \"1.3yr\",\n          \"value\": 0.37,\n          \"ci_low\":
+        0.27,\n          \"ci_high\": 0.46\n        },\n        {\n          \"rl\":
+        \"1.4yr\",\n          \"value\": 0.37,\n          \"ci_low\": 0.28,\n          \"ci_high\":
+        0.47\n        },\n        {\n          \"rl\": \"1.5yr\",\n          \"value\":
+        0.38,\n          \"ci_low\": 0.28,\n          \"ci_high\": 0.47\n        },\n
+        \       {\n          \"rl\": \"1.6yr\",\n          \"value\": 0.38,\n          \"ci_low\":
+        0.28,\n          \"ci_high\": 0.48\n        },\n        {\n          \"rl\":
+        \"1.7yr\",\n          \"value\": 0.38,\n          \"ci_low\": 0.28,\n          \"ci_high\":
+        0.48\n        },\n        {\n          \"rl\": \"1.8yr\",\n          \"value\":
+        0.39,\n          \"ci_low\": 0.29,\n          \"ci_high\": 0.49\n        },\n
+        \       {\n          \"rl\": \"1.9yr\",\n          \"value\": 0.39,\n          \"ci_low\":
+        0.29,\n          \"ci_high\": 0.49\n        },\n        {\n          \"rl\":
+        \"2yr\",\n          \"value\": 0.39,\n          \"ci_low\": 0.29,\n          \"ci_high\":
+        0.49\n        },\n        {\n          \"rl\": \"5yr\",\n          \"value\":
+        0.45,\n          \"ci_low\": 0.33,\n          \"ci_high\": 0.57\n        },\n
+        \       {\n          \"rl\": \"10yr\",\n          \"value\": 0.49,\n          \"ci_low\":
+        0.36,\n          \"ci_high\": 0.62\n        },\n        {\n          \"rl\":
+        \"15yr\",\n          \"value\": 0.51,\n          \"ci_low\": 0.38,\n          \"ci_high\":
+        0.66\n        },\n        {\n          \"rl\": \"20yr\",\n          \"value\":
+        0.53,\n          \"ci_low\": 0.39,\n          \"ci_high\": 0.68\n        },\n
+        \       {\n          \"rl\": \"25yr\",\n          \"value\": 0.55,\n          \"ci_low\":
+        0.4,\n          \"ci_high\": 0.7\n        },\n        {\n          \"rl\":
+        \"30yr\",\n          \"value\": 0.56,\n          \"ci_low\": 0.41,\n          \"ci_high\":
+        0.72\n        },\n        {\n          \"rl\": \"35yr\",\n          \"value\":
+        0.57,\n          \"ci_low\": 0.41,\n          \"ci_high\": 0.73\n        },\n
+        \       {\n          \"rl\": \"40yr\",\n          \"value\": 0.58,\n          \"ci_low\":
+        0.42,\n          \"ci_high\": 0.74\n        },\n        {\n          \"rl\":
+        \"45yr\",\n          \"value\": 0.59,\n          \"ci_low\": 0.42,\n          \"ci_high\":
+        0.75\n        },\n        {\n          \"rl\": \"50yr\",\n          \"value\":
+        0.6,\n          \"ci_low\": 0.43,\n          \"ci_high\": 0.76\n        }\n
+        \     ]\n    }\n  ]\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 09:16:19 GMT
+      content-length:
+      - '4458'
+      x-amz-apigw-id:
+      - A2XTqFC7IAMEeLw=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '4458'
+      x-amzn-Remapped-Date:
+      - Tue, 21 Jul 2026 09:16:19 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 3d4b80a0-3193-4149-b862-a879cd28fb11
+    status:
+      code: 200
+      message: OK
+version: 1
