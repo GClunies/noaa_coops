@@ -32,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   transient failures (`429`/`5xx`). Gives the data-inventory path the same
   resiliency the REST path already had.
 
+### Removed
+
+- **`datums` product.** Removed from `ALL_PRODUCTS` — it's a Metadata API concept (`station.datums`), not a Data API product.
+
 ## [0.5.0]
 
 Major modernization release. Every layer of the project was touched — build
