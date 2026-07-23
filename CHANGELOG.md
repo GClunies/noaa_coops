@@ -8,14 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+
 - **`daily_max_min` product support:** `Station.get_data()` now accepts `product="daily_max_min"`.
 - Standardized API response handling for `daily_max_min` to unify 6-minute and hourly payloads into a consistent `(record_type, value, pcComplete, flag)` column schema.
 - Added `max_min_type` parameter to filter extrema (`"max"`, `"min"`, or `None` for both). 
 - `interval` now automatically defaults to `"h"` (hourly) when requesting `daily_max_min` to prevent mixed-interval responses.
 - Added `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED` registries, with strict parameter validation for `max_min_type`.
 - Added `PRODUCT_LIMITS` dictionary to `_products.py` to support pagination and chunking limits.
+- **Derived Product API (DPAPI) support:** `Station.get_derived_product()` fetches computed/aggregate NOAA products — sea level trends, sea level rise projections, high-tide-flooding counts, extreme water levels, and regional frequency analysis. See README for supported products and usage.
+- Parameter validation for derived products fails fast with `ValueError` before any network call, matching `get_data()`'s existing behavior.
 
 ### Fixed
+
 - Improved API error handling in `_make_api_request`: Reinstated checks for HTTP 200 responses that contain an embedded `{"error": {"message": "..."}}` body, ensuring bad parameter requests fail fast with clear error messages rather than silently crashing the parser.
 - Enforced datum validation for the `ofs_water_level` product to ensure requests fail fast before hitting the API.
 - `Station.get_data` uses `PRODUCT_LIMITS` for `_fetch_in_blocks` block sizing, so each product respects its own documented API date-range cap. Previously, all products used a hardcoded 31-day limit (except `hourly_height`/`high_low` at 365 days).

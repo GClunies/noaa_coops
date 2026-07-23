@@ -195,13 +195,13 @@ def build_dpapi_url(
     elif product == "sealvltrends":
         if affil:
             parameters["affil"] = affil
+        if units:
+            parameters["units"] = units
         if detail == "monthly_means":
             parameters["details"] = "monthlymeans"
             # confirmed: all 510 stations report trendType=SINGLE as of this
             # check; hardcoded rather than fetched per-call.
             parameters["trendType"] = "SINGLE"
-            if units:
-                parameters["units"] = units
         url = f"{DPAPI_BASE_URL}product/{product}.json"
 
     elif product == "slr_projections":
@@ -431,7 +431,10 @@ def get_derived_product(
             to DPAPI's required "%Y%m%d" before the request is sent.
         end_date: End date, same formats as start_date.
         year: Year filter, used by HTF products.
-        units: "metric" (default) or "english".
+        units: "metric" or "english". NOAA's server-side default when omitted varies by product — 
+                toptenwaterlevels, extremewaterlevels, extrfa, and htf_daily default to english; 
+                slr_projections defaults to metric. 
+                Passing units explicitly is recommended.
         datum: Datum reference — valid values depend on product, see
             DATUM_OPTIONS. Not every product accepts a datum.
         affil: "US" or "Global" — sealvltrends, slr_projections, offsets.
