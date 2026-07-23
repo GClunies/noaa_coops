@@ -208,7 +208,7 @@ class Station:
         if interval is None and product == "daily_max_min":
             interval = "h"
 
-        max_days = PRODUCT_LIMITS.get(product)
+        max_days = PRODUCT_LIMITS[product]
         single_block = delta.days <= max_days
 
         if single_block:
@@ -394,7 +394,7 @@ class Station:
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = PRODUCT_LIMITS.get(product)
+        block_size = PRODUCT_LIMITS[product]
         delta = end_dt - begin_dt
         num_blocks = int(math.ceil(delta.days / block_size))
 

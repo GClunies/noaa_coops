@@ -787,19 +787,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Jul 2026 17:06:38 GMT
+      - Thu, 23 Jul 2026 11:51:48 GMT
       content-length:
       - '58889'
       x-amz-apigw-id:
-      - A3cM4FzSoAMEh7Q=
+      - A9T9TFk-oAMEXlw=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Tue, 21 Jul 2026 17:06:38 GMT
+      - Thu, 23 Jul 2026 11:51:48 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - 69ed541e-8601-4d17-94b9-76f99e1a67ab
+      - 77f8c4eb-06f5-4551-846c-7ad761e69502
     status:
       code: 200
       message: OK
@@ -870,7 +870,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Tue, 21 Jul 2026 17:06:40 GMT
+      - Thu, 23 Jul 2026 11:51:50 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -907,13 +907,13 @@ interactions:
         xmlns="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><station
         ID="1611400" name="Nawiliwili"><metadata><location><lat>21.9544</lat><long>-159.3561</long><state>HI</state></location><date_established>1954-11-24</date_established><shef_id>NWWH1</shef_id><deployment_designation>NWLON</deployment_designation></metadata><parameter
         first="2009-01-16 20:42" last="2013-01-11 02:00" name="Wind"/><parameter first="2015-02-07
-        10:24" last="2026-07-21 17:00" name="Wind"/><parameter first="2009-01-16 20:42"
+        10:24" last="2026-07-23 11:42" name="Wind"/><parameter first="2009-01-16 20:42"
         last="2013-01-11 02:36" name="Air Temperature"/><parameter first="2015-02-07
-        10:24" last="2026-07-21 17:00" name="Air Temperature"/><parameter first="1994-01-22
-        10:00" last="2026-07-21 17:00" name="Water Temperature"/><parameter first="2009-01-16
+        10:24" last="2026-07-23 11:42" name="Air Temperature"/><parameter first="1994-01-22
+        10:00" last="2026-07-23 11:42" name="Water Temperature"/><parameter first="2009-01-16
         20:42" last="2013-01-11 02:36" name="Barometric Pressure"/><parameter first="2015-02-07
-        10:24" last="2026-07-21 17:00" name="Barometric Pressure"/><parameter first="2001-01-01
-        00:00" last="2026-07-21 17:00" name="Preliminary 6-Minute Water Level"/><parameter
+        10:24" last="2026-07-23 11:42" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-23 11:42" name="Preliminary 6-Minute Water Level"/><parameter
         first="1995-11-30 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
         Level"/><parameter first="1954-11-27 10:00" last="2026-06-30 23:00" name="Verified
         Hourly Height Water Level"/><parameter first="1979-02-01 10:18" last="2026-06-30
@@ -927,7 +927,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Tue, 21 Jul 2026 17:06:42 GMT
+      - Thu, 23 Jul 2026 11:51:52 GMT
       Server:
       - nginx
       Transfer-Encoding:
@@ -945,35 +945,40 @@ interactions:
       Connection:
       - keep-alive
     method: GET
-    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400
+    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400&units=metric
   response:
     body:
       string: "{\n  \"count\": 1,\n  \"SeaLvlTrends\": [\n    {\n      \"stationId\":
         \"1611400\",\n      \"stationName\": \"Nawiliwili\",\n      \"affil\": \"US\",\n
-        \     \"trendUnits\": \"inches/decade\",\n      \"seasonalUnits\": \"inches\",\n
-        \     \"seasonalAverage\": 0.98,\n      \"latitude\": 21.9544,\n      \"longitude\":
-        -159.3561,\n      \"trendType\": \"SINGLE\",\n      \"autoregressive\": 0.66,\n
-        \     \"autoregressiveError\": 0.03,\n      \"trend\": 0.75,\n      \"trendError\":
-        0.07,\n      \"y2000_offset\": 0.0,\n      \"startDate\": \"01/15/1955\",\n
-        \     \"endDate\": \"12/15/2025\",\n      \"monthlyMeans\": \"https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400&details=monthlymeans&units=english&trendType=SINGLE\",\n
+        \     \"annotation\": null,\n      \"trendUnits\": \"mm/yr\",\n      \"units\":
+        null,\n      \"seasonalUnits\": \"meters\",\n      \"seasonalAverage\": 0.025,\n
+        \     \"latitude\": 21.9544,\n      \"longitude\": -159.3561,\n      \"trendType\":
+        \"SINGLE\",\n      \"autoregressive\": 0.66,\n      \"autoregressiveError\":
+        0.03,\n      \"trend\": 1.9,\n      \"trendError\": 0.19,\n      \"y2000_offset\":
+        0.0,\n      \"startDate\": \"01/15/1955\",\n      \"endDate\": \"12/15/2025\",\n
+        \     \"trend0\": null,\n      \"trendError0\": null,\n      \"y2000_offset0\":
+        null,\n      \"startDate0\": null,\n      \"endDate0\": null,\n      \"monthlyMeans\":
+        \"https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400&details=monthlymeans&units=metric&trendType=SINGLE\",\n
         \     \"numberEvents\": 0,\n      \"events\": [],\n      \"seasonalCycleMonth\":
-        [\n        {\n          \"month\": 1,\n          \"seasonalVar\": -0.27,\n
-        \         \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
-        2,\n          \"seasonalVar\": -1.06,\n          \"seasonalErr\": 0.24\n        },\n
-        \       {\n          \"month\": 3,\n          \"seasonalVar\": -1.52,\n          \"seasonalErr\":
-        0.28\n        },\n        {\n          \"month\": 4,\n          \"seasonalVar\":
-        -1.7,\n          \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
-        5,\n          \"seasonalVar\": -1.66,\n          \"seasonalErr\": 0.24\n        },\n
-        \       {\n          \"month\": 6,\n          \"seasonalVar\": -1.13,\n          \"seasonalErr\":
-        0.24\n        },\n        {\n          \"month\": 7,\n          \"seasonalVar\":
-        0.44,\n          \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
-        8,\n          \"seasonalVar\": 1.38,\n          \"seasonalErr\": 0.24\n        },\n
-        \       {\n          \"month\": 9,\n          \"seasonalVar\": 2.31,\n          \"seasonalErr\":
-        0.24\n        },\n        {\n          \"month\": 10,\n          \"seasonalVar\":
-        2.01,\n          \"seasonalErr\": 0.24\n        },\n        {\n          \"month\":
-        11,\n          \"seasonalVar\": 0.97,\n          \"seasonalErr\": 0.24\n        },\n
-        \       {\n          \"month\": 12,\n          \"seasonalVar\": 0.23,\n          \"seasonalErr\":
-        0.24\n        }\n      ]\n    }\n  ]\n}"
+        [\n        {\n          \"month\": 1,\n          \"seasonalVar\": -0.007,\n
+        \         \"seasonalErr\": 0.006\n        },\n        {\n          \"month\":
+        2,\n          \"seasonalVar\": -0.027,\n          \"seasonalErr\": 0.006\n
+        \       },\n        {\n          \"month\": 3,\n          \"seasonalVar\":
+        -0.039,\n          \"seasonalErr\": 0.007\n        },\n        {\n          \"month\":
+        4,\n          \"seasonalVar\": -0.043,\n          \"seasonalErr\": 0.006\n
+        \       },\n        {\n          \"month\": 5,\n          \"seasonalVar\":
+        -0.042,\n          \"seasonalErr\": 0.006\n        },\n        {\n          \"month\":
+        6,\n          \"seasonalVar\": -0.029,\n          \"seasonalErr\": 0.006\n
+        \       },\n        {\n          \"month\": 7,\n          \"seasonalVar\":
+        0.011,\n          \"seasonalErr\": 0.006\n        },\n        {\n          \"month\":
+        8,\n          \"seasonalVar\": 0.035,\n          \"seasonalErr\": 0.006\n
+        \       },\n        {\n          \"month\": 9,\n          \"seasonalVar\":
+        0.059,\n          \"seasonalErr\": 0.006\n        },\n        {\n          \"month\":
+        10,\n          \"seasonalVar\": 0.051,\n          \"seasonalErr\": 0.006\n
+        \       },\n        {\n          \"month\": 11,\n          \"seasonalVar\":
+        0.025,\n          \"seasonalErr\": 0.006\n        },\n        {\n          \"month\":
+        12,\n          \"seasonalVar\": 0.006,\n          \"seasonalErr\": 0.006\n
+        \       }\n      ],\n      \"trends\": null\n    }\n  ]\n}"
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -986,21 +991,21 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Jul 2026 17:06:43 GMT
+      - Thu, 23 Jul 2026 11:51:53 GMT
       content-length:
-      - '2042'
+      - '2255'
       x-amz-apigw-id:
-      - A3cNmHBmoAMEkTw=
+      - A9T-BH6lIAMEoww=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Content-Length:
-      - '2042'
+      - '2255'
       x-amzn-Remapped-Date:
-      - Tue, 21 Jul 2026 17:06:43 GMT
+      - Thu, 23 Jul 2026 11:51:53 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - d288f366-3019-478b-bd8a-6771f7c6f361
+      - 9a46bc2e-f73c-4e9f-af6a-11eef58c9a8d
     status:
       code: 200
       message: OK

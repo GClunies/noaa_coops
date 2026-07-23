@@ -237,7 +237,10 @@ def build_dpapi_url(
     else:
         raise ValueError(f"No URL pattern defined for product '{product}'")
 
-    return requests.Request("GET", url, params=parameters).prepare().url
+    prepared_url = requests.Request("GET", url, params=parameters).prepare().url
+    if prepared_url is None:
+        raise COOPSAPIError(f"Failed to build a request URL for product '{product}'.")
+    return prepared_url
 
 
 # ---------------------------------------------------------------------------
@@ -258,7 +261,7 @@ def _parse_extrfa(payload: dict) -> pd.DataFrame:
         record["localUTrend_value"] = record["localUTrend"][0]["Utrend"]
         record["localUTrend_unit"] = record["localUTrend"][0]["unit"]
 
-    meta_fields = [
+    meta_fields: list[str | list[str]] = [
         "stationId",
         "name",
         "lat",
@@ -291,7 +294,7 @@ def _parse_extrfa(payload: dict) -> pd.DataFrame:
 
 def _parse_extremewaterlevels(payload: dict, level_type: Optional[str]) -> pd.DataFrame:
     records = payload["ExtremeWaterLevels"]
-    meta_fields = [
+    meta_fields: list[str | list[str]] = [
         "stationId",
         "stationName",
         "stationTitle",
@@ -340,7 +343,7 @@ def _parse_sealvltrends(payload: dict, detail: Optional[str]) -> pd.DataFrame:
         return pd.json_normalize(payload["data"])
 
     records = payload["SeaLvlTrends"]
-    meta_fields = [
+    meta_fields: list[str | list[str]] = [
         "stationId",
         "stationName",
         "affil",
@@ -431,9 +434,9 @@ def get_derived_product(
             to DPAPI's required "%Y%m%d" before the request is sent.
         end_date: End date, same formats as start_date.
         year: Year filter, used by HTF products.
-        units: "metric" or "english". NOAA's server-side default when omitted varies by product — 
-                toptenwaterlevels, extremewaterlevels, extrfa, and htf_daily default to english; 
-                slr_projections defaults to metric. 
+        units: "metric" or "english". NOAA's server-side default when omitted varies by product —
+                toptenwaterlevels, extremewaterlevels, extrfa, and htf_daily default to english;
+                slr_projections defaults to metric.
                 Passing units explicitly is recommended.
         datum: Datum reference — valid values depend on product, see
             DATUM_OPTIONS. Not every product accepts a datum.
