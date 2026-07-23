@@ -12,7 +12,6 @@ on every PR. See ``.github/workflows/nightly.yml``.
 
 from __future__ import annotations
 
-import pandas as pd
 import pytest
 
 import noaa_coops as nc
