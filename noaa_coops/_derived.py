@@ -55,6 +55,19 @@ SEALVLTRENDS_DETAILS: frozenset[str] = frozenset(
 #: server-side param for this specific field
 EXTREMEWATERLEVELS_LEVEL_TYPES: frozenset[str] = frozenset({"high", "low"})
 
+#: slr_projections `scenario` options. Default (server-side, when omitted) is "all".
+SLR_PROJECTION_SCENARIOS: frozenset[str] = frozenset(
+    {
+        "all",
+        "low",
+        "intermediate-low",
+        "intermediate",
+        "intermediate-high",
+        "high",
+        "extreme",
+    }
+)
+
 
 # ---------------------------------------------------------------------------
 # Validation
@@ -77,6 +90,7 @@ def validate_params(
     datum: Optional[str],
     detail: Optional[str] = None,
     level_type: Optional[str] = None,
+    scenario: Optional[str] = None,
 ) -> None:
     """Validate arguments before any DPAPI request is made.
 
@@ -143,6 +157,17 @@ def validate_params(
             raise ValueError(
                 f"Invalid level_type '{level_type}'. "
                 f"Must be one of: {sorted(EXTREMEWATERLEVELS_LEVEL_TYPES)}"
+            )
+
+    if scenario is not None:
+        if product != "slr_projections":
+            raise ValueError(
+                f"`scenario` is only supported for slr_projections, not '{product}'."
+            )
+        if scenario not in SLR_PROJECTION_SCENARIOS:
+            raise ValueError(
+                f"Invalid scenario '{scenario}'. "
+                f"Must be one of: {sorted(SLR_PROJECTION_SCENARIOS)}"
             )
 
 
@@ -443,7 +468,10 @@ def get_derived_product(
         affil: "US" or "Global" — sealvltrends, slr_projections, offsets.
         projection_year: slr_projections only.
         report_year: slr_projections, slr_projectionOffsets.
-        scenario: slr_projections only.
+        scenario: slr_projections only. One of: 'all', 'low',
+            'intermediate-low', 'intermediate', 'intermediate-high',
+            'high', 'extreme'. Default (server-side, when omitted) is
+            'all'.
         detail: sealvltrends only. "monthly_means" (deseasonalized monthly
             series), "events" (may be empty), or "seasonal_cycle" (the
             12-month seasonal pattern removed to compute the trend). Omit
@@ -452,7 +480,8 @@ def get_derived_product(
             tenYearEvents client-side. Omit for full station metadata.
 
     Raises:
-        ValueError: product invalid, or a required/unsupported param for it.
+        ValueError: product invalid, or a required/unsupported/invalid
+            param for it.
         COOPSAPIError: DPAPI returned a non-200 response.
 
     Returns:
@@ -476,6 +505,7 @@ def get_derived_product(
         datum=datum,
         detail=detail,
         level_type=level_type,
+        scenario=scenario,
     )
 
     url = build_dpapi_url(

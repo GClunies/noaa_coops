@@ -45,6 +45,14 @@ BASE = {
             {"product": "extremewaterlevels", "level_type": "bogus"},
             "Invalid level_type",
         ),
+        (
+            {"product": "extrfa", "scenario": "low"},
+            "only supported for slr_projections",
+        ),
+        (
+            {"product": "slr_projections", "scenario": "bogus"},
+            "Invalid scenario",
+        ),
     ],
 )
 def test_validate_params_rejects_bad_input(overrides, match):
@@ -72,6 +80,9 @@ def test_validate_params_rejects_bad_input(overrides, match):
         {"product": "sealvltrends", "detail": "events"},
         {"product": "sealvltrends", "detail": "seasonal_cycle"},
         {"product": "slr_projections"},
+        {"product": "slr_projections", "scenario": "all"},
+        {"product": "slr_projections", "scenario": "low"},
+        {"product": "slr_projections", "scenario": "intermediate-high"},
         {"product": "slr_projectionOffsets"},
         {"product": "extrfa"},
         {"product": "extrfa", "datum": "MLLW"},

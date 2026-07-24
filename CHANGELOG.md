@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Added `PRODUCT_LIMITS` dictionary to `_products.py` to support pagination and chunking limits.
 - **Derived Product API (DPAPI) support:** `Station.get_derived_product()` fetches computed/aggregate NOAA products — sea level trends, sea level rise projections, high-tide-flooding counts, extreme water levels, and regional frequency analysis. See README for supported products and usage.
 - Parameter validation for derived products fails fast with `ValueError` before any network call, matching `get_data()`'s existing behavior.
+- Added `scenario` validation for `slr_projections`: must be one of `all`, `low`, `intermediate-low`, `intermediate`, `intermediate-high`, `high`, `extreme` (default `all`).
 
 ### Fixed
 

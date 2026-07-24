@@ -297,8 +297,10 @@ class Station:
                 Not every report year has published data — if you get an
                 empty result, try omitting this or checking which years
                 are available.
-            scenario: ``slr_projections`` only (e.g. ``"low"``,
-                ``"intermediate"``, ``"high"``).
+            scenario: ``slr_projections`` only. One of ``"all"``,
+                ``"low"``, ``"intermediate-low"``, ``"intermediate"``,
+                ``"intermediate-high"``, ``"high"``, ``"extreme"``.
+                Default (server-side, when omitted) is ``"all"``.
             detail: ``sealvltrends`` only. ``"monthly_means"``
                 (deseasonalized monthly series), ``"events"`` (may be
                 empty), or ``"seasonal_cycle"`` (the 12-month seasonal
@@ -310,7 +312,7 @@ class Station:
 
         Raises:
             ValueError: ``product`` is invalid, or a parameter is
-                required/unsupported for the chosen product.
+                required/unsupported/invalid for the chosen product.
             COOPSAPIError: DPAPI returned a non-200 response.
 
         Returns:

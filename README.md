@@ -191,7 +191,8 @@ the authoritative reference.
 | `start_date` / `end_date` | **Required** for `htf_daily`. Same accepted formats as `get_data()`.                          |
 | `year`           | Optional year filter, used by HTF products.                                                            |
 | `affil`          | `sealvltrends`, `slr_projections`, `slr_projectionOffsets`: `"US"` or `"Global"`.                       |
-| `projection_year`, `report_year`, `scenario` | `slr_projections`/`slr_projectionOffsets` only. Not every `report_year` has published data. |
+| `projection_year`, `report_year` | `slr_projections`/`slr_projectionOffsets` only. Not every `report_year` has published data. |
+| `scenario`       | `slr_projections` only: `all`, `low`, `intermediate-low`, `intermediate`, `intermediate-high`, `high`, `extreme`. Default is `all`. |
 
 **Valid `datum` values by product:**
 
