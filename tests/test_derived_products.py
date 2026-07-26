@@ -19,7 +19,7 @@ from noaa_coops._derived import build_dpapi_url
 
 DERIVED_PRODUCT_MATRIX = [
     pytest.param(
-        "toptenwaterlevels",
+        "top_ten_water_levels",
         "9447130",
         {"datum": "MLLW"},
         {
@@ -69,7 +69,7 @@ DERIVED_PRODUCT_MATRIX = [
         id="extrfa",
     ),
     pytest.param(
-        "sealvltrends",
+        "sea_level_trends",
         "1611400",
         {"detail": "seasonal_cycle"},
         {
@@ -93,7 +93,7 @@ DERIVED_PRODUCT_MATRIX = [
             "startDate",
             "endDate",
         },
-        id="sealvltrends_seasonal",
+        id="sea_level_trends_seasonal",
     ),
     pytest.param(
         "htf_annual",
@@ -136,13 +136,13 @@ def test_derived_products(
     assert not missing, f"{product} missing expected columns: {missing}"
 
 
-def test_sealvltrends_monthly_means_requests_single_trend_type():
+def test_sea_level_trends_monthly_means_requests_single_trend_type():
     """monthly_means always requests trendType=SINGLE (see _derived.build_dpapi_url) --
     all 510 stations report a single trend type as of the check documented there.
     `trendType` is a request param for this detail"""
 
     url = build_dpapi_url(
-        product="sealvltrends",
+        product="sea_level_trends",
         station_id="1611400",
         detail="monthly_means",
     )
@@ -150,11 +150,11 @@ def test_sealvltrends_monthly_means_requests_single_trend_type():
 
 
 @pytest.mark.vcr
-def test_sealvltrends_monthly_means() -> None:
+def test_sea_level_trends_monthly_means() -> None:
     """Unlike test_derived_products, this checks for an exact column set (`==`),
     not just presence of the expected ones."""
     station = nc.Station(id="1611400")
-    df = station.get_derived_product(product="sealvltrends", detail="monthly_means")
+    df = station.get_derived_product(product="sea_level_trends", detail="monthly_means")
 
     expected_cols = {
         "year",

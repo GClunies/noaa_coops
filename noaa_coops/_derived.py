@@ -7,6 +7,7 @@ the same way ``Station.__init__`` calls ``populate_metadata`` from ``_metadata.p
 
 from __future__ import annotations
 
+import datetime
 from typing import TYPE_CHECKING, Optional
 
 import pandas as pd
@@ -29,9 +30,6 @@ if TYPE_CHECKING:
 HTF_PRODUCTS: frozenset[str] = frozenset(
     {"htf_daily", "htf_monthly", "htf_seasonal", "htf_annual"}
 )
-
-#: Pattern: {base}product/{product}.json  (NOT extrfa — it has its own pattern)
-PATH_PRODUCTS: frozenset[str] = frozenset({"sealvltrends", "slr_projections"})
 
 #: Pattern: {base}product.json?name={product}
 PARAM_PRODUCTS: frozenset[str] = frozenset({"toptenwaterlevels", "extremewaterlevels"})
@@ -68,6 +66,23 @@ SLR_PROJECTION_SCENARIOS: frozenset[str] = frozenset(
     }
 )
 
+#: Public product name -> NOAA DPAPI product name.
+#: `Station.get_derived_product` accepts and returns the public name; only
+#: `build_dpapi_url` needs to know the underlying API spelling. Products
+#: already in snake_case (htf_daily, htf_monthly, htf_seasonal, htf_annual,
+#: slr_projections, extrfa) aren't listed since the public and API names match.
+PRODUCT_ALIASES: dict[str, str] = {
+    "sea_level_trends": "sealvltrends",
+    "slr_projection_offsets": "slr_projectionOffsets",
+    "top_ten_water_levels": "toptenwaterlevels",
+    "extreme_water_levels": "extremewaterlevels",
+}
+
+
+def _to_api_product(product: str) -> str:
+    """Translate a public snake_case product name to NOAA's API name."""
+    return PRODUCT_ALIASES.get(product, product)
+
 
 # ---------------------------------------------------------------------------
 # Validation
@@ -91,20 +106,18 @@ def validate_params(
     detail: Optional[str] = None,
     level_type: Optional[str] = None,
     scenario: Optional[str] = None,
+    year: Optional[int] = None,
 ) -> None:
     """Validate arguments before any DPAPI request is made.
+
+    ``product`` is the public snake_case name (see PRODUCT_ALIASES); error
+    messages echo it back so users never see NOAA's internal spelling.
 
     Raises ValueError on the first failure — same contract as
     _products.validate_params, called before any network activity.
     """
     valid_products = (
-        HTF_PRODUCTS
-        | PATH_PRODUCTS
-        | PARAM_PRODUCTS
-        | {
-            "extrfa",
-            "slr_projectionOffsets",
-        }
+        HTF_PRODUCTS | {"slr_projections", "extrfa"} | frozenset(PRODUCT_ALIASES)
     )
     if product not in valid_products:
         raise ValueError(
@@ -112,7 +125,9 @@ def validate_params(
             "See https://api.tidesandcurrents.noaa.gov/dpapi/prod/#products"
         )
 
-    if product in DATES_REQUIRED:
+    api_product = _to_api_product(product)
+
+    if api_product in DATES_REQUIRED:
         if not start_date or not end_date:
             raise ValueError(
                 f"`start_date` and `end_date` are both required for product '{product}'."
@@ -127,7 +142,7 @@ def validate_params(
         raise ValueError(f"Invalid units '{units}'. Must be 'metric' or 'english'.")
 
     if datum is not None:
-        valid_datums = DATUM_OPTIONS.get(product)
+        valid_datums = DATUM_OPTIONS.get(api_product)
         if valid_datums is None:
             raise ValueError(
                 f"Product '{product}' does not accept a `datum` parameter."
@@ -139,9 +154,9 @@ def validate_params(
             )
 
     if detail is not None:
-        if product != "sealvltrends":
+        if api_product != "sealvltrends":
             raise ValueError(
-                f"`detail` is only supported for sealvltrends, not '{product}'."
+                f"`detail` is only supported for sea_level_trends, not '{product}'."
             )
         if detail not in SEALVLTRENDS_DETAILS:
             raise ValueError(
@@ -149,9 +164,9 @@ def validate_params(
             )
 
     if level_type is not None:
-        if product != "extremewaterlevels":
+        if api_product != "extremewaterlevels":
             raise ValueError(
-                f"`level_type` is only supported for extremewaterlevels, not '{product}'."
+                f"`level_type` is only supported for extreme_water_levels, not '{product}'."
             )
         if level_type not in EXTREMEWATERLEVELS_LEVEL_TYPES:
             raise ValueError(
@@ -160,7 +175,7 @@ def validate_params(
             )
 
     if scenario is not None:
-        if product != "slr_projections":
+        if api_product != "slr_projections":
             raise ValueError(
                 f"`scenario` is only supported for slr_projections, not '{product}'."
             )
@@ -168,6 +183,15 @@ def validate_params(
             raise ValueError(
                 f"Invalid scenario '{scenario}'. "
                 f"Must be one of: {sorted(SLR_PROJECTION_SCENARIOS)}"
+            )
+
+    if year is not None:
+        if isinstance(year, bool) or not isinstance(year, int):
+            raise ValueError(f"`year` must be an int, got {type(year).__name__}.")
+        current_year = datetime.date.today().year
+        if not (1800 <= year <= current_year):
+            raise ValueError(
+                f"Invalid year '{year}'. Must be between 1800 and {current_year}."
             )
 
 
@@ -191,8 +215,11 @@ def build_dpapi_url(
     detail: Optional[str] = None,
 ) -> str:
     """Build a DPAPI request URL. Assumes validate_params() already ran.
-    Internal helper — see Station.get_derived_product() for parameter docs.
+    ``product`` is the public snake_case name; it's translated to NOAA's
+    API spelling here. Internal helper — see Station.get_derived_product()
+    for parameter docs.
     """
+    product = _to_api_product(product)
     parameters: dict[str, str] = {}
     if station_id:
         parameters["station"] = station_id
@@ -413,9 +440,16 @@ def parse_dpapi_response(
 ) -> pd.DataFrame:
     """Turn a raw DPAPI JSON payload into a DataFrame.
 
+    ``product`` is the public snake_case name; it's translated to NOAA's
+    API spelling here.
+
     Every Phase 1 product ends up representable as a DataFrame (single-row
     for station-info-only responses, multi-row for exploded sub-tables) —
+    extrfa, sealvltrends, and extremewaterlevels get dedicated parsers below;
+    everything else falls through to a generic json_normalize on whichever
+    top-level key holds a list.
     """
+    product = _to_api_product(product)
     if product == "extrfa":
         return _parse_extrfa(payload)
     if product == "sealvltrends":
@@ -446,37 +480,46 @@ def get_derived_product(
     scenario: Optional[str] = None,
     detail: Optional[
         str
-    ] = None,  # sealvltrends: "monthly_means" | "events" | "seasonal_cycle"
-    level_type: Optional[str] = None,  # extremewaterlevels: "high" | "low"
+    ] = None,  # sea_level_trends: "monthly_means" | "events" | "seasonal_cycle"
+    level_type: Optional[str] = None,  # extreme_water_levels: "high" | "low"
 ) -> pd.DataFrame:
     """Fetch a derived product for ``station`` from the NOAA DPAPI.
 
     Args:
         station: The bound Station instance — station.id is used as the
             station_id for this request.
-        product: DPAPI product name.
+        product: DPAPI product name, in conventional snake_case (e.g.
+            "sea_level_trends", "slr_projection_offsets",
+            "top_ten_water_levels", "extreme_water_levels")
+            regardless of NOAA's underlying API spelling — see
+            PRODUCT_ALIASES for the full mapping. Products like "extrfa"
+            and "slr_projections" already match NOAA's spelling as-is.
         start_date: Start date, any KNOWN_DATE_FORMATS format, normalized
             to DPAPI's required "%Y%m%d" before the request is sent.
+            Required for htf_daily; also accepted (optional) by
+            htf_monthly.
         end_date: End date, same formats as start_date.
-        year: Year filter, used by HTF products.
-        units: "metric" or "english". NOAA's server-side default when omitted varies by product —
-                toptenwaterlevels, extremewaterlevels, extrfa, and htf_daily default to english;
-                slr_projections defaults to metric.
-                Passing units explicitly is recommended.
+        year: Year filter, used by HTF products. Must be between 1800 and
+            the current year.
+        units: "metric" or "english". NOAA's server-side default when omitted
+            varies by product — top_ten_water_levels, extreme_water_levels,
+            extrfa, and htf_daily default to english; slr_projections
+            defaults to metric. Passing units explicitly is recommended.
         datum: Datum reference — valid values depend on product, see
             DATUM_OPTIONS. Not every product accepts a datum.
-        affil: "US" or "Global" — sealvltrends, slr_projections, offsets.
+        affil: "US" or "Global" — sea_level_trends, slr_projections,
+            slr_projection_offsets.
         projection_year: slr_projections only.
-        report_year: slr_projections, slr_projectionOffsets.
+        report_year: slr_projections, slr_projection_offsets.
         scenario: slr_projections only. One of: 'all', 'low',
             'intermediate-low', 'intermediate', 'intermediate-high',
             'high', 'extreme'. Default (server-side, when omitted) is
             'all'.
-        detail: sealvltrends only. "monthly_means" (deseasonalized monthly
+        detail: sea_level_trends only. "monthly_means" (deseasonalized monthly
             series), "events" (may be empty), or "seasonal_cycle" (the
             12-month seasonal pattern removed to compute the trend). Omit
             for the top-level trend statistics.
-        level_type: extremewaterlevels only. "high" or "low" — filters
+        level_type: extreme_water_levels only. "high" or "low" — filters
             tenYearEvents client-side. Omit for full station metadata.
 
     Raises:
@@ -486,7 +529,7 @@ def get_derived_product(
 
     Returns:
         A DataFrame. Single row for station-info-only responses (no
-        detail/level_type given on sealvltrends/extremewaterlevels),
+        detail/level_type given on sea_level_trends/extreme_water_levels),
         multiple rows with station identity columns included for exploded
         sub-tables (e.g. RFA's ewlProbabilities, HTF time series).
     """
@@ -506,6 +549,7 @@ def get_derived_product(
         detail=detail,
         level_type=level_type,
         scenario=scenario,
+        year=year,
     )
 
     url = build_dpapi_url(

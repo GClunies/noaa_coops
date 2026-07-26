@@ -277,23 +277,31 @@ class Station:
 
         Args:
             product: DPAPI product name. One of: ``"htf_daily"``,
-                ``"htf_monthly"``, ``"htf_seasonal"``, ``"htf_annual"``,
-                ``"sealvltrends"``, ``"slr_projections"``,
-                ``"slr_projectionOffsets"``, ``"extrfa"``,
-                ``"toptenwaterlevels"``, ``"extremewaterlevels"``.
+                ``"htf_monthly"``, ``"htf_seasonal"``,
+                ``"htf_annual"``, ``"sea_level_trends"``,
+                ``"slr_projections"``, ``"slr_projection_offsets"``,
+                ``"extrfa"``, ``"top_ten_water_levels"``,
+                ``"extreme_water_levels"``.
             start_date: Start date. Accepts any of the formats in
                 :data:`noaa_coops._parsing.KNOWN_DATE_FORMATS`; normalized
                 to DPAPI's required ``"%Y%m%d"`` before the request is
-                sent. Required for ``"htf_daily"``.
+                sent. Required for ``"htf_daily"``; also accepted
+                (optional) by ``"htf_monthly"``.
             end_date: End date, same formats as ``start_date``.
-            year: Year filter, used by HTF products.
-            units: ``"metric"`` (default) or ``"english"``.
+            year: Year filter, used by HTF products. Must be between 1800
+                and the current year.
+            units: ``"metric"`` (default) or ``"english"``. NOAA's
+                server-side default when omitted varies by product —
+                ``top_ten_water_levels``, ``extreme_water_levels``,
+                ``extrfa``, and ``htf_daily`` default to english;
+                ``slr_projections`` defaults to metric. Passing units
+                explicitly is recommended.
             datum: Datum reference. Valid values depend on ``product`` —
                 not every product accepts a datum at all.
-            affil: ``"US"`` or ``"Global"`` — ``sealvltrends``,
-                ``slr_projections``, ``slr_projectionOffsets``.
+            affil: ``"US"`` or ``"Global"`` — ``sea_level_trends``,
+                ``slr_projections``, ``slr_projection_offsets``.
             projection_year: ``slr_projections`` only.
-            report_year: ``slr_projections``, ``slr_projectionOffsets``.
+            report_year: ``slr_projections``, ``slr_projection_offsets``.
                 Not every report year has published data — if you get an
                 empty result, try omitting this or checking which years
                 are available.
@@ -301,12 +309,12 @@ class Station:
                 ``"low"``, ``"intermediate-low"``, ``"intermediate"``,
                 ``"intermediate-high"``, ``"high"``, ``"extreme"``.
                 Default (server-side, when omitted) is ``"all"``.
-            detail: ``sealvltrends`` only. ``"monthly_means"``
+            detail: ``sea_level_trends`` only. ``"monthly_means"``
                 (deseasonalized monthly series), ``"events"`` (may be
                 empty), or ``"seasonal_cycle"`` (the 12-month seasonal
                 pattern removed to compute the trend). Omit for the
                 top-level trend statistics.
-            level_type: ``extremewaterlevels`` only. ``"high"`` or
+            level_type: ``extreme_water_levels`` only. ``"high"`` or
                 ``"low"`` — filters the ten-year event history. Omit for
                 full station metadata.
 
@@ -316,10 +324,11 @@ class Station:
             COOPSAPIError: DPAPI returned a non-200 response.
 
         Returns:
-            A DataFrame. Station identity columns are included whenever
-            the result spans multiple rows (e.g. exploded sub-tables like
-            RFA's return-period probabilities), so the data stays
-            traceable even if extracted from this call's context.
+            A DataFrame. Multi-row results
+            (e.g. RFA's exploded return-period table)
+            include station identity columns so each row
+            remains attributable to its station even after
+            the DataFrame leaves this call's scope.
         """
         return _get_derived_product(
             self,

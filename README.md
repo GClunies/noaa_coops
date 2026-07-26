@@ -140,19 +140,19 @@ via the [Derived Product API](https://api.tidesandcurrents.noaa.gov/dpapi/prod/)
 
 ```python
 >>> seattle = Station(id="9447130")
->>> df = seattle.get_derived_product(product="sealvltrends", units="english")
+>>> df = seattle.get_derived_product(product="sea_level_trends", units="english")
 >>> df[["stationName", "trend", "trendError", "trendUnits"]]
    stationName      trend   trendError  trendUnits
 0  Seattle          0.82    0.03        inches/decade
 ```
 
 Some products accept extra parameters to select a sub-resource. 
-- `sealvltrends` takes `detail` (`"monthly_means"`, `"events"`, `"seasonal_cycle"`);
-- `extremewaterlevels` takes `level_type` (`"high"`, `"low"`):
+- `sea_level_trends` takes `detail` (`"monthly_means"`, `"events"`, `"seasonal_cycle"`);
+- `extreme_water_levels` takes `level_type` (`"high"`, `"low"`):
 
 ```python
 >>> monthly = seattle.get_derived_product(
-...     product="sealvltrends", detail="monthly_means"
+...     product="sea_level_trends", detail="monthly_means"
 ... )
 >>> monthly
    year  month    meanDate  mslDeseasonalized     msl  trendLine  upperConfidence  lowerConfidence
@@ -163,7 +163,7 @@ Some products accept extra parameters to select a sub-resource.
 4  1899      5  05/15/1899             -0.223  -0.279     -0.198           -0.188           -0.208
 
 >>> lows = seattle.get_derived_product(
-...     product="extremewaterlevels", level_type="low"
+...     product="extreme_water_levels", level_type="low"
 ... )
 >>> lows.head()
      type        date status  stationId stationName          stationTitle state       epoch  epochMidyear   latitude   longitude  annotation
@@ -183,24 +183,24 @@ the authoritative reference.
 
 | Argument         | Accepted values                                                                                     |
 |------------------|--------------------------------------------------------------------------------------------------------|
-| `product`        | `htf_daily` — high-tide-flooding, daily. **Requires** `start_date`/`end_date`. <br> `htf_monthly` — high-tide-flooding, monthly. <br> `htf_seasonal` — high-tide-flooding, seasonal. <br> `htf_annual` — high-tide-flooding, annual. <br> `sealvltrends` — sea level trends. Optional `detail`. <br> `slr_projections` — sea level rise projections. <br> `slr_projectionOffsets` — sea level rise projection offsets. Not every `report_year` has published data. <br> `extrfa` — extreme water level regional frequency analysis. <br> `toptenwaterlevels` — top ten historical water level events. <br> `extremewaterlevels` — extreme water level event history. Optional `level_type`. |
-| `datum`          | Only accepted by `toptenwaterlevels`, `extrfa`, and `htf_daily`. Valid values differ per product; see table below. |
-| `units`          | `metric` or `english`. Documented server-side default varies by product — `toptenwaterlevels`, `extremewaterlevels`, `extrfa`, and `htf_daily` default to english; `slr_projections` defaults to metric. `sealvltrends` isn't documented as accepting `units` at all, but empirically honors it when passed — pass explicitly rather than relying on undocumented behavior. |
-| `detail`         | `sealvltrends` only: `monthly_means`, `events`, `seasonal_cycle`. Omit for top-level trend statistics. |
-| `level_type`     | `extremewaterlevels` only: `high`, `low`. Omit for full station metadata.                              |
-| `start_date` / `end_date` | **Required** for `htf_daily`. Same accepted formats as `get_data()`.                          |
-| `year`           | Optional year filter, used by HTF products.                                                            |
-| `affil`          | `sealvltrends`, `slr_projections`, `slr_projectionOffsets`: `"US"` or `"Global"`.                       |
-| `projection_year`, `report_year` | `slr_projections`/`slr_projectionOffsets` only. Not every `report_year` has published data. |
+| `product`        | `htf_daily` — high-tide-flooding, daily. **Requires** `start_date`/`end_date`. <br> `htf_monthly` — high-tide-flooding, monthly. Optional `start_date`/`end_date`. <br> `htf_seasonal` — high-tide-flooding, seasonal. <br> `htf_annual` — high-tide-flooding, annual. <br> `sea_level_trends` — sea level trends. Optional `detail`. <br> `slr_projections` — sea level rise projections. <br> `slr_projection_offsets` — sea level rise projection offsets. Not every `report_year` has published data. <br> `extrfa` — extreme water level regional frequency analysis. <br> `top_ten_water_levels` — top ten historical water level events. <br> `extreme_water_levels` — extreme water level event history. Optional `level_type`. <br> Product names are conventional snake_case; NOAA's underlying API names (some camelCase or unseparated) are handled internally. |
+| `datum`          | Only accepted by `top_ten_water_levels`, `extrfa`, and `htf_daily`. Valid values differ per product; see table below. |
+| `units`          | `metric` or `english`. Documented server-side default varies by product — `top_ten_water_levels`, `extreme_water_levels`, `extrfa`, and `htf_daily` default to english; `slr_projections` defaults to metric. `sea_level_trends` isn't documented as accepting `units` at all, but empirically honors it when passed — pass explicitly rather than relying on undocumented behavior. |
+| `detail`         | `sea_level_trends` only: `monthly_means`, `events`, `seasonal_cycle`. Omit for top-level trend statistics. |
+| `level_type`     | `extreme_water_levels` only: `high`, `low`. Omit for full station metadata.                              |
+| `start_date` / `end_date` | **Required** for `htf_daily`; optional for `htf_monthly`. Same accepted formats as `get_data()`. |
+| `year`           | Optional year filter, used by HTF products. Must be between 1800 and the current year.                 |
+| `affil`          | `sea_level_trends`, `slr_projections`, `slr_projection_offsets`: `"US"` or `"Global"`.                  |
+| `projection_year`, `report_year` | `slr_projections`/`slr_projection_offsets` only. Not every `report_year` has published data. |
 | `scenario`       | `slr_projections` only: `all`, `low`, `intermediate-low`, `intermediate`, `intermediate-high`, `high`, `extreme`. Default is `all`. |
 
 **Valid `datum` values by product:**
 
-| `product`           | Accepted datums                                                                 |
-|---------------------|-----------------------------------------------------------------------------------|
-| `toptenwaterlevels` | `STND`, `MHHW`, `MHW`, `MSL`, `MTL`, `MLW`, `MLLW`, `NAVD`, `IGLD`, `LWD`         |
-| `extrfa`            | `STND`, `MLLW`, `MHHW`, `MSL`, `MLW`, `MHW`                                       |
-| `htf_daily`         | `STND`, `MLLW`, `MHHW`, `GT`, `MSL`, `MLW`, `MHW`                                 |
+| `product`                  | Accepted datums                                                          |
+|-----------------------------|-----------------------------------------------------------------------------------|
+| `top_ten_water_levels`      | `STND`, `MHHW`, `MHW`, `MSL`, `MTL`, `MLW`, `MLLW`, `NAVD`, `IGLD`, `LWD` |
+| `extrfa`  | `STND`, `MLLW`, `MHHW`, `MSL`, `MLW`, `MHW`                              |
+| `htf_daily`                 | `STND`, `MLLW`, `MHHW`, `GT`, `MSL`, `MLW`, `MHW`                        |
 
 
 ### Accepted date formats
