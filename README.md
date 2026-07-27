@@ -183,12 +183,12 @@ the authoritative reference.
 
 | Argument         | Accepted values                                                                                     |
 |------------------|--------------------------------------------------------------------------------------------------------|
-| `product`        | `htf_daily` — high-tide-flooding, daily. **Requires** `start_date`/`end_date`. <br> `htf_monthly` — high-tide-flooding, monthly. Optional `start_date`/`end_date`. <br> `htf_seasonal` — high-tide-flooding, seasonal. <br> `htf_annual` — high-tide-flooding, annual. <br> `sea_level_trends` — sea level trends. Optional `detail`. <br> `slr_projections` — sea level rise projections. <br> `slr_projection_offsets` — sea level rise projection offsets. Not every `report_year` has published data. <br> `extrfa` — extreme water level regional frequency analysis. <br> `top_ten_water_levels` — top ten historical water level events. <br> `extreme_water_levels` — extreme water level event history. Optional `level_type`. <br> Product names are conventional snake_case; NOAA's underlying API names (some camelCase or unseparated) are handled internally. |
-| `datum`          | Only accepted by `top_ten_water_levels`, `extrfa`, and `htf_daily`. Valid values differ per product; see table below. |
-| `units`          | `metric` or `english`. Documented server-side default varies by product — `top_ten_water_levels`, `extreme_water_levels`, `extrfa`, and `htf_daily` default to english; `slr_projections` defaults to metric. `sea_level_trends` isn't documented as accepting `units` at all, but empirically honors it when passed — pass explicitly rather than relying on undocumented behavior. |
+| `product`        | `htf_daily` — high-tide-flooding, daily. **Requires** `start_date`/`end_date`. <br> `htf_monthly` — high-tide-flooding, monthly. Optional `start_date`/`end_date`. <br> `htf_seasonal` — high-tide-flooding, seasonal. <br> `htf_annual` — high-tide-flooding, annual. <br> `sea_level_trends` — sea level trends. Optional `detail`. <br> `slr_projections` — sea level rise projections. <br> `slr_projection_offsets` — sea level rise projection offsets. Not every `report_year` has published data. <br> `rfa_extreme_water_levels` — extreme water level regional frequency analysis. <br> `top_ten_water_levels` — top ten historical water level events. <br> `extreme_water_levels` — extreme water level event history. Optional `level_type`. <br> Product names are conventional snake_case; NOAA's underlying API names (some camelCase or unseparated) are handled internally. |
+| `datum`          | Only accepted by `top_ten_water_levels`, `rfa_extreme_water_levels`, and `htf_daily`. Valid values differ per product; see table below. |
+| `units`          | `metric` or `english`. Documented server-side default varies by product — `top_ten_water_levels`, `extreme_water_levels`, `rfa_extreme_water_levels`, and `htf_daily` default to english; `slr_projections` defaults to metric. `sea_level_trends` isn't documented as accepting `units` at all, but empirically honors it when passed — pass explicitly rather than relying on undocumented behavior. |
 | `detail`         | `sea_level_trends` only: `monthly_means`, `events`, `seasonal_cycle`. Omit for top-level trend statistics. |
 | `level_type`     | `extreme_water_levels` only: `high`, `low`. Omit for full station metadata.                              |
-| `start_date` / `end_date` | **Required** for `htf_daily`; optional for `htf_monthly`. Same accepted formats as `get_data()`. |
+| `start_date` / `end_date` | **Required** for `htf_daily`; optional for `htf_monthly`. Same accepted formats as `get_data()`. Not accepted by `htf_seasonal` or `htf_annual` — use `year` instead. |
 | `year`           | Optional year filter, used by HTF products. Must be between 1800 and the current year.                 |
 | `affil`          | `sea_level_trends`, `slr_projections`, `slr_projection_offsets`: `"US"` or `"Global"`.                  |
 | `projection_year`, `report_year` | `slr_projections`/`slr_projection_offsets` only. Not every `report_year` has published data. |
@@ -199,7 +199,7 @@ the authoritative reference.
 | `product`                  | Accepted datums                                                          |
 |-----------------------------|-----------------------------------------------------------------------------------|
 | `top_ten_water_levels`      | `STND`, `MHHW`, `MHW`, `MSL`, `MTL`, `MLW`, `MLLW`, `NAVD`, `IGLD`, `LWD` |
-| `extrfa`  | `STND`, `MLLW`, `MHHW`, `MSL`, `MLW`, `MHW`                              |
+| `rfa_extreme_water_levels`  | `STND`, `MLLW`, `MHHW`, `MSL`, `MLW`, `MHW`                              |
 | `htf_daily`                 | `STND`, `MLLW`, `MHHW`, `GT`, `MSL`, `MLW`, `MHW`                        |
 
 
@@ -211,6 +211,21 @@ the authoritative reference.
 - `"20150101 12:34"` — `%Y%m%d %H:%M`
 - `"01/15/2015"` — `%m/%d/%Y`
 - `"01/15/2015 23:59"` — `%m/%d/%Y %H:%M`
+
+### Deferred DPAPI products
+
+The following DPAPI products/parameters are not yet supported by
+`Station.get_derived_product()` and are deferred to a future phase:
+
+- High Tide Flooding prediction (`htf`) products
+- HTF Met Year Flood Count
+- HTF Next Met Year Annual Outlook
+- HTF Decadal Projections and Likely Decadal Scenarios
+- `extreme_water_levels` sub-endpoints: `annuals`, `monthlies`,
+  `exceedanceLevels`, `exceedanceLevelsByMonth`
+- `peak_water_levels`
+- All-stations / bounding-box queries: `slr_projections`'
+  `lat`/`lon`/`bbox` params, `station_or_grid`
 
 ## API etiquette
 

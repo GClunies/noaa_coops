@@ -12,7 +12,7 @@ import pytest
 from noaa_coops._derived import validate_params
 
 BASE = {
-    "product": "extrfa",
+    "product": "rfa_extreme_water_levels",
     "start_date": None,
     "end_date": None,
     "units": None,
@@ -27,22 +27,22 @@ BASE = {
         ({"product": "htf_daily", "start_date": None, "end_date": None}, "required"),
         (
             {
-                "product": "extrfa",
+                "product": "rfa_extreme_water_levels",
                 "start_date": "20240201",
                 "end_date": "20240101",
             },
             "must not be after",
         ),
-        ({"product": "extrfa", "units": "furlongs"}, "Invalid units"),
+        ({"product": "rfa_extreme_water_levels", "units": "furlongs"}, "Invalid units"),
         ({"product": "sea_level_trends", "datum": "MLLW"}, "does not accept"),
         ({"product": "top_ten_water_levels", "datum": "NOTREAL"}, "Invalid datum"),
         (
-            {"product": "extrfa", "detail": "monthly_means"},
+            {"product": "rfa_extreme_water_levels", "detail": "monthly_means"},
             "only supported for sea_level_trends",
         ),
         ({"product": "sea_level_trends", "detail": "bogus"}, "Invalid detail"),
         (
-            {"product": "extrfa", "level_type": "low"},
+            {"product": "rfa_extreme_water_levels", "level_type": "low"},
             "only supported for extreme_water_levels",
         ),
         (
@@ -50,7 +50,7 @@ BASE = {
             "Invalid level_type",
         ),
         (
-            {"product": "extrfa", "scenario": "low"},
+            {"product": "rfa_extreme_water_levels", "scenario": "low"},
             "only supported for slr_projections",
         ),
         (
@@ -91,8 +91,8 @@ def test_validate_params_rejects_bad_input(overrides, match):
         {"product": "slr_projections", "scenario": "low"},
         {"product": "slr_projections", "scenario": "intermediate-high"},
         {"product": "slr_projection_offsets"},
-        {"product": "extrfa"},
-        {"product": "extrfa", "datum": "MLLW"},
+        {"product": "rfa_extreme_water_levels"},
+        {"product": "rfa_extreme_water_levels", "datum": "MLLW"},
         {"product": "top_ten_water_levels", "datum": "MLLW"},
         {"product": "extreme_water_levels"},
         {"product": "extreme_water_levels", "level_type": "high"},

@@ -36,7 +36,7 @@ DERIVED_PRODUCT_MATRIX = [
         id="top_ten_wls",
     ),
     pytest.param(
-        "extrfa",
+        "rfa_extreme_water_levels",
         "1611347",
         {},
         {
@@ -66,7 +66,7 @@ DERIVED_PRODUCT_MATRIX = [
             "localUTrend_value",
             "localUTrend_unit",
         },
-        id="extrfa",
+        id="rfa_extreme_water_levels",
     ),
     pytest.param(
         "sea_level_trends",

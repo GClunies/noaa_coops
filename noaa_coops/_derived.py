@@ -36,6 +36,9 @@ PARAM_PRODUCTS: frozenset[str] = frozenset({"toptenwaterlevels", "extremewaterle
 
 DATES_REQUIRED: frozenset[str] = frozenset({"htf_daily"})
 
+#: NOAA's endpoints for these don't accept a date range at all — only `year`.
+DATES_NOT_APPLICABLE: frozenset[str] = frozenset({"htf_seasonal", "htf_annual"})
+
 #: sealvltrends `detail` options:
 #: None/omitted -> top-level scalar fields only (station identity + trend stats)
 #: "monthly_means" -> deseasonalized monthly series. Separate NOAA query
@@ -70,12 +73,13 @@ SLR_PROJECTION_SCENARIOS: frozenset[str] = frozenset(
 #: `Station.get_derived_product` accepts and returns the public name; only
 #: `build_dpapi_url` needs to know the underlying API spelling. Products
 #: already in snake_case (htf_daily, htf_monthly, htf_seasonal, htf_annual,
-#: slr_projections, extrfa) aren't listed since the public and API names match.
+#: slr_projections) aren't listed since the public and API names match.
 PRODUCT_ALIASES: dict[str, str] = {
     "sea_level_trends": "sealvltrends",
     "slr_projection_offsets": "slr_projectionOffsets",
     "top_ten_water_levels": "toptenwaterlevels",
     "extreme_water_levels": "extremewaterlevels",
+    "rfa_extreme_water_levels": "extrfa",
 }
 
 
@@ -116,9 +120,7 @@ def validate_params(
     Raises ValueError on the first failure — same contract as
     _products.validate_params, called before any network activity.
     """
-    valid_products = (
-        HTF_PRODUCTS | {"slr_projections", "extrfa"} | frozenset(PRODUCT_ALIASES)
-    )
+    valid_products = HTF_PRODUCTS | {"slr_projections"} | frozenset(PRODUCT_ALIASES)
     if product not in valid_products:
         raise ValueError(
             f"Invalid product '{product}'. Must be one of: {sorted(valid_products)}. "
@@ -132,6 +134,12 @@ def validate_params(
             raise ValueError(
                 f"`start_date` and `end_date` are both required for product '{product}'."
             )
+
+    if api_product in DATES_NOT_APPLICABLE and (start_date or end_date):
+        raise ValueError(
+            f"`start_date`/`end_date` have no effect on '{product}' and "
+            "aren't accepted — use `year` instead."
+        )
 
     if start_date and end_date and start_date > end_date:
         raise ValueError(
@@ -451,14 +459,16 @@ def parse_dpapi_response(
     """
     product = _to_api_product(product)
     if product == "extrfa":
-        return _parse_extrfa(payload)
-    if product == "sealvltrends":
-        return _parse_sealvltrends(payload, detail)
-    if product == "extremewaterlevels":
-        return _parse_extremewaterlevels(payload, level_type)
+        df = _parse_extrfa(payload)
+    elif product == "sealvltrends":
+        df = _parse_sealvltrends(payload, detail)
+    elif product == "extremewaterlevels":
+        df = _parse_extremewaterlevels(payload, level_type)
+    else:
+        top_level_key = next(k for k, v in payload.items() if isinstance(v, list))
+        df = pd.json_normalize(payload[top_level_key])
 
-    top_level_key = next(k for k, v in payload.items() if isinstance(v, list))
-    return pd.json_normalize(payload[top_level_key])
+    return df.reset_index(drop=True)
 
 
 # ---------------------------------------------------------------------------
@@ -490,21 +500,23 @@ def get_derived_product(
             station_id for this request.
         product: DPAPI product name, in conventional snake_case (e.g.
             "sea_level_trends", "slr_projection_offsets",
-            "top_ten_water_levels", "extreme_water_levels")
-            regardless of NOAA's underlying API spelling — see
-            PRODUCT_ALIASES for the full mapping. Products like "extrfa"
-            and "slr_projections" already match NOAA's spelling as-is.
+            "top_ten_water_levels", "extreme_water_levels",
+            "rfa_extreme_water_levels") regardless of NOAA's underlying API
+            spelling — see PRODUCT_ALIASES for the full mapping. Products
+            like "slr_projections" already match NOAA's spelling as-is.
         start_date: Start date, any KNOWN_DATE_FORMATS format, normalized
             to DPAPI's required "%Y%m%d" before the request is sent.
             Required for htf_daily; also accepted (optional) by
-            htf_monthly.
+            htf_monthly. Not accepted by htf_seasonal or htf_annual — use
+            `year` instead.
         end_date: End date, same formats as start_date.
         year: Year filter, used by HTF products. Must be between 1800 and
             the current year.
         units: "metric" or "english". NOAA's server-side default when omitted
             varies by product — top_ten_water_levels, extreme_water_levels,
-            extrfa, and htf_daily default to english; slr_projections
-            defaults to metric. Passing units explicitly is recommended.
+            rfa_extreme_water_levels, and htf_daily default to english;
+            slr_projections defaults to metric. Passing units explicitly is
+            recommended.
         datum: Datum reference — valid values depend on product, see
             DATUM_OPTIONS. Not every product accepts a datum.
         affil: "US" or "Global" — sea_level_trends, slr_projections,

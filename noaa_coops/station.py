@@ -280,22 +280,24 @@ class Station:
                 ``"htf_monthly"``, ``"htf_seasonal"``,
                 ``"htf_annual"``, ``"sea_level_trends"``,
                 ``"slr_projections"``, ``"slr_projection_offsets"``,
-                ``"extrfa"``, ``"top_ten_water_levels"``,
+                ``"rfa_extreme_water_levels"``, ``"top_ten_water_levels"``,
                 ``"extreme_water_levels"``.
             start_date: Start date. Accepts any of the formats in
                 :data:`noaa_coops._parsing.KNOWN_DATE_FORMATS`; normalized
                 to DPAPI's required ``"%Y%m%d"`` before the request is
                 sent. Required for ``"htf_daily"``; also accepted
-                (optional) by ``"htf_monthly"``.
+                (optional) by ``"htf_monthly"``. Not accepted by
+                ``"htf_seasonal"`` or ``"htf_annual"`` — use ``year``
+                instead.
             end_date: End date, same formats as ``start_date``.
             year: Year filter, used by HTF products. Must be between 1800
                 and the current year.
             units: ``"metric"`` (default) or ``"english"``. NOAA's
                 server-side default when omitted varies by product —
                 ``top_ten_water_levels``, ``extreme_water_levels``,
-                ``extrfa``, and ``htf_daily`` default to english;
-                ``slr_projections`` defaults to metric. Passing units
-                explicitly is recommended.
+                ``rfa_extreme_water_levels``, and ``htf_daily`` default to
+                english; ``slr_projections`` defaults to metric. Passing
+                units explicitly is recommended.
             datum: Datum reference. Valid values depend on ``product`` —
                 not every product accepts a datum at all.
             affil: ``"US"`` or ``"Global"`` — ``sea_level_trends``,
