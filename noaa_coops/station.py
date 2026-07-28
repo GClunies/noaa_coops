@@ -17,6 +17,7 @@ import pandas as pd
 import requests
 import zeep
 
+from noaa_coops._derived import get_derived_product as _get_derived_product
 from noaa_coops._endpoints import DATA_GETTER_URL, INVENTORY_WSDL_URL
 from noaa_coops._exceptions import COOPSAPIError
 from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION, _SOAP_SESSION
@@ -43,13 +44,15 @@ class Station:
 
     Constructs by ID and immediately fetches metadata. Users then call
     :meth:`get_data` to retrieve time-series observations/predictions,
-    or read any of the many metadata attributes populated during
-    construction.
+    :meth:`get_derived_product` for computed/aggregate products like sea
+    level trends and high-tide-flooding counts, or read any of the many
+    metadata attributes populated during construction.
 
     Supported NOAA APIs:
         - Data retrieval — https://tidesandcurrents.noaa.gov/api/
         - Metadata (mdapi) — https://tidesandcurrents.noaa.gov/mdapi/latest/
         - Data inventory (SOAP) — https://opendap.co-ops.nos.noaa.gov/axis/
+        - Derived products (DPAPI) — https://api.tidesandcurrents.noaa.gov/dpapi/prod/
     """
 
     # Per-product SOAP data inventory: {product_name: {"start_date": ..., "end_date": ...}}
@@ -205,7 +208,7 @@ class Station:
         if interval is None and product == "daily_max_min":
             interval = "h"
 
-        max_days = PRODUCT_LIMITS.get(product)
+        max_days = PRODUCT_LIMITS[product]
         single_block = delta.days <= max_days
 
         if single_block:
@@ -243,6 +246,107 @@ class Station:
         df = normalize_data_frame(df)
         self.data = df
         return df
+
+    # ------------------------------------------------------------------
+    # Derived products (DPAPI)
+    # ------------------------------------------------------------------
+
+    def get_derived_product(
+        self,
+        product: str,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        year: Optional[int] = None,
+        units: Optional[str] = "metric",
+        datum: Optional[str] = None,
+        affil: Optional[str] = None,
+        projection_year: Optional[int] = None,
+        report_year: Optional[int] = None,
+        scenario: Optional[str] = None,
+        detail: Optional[str] = None,
+        level_type: Optional[str] = None,
+    ) -> pd.DataFrame:
+        """Fetch a derived product from the NOAA CO-OPS Derived Product API (DPAPI).
+
+        The DPAPI provides access to computed/aggregate products — sea
+        level trends, sea level rise projections, high-tide-flooding
+        counts, extreme water levels, and regional frequency analysis —
+        as opposed to :meth:`get_data`'s raw time-series observations.
+        Always scoped to this station (``station.id`` is used as the
+        station_id for every request).
+
+        Args:
+            product: DPAPI product name. One of: ``"htf_daily"``,
+                ``"htf_monthly"``, ``"htf_seasonal"``,
+                ``"htf_annual"``, ``"sea_level_trends"``,
+                ``"slr_projections"``, ``"slr_projection_offsets"``,
+                ``"rfa_extreme_water_levels"``, ``"top_ten_water_levels"``,
+                ``"extreme_water_levels"``.
+            start_date: Start date. Accepts any of the formats in
+                :data:`noaa_coops._parsing.KNOWN_DATE_FORMATS`; normalized
+                to DPAPI's required ``"%Y%m%d"`` before the request is
+                sent. Required for ``"htf_daily"``; also accepted
+                (optional) by ``"htf_monthly"``. Not accepted by
+                ``"htf_seasonal"`` or ``"htf_annual"`` — use ``year``
+                instead.
+            end_date: End date, same formats as ``start_date``.
+            year: Year filter, used by HTF products. Must be between 1800
+                and the current year.
+            units: ``"metric"`` (default) or ``"english"``. NOAA's
+                server-side default when omitted varies by product —
+                ``top_ten_water_levels``, ``extreme_water_levels``,
+                ``rfa_extreme_water_levels``, and ``htf_daily`` default to
+                english; ``slr_projections`` defaults to metric. Passing
+                units explicitly is recommended.
+            datum: Datum reference. Valid values depend on ``product`` —
+                not every product accepts a datum at all.
+            affil: ``"US"`` or ``"Global"`` — ``sea_level_trends``,
+                ``slr_projections``, ``slr_projection_offsets``.
+            projection_year: ``slr_projections`` only.
+            report_year: ``slr_projections``, ``slr_projection_offsets``.
+                Not every report year has published data — if you get an
+                empty result, try omitting this or checking which years
+                are available.
+            scenario: ``slr_projections`` only. One of ``"all"``,
+                ``"low"``, ``"intermediate-low"``, ``"intermediate"``,
+                ``"intermediate-high"``, ``"high"``, ``"extreme"``.
+                Default (server-side, when omitted) is ``"all"``.
+            detail: ``sea_level_trends`` only. ``"monthly_means"``
+                (deseasonalized monthly series), ``"events"`` (may be
+                empty), or ``"seasonal_cycle"`` (the 12-month seasonal
+                pattern removed to compute the trend). Omit for the
+                top-level trend statistics.
+            level_type: ``extreme_water_levels`` only. ``"high"`` or
+                ``"low"`` — filters the ten-year event history. Omit for
+                full station metadata.
+
+        Raises:
+            ValueError: ``product`` is invalid, or a parameter is
+                required/unsupported/invalid for the chosen product.
+            COOPSAPIError: DPAPI returned a non-200 response.
+
+        Returns:
+            A DataFrame. Multi-row results
+            (e.g. RFA's exploded return-period table)
+            include station identity columns so each row
+            remains attributable to its station even after
+            the DataFrame leaves this call's scope.
+        """
+        return _get_derived_product(
+            self,
+            product,
+            start_date=start_date,
+            end_date=end_date,
+            year=year,
+            units=units,
+            datum=datum,
+            affil=affil,
+            projection_year=projection_year,
+            report_year=report_year,
+            scenario=scenario,
+            detail=detail,
+            level_type=level_type,
+        )
 
     # ------------------------------------------------------------------
     # Internals
@@ -303,7 +407,7 @@ class Station:
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = PRODUCT_LIMITS.get(product)
+        block_size = PRODUCT_LIMITS[product]
         delta = end_dt - begin_dt
         num_blocks = int(math.ceil(delta.days / block_size))
 

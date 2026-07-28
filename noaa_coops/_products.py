@@ -27,7 +27,6 @@ ALL_PRODUCTS: frozenset[str] = frozenset(
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
-        "datums",
         "air_gap",
         "air_temperature",
         "water_temperature",

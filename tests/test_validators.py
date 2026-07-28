@@ -29,7 +29,6 @@ from noaa_coops._products import validate_params
         "wind",
         "air_pressure",
         "predictions",
-        "datums",
         "high_low",
         "hourly_height",
         "daily_mean",
