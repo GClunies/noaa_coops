@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0091.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"currentpredictionoffsets\": {\n        \"id\": \"ACT0091\",\n        \"refStationId\":
+        \"EPT0003\",\n        \"refStationBin\": 11,\n        \"meanFloodDir\": 210.0,\n
+        \       \"meanEbbDir\": 40.0,\n        \"mfcTimeAdjMin\": 0,\n        \"sbeTimeAdjMin\":
+        0,\n        \"mecTimeAdjMin\": 0,\n        \"sbfTimeAdjMin\": 0,\n        \"mfcAmpAdj\":
+        1.2,\n        \"mecAmpAdj\": 1.2,\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0091_1/currentpredictionoffsets.json\"\n
+        \     },\n      \"currbin\": 1,\n      \"type\": \"S\",\n      \"depth\":
+        null,\n      \"depthType\": \"U\",\n      \"timezone_offset\": \"\",\n      \"harmonicConstituents\":
+        {\n        \"units\": \"meters, centimeters/second\",\n        \"HarmonicConstituents\":
+        [],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0091/harcon.json\"\n
+        \     },\n      \"id\": \"ACT0091\",\n      \"name\": \"Eastport, Friar Roads\",\n
+        \     \"lat\": 44.9,\n      \"lng\": -66.98333,\n      \"affiliations\": \"\",\n
+        \     \"portscode\": \"\",\n      \"products\": null,\n      \"disclaimers\":
+        null,\n      \"notices\": null,\n      \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0091.json\",\n
+        \     \"expand\": \"currentpredictionoffsets,harcon\",\n      \"tideType\":
+        \"\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 31 Jul 2026 08:02:08 GMT
+      content-length:
+      - '1297'
+      x-amz-apigw-id:
+      - BXJ0LEdGIAMEAcQ=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '1297'
+      x-amzn-Remapped-Date:
+      - Fri, 31 Jul 2026 08:02:08 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 762d5404-b46f-4574-a8fe-3345d5fb017e
+    status:
+      code: 200
+      message: OK
+version: 1

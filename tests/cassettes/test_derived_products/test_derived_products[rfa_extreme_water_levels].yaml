@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
     method: GET
-    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels?units=metric
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
   response:
     body:
       string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
@@ -19,66 +19,103 @@ interactions:
         \       \"noaachart\": \"19382\",\n        \"timemeridian\": -150,\n        \"timezone\":
         -10.0,\n        \"origyear\": \"1996-01-22 23:00:00\",\n        \"self\":
         \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/details.json\"\n
-        \     },\n      \"sensors\": {\n        \"units\": \"feet\",\n        \"sensors\":
+        \     },\n      \"sensors\": {\n        \"units\": \"meters\",\n        \"sensors\":
         null,\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/sensors.json\"\n
         \     },\n      \"floodlevels\": null,\n      \"datums\": {\n        \"accepted\":
         \"Apr 17 2003\",\n        \"superseded\": \"\",\n        \"epoch\": \"1983-2001\",\n
-        \       \"units\": \"feet\",\n        \"OrthometricDatum\": \"Ortho\",\n        \"datums\":
-        [\n          {\n            \"name\": \"STND\",\n            \"description\":
+        \       \"units\": \"meters\",\n        \"OrthometricDatum\": \"Ortho\",\n
+        \       \"datums\": [\n          {\n            \"name\": \"STND\",\n            \"description\":
         \"Station Datum\",\n            \"value\": 0.0\n          },\n          {\n
         \           \"name\": \"MHHW\",\n            \"description\": \"Mean Higher-High
-        Water\",\n            \"value\": 5.16\n          },\n          {\n            \"name\":
+        Water\",\n            \"value\": 1.572\n          },\n          {\n            \"name\":
         \"MHW\",\n            \"description\": \"Mean High Water\",\n            \"value\":
-        4.76\n          },\n          {\n            \"name\": \"DTL\",\n            \"description\":
-        \"Mean Diurnal Tide Level\",\n            \"value\": 4.24\n          },\n
+        1.45\n          },\n          {\n            \"name\": \"DTL\",\n            \"description\":
+        \"Mean Diurnal Tide Level\",\n            \"value\": 1.292\n          },\n
         \         {\n            \"name\": \"MTL\",\n            \"description\":
-        \"Mean Tide Level\",\n            \"value\": 4.13\n          },\n          {\n
+        \"Mean Tide Level\",\n            \"value\": 1.26\n          },\n          {\n
         \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
-        \           \"value\": 4.15\n          },\n          {\n            \"name\":
+        \           \"value\": 1.265\n          },\n          {\n            \"name\":
         \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
-        3.51\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
-        \"Mean Lower-Low Water\",\n            \"value\": 3.32\n          },\n          {\n
+        1.071\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 1.011\n          },\n          {\n
         \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
-        Range\",\n            \"value\": 1.84\n          },\n          {\n            \"name\":
+        Range\",\n            \"value\": 0.561\n          },\n          {\n            \"name\":
         \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
-        1.24\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
-        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.4\n          },\n
+        0.379\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.123\n          },\n
         \         {\n            \"name\": \"DLQ\",\n            \"description\":
-        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.2\n          },\n
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.06\n          },\n
         \         {\n            \"name\": \"HWI\",\n            \"description\":
         \"Greenwich High Water Interval (in hours)\",\n            \"value\": 1.49\n
         \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
         \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 7.8\n
-        \         }\n        ],\n        \"LAT\": 2.677,\n        \"LATdate\": \"20250526\",\n
-        \       \"LATtime\": \"18:00\",\n        \"HAT\": 6.096,\n        \"HATdate\":
-        \"20251205\",\n        \"HATtime\": \"14:06\",\n        \"min\": 2.402,\n
+        \         }\n        ],\n        \"LAT\": 0.816,\n        \"LATdate\": \"20250526\",\n
+        \       \"LATtime\": \"18:00\",\n        \"HAT\": 1.858,\n        \"HATdate\":
+        \"20251205\",\n        \"HATtime\": \"14:06\",\n        \"min\": 0.732,\n
         \       \"mindate\": \"19910514\",\n        \"mintime\": \"18:54\",\n        \"max\":
-        9.13,\n        \"maxdate\": \"19920912\",\n        \"maxtime\": \"01:18\",\n
+        2.783,\n        \"maxdate\": \"19920912\",\n        \"maxtime\": \"01:18\",\n
         \       \"disclaimers\": {\n          \"disclaimers\": [],\n          \"self\":
         null\n        },\n        \"DatumAnalysisPeriod\": [\n          \"01/01/1990
         - 12/31/1996\"\n        ],\n        \"NGSLink\": \"\",\n        \"ctrlStation\":
         \"1611400 Nawiliwili, HI\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/datums.json\"\n
-        \     },\n      \"supersededdatums\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/supersededdatums.json\"\n
-        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"feet\",\n
+        \     },\n      \"supersededdatums\": {\n        \"accepted\": \"Feb 20 2001\",\n
+        \       \"superseded\": \"Apr 17 2003\",\n        \"epoch\": \"1960-1978\",\n
+        \       \"units\": \"meters\",\n        \"OrthometricDatum\": \"Ortho\",\n
+        \       \"datums\": [\n          {\n            \"name\": \"STND\",\n            \"description\":
+        \"Station Datum\",\n            \"value\": 0.0\n          },\n          {\n
+        \           \"name\": \"MHHW\",\n            \"description\": \"Mean Higher-High
+        Water\",\n            \"value\": 1.548\n          },\n          {\n            \"name\":
+        \"MHW\",\n            \"description\": \"Mean High Water\",\n            \"value\":
+        1.41\n          },\n          {\n            \"name\": \"DTL\",\n            \"description\":
+        \"Mean Diurnal Tide Level\",\n            \"value\": 1.263\n          },\n
+        \         {\n            \"name\": \"MTL\",\n            \"description\":
+        \"Mean Tide Level\",\n            \"value\": 1.228\n          },\n          {\n
+        \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
+        \           \"value\": 1.241\n          },\n          {\n            \"name\":
+        \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
+        1.046\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 0.979\n          },\n          {\n
+        \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
+        Range\",\n            \"value\": 0.57\n          },\n          {\n            \"name\":
+        \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
+        0.364\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.138\n          },\n
+        \         {\n            \"name\": \"DLQ\",\n            \"description\":
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.067\n          },\n
+        \         {\n            \"name\": \"HWI\",\n            \"description\":
+        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 1.42\n
+        \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
+        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 7.79\n
+        \         }\n        ],\n        \"LAT\": 0.79200006,\n        \"LATdate\":
+        \"20250526\",\n        \"LATtime\": \"18:00\",\n        \"HAT\": 1.8340001,\n
+        \       \"HATdate\": \"20251205\",\n        \"HATtime\": \"14:06\",\n        \"min\":
+        0.732,\n        \"mindate\": \"19910514\",\n        \"mintime\": \"18:54\",\n
+        \       \"max\": 2.783,\n        \"maxdate\": \"19920912\",\n        \"maxtime\":
+        \"01:18\",\n        \"disclaimers\": {\n          \"disclaimers\": [],\n          \"self\":
+        null\n        },\n        \"DatumAnalysisPeriod\": [\n          \"03/01/1989
+        - 01/31/1991\",\n          \"03/01/1991 - 12/31/1994\",\n          \"02/01/1995
+        - 12/31/1996\"\n        ],\n        \"NGSLink\": \"\",\n        \"ctrlStation\":
+        \"1611400 Nawiliwili, HI\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/supersededdatums.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"meters\",\n
         \       \"HarmonicConstituents\": [\n          {\n            \"number\":
         1,\n            \"name\": \"M2\",\n            \"description\": \"Principal
-        lunar semidiurnal constituent\",\n            \"amplitude\": 0.52,\n            \"phase_GMT\":
+        lunar semidiurnal constituent\",\n            \"amplitude\": 0.159,\n            \"phase_GMT\":
         44.1,\n            \"phase_local\": 114.3,\n            \"speed\": 28.984104,\n
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 2,\n            \"name\": \"S2\",\n            \"description\":
-        \"Principal solar semidiurnal constituent\",\n            \"amplitude\": 0.22,\n
+        \"Principal solar semidiurnal constituent\",\n            \"amplitude\": 0.066,\n
         \           \"phase_GMT\": 38.3,\n            \"phase_local\": 98.3,\n            \"speed\":
         30.0,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
         \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 3,\n            \"name\": \"N2\",\n            \"description\":
         \"Larger lunar elliptic semidiurnal constituent\",\n            \"amplitude\":
-        0.1,\n            \"phase_GMT\": 38.3,\n            \"phase_local\": 113.9,\n
+        0.03,\n            \"phase_GMT\": 38.3,\n            \"phase_local\": 113.9,\n
         \           \"speed\": 28.43973,\n            \"comments\": \"Mean of 5 NOS
         one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 4,\n            \"name\":
         \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"amplitude\":
-        0.54,\n            \"phase_GMT\": 226.5,\n            \"phase_local\": 76.1,\n
+        0.164,\n            \"phase_GMT\": 226.5,\n            \"phase_local\": 76.1,\n
         \           \"speed\": 15.041069,\n            \"comments\": \"Mean of 5 NOS
         one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 5,\n            \"name\":
@@ -88,7 +125,7 @@ interactions:
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 6,\n            \"name\": \"O1\",\n            \"description\":
-        \"Lunar diurnal constituent\",\n            \"amplitude\": 0.28,\n            \"phase_GMT\":
+        \"Lunar diurnal constituent\",\n            \"amplitude\": 0.086,\n            \"phase_GMT\":
         221.5,\n            \"phase_local\": 82.1,\n            \"speed\": 13.943035,\n
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
@@ -114,7 +151,7 @@ interactions:
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 11,\n            \"name\": \"NU2\",\n            \"description\":
-        \"Larger lunar evectional constituent\",\n            \"amplitude\": 0.02,\n
+        \"Larger lunar evectional constituent\",\n            \"amplitude\": 0.005,\n
         \           \"phase_GMT\": 25.2,\n            \"phase_local\": 100.1,\n            \"speed\":
         28.512583,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
         \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
@@ -125,22 +162,22 @@ interactions:
         year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 13,\n            \"name\":
         \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"amplitude\":
-        0.01,\n            \"phase_GMT\": 356.0,\n            \"phase_local\": 76.3,\n
+        0.004,\n            \"phase_GMT\": 356.0,\n            \"phase_local\": 76.3,\n
         \           \"speed\": 27.968208,\n            \"comments\": \"Mean of 5 NOS
         one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 14,\n            \"name\":
         \"2N2\",\n            \"description\": \"Lunar elliptical semidiurnal second-order
-        constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        constituent\",\n            \"amplitude\": 0.003,\n            \"phase_GMT\":
         45.0,\n            \"phase_local\": 126.0,\n            \"speed\": 27.895355,\n
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 15,\n            \"name\": \"OO1\",\n            \"description\":
-        \"Lunar diurnal\",\n            \"amplitude\": 0.02,\n            \"phase_GMT\":
+        \"Lunar diurnal\",\n            \"amplitude\": 0.007,\n            \"phase_GMT\":
         263.1,\n            \"phase_local\": 101.7,\n            \"speed\": 16.139101,\n
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 16,\n            \"name\": \"LAM2\",\n            \"description\":
-        \"Smaller lunar evectional constituent\",\n            \"amplitude\": 0.0,\n
+        \"Smaller lunar evectional constituent\",\n            \"amplitude\": 0.001,\n
         \           \"phase_GMT\": 41.4,\n            \"phase_local\": 106.8,\n            \"speed\":
         29.455626,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
         \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
@@ -150,13 +187,13 @@ interactions:
         \"Mean of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year
         analyses (1989-1996).\"\n          },\n          {\n            \"number\":
         18,\n            \"name\": \"M1\",\n            \"description\": \"Smaller
-        lunar elliptic diurnal constituent\",\n            \"amplitude\": 0.02,\n
+        lunar elliptic diurnal constituent\",\n            \"amplitude\": 0.005,\n
         \           \"phase_GMT\": 247.2,\n            \"phase_local\": 102.2,\n            \"speed\":
         14.496694,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
         \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 19,\n            \"name\": \"J1\",\n            \"description\":
         \"Smaller lunar elliptic diurnal constituent\",\n            \"amplitude\":
-        0.04,\n            \"phase_GMT\": 237.6,\n            \"phase_local\": 81.7,\n
+        0.011,\n            \"phase_GMT\": 237.6,\n            \"phase_local\": 81.7,\n
         \           \"speed\": 15.5854435,\n            \"comments\": \"Mean of 5
         NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 20,\n            \"name\":
@@ -171,7 +208,7 @@ interactions:
         of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 22,\n            \"name\":
         \"SA\",\n            \"description\": \"Solar annual constituent\",\n            \"amplitude\":
-        0.16,\n            \"phase_GMT\": 192.1,\n            \"phase_local\": 191.7,\n
+        0.049,\n            \"phase_GMT\": 192.1,\n            \"phase_local\": 191.7,\n
         \           \"speed\": 0.0410686,\n            \"comments\": \"Mean of 5 NOS
         one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 23,\n            \"name\":
@@ -186,32 +223,32 @@ interactions:
         of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 25,\n            \"name\":
         \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
-        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 219.4,\n            \"phase_local\":
+        \           \"amplitude\": 0.003,\n            \"phase_GMT\": 219.4,\n            \"phase_local\":
         84.7,\n            \"speed\": 13.471515,\n            \"comments\": \"Mean
         of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 26,\n            \"name\":
         \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
-        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 215.7,\n            \"phase_local\":
+        \           \"amplitude\": 0.015,\n            \"phase_GMT\": 215.7,\n            \"phase_local\":
         81.7,\n            \"speed\": 13.398661,\n            \"comments\": \"Mean
         of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 27,\n            \"name\":
         \"T2\",\n            \"description\": \"Larger solar elliptic constituent\",\n
-        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 38.2,\n            \"phase_local\":
+        \           \"amplitude\": 0.005,\n            \"phase_GMT\": 38.2,\n            \"phase_local\":
         98.6,\n            \"speed\": 29.958933,\n            \"comments\": \"Mean
         of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 28,\n            \"name\":
         \"R2\",\n            \"description\": \"Smaller solar elliptic constituent\",\n
-        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 38.1,\n            \"phase_local\":
+        \           \"amplitude\": 0.001,\n            \"phase_GMT\": 38.1,\n            \"phase_local\":
         97.7,\n            \"speed\": 30.041067,\n            \"comments\": \"Mean
         of 5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 29,\n            \"name\":
         \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"amplitude\":
-        0.01,\n            \"phase_GMT\": 216.4,\n            \"phase_local\": 87.9,\n
+        0.002,\n            \"phase_GMT\": 216.4,\n            \"phase_local\": 87.9,\n
         \           \"speed\": 12.854286,\n            \"comments\": \"Mean of 5 NOS
         one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 30,\n            \"name\":
         \"P1\",\n            \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
-        0.17,\n            \"phase_GMT\": 223.3,\n            \"phase_local\": 73.7,\n
+        0.051,\n            \"phase_GMT\": 223.3,\n            \"phase_local\": 73.7,\n
         \           \"speed\": 14.958931,\n            \"comments\": \"Mean of 5 NOS
         one year analyses (1992-1996).   Sa from mean of 8 one year analyses (1989-1996).\"\n
         \         },\n          {\n            \"number\": 31,\n            \"name\":
@@ -226,7 +263,7 @@ interactions:
         5 NOS one year analyses (1992-1996).   Sa from mean of 8 one year analyses
         (1989-1996).\"\n          },\n          {\n            \"number\": 33,\n            \"name\":
         \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
-        constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        constituent\",\n            \"amplitude\": 0.004,\n            \"phase_GMT\":
         35.1,\n            \"phase_local\": 99.8,\n            \"speed\": 29.528479,\n
         \           \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).   Sa
         from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
@@ -236,7 +273,7 @@ interactions:
         42.92714,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
         \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
         \           \"number\": 35,\n            \"name\": \"K2\",\n            \"description\":
-        \"Lunisolar semidiurnal constituent\",\n            \"amplitude\": 0.06,\n
+        \"Lunisolar semidiurnal constituent\",\n            \"amplitude\": 0.019,\n
         \           \"phase_GMT\": 34.0,\n            \"phase_local\": 93.2,\n            \"speed\":
         30.082138,\n            \"comments\": \"Mean of 5 NOS one year analyses (1992-1996).
         \  Sa from mean of 8 one year analyses (1989-1996).\"\n          },\n          {\n
@@ -463,8 +500,11 @@ interactions:
         turn left on Highway 541 and go about 1.2 km (0.7 mi) to  the State of Hawaii
         transit building on the pier.  The gauge was located inside the building and
         the bench marks are located in the vicinity.\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/benchmarks.json\"\n
-        \     },\n      \"tidePredOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/tidepredoffsets.json\"\n
-        \     },\n      \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/ofsmapoffsets.json\"\n
+        \     },\n      \"tidePredOffsets\": {\n        \"refStationId\": \"\",\n
+        \       \"type\": \"R\",\n        \"heightOffsetHighTide\": null,\n        \"heightOffsetLowTide\":
+        null,\n        \"timeOffsetHighTide\": null,\n        \"timeOffsetLowTide\":
+        null,\n        \"heightAdjustedType\": \"\",\n        \"self\": null\n      },\n
+        \     \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611347/ofsmapoffsets.json\"\n
         \     },\n      \"state\": \"HI\",\n      \"timezone\": \"HAST\",\n      \"timezonecorr\":
         -10,\n      \"observedst\": false,\n      \"stormsurge\": false,\n      \"nearby\":
         {\n        \"count\": 4,\n        \"units\": null,\n        \"stations\":
@@ -535,19 +575,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Jul 2026 09:16:15 GMT
+      - Thu, 30 Jul 2026 18:55:32 GMT
       content-length:
-      - '39702'
+      - '42577'
       x-amz-apigw-id:
-      - A2XS-EPlIAMEElQ=
+      - BVWltG-NoAMElrg=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Tue, 21 Jul 2026 09:16:15 GMT
+      - Thu, 30 Jul 2026 18:55:32 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - 7fa69cf2-d650-4c86-871c-915c47e9307f
+      - 870cb30a-777f-4af5-82a8-c4a7cc809e4d
     status:
       code: 200
       message: OK
@@ -618,7 +658,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Tue, 21 Jul 2026 09:16:17 GMT
+      - Thu, 30 Jul 2026 18:55:33 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -670,7 +710,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Tue, 21 Jul 2026 09:16:18 GMT
+      - Thu, 30 Jul 2026 18:55:35 GMT
       Server:
       - nginx
       Transfer-Encoding:
@@ -765,21 +805,21 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Jul 2026 09:16:19 GMT
+      - Thu, 30 Jul 2026 18:55:36 GMT
       content-length:
       - '4458'
       x-amz-apigw-id:
-      - A2XTqFC7IAMEeLw=
+      - BVWmWGjtIAMEG-A=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Content-Length:
       - '4458'
       x-amzn-Remapped-Date:
-      - Tue, 21 Jul 2026 09:16:19 GMT
+      - Thu, 30 Jul 2026 18:55:36 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - 3d4b80a0-3193-4149-b862-a879cd28fb11
+      - bfdfc9de-69d5-49d9-8c89-a2c49951aca7
     status:
       code: 200
       message: OK

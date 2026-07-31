@@ -1103,19 +1103,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 30 Jul 2026 18:55:27 GMT
+      - Fri, 31 Jul 2026 08:02:11 GMT
       content-length:
       - '83812'
       x-amz-apigw-id:
-      - BVWlCHrsIAMErsQ=
+      - BXJ0kGEcIAMEujg=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Thu, 30 Jul 2026 18:53:37 GMT
+      - Fri, 31 Jul 2026 08:01:41 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - 468859af-834d-485d-91fa-25c469d259ac
+      - 4ac720ad-d721-4198-a552-ee23b7216d05
     status:
       code: 200
       message: OK
@@ -1186,7 +1186,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Thu, 30 Jul 2026 18:55:28 GMT
+      - Fri, 31 Jul 2026 08:02:12 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -1225,10 +1225,10 @@ interactions:
         first="1991-11-09 00:00" last="2019-01-02 18:36" name="Wind"/><parameter first="1991-11-09
         01:00" last="2019-01-02 18:36" name="Air Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Water Temperature"/><parameter first="2023-09-28
-        00:00" last="2026-07-30 18:48" name="Water Temperature"/><parameter first="1991-11-09
+        00:00" last="2026-07-31 07:54" name="Water Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Barometric Pressure"/><parameter first="2023-09-28
-        00:00" last="2026-07-30 18:48" name="Barometric Pressure"/><parameter first="2001-01-01
-        00:00" last="2026-07-30 18:48" name="Preliminary 6-Minute Water Level"/><parameter
+        00:00" last="2026-07-31 07:54" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-31 07:54" name="Preliminary 6-Minute Water Level"/><parameter
         first="1995-06-01 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
         Level"/><parameter first="1899-01-01 08:00" last="2026-06-30 23:00" name="Verified
         Hourly Height Water Level"/><parameter first="1977-10-18 10:18" last="1977-11-15
@@ -1243,7 +1243,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Thu, 30 Jul 2026 18:55:30 GMT
+      - Fri, 31 Jul 2026 08:02:14 GMT
       Server:
       - nginx
       Transfer-Encoding:
@@ -1251,114 +1251,4 @@ interactions:
     status:
       code: 200
       message: ''
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-    method: GET
-    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/.json?station=9447130&datum=MLLW&units=metric&name=toptenwaterlevels
-  response:
-    body:
-      string: "{\n  \"units\": \"meters\",\n  \"topTenWaterLevels\": [\n    {\n      \"stationId\":
-        \"9447130\",\n      \"stationName\": \"Seattle, WA\",\n      \"peakDate\":
-        \"2022-12-27\",\n      \"peakTime\": \"16:42\",\n      \"height\": 4.609,\n
-        \     \"datum\": \"MLLW\",\n      \"category\": \"Other\",\n      \"event\":
-        \"Above Normal Tides & Cold Front Passage\",\n      \"source\": \"Observed
-        Peak Water Level\",\n      \"mhhw\": null,\n      \"mhw\": null,\n      \"mtl\":
-        null,\n      \"msl\": null,\n      \"mlw\": null,\n      \"mllw\": null,\n
-        \     \"navd\": null\n    },\n    {\n      \"stationId\": \"9447130\",\n      \"stationName\":
-        \"Seattle, WA\",\n      \"peakDate\": \"2022-01-07\",\n      \"peakTime\":
-        \"17:00\",\n      \"height\": 4.426,\n      \"datum\": \"MLLW\",\n      \"category\":
-        \"Other\",\n      \"event\": \"Above Normal Tides & Cold Front Passage\",\n
-        \     \"source\": \"Observed Peak Water Level\",\n      \"mhhw\": null,\n
-        \     \"mhw\": null,\n      \"mtl\": null,\n      \"msl\": null,\n      \"mlw\":
-        null,\n      \"mllw\": null,\n      \"navd\": null\n    },\n    {\n      \"stationId\":
-        \"9447130\",\n      \"stationName\": \"Seattle, WA\",\n      \"peakDate\":
-        \"1977-12-15\",\n      \"peakTime\": \"17:00\",\n      \"height\": 4.418,\n
-        \     \"datum\": \"MLLW\",\n      \"category\": \"TBD\",\n      \"event\":
-        \"To Be Determined\",\n      \"source\": \"Observed Peak Water Level\",\n
-        \     \"mhhw\": null,\n      \"mhw\": null,\n      \"mtl\": null,\n      \"msl\":
-        null,\n      \"mlw\": null,\n      \"mllw\": null,\n      \"navd\": null\n
-        \   },\n    {\n      \"stationId\": \"9447130\",\n      \"stationName\": \"Seattle,
-        WA\",\n      \"peakDate\": \"2012-12-17\",\n      \"peakTime\": \"15:54\",\n
-        \     \"height\": 4.413,\n      \"datum\": \"MLLW\",\n      \"category\":
-        \"Extra Tropical\",\n      \"event\": \"Coastal Low Pressure & Onshore Winds\",\n
-        \     \"source\": \"Observed Peak Water Level\",\n      \"mhhw\": null,\n
-        \     \"mhw\": null,\n      \"mtl\": null,\n      \"msl\": null,\n      \"mlw\":
-        null,\n      \"mllw\": null,\n      \"navd\": null\n    },\n    {\n      \"stationId\":
-        \"9447130\",\n      \"stationName\": \"Seattle, WA\",\n      \"peakDate\":
-        \"1983-01-27\",\n      \"peakTime\": \"13:00\",\n      \"height\": 4.393,\n
-        \     \"datum\": \"MLLW\",\n      \"category\": \"Extra Tropical\",\n      \"event\":
-        \"Frontal Passage & Above Normal Tides\",\n      \"source\": \"Observed Peak
-        Water Level\",\n      \"mhhw\": null,\n      \"mhw\": null,\n      \"mtl\":
-        null,\n      \"msl\": null,\n      \"mlw\": null,\n      \"mllw\": null,\n
-        \     \"navd\": null\n    },\n    {\n      \"stationId\": \"9447130\",\n      \"stationName\":
-        \"Seattle, WA\",\n      \"peakDate\": \"2016-03-10\",\n      \"peakTime\":
-        \"13:30\",\n      \"height\": 4.353,\n      \"datum\": \"MLLW\",\n      \"category\":
-        \"Extra Tropical\",\n      \"event\": \"Coastal Low Pressure & Strong, Onshore
-        Winds\",\n      \"source\": \"Observed Peak Water Level\",\n      \"mhhw\":
-        null,\n      \"mhw\": null,\n      \"mtl\": null,\n      \"msl\": null,\n
-        \     \"mlw\": null,\n      \"mllw\": null,\n      \"navd\": null\n    },\n
-        \   {\n      \"stationId\": \"9447130\",\n      \"stationName\": \"Seattle,
-        WA\",\n      \"peakDate\": \"1987-01-03\",\n      \"peakTime\": \"16:00\",\n
-        \     \"height\": 4.351,\n      \"datum\": \"MLLW\",\n      \"category\":
-        \"Extra Tropical\",\n      \"event\": \"Coastal Low Pressure\",\n      \"source\":
-        \"Observed Peak Water Level\",\n      \"mhhw\": null,\n      \"mhw\": null,\n
-        \     \"mtl\": null,\n      \"msl\": null,\n      \"mlw\": null,\n      \"mllw\":
-        null,\n      \"navd\": null\n    },\n    {\n      \"stationId\": \"9447130\",\n
-        \     \"stationName\": \"Seattle, WA\",\n      \"peakDate\": \"2021-01-13\",\n
-        \     \"peakTime\": \"13:36\",\n      \"height\": 4.34,\n      \"datum\":
-        \"MLLW\",\n      \"category\": \"Other\",\n      \"event\": \"Coastal Low
-        Pressure & Above Normal Tides\",\n      \"source\": \"Observed Peak Water
-        Level\",\n      \"mhhw\": null,\n      \"mhw\": null,\n      \"mtl\": null,\n
-        \     \"msl\": null,\n      \"mlw\": null,\n      \"mllw\": null,\n      \"navd\":
-        null\n    },\n    {\n      \"stationId\": \"9447130\",\n      \"stationName\":
-        \"Seattle, WA\",\n      \"peakDate\": \"2024-12-18\",\n      \"peakTime\":
-        \"15:54\",\n      \"height\": 4.334,\n      \"datum\": \"MLLW\",\n      \"category\":
-        \"Other\",\n      \"event\": \"Above Normal Tides & Cold Front Passage\",\n
-        \     \"source\": \"Observed Peak Water Level\",\n      \"mhhw\": null,\n
-        \     \"mhw\": null,\n      \"mtl\": null,\n      \"msl\": null,\n      \"mlw\":
-        null,\n      \"mllw\": null,\n      \"navd\": null\n    },\n    {\n      \"stationId\":
-        \"9447130\",\n      \"stationName\": \"Seattle, WA\",\n      \"peakDate\":
-        \"2003-01-03\",\n      \"peakTime\": \"14:00\",\n      \"height\": 4.334,\n
-        \     \"datum\": \"MLLW\",\n      \"category\": \"Extra Tropical\",\n      \"event\":
-        \"Coastal Low Pressure & Onshore Winds\",\n      \"source\": \"Observed Peak
-        Water Level\",\n      \"mhhw\": null,\n      \"mhw\": null,\n      \"mtl\":
-        null,\n      \"msl\": null,\n      \"mlw\": null,\n      \"mllw\": null,\n
-        \     \"navd\": null\n    }\n  ],\n  \"self\": null\n}"
-    headers:
-      Access-Control-Allow-Headers:
-      - X-Requested-With
-      Access-Control-Allow-Methods:
-      - GET
-      Access-Control-Allow-Origin:
-      - '*'
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      Date:
-      - Thu, 30 Jul 2026 18:55:31 GMT
-      content-length:
-      - '4556'
-      x-amz-apigw-id:
-      - BVWllHlaoAMEUKw=
-      x-amzn-Remapped-Connection:
-      - keep-alive
-      x-amzn-Remapped-Content-Length:
-      - '4556'
-      x-amzn-Remapped-Date:
-      - Thu, 30 Jul 2026 18:55:31 GMT
-      x-amzn-Remapped-Server:
-      - nginx
-      x-amzn-RequestId:
-      - e5f6d364-95d1-456e-8ba5-c9813b970594
-    status:
-      code: 200
-      message: OK
 version: 1

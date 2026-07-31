@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/TEC5647.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"state\": \"\",\n      \"tidepredoffsets\": {\n        \"refStationId\":
+        \"8724580\",\n        \"type\": \"S\",\n        \"heightOffsetHighTide\":
+        0.46,\n        \"heightOffsetLowTide\": 0.46,\n        \"timeOffsetHighTide\":
+        14,\n        \"timeOffsetLowTide\": 47,\n        \"heightAdjustedType\": \"R\",\n
+        \       \"self\": null\n      },\n      \"type\": \"S\",\n      \"timemeridian\":
+        null,\n      \"reference_id\": \"8724580\",\n      \"timezonecorr\": -6,\n
+        \     \"id\": \"TEC5647\",\n      \"name\": \"Belize City\",\n      \"lat\":
+        17.5,\n      \"lng\": -88.18299865722656,\n      \"affiliations\": \"\",\n
+        \     \"portscode\": \"\",\n      \"products\": null,\n      \"disclaimers\":
+        null,\n      \"notices\": null,\n      \"self\": null,\n      \"expand\":
+        null,\n      \"tideType\": \"\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 31 Jul 2026 08:02:07 GMT
+      content-length:
+      - '787'
+      x-amz-apigw-id:
+      - BXJz7HJFoAMERBg=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '787'
+      x-amzn-Remapped-Date:
+      - Fri, 31 Jul 2026 08:02:07 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 8fc5aa53-e2c0-4088-9cd2-a684d09834c0
+    status:
+      code: 200
+      message: OK
+version: 1
