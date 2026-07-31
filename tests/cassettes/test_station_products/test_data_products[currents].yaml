@@ -1,0 +1,515 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"project\": \"Boston Harbor PORTS\",\n      \"deployed\": \"2025-11-17
+        00:02:00\",\n      \"retrieved\": \"\",\n      \"timezone_offset\": \"-5\",\n
+        \     \"observedst\": true,\n      \"project_type\": \"PORTS\",\n      \"noaachart\":
+        null,\n      \"deployments\": {\n        \"units\": \"meters\",\n        \"flood_direction_degrees\":
+        310.0,\n        \"orientation\": \"side\",\n        \"sensor_depth\": 8.5,\n
+        \       \"depth\": 12.5,\n        \"measured_depth\": 12.5,\n        \"height_from_bottom\":
+        4.0,\n        \"sample_interval\": 360,\n        \"ping_int\": null,\n        \"first_good_data\":
+        \"\",\n        \"last_good_data\": \"\",\n        \"deployments\": [\n          {\n
+        \           \"id\": \"bh0101\",\n            \"deployed\": \"2025-11-17 00:02:00\",\n
+        \           \"retrieved\": \"\",\n            \"lat\": 42.34086227416992,\n
+        \           \"lng\": -71.01233673095703,\n            \"instrument_id\": 52259,\n
+        \           \"instrument_desc\": \"Sontek ADP/Nortek AWAC\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"*3\",\n            \"frequency\": \"250\",\n
+        \           \"nbr_beams\": \"2\"\n          },\n          {\n            \"id\":
+        \"bh0101\",\n            \"deployed\": \"2025-11-17 00:00:00\",\n            \"retrieved\":
+        \"2025-11-17 00:00:00\",\n            \"lat\": 42.34086227416992,\n            \"lng\":
+        -71.01233673095703,\n            \"instrument_id\": 26984,\n            \"instrument_desc\":
+        \"Sontek ADP/Nortek AWAC\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"*2\",\n            \"frequency\": \"250\",\n            \"nbr_beams\": \"2\"\n
+        \         }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/deployments.json\"\n
+        \     },\n      \"bins\": {\n        \"nbr_of_bins\": 23,\n        \"max_pics_bin\":
+        23,\n        \"units\": \"meters\",\n        \"bin_size\": 4.0,\n        \"center_bin_1_dist\":
+        6.0,\n        \"real_time_bin\": 17,\n        \"bins\": [\n          {\n            \"num\":
+        1,\n            \"depth\": null,\n            \"distance\": 6.0,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 2,\n            \"depth\": null,\n            \"distance\":
+        10.0,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 3,\n            \"depth\":
+        null,\n            \"distance\": 13.99,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        4,\n            \"depth\": null,\n            \"distance\": 18.01,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 5,\n            \"depth\": null,\n            \"distance\":
+        22.01,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 6,\n            \"depth\":
+        null,\n            \"distance\": 26.0,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        7,\n            \"depth\": null,\n            \"distance\": 29.99,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 8,\n            \"depth\": null,\n            \"distance\":
+        33.99,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 9,\n            \"depth\":
+        null,\n            \"distance\": 38.01,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        10,\n            \"depth\": null,\n            \"distance\": 42.0,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 11,\n            \"depth\": null,\n            \"distance\":
+        45.99,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 12,\n            \"depth\":
+        null,\n            \"distance\": 49.99,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        13,\n            \"depth\": null,\n            \"distance\": 54.01,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 14,\n            \"depth\": null,\n            \"distance\":
+        58.0,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 15,\n            \"depth\":
+        null,\n            \"distance\": 62.0,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        16,\n            \"depth\": null,\n            \"distance\": 65.99,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 17,\n            \"depth\": null,\n            \"distance\":
+        70.01,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 18,\n            \"depth\":
+        null,\n            \"distance\": 74.01,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        19,\n            \"depth\": null,\n            \"distance\": 78.0,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 20,\n            \"depth\": null,\n            \"distance\":
+        81.99,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 21,\n            \"depth\":
+        null,\n            \"distance\": 86.02,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        22,\n            \"depth\": null,\n            \"distance\": 90.01,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 23,\n            \"depth\": null,\n            \"distance\":
+        94.0,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/bins.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"meters,
+        centimeters/second\",\n        \"HarmonicConstituents\": [\n          {\n
+        \           \"binNbr\": 17,\n            \"binDepth\": 70.01,\n            \"constNum\":
+        1,\n            \"constituentName\": \"M2\",\n            \"description\":
+        \"Principal lunar semidiurnal constituent\",\n            \"majorAmplitude\":
+        18.62,\n            \"majorPhase\": 253.3,\n            \"majorPhaseGMT\":
+        38.2,\n            \"minorAmplitude\": 0.36,\n            \"minorPhase\":
+        328.4,\n            \"minorPhaseGMT\": 113.3,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 2,\n            \"constituentName\": \"S2\",\n
+        \           \"description\": \"Principal solar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.88,\n            \"majorPhase\": 244.5,\n
+        \           \"majorPhaseGMT\": 34.5,\n            \"minorAmplitude\": 0.26,\n
+        \           \"minorPhase\": 86.6,\n            \"minorPhaseGMT\": 236.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 3,\n            \"constituentName\":
+        \"N2\",\n            \"description\": \"Larger lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 4.78,\n            \"majorPhase\":
+        210.8,\n            \"majorPhaseGMT\": 353.0,\n            \"minorAmplitude\":
+        0.0,\n            \"minorPhase\": 156.9,\n            \"minorPhaseGMT\": 0.0,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 4,\n            \"constituentName\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        2.47,\n            \"majorPhase\": 22.6,\n            \"majorPhaseGMT\": 97.8,\n
+        \           \"minorAmplitude\": 0.62,\n            \"minorPhase\": 233.5,\n
+        \           \"minorPhaseGMT\": 308.7,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 5,\n            \"constituentName\": \"M4\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 287.5,\n            \"majorPhaseGMT\":
+        217.3,\n            \"minorAmplitude\": 0.21,\n            \"minorPhase\":
+        239.0,\n            \"minorPhaseGMT\": 168.8,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 6,\n            \"constituentName\": \"O1\",\n
+        \           \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 86.8,\n            \"majorPhaseGMT\": 156.5,\n
+        \           \"minorAmplitude\": 0.1,\n            \"minorPhase\": 174.2,\n
+        \           \"minorPhaseGMT\": 243.9,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 7,\n            \"constituentName\": \"M6\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"majorAmplitude\":
+        0.98,\n            \"majorPhase\": 128.5,\n            \"majorPhaseGMT\":
+        203.3,\n            \"minorAmplitude\": 0.15,\n            \"minorPhase\":
+        314.9,\n            \"minorPhaseGMT\": 29.7,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 8,\n            \"constituentName\": \"MK3\",\n
+        \           \"description\": \"Shallow water terdiurnal\",\n            \"majorAmplitude\":
+        0.31,\n            \"majorPhase\": 90.8,\n            \"majorPhaseGMT\": 310.9,\n
+        \           \"minorAmplitude\": 0.1,\n            \"minorPhase\": 37.9,\n
+        \           \"minorPhaseGMT\": 258.0,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 9,\n            \"constituentName\": \"S4\",\n            \"description\":
+        \"Shallow water overtides of principal solar constituent\",\n            \"majorAmplitude\":
+        0.26,\n            \"majorPhase\": 306.3,\n            \"majorPhaseGMT\":
+        246.3,\n            \"minorAmplitude\": 0.05,\n            \"minorPhase\":
+        180.5,\n            \"minorPhaseGMT\": 120.5,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 10,\n            \"constituentName\": \"MN4\",\n
+        \           \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.1,\n            \"majorPhase\": 126.0,\n
+        \           \"majorPhaseGMT\": 53.1,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 229.5,\n            \"minorPhaseGMT\": 156.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 12,\n            \"constituentName\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"majorAmplitude\": 0.21,\n            \"majorPhase\":
+        57.1,\n            \"majorPhaseGMT\": 147.1,\n            \"minorAmplitude\":
+        0.1,\n            \"minorPhase\": 97.0,\n            \"minorPhaseGMT\": 187.0,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 14,\n            \"constituentName\":
+        \"2N2\",\n            \"description\": \"Lunar elliptical semidiurnal second-order
+        constituent\",\n            \"majorAmplitude\": 1.8,\n            \"majorPhase\":
+        191.5,\n            \"majorPhaseGMT\": 331.0,\n            \"minorAmplitude\":
+        0.21,\n            \"minorPhase\": 313.2,\n            \"minorPhaseGMT\":
+        92.7,\n            \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\":
+        -0.77,\n            \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 15,\n            \"constituentName\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"majorAmplitude\":
+        0.26,\n            \"majorPhase\": 75.3,\n            \"majorPhaseGMT\": 156.0,\n
+        \           \"minorAmplitude\": 0.05,\n            \"minorPhase\": 118.3,\n
+        \           \"minorPhaseGMT\": 199.0,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 18,\n            \"constituentName\": \"M1\",\n
+        \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.57,\n            \"majorPhase\": 193.0,\n
+        \           \"majorPhaseGMT\": 265.5,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 19.7,\n            \"minorPhaseGMT\": 92.2,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 19,\n            \"constituentName\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.1,\n            \"majorPhase\": 31.5,\n
+        \           \"majorPhaseGMT\": 109.4,\n            \"minorAmplitude\": 0.05,\n
+        \           \"minorPhase\": 244.0,\n            \"minorPhaseGMT\": 321.9,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 26,\n            \"constituentName\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.26,\n            \"majorPhase\": 33.9,\n
+        \           \"majorPhaseGMT\": 100.9,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 174.4,\n            \"minorPhaseGMT\": 241.4,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 29,\n            \"constituentName\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 271.0,\n            \"majorPhaseGMT\":
+        335.3,\n            \"minorAmplitude\": 0.1,\n            \"minorPhase\":
+        277.9,\n            \"minorPhaseGMT\": 342.2,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 30,\n            \"constituentName\": \"P1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"majorAmplitude\":
+        2.31,\n            \"majorPhase\": 68.8,\n            \"majorPhaseGMT\": 143.6,\n
+        \           \"minorAmplitude\": 0.72,\n            \"minorPhase\": 299.5,\n
+        \           \"minorPhaseGMT\": 14.3,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 31,\n            \"constituentName\": \"2SM2\",\n
+        \           \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.46,\n            \"majorPhase\": 241.4,\n
+        \           \"majorPhaseGMT\": 36.5,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 126.5,\n            \"minorPhaseGMT\": 281.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 32,\n            \"constituentName\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.15,\n            \"majorPhase\": 265.8,\n
+        \           \"majorPhaseGMT\": 123.2,\n            \"minorAmplitude\": 0.05,\n
+        \           \"minorPhase\": 86.6,\n            \"minorPhaseGMT\": 304.0,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 33,\n            \"constituentName\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 0.72,\n            \"majorPhase\":
+        166.8,\n            \"majorPhaseGMT\": 314.4,\n            \"minorAmplitude\":
+        0.15,\n            \"minorPhase\": 358.2,\n            \"minorPhaseGMT\":
+        145.8,\n            \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\":
+        -0.77,\n            \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 34,\n            \"constituentName\":
+        \"2MK3\",\n            \"description\": \"Shallow water terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.87,\n            \"majorPhase\": 304.8,\n
+        \           \"majorPhaseGMT\": 159.4,\n            \"minorAmplitude\": 0.05,\n
+        \           \"minorPhase\": 307.5,\n            \"minorPhaseGMT\": 162.1,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 35,\n            \"constituentName\":
+        \"K2\",\n            \"description\": \"Lunisolar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.26,\n            \"majorPhase\": 291.3,\n
+        \           \"majorPhaseGMT\": 81.7,\n            \"minorAmplitude\": 0.21,\n
+        \           \"minorPhase\": 199.3,\n            \"minorPhaseGMT\": 349.7,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 36,\n            \"constituentName\":
+        \"M8\",\n            \"description\": \"Shallow water eighth diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.77,\n            \"majorPhase\": 283.6,\n
+        \           \"majorPhaseGMT\": 143.3,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 282.9,\n            \"minorPhaseGMT\": 142.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 37,\n            \"constituentName\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.41,\n            \"majorPhase\": 229.6,\n
+        \           \"majorPhaseGMT\": 164.5,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 251.0,\n            \"minorPhaseGMT\": 185.9,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/harcon.json\"\n
+        \     },\n      \"height_from_bottom\": 4.0,\n      \"center_bin_1_dist\":
+        6.0,\n      \"id\": \"bh0101\",\n      \"name\": \"Castle Island\",\n      \"lat\":
+        42.34086227416992,\n      \"lng\": -71.01233673095703,\n      \"affiliations\":
+        \"\",\n      \"portscode\": \"bh\",\n      \"products\": {\n        \"products\":
+        [\n          {\n            \"name\": \"Currents\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/cdata/DataPlot?id=bh0101\"\n          },\n
+        \         {\n            \"name\": \"Current Predictions\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/noaacurrents/Predictions?id=bh0101\"\n
+        \         },\n          {\n            \"name\": \"PORTS\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/ports/ports.html?id=bh0101\"\n          },\n
+        \         {\n            \"name\": \"PORT Code\",\n            \"value\":
+        \"bh\"\n          },\n          {\n            \"name\": \"PORT Name\",\n
+        \           \"value\": \"Boston Harbor PORTS\"\n          }\n        ],\n
+        \       \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/products.json\"\n
+        \     },\n      \"disclaimers\": null,\n      \"notices\": null,\n      \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101.json\",\n
+        \     \"expand\": \"deployments,bins,harcon\",\n      \"tideType\": \"\"\n
+        \   }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Jul 2026 18:54:19 GMT
+      content-length:
+      - '20912'
+      x-amz-apigw-id:
+      - BVWaTHHaoAMECcw=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Thu, 30 Jul 2026 18:54:00 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 9438ff3f-92de-4510-bae4-2a515d0249b8
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20260525+00%3A00&end_date=20260526+00%3A00&station=bh0101&product=currents&application=noaa_coops&format=json&units=metric&time_zone=gmt&bin=1
+  response:
+    body:
+      string: '{"metadata":{"id":"bh0101","name":"Castle Island","lat":"42.3409","lon":"-71.0123"},
+        "data": [{"t":"2026-05-25 00:06", "s":"6.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        00:12", "s":"5.0", "d":"119",  "b":"1"},{"t":"2026-05-25 00:18", "s":"5.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 00:24", "s":"6.1", "d":"128",  "b":"1"},{"t":"2026-05-25
+        00:36", "s":"1.0", "d":"119",  "b":"1"},{"t":"2026-05-25 00:54", "s":"5.1",
+        "d":"130",  "b":"1"},{"t":"2026-05-25 01:00", "s":"3.2", "d":"101",  "b":"1"},{"t":"2026-05-25
+        01:06", "s":"5.1", "d":"108",  "b":"1"},{"t":"2026-05-25 01:12", "s":"1.0",
+        "d":"29",  "b":"1"},{"t":"2026-05-25 01:18", "s":"3.2", "d":"137",  "b":"1"},{"t":"2026-05-25
+        01:24", "s":"2.0", "d":"119",  "b":"1"},{"t":"2026-05-25 01:30", "s":"2.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 01:36", "s":"3.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        01:42", "s":"3.2", "d":"137",  "b":"1"},{"t":"2026-05-25 01:48", "s":"4.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 01:54", "s":"3.2", "d":"281",  "b":"1"},{"t":"2026-05-25
+        02:00", "s":"2.2", "d":"236",  "b":"1"},{"t":"2026-05-25 02:06", "s":"2.2",
+        "d":"272",  "b":"1"},{"t":"2026-05-25 02:12", "s":"4.2", "d":"344",  "b":"1"},{"t":"2026-05-25
+        02:18", "s":"3.6", "d":"85",  "b":"1"},{"t":"2026-05-25 02:24", "s":"8.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 02:30", "s":"9.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        02:36", "s":"8.2", "d":"133",  "b":"1"},{"t":"2026-05-25 02:42", "s":"2.0",
+        "d":"209",  "b":"1"},{"t":"2026-05-25 02:48", "s":"7.3", "d":"103",  "b":"1"},{"t":"2026-05-25
+        02:54", "s":"3.6", "d":"85",  "b":"1"},{"t":"2026-05-25 03:00", "s":"13.0",
+        "d":"96",  "b":"1"},{"t":"2026-05-25 03:06", "s":"11.4", "d":"81",  "b":"1"},{"t":"2026-05-25
+        03:12", "s":"10.8", "d":"97",  "b":"1"},{"t":"2026-05-25 03:18", "s":"5.7",
+        "d":"74",  "b":"1"},{"t":"2026-05-25 03:24", "s":"7.3", "d":"45",  "b":"1"},{"t":"2026-05-25
+        03:30", "s":"11.3", "d":"74",  "b":"1"},{"t":"2026-05-25 03:36", "s":"13.6",
+        "d":"65",  "b":"1"},{"t":"2026-05-25 03:42", "s":"9.5", "d":"47",  "b":"1"},{"t":"2026-05-25
+        03:48", "s":"11.4", "d":"81",  "b":"1"},{"t":"2026-05-25 03:54", "s":"9.9",
+        "d":"74",  "b":"1"},{"t":"2026-05-25 04:00", "s":"11.4", "d":"67",  "b":"1"},{"t":"2026-05-25
+        04:06", "s":"12.7", "d":"74",  "b":"1"},{"t":"2026-05-25 04:12", "s":"9.2",
+        "d":"78",  "b":"1"},{"t":"2026-05-25 04:18", "s":"10.8", "d":"85",  "b":"1"},{"t":"2026-05-25
+        04:24", "s":"11.3", "d":"74",  "b":"1"},{"t":"2026-05-25 04:30", "s":"10.2",
+        "d":"108",  "b":"1"},{"t":"2026-05-25 04:36", "s":"5.0", "d":"352",  "b":"1"},{"t":"2026-05-25
+        04:42", "s":"4.5", "d":"2",  "b":"1"},{"t":"2026-05-25 04:48", "s":"3.2",
+        "d":"317",  "b":"1"},{"t":"2026-05-25 04:54", "s":"6.7", "d":"56",  "b":"1"},{"t":"2026-05-25
+        05:00", "s":"7.3", "d":"45",  "b":"1"},{"t":"2026-05-25 05:06", "s":"3.2",
+        "d":"11",  "b":"1"},{"t":"2026-05-25 05:12", "s":"13.5", "d":"77",  "b":"1"},{"t":"2026-05-25
+        05:18", "s":"3.6", "d":"63",  "b":"1"},{"t":"2026-05-25 05:24", "s":"3.6",
+        "d":"85",  "b":"1"},{"t":"2026-05-25 05:30", "s":"2.0", "d":"29",  "b":"1"},{"t":"2026-05-25
+        05:36", "s":"3.0", "d":"29",  "b":"1"},{"t":"2026-05-25 05:42", "s":"4.5",
+        "d":"326",  "b":"1"},{"t":"2026-05-25 05:48", "s":"3.0", "d":"299",  "b":"1"},{"t":"2026-05-25
+        05:54", "s":"4.2", "d":"344",  "b":"1"},{"t":"2026-05-25 06:00", "s":"5.8",
+        "d":"330",  "b":"1"},{"t":"2026-05-25 06:06", "s":"13.3", "d":"16",  "b":"1"},{"t":"2026-05-25
+        06:12", "s":"7.0", "d":"29",  "b":"1"},{"t":"2026-05-25 06:18", "s":"5.8",
+        "d":"330",  "b":"1"},{"t":"2026-05-25 06:24", "s":"7.1", "d":"344",  "b":"1"},{"t":"2026-05-25
+        06:30", "s":"6.4", "d":"350",  "b":"1"},{"t":"2026-05-25 06:36", "s":"4.0",
+        "d":"29",  "b":"1"},{"t":"2026-05-25 06:42", "s":"2.8", "d":"344",  "b":"1"},{"t":"2026-05-25
+        06:48", "s":"5.1", "d":"310",  "b":"1"},{"t":"2026-05-25 06:54", "s":"9.1",
+        "d":"305",  "b":"1"},{"t":"2026-05-25 07:00", "s":"10.2", "d":"310",  "b":"1"},{"t":"2026-05-25
+        07:06", "s":"12.0", "d":"304",  "b":"1"},{"t":"2026-05-25 07:12", "s":"7.6",
+        "d":"322",  "b":"1"},{"t":"2026-05-25 07:18", "s":"11.0", "d":"304",  "b":"1"},{"t":"2026-05-25
+        07:24", "s":"10.0", "d":"299",  "b":"1"},{"t":"2026-05-25 07:30", "s":"10.0",
+        "d":"305",  "b":"1"},{"t":"2026-05-25 07:36", "s":"11.2", "d":"309",  "b":"1"},{"t":"2026-05-25
+        07:42", "s":"11.4", "d":"314",  "b":"1"},{"t":"2026-05-25 07:48", "s":"10.4",
+        "d":"316",  "b":"1"},{"t":"2026-05-25 07:54", "s":"12.4", "d":"313",  "b":"1"},{"t":"2026-05-25
+        08:00", "s":"13.3", "d":"312",  "b":"1"},{"t":"2026-05-25 08:06", "s":"10.8",
+        "d":"321",  "b":"1"},{"t":"2026-05-25 08:12", "s":"11.2", "d":"309",  "b":"1"},{"t":"2026-05-25
+        08:18", "s":"10.8", "d":"321",  "b":"1"},{"t":"2026-05-25 08:24", "s":"9.1",
+        "d":"305",  "b":"1"},{"t":"2026-05-25 08:30", "s":"10.0", "d":"305",  "b":"1"},{"t":"2026-05-25
+        08:36", "s":"8.2", "d":"313",  "b":"1"},{"t":"2026-05-25 08:42", "s":"9.2",
+        "d":"312",  "b":"1"},{"t":"2026-05-25 08:48", "s":"8.1", "d":"306",  "b":"1"},{"t":"2026-05-25
+        08:54", "s":"11.0", "d":"304",  "b":"1"},{"t":"2026-05-25 09:00", "s":"9.1",
+        "d":"305",  "b":"1"},{"t":"2026-05-25 09:06", "s":"10.0", "d":"305",  "b":"1"},{"t":"2026-05-25
+        09:12", "s":"8.2", "d":"313",  "b":"1"},{"t":"2026-05-25 09:18", "s":"5.1",
+        "d":"310",  "b":"1"},{"t":"2026-05-25 09:24", "s":"4.1", "d":"313",  "b":"1"},{"t":"2026-05-25
+        09:30", "s":"5.1", "d":"310",  "b":"1"},{"t":"2026-05-25 09:36", "s":"4.0",
+        "d":"299",  "b":"1"},{"t":"2026-05-25 09:42", "s":"8.0", "d":"299",  "b":"1"},{"t":"2026-05-25
+        09:48", "s":"8.0", "d":"299",  "b":"1"},{"t":"2026-05-25 09:54", "s":"6.1",
+        "d":"308",  "b":"1"},{"t":"2026-05-25 10:00", "s":"4.1", "d":"313",  "b":"1"},{"t":"2026-05-25
+        10:06", "s":"5.0", "d":"299",  "b":"1"},{"t":"2026-05-25 10:12", "s":"6.0",
+        "d":"299",  "b":"1"},{"t":"2026-05-25 10:18", "s":"5.0", "d":"299",  "b":"1"},{"t":"2026-05-25
+        10:24", "s":"5.1", "d":"310",  "b":"1"},{"t":"2026-05-25 10:30", "s":"4.1",
+        "d":"313",  "b":"1"},{"t":"2026-05-25 10:36", "s":"3.2", "d":"317",  "b":"1"},{"t":"2026-05-25
+        10:42", "s":"2.2", "d":"326",  "b":"1"},{"t":"2026-05-25 10:48", "s":"2.2",
+        "d":"326",  "b":"1"},{"t":"2026-05-25 10:54", "s":"3.2", "d":"317",  "b":"1"},{"t":"2026-05-25
+        11:00", "s":"4.0", "d":"299",  "b":"1"},{"t":"2026-05-25 11:06", "s":"1.0",
+        "d":"299",  "b":"1"},{"t":"2026-05-25 11:12", "s":"2.0", "d":"299",  "b":"1"},{"t":"2026-05-25
+        11:18", "s":"1.0", "d":"299",  "b":"1"},{"t":"2026-05-25 11:24", "s":"1.0",
+        "d":"299",  "b":"1"},{"t":"2026-05-25 11:30", "s":"3.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        11:36", "s":"2.0", "d":"119",  "b":"1"},{"t":"2026-05-25 11:48", "s":"5.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 11:54", "s":"5.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        12:06", "s":"6.3", "d":"137",  "b":"1"},{"t":"2026-05-25 12:12", "s":"7.1",
+        "d":"127",  "b":"1"},{"t":"2026-05-25 12:30", "s":"7.1", "d":"127",  "b":"1"},{"t":"2026-05-25
+        12:36", "s":"6.0", "d":"119",  "b":"1"},{"t":"2026-05-25 12:42", "s":"7.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 12:48", "s":"4.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        12:54", "s":"4.0", "d":"119",  "b":"1"},{"t":"2026-05-25 13:00", "s":"2.2",
+        "d":"92",  "b":"1"},{"t":"2026-05-25 13:06", "s":"5.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        13:12", "s":"7.1", "d":"127",  "b":"1"},{"t":"2026-05-25 13:18", "s":"3.2",
+        "d":"101",  "b":"1"},{"t":"2026-05-25 13:36", "s":"1.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        13:42", "s":"12.2", "d":"128",  "b":"1"},{"t":"2026-05-25 13:54", "s":"8.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 14:00", "s":"9.1", "d":"125",  "b":"1"},{"t":"2026-05-25
+        14:06", "s":"15.0", "d":"123",  "b":"1"},{"t":"2026-05-25 14:12", "s":"14.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 14:18", "s":"15.1", "d":"127",  "b":"1"},{"t":"2026-05-25
+        14:30", "s":"13.0", "d":"119",  "b":"1"},{"t":"2026-05-25 14:36", "s":"13.0",
+        "d":"123",  "b":"1"},{"t":"2026-05-25 14:42", "s":"13.0", "d":"123",  "b":"1"},{"t":"2026-05-25
+        14:48", "s":"8.0", "d":"119",  "b":"1"},{"t":"2026-05-25 14:54", "s":"9.1",
+        "d":"125",  "b":"1"},{"t":"2026-05-25 15:00", "s":"21.4", "d":"130",  "b":"1"},{"t":"2026-05-25
+        15:06", "s":"9.1", "d":"125",  "b":"1"},{"t":"2026-05-25 15:12", "s":"14.3",
+        "d":"131",  "b":"1"},{"t":"2026-05-25 15:18", "s":"15.1", "d":"127",  "b":"1"},{"t":"2026-05-25
+        15:24", "s":"10.0", "d":"125",  "b":"1"},{"t":"2026-05-25 15:30", "s":"15.1",
+        "d":"127",  "b":"1"},{"t":"2026-05-25 15:36", "s":"7.3", "d":"135",  "b":"1"},{"t":"2026-05-25
+        15:42", "s":"18.0", "d":"119",  "b":"1"},{"t":"2026-05-25 15:48", "s":"15.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 15:54", "s":"14.0", "d":"123",  "b":"1"},{"t":"2026-05-25
+        16:00", "s":"10.0", "d":"119",  "b":"1"},{"t":"2026-05-25 16:06", "s":"8.1",
+        "d":"126",  "b":"1"},{"t":"2026-05-25 16:12", "s":"7.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        16:18", "s":"6.1", "d":"110",  "b":"1"},{"t":"2026-05-25 16:24", "s":"3.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 16:30", "s":"1.4", "d":"74",  "b":"1"},{"t":"2026-05-25
+        16:36", "s":"1.0", "d":"119",  "b":"1"},{"t":"2026-05-25 16:42", "s":"4.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 16:48", "s":"9.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        16:54", "s":"8.1", "d":"126",  "b":"1"},{"t":"2026-05-25 17:00", "s":"13.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 17:06", "s":"13.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        17:18", "s":"8.2", "d":"105",  "b":"1"},{"t":"2026-05-25 17:24", "s":"5.4",
+        "d":"97",  "b":"1"},{"t":"2026-05-25 17:30", "s":"5.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        17:36", "s":"3.0", "d":"119",  "b":"1"},{"t":"2026-05-25 17:42", "s":"4.0",
+        "d":"119",  "b":"1"},{"t":"2026-05-25 17:48", "s":"2.0", "d":"119",  "b":"1"},{"t":"2026-05-25
+        17:54", "s":"3.2", "d":"11",  "b":"1"},{"t":"2026-05-25 18:00", "s":"1.0",
+        "d":"29",  "b":"1"},{"t":"2026-05-25 18:06", "s":"4.0", "d":"299",  "b":"1"},{"t":"2026-05-25
+        18:18", "s":"9.2", "d":"312",  "b":"1"},{"t":"2026-05-25 18:24", "s":"9.2",
+        "d":"312",  "b":"1"},{"t":"2026-05-25 18:30", "s":"5.8", "d":"330",  "b":"1"},{"t":"2026-05-25
+        18:36", "s":"3.2", "d":"317",  "b":"1"},{"t":"2026-05-25 18:42", "s":"3.2",
+        "d":"317",  "b":"1"},{"t":"2026-05-25 18:48", "s":"7.3", "d":"315",  "b":"1"},{"t":"2026-05-25
+        18:54", "s":"8.1", "d":"306",  "b":"1"},{"t":"2026-05-25 19:00", "s":"6.3",
+        "d":"317",  "b":"1"},{"t":"2026-05-25 19:06", "s":"6.3", "d":"317",  "b":"1"},{"t":"2026-05-25
+        19:12", "s":"10.0", "d":"305",  "b":"1"},{"t":"2026-05-25 19:18", "s":"9.2",
+        "d":"312",  "b":"1"},{"t":"2026-05-25 19:30", "s":"13.2", "d":"308",  "b":"1"},{"t":"2026-05-25
+        19:36", "s":"13.9", "d":"329",  "b":"1"},{"t":"2026-05-25 19:42", "s":"15.7",
+        "d":"326",  "b":"1"},{"t":"2026-05-25 19:48", "s":"17.1", "d":"320",  "b":"1"},{"t":"2026-05-25
+        19:54", "s":"12.1", "d":"323",  "b":"1"},{"t":"2026-05-25 20:00", "s":"6.7",
+        "d":"326",  "b":"1"},{"t":"2026-05-25 20:06", "s":"10.2", "d":"310",  "b":"1"},{"t":"2026-05-25
+        20:12", "s":"16.8", "d":"316",  "b":"1"},{"t":"2026-05-25 20:18", "s":"14.6",
+        "d":"315",  "b":"1"},{"t":"2026-05-25 20:24", "s":"15.1", "d":"307",  "b":"1"},{"t":"2026-05-25
+        20:30", "s":"9.5", "d":"317",  "b":"1"},{"t":"2026-05-25 20:36", "s":"10.0",
+        "d":"305",  "b":"1"},{"t":"2026-05-25 20:42", "s":"7.6", "d":"322",  "b":"1"},{"t":"2026-05-25
+        20:48", "s":"5.0", "d":"299",  "b":"1"},{"t":"2026-05-25 20:54", "s":"10.2",
+        "d":"310",  "b":"1"},{"t":"2026-05-25 21:00", "s":"14.0", "d":"303",  "b":"1"},{"t":"2026-05-25
+        21:06", "s":"20.1", "d":"305",  "b":"1"},{"t":"2026-05-25 21:12", "s":"18.1",
+        "d":"305",  "b":"1"},{"t":"2026-05-25 21:18", "s":"16.5", "d":"313",  "b":"1"},{"t":"2026-05-25
+        21:24", "s":"17.5", "d":"312",  "b":"1"},{"t":"2026-05-25 21:30", "s":"13.3",
+        "d":"312",  "b":"1"},{"t":"2026-05-25 21:36", "s":"10.2", "d":"310",  "b":"1"},{"t":"2026-05-25
+        21:42", "s":"10.2", "d":"310",  "b":"1"},{"t":"2026-05-25 21:48", "s":"3.2",
+        "d":"11",  "b":"1"},{"t":"2026-05-25 21:54", "s":"2.8", "d":"344",  "b":"1"},{"t":"2026-05-25
+        22:00", "s":"1.4", "d":"344",  "b":"1"},{"t":"2026-05-25 22:06", "s":"5.8",
+        "d":"330",  "b":"1"},{"t":"2026-05-25 22:12", "s":"11.0", "d":"304",  "b":"1"},{"t":"2026-05-25
+        22:18", "s":"11.4", "d":"314",  "b":"1"},{"t":"2026-05-25 22:24", "s":"7.3",
+        "d":"315",  "b":"1"},{"t":"2026-05-25 22:30", "s":"11.2", "d":"289",  "b":"1"},{"t":"2026-05-25
+        22:36", "s":"14.0", "d":"303",  "b":"1"},{"t":"2026-05-25 22:42", "s":"13.0",
+        "d":"303",  "b":"1"},{"t":"2026-05-25 22:48", "s":"9.2", "d":"312",  "b":"1"},{"t":"2026-05-25
+        22:54", "s":"6.1", "d":"308",  "b":"1"},{"t":"2026-05-25 23:00", "s":"2.0",
+        "d":"299",  "b":"1"},{"t":"2026-05-25 23:12", "s":"4.0", "d":"299",  "b":"1"},{"t":"2026-05-25
+        23:18", "s":"3.2", "d":"317",  "b":"1"},{"t":"2026-05-25 23:24", "s":"3.2",
+        "d":"47",  "b":"1"},{"t":"2026-05-25 23:36", "s":"4.1", "d":"105",  "b":"1"},{"t":"2026-05-25
+        23:42", "s":"4.1", "d":"105",  "b":"1"},{"t":"2026-05-25 23:48", "s":"7.1",
+        "d":"127",  "b":"1"},{"t":"2026-05-25 23:54", "s":"6.0", "d":"119",  "b":"1"},{"t":"2026-05-26
+        00:00", "s":"8.1", "d":"126",  "b":"1"}]}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Thu, 30 Jul 2026 18:54:20 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Pragma:
+      - no-cache
+      content-length:
+      - '12898'
+      x-amz-apigw-id:
+      - BVWabGVAIAMENAA=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Thu, 30 Jul 2026 18:54:20 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - fb577e35-d975-4ea0-a1b1-bf86ba02479e
+    status:
+      code: 200
+      message: OK
+version: 1
