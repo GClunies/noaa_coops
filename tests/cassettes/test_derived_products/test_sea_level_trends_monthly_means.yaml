@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
     method: GET
-    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels?units=metric
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
   response:
     body:
       string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
@@ -18,23 +18,23 @@ interactions:
         \"1954-11-24 00:00:00\",\n        \"removed\": \"\",\n        \"noaachart\":
         \"19383\",\n        \"timemeridian\": -150,\n        \"timezone\": -10.0,\n
         \       \"origyear\": \"1991-02-16 00:00:00\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/details.json\"\n
-        \     },\n      \"sensors\": {\n        \"units\": \"feet\",\n        \"sensors\":
+        \     },\n      \"sensors\": {\n        \"units\": \"meters\",\n        \"sensors\":
         [\n          {\n            \"status\": 1,\n            \"refdatum\": \"Site
         Elevation\",\n            \"sensorID\": \"C1\",\n            \"name\": \"Wind\",\n
-        \           \"elevation\": 27.85433,\n            \"message\": \"\",\n            \"dcp\":
+        \           \"elevation\": 8.49,\n            \"message\": \"\",\n            \"dcp\":
         3\n          },\n          {\n            \"status\": 1,\n            \"refdatum\":
         \"Site Elevation\",\n            \"sensorID\": \"D1\",\n            \"name\":
-        \"Air Temperature\",\n            \"elevation\": 12.795276,\n            \"message\":
+        \"Air Temperature\",\n            \"elevation\": 3.9,\n            \"message\":
         \"\",\n            \"dcp\": 3\n          },\n          {\n            \"status\":
         1,\n            \"refdatum\": \"MLLW\",\n            \"sensorID\": \"E1\",\n
-        \           \"name\": \"Water Temperature\",\n            \"elevation\": -11.863517,\n
+        \           \"name\": \"Water Temperature\",\n            \"elevation\": -3.62,\n
         \           \"message\": \"\",\n            \"dcp\": 1\n          },\n          {\n
         \           \"status\": 1,\n            \"refdatum\": \"MSL\",\n            \"sensorID\":
         \"F1\",\n            \"name\": \"Barometric Pressure\",\n            \"elevation\":
-        9.891732,\n            \"message\": \"\",\n            \"dcp\": 3\n          },\n
+        3.02,\n            \"message\": \"\",\n            \"dcp\": 3\n          },\n
         \         {\n            \"status\": 1,\n            \"refdatum\": \"MSL\",\n
         \           \"sensorID\": \"site\",\n            \"name\": \"site\",\n            \"elevation\":
-        4.9704723,\n            \"message\": \"\",\n            \"dcp\": 0\n          },\n
+        1.52,\n            \"message\": \"\",\n            \"dcp\": 0\n          },\n
         \         {\n            \"status\": 1,\n            \"refdatum\": \"\",\n
         \           \"sensorID\": \"U1\",\n            \"name\": \"Tsunami WL\",\n
         \           \"elevation\": null,\n            \"message\": \"\",\n            \"dcp\":
@@ -42,76 +42,113 @@ interactions:
         \"\",\n            \"sensorID\": \"Y1\",\n            \"name\": \"Microwave
         WL\",\n            \"elevation\": null,\n            \"message\": \"\",\n
         \           \"dcp\": 4\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/sensors.json\"\n
-        \     },\n      \"floodlevels\": {\n        \"nos_minor\": 5.11,\n        \"nos_moderate\":
-        6.80,\n        \"nos_major\": 8.03,\n        \"nws_minor\": 5.22,\n        \"nws_moderate\":
+        \     },\n      \"floodlevels\": {\n        \"nos_minor\": 1.559,\n        \"nos_moderate\":
+        2.072,\n        \"nos_major\": 2.447,\n        \"nws_minor\": 1.590,\n        \"nws_moderate\":
         null,\n        \"nws_major\": null,\n        \"action\": null,\n        \"self\":
         \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/floodlevels.json\"\n
         \     },\n      \"datums\": {\n        \"accepted\": \"Apr 17 2003\",\n        \"superseded\":
-        \"\",\n        \"epoch\": \"1983-2001\",\n        \"units\": \"feet\",\n        \"OrthometricDatum\":
-        \"Ortho\",\n        \"datums\": [\n          {\n            \"name\": \"STND\",\n
-        \           \"description\": \"Station Datum\",\n            \"value\": 0.0\n
-        \         },\n          {\n            \"name\": \"MHHW\",\n            \"description\":
-        \"Mean Higher-High Water\",\n            \"value\": 4.12\n          },\n          {\n
-        \           \"name\": \"MHW\",\n            \"description\": \"Mean High Water\",\n
-        \           \"value\": 3.71\n          },\n          {\n            \"name\":
-        \"DTL\",\n            \"description\": \"Mean Diurnal Tide Level\",\n            \"value\":
-        3.2\n          },\n          {\n            \"name\": \"MTL\",\n            \"description\":
-        \"Mean Tide Level\",\n            \"value\": 3.1\n          },\n          {\n
+        \"\",\n        \"epoch\": \"1983-2001\",\n        \"units\": \"meters\",\n
+        \       \"OrthometricDatum\": \"Ortho\",\n        \"datums\": [\n          {\n
+        \           \"name\": \"STND\",\n            \"description\": \"Station Datum\",\n
+        \           \"value\": 0.0\n          },\n          {\n            \"name\":
+        \"MHHW\",\n            \"description\": \"Mean Higher-High Water\",\n            \"value\":
+        1.255\n          },\n          {\n            \"name\": \"MHW\",\n            \"description\":
+        \"Mean High Water\",\n            \"value\": 1.131\n          },\n          {\n
+        \           \"name\": \"DTL\",\n            \"description\": \"Mean Diurnal
+        Tide Level\",\n            \"value\": 0.976\n          },\n          {\n            \"name\":
+        \"MTL\",\n            \"description\": \"Mean Tide Level\",\n            \"value\":
+        0.944\n          },\n          {\n            \"name\": \"MSL\",\n            \"description\":
+        \"Mean Sea Level\",\n            \"value\": 0.949\n          },\n          {\n
+        \           \"name\": \"MLW\",\n            \"description\": \"Mean Low Water\",\n
+        \           \"value\": 0.758\n          },\n          {\n            \"name\":
+        \"MLLW\",\n            \"description\": \"Mean Lower-Low Water\",\n            \"value\":
+        0.697\n          },\n          {\n            \"name\": \"GT\",\n            \"description\":
+        \"Great Diurnal Range\",\n            \"value\": 0.558\n          },\n          {\n
+        \           \"name\": \"MN\",\n            \"description\": \"Mean Range of
+        Tide\",\n            \"value\": 0.373\n          },\n          {\n            \"name\":
+        \"DHQ\",\n            \"description\": \"Mean Diurnal High Water Inequality\",\n
+        \           \"value\": 0.124\n          },\n          {\n            \"name\":
+        \"DLQ\",\n            \"description\": \"Mean Diurnal Low Water Inequality\",\n
+        \           \"value\": 0.06\n          },\n          {\n            \"name\":
+        \"HWI\",\n            \"description\": \"Greenwich High Water Interval (in
+        hours)\",\n            \"value\": 1.74\n          },\n          {\n            \"name\":
+        \"LWI\",\n            \"description\": \"Greenwich Low Water Interval (in
+        hours)\",\n            \"value\": 7.97\n          }\n        ],\n        \"LAT\":
+        0.537,\n        \"LATdate\": \"20230121\",\n        \"LATtime\": \"06:06\",\n
+        \       \"HAT\": 1.498,\n        \"HATdate\": \"20251205\",\n        \"HATtime\":
+        \"14:18\",\n        \"min\": 0.366,\n        \"mindate\": \"19670524\",\n
+        \       \"mintime\": \"00:00\",\n        \"max\": 2.216,\n        \"maxdate\":
+        \"19920911\",\n        \"maxtime\": \"15:30\",\n        \"disclaimers\": {\n
+        \         \"disclaimers\": [],\n          \"self\": null\n        },\n        \"DatumAnalysisPeriod\":
+        [\n          \"01/01/1983 - 12/31/2001\"\n        ],\n        \"NGSLink\":
+        \"\",\n        \"ctrlStation\": \"\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/datums.json\"\n
+        \     },\n      \"supersededdatums\": {\n        \"accepted\": \"Aug 23 2000\",\n
+        \       \"superseded\": \"Apr 17 2003\",\n        \"epoch\": \"1960-1978\",\n
+        \       \"units\": \"meters\",\n        \"OrthometricDatum\": \"Ortho\",\n
+        \       \"datums\": [\n          {\n            \"name\": \"STND\",\n            \"description\":
+        \"Station Datum\",\n            \"value\": 0.0\n          },\n          {\n
+        \           \"name\": \"MHHW\",\n            \"description\": \"Mean Higher-High
+        Water\",\n            \"value\": 1.231\n          },\n          {\n            \"name\":
+        \"MHW\",\n            \"description\": \"Mean High Water\",\n            \"value\":
+        1.091\n          },\n          {\n            \"name\": \"DTL\",\n            \"description\":
+        \"Mean Diurnal Tide Level\",\n            \"value\": 0.948\n          },\n
+        \         {\n            \"name\": \"MTL\",\n            \"description\":
+        \"Mean Tide Level\",\n            \"value\": 0.911\n          },\n          {\n
         \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
-        \           \"value\": 3.11\n          },\n          {\n            \"name\":
+        \           \"value\": 0.924\n          },\n          {\n            \"name\":
         \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
-        2.49\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
-        \"Mean Lower-Low Water\",\n            \"value\": 2.29\n          },\n          {\n
+        0.732\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 0.664\n          },\n          {\n
         \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
-        Range\",\n            \"value\": 1.83\n          },\n          {\n            \"name\":
+        Range\",\n            \"value\": 0.567\n          },\n          {\n            \"name\":
         \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
-        1.22\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
-        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.41\n          },\n
+        0.36\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.14\n          },\n
         \         {\n            \"name\": \"DLQ\",\n            \"description\":
-        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.2\n          },\n
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.068\n          },\n
         \         {\n            \"name\": \"HWI\",\n            \"description\":
-        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 1.74\n
+        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 1.67\n
         \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
-        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 7.97\n
-        \         }\n        ],\n        \"LAT\": 1.762,\n        \"LATdate\": \"20230121\",\n
-        \       \"LATtime\": \"06:06\",\n        \"HAT\": 4.915,\n        \"HATdate\":
-        \"20251205\",\n        \"HATtime\": \"14:18\",\n        \"min\": 1.201,\n
+        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 7.96\n
+        \         }\n        ],\n        \"LAT\": 0.512,\n        \"LATdate\": \"20230121\",\n
+        \       \"LATtime\": \"06:06\",\n        \"HAT\": 1.473,\n        \"HATdate\":
+        \"20251205\",\n        \"HATtime\": \"14:18\",\n        \"min\": 0.366,\n
         \       \"mindate\": \"19670524\",\n        \"mintime\": \"00:00\",\n        \"max\":
-        7.27,\n        \"maxdate\": \"19920911\",\n        \"maxtime\": \"15:30\",\n
+        2.216,\n        \"maxdate\": \"19920911\",\n        \"maxtime\": \"15:30\",\n
         \       \"disclaimers\": {\n          \"disclaimers\": [],\n          \"self\":
-        null\n        },\n        \"DatumAnalysisPeriod\": [\n          \"01/01/1983
-        - 12/31/2001\"\n        ],\n        \"NGSLink\": \"\",\n        \"ctrlStation\":
-        \"\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/datums.json\"\n
-        \     },\n      \"supersededdatums\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/supersededdatums.json\"\n
-        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"feet\",\n
+        null\n        },\n        \"DatumAnalysisPeriod\": [\n          \"01/01/1960
+        - 12/31/1964\",\n          \"01/01/1976 - 12/31/1980\"\n        ],\n        \"NGSLink\":
+        \"\",\n        \"ctrlStation\": \"1612340 Honolulu, HI\",\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/supersededdatums.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"meters\",\n
         \       \"HarmonicConstituents\": [\n          {\n            \"number\":
         1,\n            \"name\": \"M2\",\n            \"description\": \"Principal
-        lunar semidiurnal constituent\",\n            \"amplitude\": 0.49,\n            \"phase_GMT\":
+        lunar semidiurnal constituent\",\n            \"amplitude\": 0.149,\n            \"phase_GMT\":
         48.1,\n            \"phase_local\": 118.3,\n            \"speed\": 28.984104,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         2,\n            \"name\": \"S2\",\n            \"description\": \"Principal
-        solar semidiurnal constituent\",\n            \"amplitude\": 0.19,\n            \"phase_GMT\":
+        solar semidiurnal constituent\",\n            \"amplitude\": 0.057,\n            \"phase_GMT\":
         45.3,\n            \"phase_local\": 105.3,\n            \"speed\": 30.0,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         3,\n            \"name\": \"N2\",\n            \"description\": \"Larger lunar
-        elliptic semidiurnal constituent\",\n            \"amplitude\": 0.1,\n            \"phase_GMT\":
+        elliptic semidiurnal constituent\",\n            \"amplitude\": 0.029,\n            \"phase_GMT\":
         35.0,\n            \"phase_local\": 110.6,\n            \"speed\": 28.43973,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         4,\n            \"name\": \"K1\",\n            \"description\": \"Lunar diurnal
-        constituent\",\n            \"amplitude\": 0.48,\n            \"phase_GMT\":
+        constituent\",\n            \"amplitude\": 0.146,\n            \"phase_GMT\":
         230.3,\n            \"phase_local\": 79.8,\n            \"speed\": 15.041069,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         5,\n            \"name\": \"M4\",\n            \"description\": \"Shallow
         water overtides of principal lunar constituent\",\n            \"amplitude\":
-        0.01,\n            \"phase_GMT\": 187.3,\n            \"phase_local\": 327.7,\n
+        0.003,\n            \"phase_GMT\": 187.3,\n            \"phase_local\": 327.7,\n
         \           \"speed\": 57.96821,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 6,\n            \"name\": \"O1\",\n            \"description\":
-        \"Lunar diurnal constituent\",\n            \"amplitude\": 0.28,\n            \"phase_GMT\":
+        \"Lunar diurnal constituent\",\n            \"amplitude\": 0.084,\n            \"phase_GMT\":
         221.3,\n            \"phase_local\": 81.9,\n            \"speed\": 13.943035,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
@@ -132,12 +169,12 @@ interactions:
         5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 10,\n            \"name\": \"MN4\",\n
         \           \"description\": \"Shallow water quarter diurnal constituent\",\n
-        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 141.1,\n            \"phase_local\":
+        \           \"amplitude\": 0.001,\n            \"phase_GMT\": 141.1,\n            \"phase_local\":
         286.9,\n            \"speed\": 57.423832,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 11,\n            \"name\":
         \"NU2\",\n            \"description\": \"Larger lunar evectional constituent\",\n
-        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 33.6,\n            \"phase_local\":
+        \           \"amplitude\": 0.006,\n            \"phase_GMT\": 33.6,\n            \"phase_local\":
         108.5,\n            \"speed\": 28.512583,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 12,\n            \"name\":
@@ -147,42 +184,42 @@ interactions:
         \"Vector Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 13,\n            \"name\":
         \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"amplitude\":
-        0.01,\n            \"phase_GMT\": 357.4,\n            \"phase_local\": 77.7,\n
+        0.004,\n            \"phase_GMT\": 357.4,\n            \"phase_local\": 77.7,\n
         \           \"speed\": 27.968208,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 14,\n            \"name\": \"2N2\",\n
         \           \"description\": \"Lunar elliptical semidiurnal second-order constituent\",\n
-        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 20.9,\n            \"phase_local\":
+        \           \"amplitude\": 0.003,\n            \"phase_GMT\": 20.9,\n            \"phase_local\":
         101.9,\n            \"speed\": 27.895355,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 15,\n            \"name\":
         \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"amplitude\":
-        0.02,\n            \"phase_GMT\": 255.0,\n            \"phase_local\": 93.6,\n
+        0.006,\n            \"phase_GMT\": 255.0,\n            \"phase_local\": 93.6,\n
         \           \"speed\": 16.139101,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 16,\n            \"name\": \"LAM2\",\n
         \           \"description\": \"Smaller lunar evectional constituent\",\n            \"amplitude\":
-        0.01,\n            \"phase_GMT\": 54.8,\n            \"phase_local\": 120.2,\n
+        0.002,\n            \"phase_GMT\": 54.8,\n            \"phase_local\": 120.2,\n
         \           \"speed\": 29.455626,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 17,\n            \"name\": \"S1\",\n
         \           \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
-        0.0,\n            \"phase_GMT\": 45.6,\n            \"phase_local\": 255.6,\n
+        0.001,\n            \"phase_GMT\": 45.6,\n            \"phase_local\": 255.6,\n
         \           \"speed\": 15.0,\n            \"comments\": \"Vector Average of
         5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 18,\n            \"name\": \"M1\",\n
         \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
-        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 241.5,\n            \"phase_local\":
+        \           \"amplitude\": 0.005,\n            \"phase_GMT\": 241.5,\n            \"phase_local\":
         96.5,\n            \"speed\": 14.496694,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 19,\n            \"name\":
         \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
-        \           \"amplitude\": 0.03,\n            \"phase_GMT\": 246.3,\n            \"phase_local\":
+        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 246.3,\n            \"phase_local\":
         90.5,\n            \"speed\": 15.5854435,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 20,\n            \"name\":
         \"MM\",\n            \"description\": \"Lunar monthly constituent\",\n            \"amplitude\":
-        0.03,\n            \"phase_GMT\": 19.4,\n            \"phase_local\": 14.0,\n
+        0.008,\n            \"phase_GMT\": 19.4,\n            \"phase_local\": 14.0,\n
         \           \"speed\": 0.5443747,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 21,\n            \"name\": \"SSA\",\n
@@ -192,7 +229,7 @@ interactions:
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 22,\n            \"name\": \"SA\",\n
         \           \"description\": \"Solar annual constituent\",\n            \"amplitude\":
-        0.17,\n            \"phase_GMT\": 181.1,\n            \"phase_local\": 180.7,\n
+        0.053,\n            \"phase_GMT\": 181.1,\n            \"phase_local\": 180.7,\n
         \           \"speed\": 0.0410686,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 23,\n            \"name\": \"MSF\",\n
@@ -202,62 +239,62 @@ interactions:
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 24,\n            \"name\":
         \"MF\",\n            \"description\": \"Lunisolar fortnightly constituent\",\n
-        \           \"amplitude\": 0.02,\n            \"phase_GMT\": 49.6,\n            \"phase_local\":
+        \           \"amplitude\": 0.005,\n            \"phase_GMT\": 49.6,\n            \"phase_local\":
         38.6,\n            \"speed\": 1.0980331,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 25,\n            \"name\":
         \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
-        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 217.3,\n            \"phase_local\":
+        \           \"amplitude\": 0.002,\n            \"phase_GMT\": 217.3,\n            \"phase_local\":
         82.5,\n            \"speed\": 13.471515,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 26,\n            \"name\":
         \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
-        \           \"amplitude\": 0.05,\n            \"phase_GMT\": 212.4,\n            \"phase_local\":
+        \           \"amplitude\": 0.014,\n            \"phase_GMT\": 212.4,\n            \"phase_local\":
         78.4,\n            \"speed\": 13.398661,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 27,\n            \"name\":
         \"T2\",\n            \"description\": \"Larger solar elliptic constituent\",\n
-        \           \"amplitude\": 0.01,\n            \"phase_GMT\": 45.3,\n            \"phase_local\":
+        \           \"amplitude\": 0.003,\n            \"phase_GMT\": 45.3,\n            \"phase_local\":
         105.7,\n            \"speed\": 29.958933,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 28,\n            \"name\":
         \"R2\",\n            \"description\": \"Smaller solar elliptic constituent\",\n
-        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 102.3,\n            \"phase_local\":
+        \           \"amplitude\": 0.001,\n            \"phase_GMT\": 102.3,\n            \"phase_local\":
         161.9,\n            \"speed\": 30.041067,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 29,\n            \"name\":
         \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"amplitude\":
-        0.0,\n            \"phase_GMT\": 223.2,\n            \"phase_local\": 94.6,\n
+        0.001,\n            \"phase_GMT\": 223.2,\n            \"phase_local\": 94.6,\n
         \           \"speed\": 12.854286,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 30,\n            \"name\": \"P1\",\n
         \           \"description\": \"Solar diurnal constituent\",\n            \"amplitude\":
-        0.15,\n            \"phase_GMT\": 228.0,\n            \"phase_local\": 78.4,\n
+        0.046,\n            \"phase_GMT\": 228.0,\n            \"phase_local\": 78.4,\n
         \           \"speed\": 14.958931,\n            \"comments\": \"Vector Average
         of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n          },\n
         \         {\n            \"number\": 31,\n            \"name\": \"2SM2\",\n
         \           \"description\": \"Shallow water semidiurnal constituent\",\n
-        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 209.4,\n            \"phase_local\":
+        \           \"amplitude\": 0.001,\n            \"phase_GMT\": 209.4,\n            \"phase_local\":
         259.3,\n            \"speed\": 31.015896,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 32,\n            \"name\":
         \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
-        \           \"amplitude\": 0.0,\n            \"phase_GMT\": 167.3,\n            \"phase_local\":
+        \           \"amplitude\": 0.001,\n            \"phase_GMT\": 167.3,\n            \"phase_local\":
         92.6,\n            \"speed\": 43.47616,\n            \"comments\": \"Vector
         Average of 5 year, 2014-2018.  Sa, Mm, and Mf from 18 years (1998-2018).\"\n
         \         },\n          {\n            \"number\": 33,\n            \"name\":
         \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
-        constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
+        constituent\",\n            \"amplitude\": 0.003,\n            \"phase_GMT\":
         30.2,\n            \"phase_local\": 94.9,\n            \"speed\": 29.528479,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         34,\n            \"name\": \"2MK3\",\n            \"description\": \"Shallow
-        water terdiurnal constituent\",\n            \"amplitude\": 0.0,\n            \"phase_GMT\":
+        water terdiurnal constituent\",\n            \"amplitude\": 0.001,\n            \"phase_GMT\":
         256.2,\n            \"phase_local\": 186.9,\n            \"speed\": 42.92714,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         35,\n            \"name\": \"K2\",\n            \"description\": \"Lunisolar
-        semidiurnal constituent\",\n            \"amplitude\": 0.05,\n            \"phase_GMT\":
+        semidiurnal constituent\",\n            \"amplitude\": 0.014,\n            \"phase_GMT\":
         34.8,\n            \"phase_local\": 93.9,\n            \"speed\": 30.082138,\n
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
@@ -267,10 +304,10 @@ interactions:
         \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
         and Mf from 18 years (1998-2018).\"\n          },\n          {\n            \"number\":
         37,\n            \"name\": \"MS4\",\n            \"description\": \"Shallow
-        water quarter diurnal constituent\",\n            \"amplitude\": 0.01,\n            \"phase_GMT\":
-        206.8,\n            \"phase_local\": 337.0,\n            \"speed\": 58.984104,\n
-        \           \"comments\": \"Vector Average of 5 year, 2014-2018.  Sa, Mm,
-        and Mf from 18 years (1998-2018).\"\n          }\n        ],\n        \"self\":
+        water quarter diurnal constituent\",\n            \"amplitude\": 0.002,\n
+        \           \"phase_GMT\": 206.8,\n            \"phase_local\": 337.0,\n            \"speed\":
+        58.984104,\n            \"comments\": \"Vector Average of 5 year, 2014-2018.
+        \ Sa, Mm, and Mf from 18 years (1998-2018).\"\n          }\n        ],\n        \"self\":
         \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/harcon.json\"\n
         \     },\n      \"benchmarks\": {\n        \"benchmarks\": [\n          {\n
         \           \"designation\": \"TBM 161 1400 Met SRM\",\n            \"vm\":
@@ -698,8 +735,11 @@ interactions:
         Road and Kapule Highway (State Highway 51) in the vicinity of Pier # 2.  The
         tide station is located in the NE corner of the Tug Pier west of the main
         dock and warehouse.\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/benchmarks.json\"\n
-        \     },\n      \"tidePredOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/tidepredoffsets.json\"\n
-        \     },\n      \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/ofsmapoffsets.json\"\n
+        \     },\n      \"tidePredOffsets\": {\n        \"refStationId\": \"\",\n
+        \       \"type\": \"R\",\n        \"heightOffsetHighTide\": null,\n        \"heightOffsetLowTide\":
+        null,\n        \"timeOffsetHighTide\": null,\n        \"timeOffsetLowTide\":
+        null,\n        \"heightAdjustedType\": \"\",\n        \"self\": null\n      },\n
+        \     \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/1611400/ofsmapoffsets.json\"\n
         \     },\n      \"state\": \"HI\",\n      \"timezone\": \"HAST\",\n      \"timezonecorr\":
         -10,\n      \"observedst\": false,\n      \"stormsurge\": false,\n      \"nearby\":
         {\n        \"count\": 4,\n        \"units\": null,\n        \"stations\":
@@ -787,19 +827,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Jul 2026 17:06:48 GMT
+      - Thu, 30 Jul 2026 18:55:45 GMT
       content-length:
-      - '58889'
+      - '61713'
       x-amz-apigw-id:
-      - A3cOcFRIIAMEdKw=
+      - BVWnwEw5IAMER7g=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Tue, 21 Jul 2026 17:06:38 GMT
+      - Thu, 30 Jul 2026 18:55:37 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - b2ed7f1b-ac22-4eed-b7e5-7b64b29bde8b
+      - 399822dd-532e-46b7-8e76-1537f0bbb575
     status:
       code: 200
       message: OK
@@ -870,7 +910,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Tue, 21 Jul 2026 17:06:49 GMT
+      - Thu, 30 Jul 2026 18:55:46 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -907,13 +947,13 @@ interactions:
         xmlns="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><station
         ID="1611400" name="Nawiliwili"><metadata><location><lat>21.9544</lat><long>-159.3561</long><state>HI</state></location><date_established>1954-11-24</date_established><shef_id>NWWH1</shef_id><deployment_designation>NWLON</deployment_designation></metadata><parameter
         first="2009-01-16 20:42" last="2013-01-11 02:00" name="Wind"/><parameter first="2015-02-07
-        10:24" last="2026-07-21 17:00" name="Wind"/><parameter first="2009-01-16 20:42"
+        10:24" last="2026-07-30 18:48" name="Wind"/><parameter first="2009-01-16 20:42"
         last="2013-01-11 02:36" name="Air Temperature"/><parameter first="2015-02-07
-        10:24" last="2026-07-21 17:00" name="Air Temperature"/><parameter first="1994-01-22
-        10:00" last="2026-07-21 17:00" name="Water Temperature"/><parameter first="2009-01-16
+        10:24" last="2026-07-30 18:48" name="Air Temperature"/><parameter first="1994-01-22
+        10:00" last="2026-07-30 18:48" name="Water Temperature"/><parameter first="2009-01-16
         20:42" last="2013-01-11 02:36" name="Barometric Pressure"/><parameter first="2015-02-07
-        10:24" last="2026-07-21 17:00" name="Barometric Pressure"/><parameter first="2001-01-01
-        00:00" last="2026-07-21 17:00" name="Preliminary 6-Minute Water Level"/><parameter
+        10:24" last="2026-07-30 18:48" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-30 18:48" name="Preliminary 6-Minute Water Level"/><parameter
         first="1995-11-30 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
         Level"/><parameter first="1954-11-27 10:00" last="2026-06-30 23:00" name="Verified
         Hourly Height Water Level"/><parameter first="1979-02-01 10:18" last="2026-06-30
@@ -927,7 +967,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Tue, 21 Jul 2026 17:06:51 GMT
+      - Thu, 30 Jul 2026 18:55:47 GMT
       Server:
       - nginx
       Transfer-Encoding:
@@ -945,7 +985,7 @@ interactions:
       Connection:
       - keep-alive
     method: GET
-    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400&details=monthlymeans&trendType=SINGLE&units=metric
+    uri: https://api.tidesandcurrents.noaa.gov/dpapi/prod/webapi/product/sealvltrends.json?station=1611400&units=metric&details=monthlymeans&trendType=SINGLE
   response:
     body:
       string: "{\n  \"info\": \"The values are in meters relative to the MSL. Values
@@ -2857,13 +2897,15 @@ interactions:
         \"10/15/2007\",\n      \"mslDeseasonalized\": -0.029,\n      \"msl\": 0.022,\n
         \     \"trendLine\": 0.04,\n      \"upperConfidence\": 0.05,\n      \"lowerConfidence\":
         0.03\n    },\n    {\n      \"year\": 2007,\n      \"month\": 11,\n      \"meanDate\":
-        \"11/15/2007\",\n      \"trendLine\": 0.04,\n      \"upperConfidence\": 0.05,\n
-        \     \"lowerConfidence\": 0.03\n    },\n    {\n      \"year\": 2007,\n      \"month\":
-        12,\n      \"meanDate\": \"12/15/2007\",\n      \"trendLine\": 0.04,\n      \"upperConfidence\":
-        0.05,\n      \"lowerConfidence\": 0.03\n    },\n    {\n      \"year\": 2008,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2008\",\n      \"trendLine\":
-        0.04,\n      \"upperConfidence\": 0.05,\n      \"lowerConfidence\": 0.03\n
-        \   },\n    {\n      \"year\": 2008,\n      \"month\": 2,\n      \"meanDate\":
+        \"11/15/2007\",\n      \"mslDeseasonalized\": null,\n      \"msl\": null,\n
+        \     \"trendLine\": 0.04,\n      \"upperConfidence\": 0.05,\n      \"lowerConfidence\":
+        0.03\n    },\n    {\n      \"year\": 2007,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2007\",\n      \"mslDeseasonalized\": null,\n      \"msl\": null,\n
+        \     \"trendLine\": 0.04,\n      \"upperConfidence\": 0.05,\n      \"lowerConfidence\":
+        0.03\n    },\n    {\n      \"year\": 2008,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2008\",\n      \"mslDeseasonalized\": null,\n      \"msl\": null,\n
+        \     \"trendLine\": 0.04,\n      \"upperConfidence\": 0.05,\n      \"lowerConfidence\":
+        0.03\n    },\n    {\n      \"year\": 2008,\n      \"month\": 2,\n      \"meanDate\":
         \"02/15/2008\",\n      \"mslDeseasonalized\": 0.026,\n      \"msl\": -0.001,\n
         \     \"trendLine\": 0.04,\n      \"upperConfidence\": 0.05,\n      \"lowerConfidence\":
         0.03\n    },\n    {\n      \"year\": 2008,\n      \"month\": 3,\n      \"meanDate\":
@@ -3011,513 +3053,519 @@ interactions:
         \"02/15/2012\",\n      \"mslDeseasonalized\": -0.005,\n      \"msl\": -0.032,\n
         \     \"trendLine\": 0.048,\n      \"upperConfidence\": 0.059,\n      \"lowerConfidence\":
         0.037\n    },\n    {\n      \"year\": 2012,\n      \"month\": 3,\n      \"meanDate\":
-        \"03/15/2012\",\n      \"trendLine\": 0.048,\n      \"upperConfidence\": 0.059,\n
-        \     \"lowerConfidence\": 0.037\n    },\n    {\n      \"year\": 2012,\n      \"month\":
-        4,\n      \"meanDate\": \"04/15/2012\",\n      \"mslDeseasonalized\": 0.027,\n
-        \     \"msl\": -0.016,\n      \"trendLine\": 0.048,\n      \"upperConfidence\":
-        0.059,\n      \"lowerConfidence\": 0.037\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2012\",\n      \"mslDeseasonalized\":
-        0.04,\n      \"msl\": -0.002,\n      \"trendLine\": 0.048,\n      \"upperConfidence\":
-        0.059,\n      \"lowerConfidence\": 0.037\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2012\",\n      \"mslDeseasonalized\":
-        0.03,\n      \"msl\": 0.001,\n      \"trendLine\": 0.049,\n      \"upperConfidence\":
-        0.06,\n      \"lowerConfidence\": 0.038\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2012\",\n      \"mslDeseasonalized\":
-        0.046,\n      \"msl\": 0.057,\n      \"trendLine\": 0.049,\n      \"upperConfidence\":
-        0.06,\n      \"lowerConfidence\": 0.038\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2012\",\n      \"mslDeseasonalized\":
-        -0.016,\n      \"msl\": 0.019,\n      \"trendLine\": 0.049,\n      \"upperConfidence\":
-        0.06,\n      \"lowerConfidence\": 0.038\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2012\",\n      \"mslDeseasonalized\":
-        -0.016,\n      \"msl\": 0.043,\n      \"trendLine\": 0.049,\n      \"upperConfidence\":
-        0.06,\n      \"lowerConfidence\": 0.038\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2012\",\n      \"mslDeseasonalized\":
-        0.008,\n      \"msl\": 0.059,\n      \"trendLine\": 0.049,\n      \"upperConfidence\":
-        0.06,\n      \"lowerConfidence\": 0.038\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2012\",\n      \"mslDeseasonalized\":
-        0.043,\n      \"msl\": 0.068,\n      \"trendLine\": 0.049,\n      \"upperConfidence\":
-        0.06,\n      \"lowerConfidence\": 0.038\n    },\n    {\n      \"year\": 2012,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2012\",\n      \"mslDeseasonalized\":
-        0.063,\n      \"msl\": 0.069,\n      \"trendLine\": 0.05,\n      \"upperConfidence\":
-        0.061,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2013\",\n      \"mslDeseasonalized\":
-        0.058,\n      \"msl\": 0.051,\n      \"trendLine\": 0.05,\n      \"upperConfidence\":
-        0.061,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2013\",\n      \"mslDeseasonalized\":
-        -0.051,\n      \"msl\": -0.078,\n      \"trendLine\": 0.05,\n      \"upperConfidence\":
-        0.061,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2013\",\n      \"mslDeseasonalized\":
-        0.025,\n      \"msl\": -0.014,\n      \"trendLine\": 0.05,\n      \"upperConfidence\":
-        0.061,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2013\",\n      \"mslDeseasonalized\":
-        0.059,\n      \"msl\": 0.016,\n      \"trendLine\": 0.05,\n      \"upperConfidence\":
-        0.061,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2013\",\n      \"mslDeseasonalized\":
-        0.089,\n      \"msl\": 0.047,\n      \"trendLine\": 0.05,\n      \"upperConfidence\":
-        0.061,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2013\",\n      \"mslDeseasonalized\":
-        0.099,\n      \"msl\": 0.07,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.062,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2013\",\n      \"mslDeseasonalized\":
-        0.056,\n      \"msl\": 0.067,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.062,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2013\",\n      \"mslDeseasonalized\":
-        0.031,\n      \"msl\": 0.066,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.063,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2013\",\n      \"mslDeseasonalized\":
-        0.047,\n      \"msl\": 0.106,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.063,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2013\",\n      \"mslDeseasonalized\":
-        0.031,\n      \"msl\": 0.082,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.063,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2013\",\n      \"mslDeseasonalized\":
-        0.03,\n      \"msl\": 0.055,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.063,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2013,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2013\",\n      \"mslDeseasonalized\":
-        0.037,\n      \"msl\": 0.043,\n      \"trendLine\": 0.051,\n      \"upperConfidence\":
-        0.063,\n      \"lowerConfidence\": 0.039\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2014\",\n      \"mslDeseasonalized\":
-        0.029,\n      \"msl\": 0.022,\n      \"trendLine\": 0.052,\n      \"upperConfidence\":
-        0.064,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2014\",\n      \"mslDeseasonalized\":
-        0.037,\n      \"msl\": 0.01,\n      \"trendLine\": 0.052,\n      \"upperConfidence\":
-        0.064,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2014\",\n      \"mslDeseasonalized\":
-        -0.007,\n      \"msl\": -0.046,\n      \"trendLine\": 0.052,\n      \"upperConfidence\":
-        0.064,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2014\",\n      \"mslDeseasonalized\":
-        0.039,\n      \"msl\": -0.004,\n      \"trendLine\": 0.052,\n      \"upperConfidence\":
-        0.064,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2014\",\n      \"mslDeseasonalized\":
-        0.036,\n      \"msl\": -0.006,\n      \"trendLine\": 0.052,\n      \"upperConfidence\":
-        0.064,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2014\",\n      \"mslDeseasonalized\":
-        0.102,\n      \"msl\": 0.073,\n      \"trendLine\": 0.052,\n      \"upperConfidence\":
-        0.064,\n      \"lowerConfidence\": 0.04\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2014\",\n      \"mslDeseasonalized\":
-        0.102,\n      \"msl\": 0.113,\n      \"trendLine\": 0.053,\n      \"upperConfidence\":
-        0.065,\n      \"lowerConfidence\": 0.041\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2014\",\n      \"mslDeseasonalized\":
-        0.06,\n      \"msl\": 0.095,\n      \"trendLine\": 0.053,\n      \"upperConfidence\":
-        0.065,\n      \"lowerConfidence\": 0.041\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2014\",\n      \"mslDeseasonalized\":
-        0.06,\n      \"msl\": 0.119,\n      \"trendLine\": 0.053,\n      \"upperConfidence\":
-        0.065,\n      \"lowerConfidence\": 0.041\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2014\",\n      \"mslDeseasonalized\":
-        0.097,\n      \"msl\": 0.148,\n      \"trendLine\": 0.053,\n      \"upperConfidence\":
-        0.065,\n      \"lowerConfidence\": 0.041\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2014\",\n      \"mslDeseasonalized\":
-        0.09,\n      \"msl\": 0.115,\n      \"trendLine\": 0.053,\n      \"upperConfidence\":
-        0.065,\n      \"lowerConfidence\": 0.041\n    },\n    {\n      \"year\": 2014,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2014\",\n      \"mslDeseasonalized\":
-        0.066,\n      \"msl\": 0.072,\n      \"trendLine\": 0.053,\n      \"upperConfidence\":
-        0.065,\n      \"lowerConfidence\": 0.041\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2015\",\n      \"mslDeseasonalized\":
-        0.059,\n      \"msl\": 0.052,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2015\",\n      \"mslDeseasonalized\":
-        0.051,\n      \"msl\": 0.024,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2015\",\n      \"mslDeseasonalized\":
-        0.004,\n      \"msl\": -0.035,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2015\",\n      \"mslDeseasonalized\":
-        0.039,\n      \"msl\": -0.004,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2015\",\n      \"mslDeseasonalized\":
-        0.074,\n      \"msl\": 0.032,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2015\",\n      \"mslDeseasonalized\":
-        0.125,\n      \"msl\": 0.096,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2015\",\n      \"mslDeseasonalized\":
-        0.167,\n      \"msl\": 0.178,\n      \"trendLine\": 0.054,\n      \"upperConfidence\":
-        0.066,\n      \"lowerConfidence\": 0.042\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2015\",\n      \"mslDeseasonalized\":
-        0.062,\n      \"msl\": 0.097,\n      \"trendLine\": 0.055,\n      \"upperConfidence\":
-        0.067,\n      \"lowerConfidence\": 0.043\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2015\",\n      \"mslDeseasonalized\":
-        -0.014,\n      \"msl\": 0.045,\n      \"trendLine\": 0.055,\n      \"upperConfidence\":
-        0.067,\n      \"lowerConfidence\": 0.043\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2015\",\n      \"mslDeseasonalized\":
-        0.036,\n      \"msl\": 0.087,\n      \"trendLine\": 0.055,\n      \"upperConfidence\":
-        0.067,\n      \"lowerConfidence\": 0.043\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2015\",\n      \"mslDeseasonalized\":
-        -0.006,\n      \"msl\": 0.019,\n      \"trendLine\": 0.055,\n      \"upperConfidence\":
-        0.067,\n      \"lowerConfidence\": 0.043\n    },\n    {\n      \"year\": 2015,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2015\",\n      \"mslDeseasonalized\":
-        -0.044,\n      \"msl\": -0.038,\n      \"trendLine\": 0.055,\n      \"upperConfidence\":
-        0.067,\n      \"lowerConfidence\": 0.043\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2016\",\n      \"mslDeseasonalized\":
-        0.036,\n      \"msl\": 0.029,\n      \"trendLine\": 0.055,\n      \"upperConfidence\":
-        0.067,\n      \"lowerConfidence\": 0.043\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2016\",\n      \"mslDeseasonalized\":
-        0.059,\n      \"msl\": 0.032,\n      \"trendLine\": 0.056,\n      \"upperConfidence\":
-        0.068,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2016\",\n      \"mslDeseasonalized\":
-        0.059,\n      \"msl\": 0.02,\n      \"trendLine\": 0.056,\n      \"upperConfidence\":
-        0.068,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2016\",\n      \"mslDeseasonalized\":
-        0.076,\n      \"msl\": 0.033,\n      \"trendLine\": 0.056,\n      \"upperConfidence\":
-        0.068,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2016\",\n      \"mslDeseasonalized\":
-        0.132,\n      \"msl\": 0.09,\n      \"trendLine\": 0.056,\n      \"upperConfidence\":
-        0.068,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2016\",\n      \"mslDeseasonalized\":
-        0.167,\n      \"msl\": 0.138,\n      \"trendLine\": 0.056,\n      \"upperConfidence\":
-        0.068,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2016\",\n      \"mslDeseasonalized\":
-        0.126,\n      \"msl\": 0.137,\n      \"trendLine\": 0.056,\n      \"upperConfidence\":
-        0.068,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2016\",\n      \"mslDeseasonalized\":
-        0.087,\n      \"msl\": 0.122,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.069,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2016\",\n      \"mslDeseasonalized\":
-        0.135,\n      \"msl\": 0.194,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.069,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2016\",\n      \"mslDeseasonalized\":
-        0.066,\n      \"msl\": 0.117,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.069,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2016\",\n      \"mslDeseasonalized\":
-        0.078,\n      \"msl\": 0.103,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.069,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2016,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2016\",\n      \"mslDeseasonalized\":
-        0.085,\n      \"msl\": 0.091,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.069,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2017\",\n      \"mslDeseasonalized\":
-        0.048,\n      \"msl\": 0.041,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.069,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2017\",\n      \"mslDeseasonalized\":
-        0.069,\n      \"msl\": 0.042,\n      \"trendLine\": 0.057,\n      \"upperConfidence\":
-        0.07,\n      \"lowerConfidence\": 0.044\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2017\",\n      \"mslDeseasonalized\":
-        0.161,\n      \"msl\": 0.122,\n      \"trendLine\": 0.058,\n      \"upperConfidence\":
-        0.071,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2017\",\n      \"mslDeseasonalized\":
-        0.195,\n      \"msl\": 0.152,\n      \"trendLine\": 0.058,\n      \"upperConfidence\":
-        0.071,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2017\",\n      \"mslDeseasonalized\":
-        0.084,\n      \"msl\": 0.042,\n      \"trendLine\": 0.058,\n      \"upperConfidence\":
-        0.071,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2017\",\n      \"mslDeseasonalized\":
-        0.143,\n      \"msl\": 0.114,\n      \"trendLine\": 0.058,\n      \"upperConfidence\":
-        0.071,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2017\",\n      \"mslDeseasonalized\":
-        0.165,\n      \"msl\": 0.176,\n      \"trendLine\": 0.058,\n      \"upperConfidence\":
-        0.071,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2017\",\n      \"mslDeseasonalized\":
-        0.177,\n      \"msl\": 0.212,\n      \"trendLine\": 0.058,\n      \"upperConfidence\":
-        0.071,\n      \"lowerConfidence\": 0.045\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2017\",\n      \"mslDeseasonalized\":
-        0.142,\n      \"msl\": 0.201,\n      \"trendLine\": 0.059,\n      \"upperConfidence\":
-        0.072,\n      \"lowerConfidence\": 0.046\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2017\",\n      \"mslDeseasonalized\":
-        0.119,\n      \"msl\": 0.17,\n      \"trendLine\": 0.059,\n      \"upperConfidence\":
-        0.072,\n      \"lowerConfidence\": 0.046\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2017\",\n      \"mslDeseasonalized\":
-        0.12,\n      \"msl\": 0.145,\n      \"trendLine\": 0.059,\n      \"upperConfidence\":
-        0.072,\n      \"lowerConfidence\": 0.046\n    },\n    {\n      \"year\": 2017,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2017\",\n      \"mslDeseasonalized\":
-        0.101,\n      \"msl\": 0.107,\n      \"trendLine\": 0.059,\n      \"upperConfidence\":
-        0.072,\n      \"lowerConfidence\": 0.046\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2018\",\n      \"mslDeseasonalized\":
-        0.076,\n      \"msl\": 0.069,\n      \"trendLine\": 0.059,\n      \"upperConfidence\":
-        0.072,\n      \"lowerConfidence\": 0.046\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2018\",\n      \"mslDeseasonalized\":
-        0.106,\n      \"msl\": 0.079,\n      \"trendLine\": 0.059,\n      \"upperConfidence\":
-        0.072,\n      \"lowerConfidence\": 0.046\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2018\",\n      \"mslDeseasonalized\":
-        0.077,\n      \"msl\": 0.038,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2018\",\n      \"mslDeseasonalized\":
-        0.091,\n      \"msl\": 0.048,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2018\",\n      \"mslDeseasonalized\":
-        0.058,\n      \"msl\": 0.016,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2018\",\n      \"mslDeseasonalized\":
-        0.052,\n      \"msl\": 0.023,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2018\",\n      \"mslDeseasonalized\":
-        0.096,\n      \"msl\": 0.107,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2018\",\n      \"mslDeseasonalized\":
-        0.08,\n      \"msl\": 0.115,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2018\",\n      \"mslDeseasonalized\":
-        0.069,\n      \"msl\": 0.128,\n      \"trendLine\": 0.06,\n      \"upperConfidence\":
-        0.073,\n      \"lowerConfidence\": 0.047\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2018\",\n      \"mslDeseasonalized\":
-        0.086,\n      \"msl\": 0.137,\n      \"trendLine\": 0.061,\n      \"upperConfidence\":
-        0.074,\n      \"lowerConfidence\": 0.048\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2018\",\n      \"mslDeseasonalized\":
-        0.042,\n      \"msl\": 0.067,\n      \"trendLine\": 0.061,\n      \"upperConfidence\":
-        0.074,\n      \"lowerConfidence\": 0.048\n    },\n    {\n      \"year\": 2018,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2018\",\n      \"mslDeseasonalized\":
-        0.036,\n      \"msl\": 0.042,\n      \"trendLine\": 0.061,\n      \"upperConfidence\":
-        0.074,\n      \"lowerConfidence\": 0.048\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2019\",\n      \"mslDeseasonalized\":
-        0.072,\n      \"msl\": 0.065,\n      \"trendLine\": 0.061,\n      \"upperConfidence\":
-        0.074,\n      \"lowerConfidence\": 0.048\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2019\",\n      \"mslDeseasonalized\":
-        0.013,\n      \"msl\": -0.014,\n      \"trendLine\": 0.061,\n      \"upperConfidence\":
-        0.074,\n      \"lowerConfidence\": 0.048\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2019\",\n      \"mslDeseasonalized\":
-        -0.011,\n      \"msl\": -0.05,\n      \"trendLine\": 0.061,\n      \"upperConfidence\":
-        0.074,\n      \"lowerConfidence\": 0.048\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2019\",\n      \"mslDeseasonalized\":
-        0.041,\n      \"msl\": -0.002,\n      \"trendLine\": 0.062,\n      \"upperConfidence\":
-        0.075,\n      \"lowerConfidence\": 0.049\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2019\",\n      \"mslDeseasonalized\":
-        0.069,\n      \"msl\": 0.027,\n      \"trendLine\": 0.062,\n      \"upperConfidence\":
-        0.075,\n      \"lowerConfidence\": 0.049\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2019\",\n      \"mslDeseasonalized\":
-        0.102,\n      \"msl\": 0.073,\n      \"trendLine\": 0.062,\n      \"upperConfidence\":
-        0.075,\n      \"lowerConfidence\": 0.049\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2019\",\n      \"mslDeseasonalized\":
-        0.073,\n      \"msl\": 0.084,\n      \"trendLine\": 0.062,\n      \"upperConfidence\":
-        0.075,\n      \"lowerConfidence\": 0.049\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2019\",\n      \"mslDeseasonalized\":
-        0.104,\n      \"msl\": 0.139,\n      \"trendLine\": 0.062,\n      \"upperConfidence\":
-        0.075,\n      \"lowerConfidence\": 0.049\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2019\",\n      \"mslDeseasonalized\":
-        0.151,\n      \"msl\": 0.21,\n      \"trendLine\": 0.062,\n      \"upperConfidence\":
-        0.075,\n      \"lowerConfidence\": 0.049\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2019\",\n      \"mslDeseasonalized\":
-        0.056,\n      \"msl\": 0.107,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2019\",\n      \"mslDeseasonalized\":
-        0.063,\n      \"msl\": 0.088,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2019,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2019\",\n      \"mslDeseasonalized\":
-        0.118,\n      \"msl\": 0.124,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2020\",\n      \"mslDeseasonalized\":
-        0.117,\n      \"msl\": 0.11,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2020\",\n      \"mslDeseasonalized\":
-        0.041,\n      \"msl\": 0.014,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2020\",\n      \"mslDeseasonalized\":
-        0.079,\n      \"msl\": 0.04,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2020\",\n      \"mslDeseasonalized\":
-        0.087,\n      \"msl\": 0.044,\n      \"trendLine\": 0.063,\n      \"upperConfidence\":
-        0.076,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2020\",\n      \"mslDeseasonalized\":
-        0.133,\n      \"msl\": 0.091,\n      \"trendLine\": 0.064,\n      \"upperConfidence\":
-        0.077,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2020\",\n      \"mslDeseasonalized\":
-        0.187,\n      \"msl\": 0.158,\n      \"trendLine\": 0.064,\n      \"upperConfidence\":
-        0.078,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2020\",\n      \"mslDeseasonalized\":
-        0.07,\n      \"msl\": 0.081,\n      \"trendLine\": 0.064,\n      \"upperConfidence\":
-        0.078,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2020\",\n      \"mslDeseasonalized\":
-        0.014,\n      \"msl\": 0.049,\n      \"trendLine\": 0.064,\n      \"upperConfidence\":
-        0.078,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2020\",\n      \"mslDeseasonalized\":
-        0.065,\n      \"msl\": 0.124,\n      \"trendLine\": 0.064,\n      \"upperConfidence\":
-        0.078,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2020\",\n      \"mslDeseasonalized\":
-        0.16,\n      \"msl\": 0.211,\n      \"trendLine\": 0.064,\n      \"upperConfidence\":
-        0.078,\n      \"lowerConfidence\": 0.05\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2020\",\n      \"mslDeseasonalized\":
-        0.117,\n      \"msl\": 0.142,\n      \"trendLine\": 0.065,\n      \"upperConfidence\":
-        0.079,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2020,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2020\",\n      \"mslDeseasonalized\":
-        0.143,\n      \"msl\": 0.149,\n      \"trendLine\": 0.065,\n      \"upperConfidence\":
-        0.079,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2021\",\n      \"mslDeseasonalized\":
-        0.133,\n      \"msl\": 0.126,\n      \"trendLine\": 0.065,\n      \"upperConfidence\":
-        0.079,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2021\",\n      \"mslDeseasonalized\":
-        0.105,\n      \"msl\": 0.078,\n      \"trendLine\": 0.065,\n      \"upperConfidence\":
-        0.079,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2021\",\n      \"mslDeseasonalized\":
-        0.086,\n      \"msl\": 0.047,\n      \"trendLine\": 0.065,\n      \"upperConfidence\":
-        0.079,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2021\",\n      \"mslDeseasonalized\":
-        0.073,\n      \"msl\": 0.03,\n      \"trendLine\": 0.065,\n      \"upperConfidence\":
-        0.079,\n      \"lowerConfidence\": 0.051\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2021\",\n      \"mslDeseasonalized\":
-        0.037,\n      \"msl\": -0.005,\n      \"trendLine\": 0.066,\n      \"upperConfidence\":
-        0.08,\n      \"lowerConfidence\": 0.052\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2021\",\n      \"mslDeseasonalized\":
-        0.089,\n      \"msl\": 0.06,\n      \"trendLine\": 0.066,\n      \"upperConfidence\":
-        0.08,\n      \"lowerConfidence\": 0.052\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2021\",\n      \"mslDeseasonalized\":
-        0.076,\n      \"msl\": 0.087,\n      \"trendLine\": 0.066,\n      \"upperConfidence\":
-        0.08,\n      \"lowerConfidence\": 0.052\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2021\",\n      \"mslDeseasonalized\":
-        0.078,\n      \"msl\": 0.113,\n      \"trendLine\": 0.066,\n      \"upperConfidence\":
-        0.08,\n      \"lowerConfidence\": 0.052\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2021\",\n      \"mslDeseasonalized\":
-        0.065,\n      \"msl\": 0.124,\n      \"trendLine\": 0.066,\n      \"upperConfidence\":
-        0.08,\n      \"lowerConfidence\": 0.052\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2021\",\n      \"mslDeseasonalized\":
-        0.031,\n      \"msl\": 0.082,\n      \"trendLine\": 0.066,\n      \"upperConfidence\":
-        0.08,\n      \"lowerConfidence\": 0.052\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2021\",\n      \"mslDeseasonalized\":
-        0.043,\n      \"msl\": 0.068,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2021,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2021\",\n      \"mslDeseasonalized\":
-        0.045,\n      \"msl\": 0.051,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2022\",\n      \"mslDeseasonalized\":
-        0.044,\n      \"msl\": 0.037,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2022\",\n      \"mslDeseasonalized\":
-        0.082,\n      \"msl\": 0.055,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2022\",\n      \"mslDeseasonalized\":
-        0.081,\n      \"msl\": 0.042,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2022\",\n      \"mslDeseasonalized\":
-        0.055,\n      \"msl\": 0.012,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2022\",\n      \"mslDeseasonalized\":
-        0.092,\n      \"msl\": 0.05,\n      \"trendLine\": 0.067,\n      \"upperConfidence\":
-        0.081,\n      \"lowerConfidence\": 0.053\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2022\",\n      \"mslDeseasonalized\":
-        0.087,\n      \"msl\": 0.058,\n      \"trendLine\": 0.068,\n      \"upperConfidence\":
-        0.082,\n      \"lowerConfidence\": 0.054\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2022\",\n      \"mslDeseasonalized\":
-        0.036,\n      \"msl\": 0.047,\n      \"trendLine\": 0.068,\n      \"upperConfidence\":
-        0.082,\n      \"lowerConfidence\": 0.054\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2022\",\n      \"mslDeseasonalized\":
-        0.03,\n      \"msl\": 0.065,\n      \"trendLine\": 0.068,\n      \"upperConfidence\":
-        0.082,\n      \"lowerConfidence\": 0.054\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2022\",\n      \"mslDeseasonalized\":
-        0.065,\n      \"msl\": 0.124,\n      \"trendLine\": 0.068,\n      \"upperConfidence\":
-        0.082,\n      \"lowerConfidence\": 0.054\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2022\",\n      \"mslDeseasonalized\":
-        0.06,\n      \"msl\": 0.111,\n      \"trendLine\": 0.068,\n      \"upperConfidence\":
-        0.082,\n      \"lowerConfidence\": 0.054\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2022\",\n      \"mslDeseasonalized\":
-        0.02,\n      \"msl\": 0.045,\n      \"trendLine\": 0.068,\n      \"upperConfidence\":
-        0.082,\n      \"lowerConfidence\": 0.054\n    },\n    {\n      \"year\": 2022,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2022\",\n      \"mslDeseasonalized\":
-        0.037,\n      \"msl\": 0.043,\n      \"trendLine\": 0.069,\n      \"upperConfidence\":
-        0.083,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2023\",\n      \"mslDeseasonalized\":
-        0.037,\n      \"msl\": 0.03,\n      \"trendLine\": 0.069,\n      \"upperConfidence\":
-        0.083,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2023\",\n      \"mslDeseasonalized\":
-        0.054,\n      \"msl\": 0.027,\n      \"trendLine\": 0.069,\n      \"upperConfidence\":
-        0.083,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2023\",\n      \"mslDeseasonalized\":
-        0.028,\n      \"msl\": -0.011,\n      \"trendLine\": 0.069,\n      \"upperConfidence\":
-        0.083,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2023\",\n      \"mslDeseasonalized\":
-        -0.032,\n      \"msl\": -0.075,\n      \"trendLine\": 0.069,\n      \"upperConfidence\":
-        0.083,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2023\",\n      \"mslDeseasonalized\":
-        0.041,\n      \"msl\": -0.001,\n      \"trendLine\": 0.069,\n      \"upperConfidence\":
-        0.083,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2023\",\n      \"mslDeseasonalized\":
-        0.025,\n      \"msl\": -0.004,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.084,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2023\",\n      \"mslDeseasonalized\":
-        0.039,\n      \"msl\": 0.05,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.084,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2023\",\n      \"mslDeseasonalized\":
-        0.13,\n      \"msl\": 0.165,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.084,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2023\",\n      \"mslDeseasonalized\":
-        0.161,\n      \"msl\": 0.22,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.085,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2023\",\n      \"mslDeseasonalized\":
-        0.19,\n      \"msl\": 0.241,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.085,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2023\",\n      \"mslDeseasonalized\":
-        0.175,\n      \"msl\": 0.2,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.085,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2023,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2023\",\n      \"mslDeseasonalized\":
-        0.095,\n      \"msl\": 0.101,\n      \"trendLine\": 0.07,\n      \"upperConfidence\":
-        0.085,\n      \"lowerConfidence\": 0.055\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2024\",\n      \"mslDeseasonalized\":
-        0.106,\n      \"msl\": 0.099,\n      \"trendLine\": 0.071,\n      \"upperConfidence\":
-        0.086,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2024\",\n      \"mslDeseasonalized\":
-        0.067,\n      \"msl\": 0.04,\n      \"trendLine\": 0.071,\n      \"upperConfidence\":
-        0.086,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2024\",\n      \"mslDeseasonalized\":
-        0.045,\n      \"msl\": 0.006,\n      \"trendLine\": 0.071,\n      \"upperConfidence\":
-        0.086,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2024\",\n      \"mslDeseasonalized\":
-        0.071,\n      \"msl\": 0.028,\n      \"trendLine\": 0.071,\n      \"upperConfidence\":
-        0.086,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2024\",\n      \"mslDeseasonalized\":
-        0.122,\n      \"msl\": 0.08,\n      \"trendLine\": 0.071,\n      \"upperConfidence\":
-        0.086,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2024\",\n      \"mslDeseasonalized\":
-        0.099,\n      \"msl\": 0.07,\n      \"trendLine\": 0.071,\n      \"upperConfidence\":
-        0.086,\n      \"lowerConfidence\": 0.056\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2024\",\n      \"mslDeseasonalized\":
-        0.123,\n      \"msl\": 0.134,\n      \"trendLine\": 0.072,\n      \"upperConfidence\":
-        0.087,\n      \"lowerConfidence\": 0.057\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2024\",\n      \"mslDeseasonalized\":
-        0.195,\n      \"msl\": 0.23,\n      \"trendLine\": 0.072,\n      \"upperConfidence\":
-        0.087,\n      \"lowerConfidence\": 0.057\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2024\",\n      \"mslDeseasonalized\":
-        0.182,\n      \"msl\": 0.241,\n      \"trendLine\": 0.072,\n      \"upperConfidence\":
-        0.087,\n      \"lowerConfidence\": 0.057\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2024\",\n      \"mslDeseasonalized\":
-        0.107,\n      \"msl\": 0.158,\n      \"trendLine\": 0.072,\n      \"upperConfidence\":
-        0.087,\n      \"lowerConfidence\": 0.057\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2024\",\n      \"mslDeseasonalized\":
-        0.143,\n      \"msl\": 0.168,\n      \"trendLine\": 0.072,\n      \"upperConfidence\":
-        0.087,\n      \"lowerConfidence\": 0.057\n    },\n    {\n      \"year\": 2024,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2024\",\n      \"mslDeseasonalized\":
-        0.091,\n      \"msl\": 0.097,\n      \"trendLine\": 0.072,\n      \"upperConfidence\":
-        0.087,\n      \"lowerConfidence\": 0.057\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2025\",\n      \"mslDeseasonalized\":
-        0.049,\n      \"msl\": 0.042,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 2,\n      \"meanDate\": \"02/15/2025\",\n      \"mslDeseasonalized\":
-        0.074,\n      \"msl\": 0.047,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 3,\n      \"meanDate\": \"03/15/2025\",\n      \"mslDeseasonalized\":
-        0.11,\n      \"msl\": 0.071,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 4,\n      \"meanDate\": \"04/15/2025\",\n      \"mslDeseasonalized\":
-        0.167,\n      \"msl\": 0.124,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 5,\n      \"meanDate\": \"05/15/2025\",\n      \"mslDeseasonalized\":
-        0.086,\n      \"msl\": 0.044,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 6,\n      \"meanDate\": \"06/15/2025\",\n      \"mslDeseasonalized\":
-        0.118,\n      \"msl\": 0.089,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 7,\n      \"meanDate\": \"07/15/2025\",\n      \"mslDeseasonalized\":
-        0.096,\n      \"msl\": 0.107,\n      \"trendLine\": 0.073,\n      \"upperConfidence\":
-        0.088,\n      \"lowerConfidence\": 0.058\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 8,\n      \"meanDate\": \"08/15/2025\",\n      \"mslDeseasonalized\":
-        0.081,\n      \"msl\": 0.116,\n      \"trendLine\": 0.074,\n      \"upperConfidence\":
-        0.089,\n      \"lowerConfidence\": 0.059\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 9,\n      \"meanDate\": \"09/15/2025\",\n      \"mslDeseasonalized\":
-        0.087,\n      \"msl\": 0.146,\n      \"trendLine\": 0.074,\n      \"upperConfidence\":
-        0.089,\n      \"lowerConfidence\": 0.059\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 10,\n      \"meanDate\": \"10/15/2025\",\n      \"mslDeseasonalized\":
-        0.132,\n      \"msl\": 0.183,\n      \"trendLine\": 0.074,\n      \"upperConfidence\":
-        0.089,\n      \"lowerConfidence\": 0.059\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 11,\n      \"meanDate\": \"11/15/2025\",\n      \"mslDeseasonalized\":
-        0.168,\n      \"msl\": 0.193,\n      \"trendLine\": 0.074,\n      \"upperConfidence\":
-        0.089,\n      \"lowerConfidence\": 0.059\n    },\n    {\n      \"year\": 2025,\n
-        \     \"month\": 12,\n      \"meanDate\": \"12/15/2025\",\n      \"mslDeseasonalized\":
-        0.147,\n      \"msl\": 0.153,\n      \"trendLine\": 0.074,\n      \"upperConfidence\":
-        0.089,\n      \"lowerConfidence\": 0.059\n    },\n    {\n      \"year\": 2026,\n
-        \     \"month\": 1,\n      \"meanDate\": \"01/15/2026\",\n      \"mslDeseasonalized\":
-        0.089,\n      \"msl\": 0.082\n    },\n    {\n      \"year\": 2026,\n      \"month\":
-        2,\n      \"meanDate\": \"02/15/2026\",\n      \"mslDeseasonalized\": 0.125,\n
-        \     \"msl\": 0.098\n    },\n    {\n      \"year\": 2026,\n      \"month\":
-        3,\n      \"meanDate\": \"03/15/2026\",\n      \"mslDeseasonalized\": 0.169,\n
-        \     \"msl\": 0.13\n    },\n    {\n      \"year\": 2026,\n      \"month\":
-        4,\n      \"meanDate\": \"04/15/2026\",\n      \"mslDeseasonalized\": 0.132,\n
-        \     \"msl\": 0.089\n    },\n    {\n      \"year\": 2026,\n      \"month\":
-        5,\n      \"meanDate\": \"05/15/2026\",\n      \"mslDeseasonalized\": 0.093,\n
-        \     \"msl\": 0.051\n    }\n  ]\n}"
+        \"03/15/2012\",\n      \"mslDeseasonalized\": null,\n      \"msl\": null,\n
+        \     \"trendLine\": 0.048,\n      \"upperConfidence\": 0.059,\n      \"lowerConfidence\":
+        0.037\n    },\n    {\n      \"year\": 2012,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2012\",\n      \"mslDeseasonalized\": 0.027,\n      \"msl\": -0.016,\n
+        \     \"trendLine\": 0.048,\n      \"upperConfidence\": 0.059,\n      \"lowerConfidence\":
+        0.037\n    },\n    {\n      \"year\": 2012,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2012\",\n      \"mslDeseasonalized\": 0.04,\n      \"msl\": -0.002,\n
+        \     \"trendLine\": 0.048,\n      \"upperConfidence\": 0.059,\n      \"lowerConfidence\":
+        0.037\n    },\n    {\n      \"year\": 2012,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2012\",\n      \"mslDeseasonalized\": 0.03,\n      \"msl\": 0.001,\n
+        \     \"trendLine\": 0.049,\n      \"upperConfidence\": 0.06,\n      \"lowerConfidence\":
+        0.038\n    },\n    {\n      \"year\": 2012,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2012\",\n      \"mslDeseasonalized\": 0.046,\n      \"msl\": 0.057,\n
+        \     \"trendLine\": 0.049,\n      \"upperConfidence\": 0.06,\n      \"lowerConfidence\":
+        0.038\n    },\n    {\n      \"year\": 2012,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2012\",\n      \"mslDeseasonalized\": -0.016,\n      \"msl\": 0.019,\n
+        \     \"trendLine\": 0.049,\n      \"upperConfidence\": 0.06,\n      \"lowerConfidence\":
+        0.038\n    },\n    {\n      \"year\": 2012,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2012\",\n      \"mslDeseasonalized\": -0.016,\n      \"msl\": 0.043,\n
+        \     \"trendLine\": 0.049,\n      \"upperConfidence\": 0.06,\n      \"lowerConfidence\":
+        0.038\n    },\n    {\n      \"year\": 2012,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2012\",\n      \"mslDeseasonalized\": 0.008,\n      \"msl\": 0.059,\n
+        \     \"trendLine\": 0.049,\n      \"upperConfidence\": 0.06,\n      \"lowerConfidence\":
+        0.038\n    },\n    {\n      \"year\": 2012,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2012\",\n      \"mslDeseasonalized\": 0.043,\n      \"msl\": 0.068,\n
+        \     \"trendLine\": 0.049,\n      \"upperConfidence\": 0.06,\n      \"lowerConfidence\":
+        0.038\n    },\n    {\n      \"year\": 2012,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2012\",\n      \"mslDeseasonalized\": 0.063,\n      \"msl\": 0.069,\n
+        \     \"trendLine\": 0.05,\n      \"upperConfidence\": 0.061,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2013\",\n      \"mslDeseasonalized\": 0.058,\n      \"msl\": 0.051,\n
+        \     \"trendLine\": 0.05,\n      \"upperConfidence\": 0.061,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2013\",\n      \"mslDeseasonalized\": -0.051,\n      \"msl\": -0.078,\n
+        \     \"trendLine\": 0.05,\n      \"upperConfidence\": 0.061,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2013\",\n      \"mslDeseasonalized\": 0.025,\n      \"msl\": -0.014,\n
+        \     \"trendLine\": 0.05,\n      \"upperConfidence\": 0.061,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2013\",\n      \"mslDeseasonalized\": 0.059,\n      \"msl\": 0.016,\n
+        \     \"trendLine\": 0.05,\n      \"upperConfidence\": 0.061,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2013\",\n      \"mslDeseasonalized\": 0.089,\n      \"msl\": 0.047,\n
+        \     \"trendLine\": 0.05,\n      \"upperConfidence\": 0.061,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2013\",\n      \"mslDeseasonalized\": 0.099,\n      \"msl\": 0.07,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.062,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2013,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2013\",\n      \"mslDeseasonalized\": 0.056,\n      \"msl\": 0.067,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.062,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2013,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2013\",\n      \"mslDeseasonalized\": 0.031,\n      \"msl\": 0.066,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.063,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2013\",\n      \"mslDeseasonalized\": 0.047,\n      \"msl\": 0.106,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.063,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2013\",\n      \"mslDeseasonalized\": 0.031,\n      \"msl\": 0.082,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.063,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2013\",\n      \"mslDeseasonalized\": 0.03,\n      \"msl\": 0.055,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.063,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2013,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2013\",\n      \"mslDeseasonalized\": 0.037,\n      \"msl\": 0.043,\n
+        \     \"trendLine\": 0.051,\n      \"upperConfidence\": 0.063,\n      \"lowerConfidence\":
+        0.039\n    },\n    {\n      \"year\": 2014,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2014\",\n      \"mslDeseasonalized\": 0.029,\n      \"msl\": 0.022,\n
+        \     \"trendLine\": 0.052,\n      \"upperConfidence\": 0.064,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2014,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2014\",\n      \"mslDeseasonalized\": 0.037,\n      \"msl\": 0.01,\n
+        \     \"trendLine\": 0.052,\n      \"upperConfidence\": 0.064,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2014,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2014\",\n      \"mslDeseasonalized\": -0.007,\n      \"msl\": -0.046,\n
+        \     \"trendLine\": 0.052,\n      \"upperConfidence\": 0.064,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2014,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2014\",\n      \"mslDeseasonalized\": 0.039,\n      \"msl\": -0.004,\n
+        \     \"trendLine\": 0.052,\n      \"upperConfidence\": 0.064,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2014,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2014\",\n      \"mslDeseasonalized\": 0.036,\n      \"msl\": -0.006,\n
+        \     \"trendLine\": 0.052,\n      \"upperConfidence\": 0.064,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2014,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2014\",\n      \"mslDeseasonalized\": 0.102,\n      \"msl\": 0.073,\n
+        \     \"trendLine\": 0.052,\n      \"upperConfidence\": 0.064,\n      \"lowerConfidence\":
+        0.04\n    },\n    {\n      \"year\": 2014,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2014\",\n      \"mslDeseasonalized\": 0.102,\n      \"msl\": 0.113,\n
+        \     \"trendLine\": 0.053,\n      \"upperConfidence\": 0.065,\n      \"lowerConfidence\":
+        0.041\n    },\n    {\n      \"year\": 2014,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2014\",\n      \"mslDeseasonalized\": 0.06,\n      \"msl\": 0.095,\n
+        \     \"trendLine\": 0.053,\n      \"upperConfidence\": 0.065,\n      \"lowerConfidence\":
+        0.041\n    },\n    {\n      \"year\": 2014,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2014\",\n      \"mslDeseasonalized\": 0.06,\n      \"msl\": 0.119,\n
+        \     \"trendLine\": 0.053,\n      \"upperConfidence\": 0.065,\n      \"lowerConfidence\":
+        0.041\n    },\n    {\n      \"year\": 2014,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2014\",\n      \"mslDeseasonalized\": 0.097,\n      \"msl\": 0.148,\n
+        \     \"trendLine\": 0.053,\n      \"upperConfidence\": 0.065,\n      \"lowerConfidence\":
+        0.041\n    },\n    {\n      \"year\": 2014,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2014\",\n      \"mslDeseasonalized\": 0.09,\n      \"msl\": 0.115,\n
+        \     \"trendLine\": 0.053,\n      \"upperConfidence\": 0.065,\n      \"lowerConfidence\":
+        0.041\n    },\n    {\n      \"year\": 2014,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2014\",\n      \"mslDeseasonalized\": 0.066,\n      \"msl\": 0.072,\n
+        \     \"trendLine\": 0.053,\n      \"upperConfidence\": 0.065,\n      \"lowerConfidence\":
+        0.041\n    },\n    {\n      \"year\": 2015,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2015\",\n      \"mslDeseasonalized\": 0.059,\n      \"msl\": 0.052,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2015\",\n      \"mslDeseasonalized\": 0.051,\n      \"msl\": 0.024,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2015\",\n      \"mslDeseasonalized\": 0.004,\n      \"msl\": -0.035,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2015\",\n      \"mslDeseasonalized\": 0.039,\n      \"msl\": -0.004,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2015\",\n      \"mslDeseasonalized\": 0.074,\n      \"msl\": 0.032,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2015\",\n      \"mslDeseasonalized\": 0.125,\n      \"msl\": 0.096,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2015\",\n      \"mslDeseasonalized\": 0.167,\n      \"msl\": 0.178,\n
+        \     \"trendLine\": 0.054,\n      \"upperConfidence\": 0.066,\n      \"lowerConfidence\":
+        0.042\n    },\n    {\n      \"year\": 2015,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2015\",\n      \"mslDeseasonalized\": 0.062,\n      \"msl\": 0.097,\n
+        \     \"trendLine\": 0.055,\n      \"upperConfidence\": 0.067,\n      \"lowerConfidence\":
+        0.043\n    },\n    {\n      \"year\": 2015,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2015\",\n      \"mslDeseasonalized\": -0.014,\n      \"msl\": 0.045,\n
+        \     \"trendLine\": 0.055,\n      \"upperConfidence\": 0.067,\n      \"lowerConfidence\":
+        0.043\n    },\n    {\n      \"year\": 2015,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2015\",\n      \"mslDeseasonalized\": 0.036,\n      \"msl\": 0.087,\n
+        \     \"trendLine\": 0.055,\n      \"upperConfidence\": 0.067,\n      \"lowerConfidence\":
+        0.043\n    },\n    {\n      \"year\": 2015,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2015\",\n      \"mslDeseasonalized\": -0.006,\n      \"msl\": 0.019,\n
+        \     \"trendLine\": 0.055,\n      \"upperConfidence\": 0.067,\n      \"lowerConfidence\":
+        0.043\n    },\n    {\n      \"year\": 2015,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2015\",\n      \"mslDeseasonalized\": -0.044,\n      \"msl\": -0.038,\n
+        \     \"trendLine\": 0.055,\n      \"upperConfidence\": 0.067,\n      \"lowerConfidence\":
+        0.043\n    },\n    {\n      \"year\": 2016,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2016\",\n      \"mslDeseasonalized\": 0.036,\n      \"msl\": 0.029,\n
+        \     \"trendLine\": 0.055,\n      \"upperConfidence\": 0.067,\n      \"lowerConfidence\":
+        0.043\n    },\n    {\n      \"year\": 2016,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2016\",\n      \"mslDeseasonalized\": 0.059,\n      \"msl\": 0.032,\n
+        \     \"trendLine\": 0.056,\n      \"upperConfidence\": 0.068,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2016,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2016\",\n      \"mslDeseasonalized\": 0.059,\n      \"msl\": 0.02,\n
+        \     \"trendLine\": 0.056,\n      \"upperConfidence\": 0.068,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2016,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2016\",\n      \"mslDeseasonalized\": 0.076,\n      \"msl\": 0.033,\n
+        \     \"trendLine\": 0.056,\n      \"upperConfidence\": 0.068,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2016,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2016\",\n      \"mslDeseasonalized\": 0.132,\n      \"msl\": 0.09,\n
+        \     \"trendLine\": 0.056,\n      \"upperConfidence\": 0.068,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2016,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2016\",\n      \"mslDeseasonalized\": 0.167,\n      \"msl\": 0.138,\n
+        \     \"trendLine\": 0.056,\n      \"upperConfidence\": 0.068,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2016,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2016\",\n      \"mslDeseasonalized\": 0.126,\n      \"msl\": 0.137,\n
+        \     \"trendLine\": 0.056,\n      \"upperConfidence\": 0.068,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2016,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2016\",\n      \"mslDeseasonalized\": 0.087,\n      \"msl\": 0.122,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.069,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2016,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2016\",\n      \"mslDeseasonalized\": 0.135,\n      \"msl\": 0.194,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.069,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2016,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2016\",\n      \"mslDeseasonalized\": 0.066,\n      \"msl\": 0.117,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.069,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2016,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2016\",\n      \"mslDeseasonalized\": 0.078,\n      \"msl\": 0.103,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.069,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2016,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2016\",\n      \"mslDeseasonalized\": 0.085,\n      \"msl\": 0.091,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.069,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2017\",\n      \"mslDeseasonalized\": 0.048,\n      \"msl\": 0.041,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.069,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2017\",\n      \"mslDeseasonalized\": 0.069,\n      \"msl\": 0.042,\n
+        \     \"trendLine\": 0.057,\n      \"upperConfidence\": 0.07,\n      \"lowerConfidence\":
+        0.044\n    },\n    {\n      \"year\": 2017,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2017\",\n      \"mslDeseasonalized\": 0.161,\n      \"msl\": 0.122,\n
+        \     \"trendLine\": 0.058,\n      \"upperConfidence\": 0.071,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2017\",\n      \"mslDeseasonalized\": 0.195,\n      \"msl\": 0.152,\n
+        \     \"trendLine\": 0.058,\n      \"upperConfidence\": 0.071,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2017\",\n      \"mslDeseasonalized\": 0.084,\n      \"msl\": 0.042,\n
+        \     \"trendLine\": 0.058,\n      \"upperConfidence\": 0.071,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2017\",\n      \"mslDeseasonalized\": 0.143,\n      \"msl\": 0.114,\n
+        \     \"trendLine\": 0.058,\n      \"upperConfidence\": 0.071,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2017\",\n      \"mslDeseasonalized\": 0.165,\n      \"msl\": 0.176,\n
+        \     \"trendLine\": 0.058,\n      \"upperConfidence\": 0.071,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2017\",\n      \"mslDeseasonalized\": 0.177,\n      \"msl\": 0.212,\n
+        \     \"trendLine\": 0.058,\n      \"upperConfidence\": 0.071,\n      \"lowerConfidence\":
+        0.045\n    },\n    {\n      \"year\": 2017,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2017\",\n      \"mslDeseasonalized\": 0.142,\n      \"msl\": 0.201,\n
+        \     \"trendLine\": 0.059,\n      \"upperConfidence\": 0.072,\n      \"lowerConfidence\":
+        0.046\n    },\n    {\n      \"year\": 2017,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2017\",\n      \"mslDeseasonalized\": 0.119,\n      \"msl\": 0.17,\n
+        \     \"trendLine\": 0.059,\n      \"upperConfidence\": 0.072,\n      \"lowerConfidence\":
+        0.046\n    },\n    {\n      \"year\": 2017,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2017\",\n      \"mslDeseasonalized\": 0.12,\n      \"msl\": 0.145,\n
+        \     \"trendLine\": 0.059,\n      \"upperConfidence\": 0.072,\n      \"lowerConfidence\":
+        0.046\n    },\n    {\n      \"year\": 2017,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2017\",\n      \"mslDeseasonalized\": 0.101,\n      \"msl\": 0.107,\n
+        \     \"trendLine\": 0.059,\n      \"upperConfidence\": 0.072,\n      \"lowerConfidence\":
+        0.046\n    },\n    {\n      \"year\": 2018,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2018\",\n      \"mslDeseasonalized\": 0.076,\n      \"msl\": 0.069,\n
+        \     \"trendLine\": 0.059,\n      \"upperConfidence\": 0.072,\n      \"lowerConfidence\":
+        0.046\n    },\n    {\n      \"year\": 2018,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2018\",\n      \"mslDeseasonalized\": 0.106,\n      \"msl\": 0.079,\n
+        \     \"trendLine\": 0.059,\n      \"upperConfidence\": 0.072,\n      \"lowerConfidence\":
+        0.046\n    },\n    {\n      \"year\": 2018,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2018\",\n      \"mslDeseasonalized\": 0.077,\n      \"msl\": 0.038,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2018\",\n      \"mslDeseasonalized\": 0.091,\n      \"msl\": 0.048,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2018\",\n      \"mslDeseasonalized\": 0.058,\n      \"msl\": 0.016,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2018\",\n      \"mslDeseasonalized\": 0.052,\n      \"msl\": 0.023,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2018\",\n      \"mslDeseasonalized\": 0.096,\n      \"msl\": 0.107,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2018\",\n      \"mslDeseasonalized\": 0.08,\n      \"msl\": 0.115,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2018\",\n      \"mslDeseasonalized\": 0.069,\n      \"msl\": 0.128,\n
+        \     \"trendLine\": 0.06,\n      \"upperConfidence\": 0.073,\n      \"lowerConfidence\":
+        0.047\n    },\n    {\n      \"year\": 2018,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2018\",\n      \"mslDeseasonalized\": 0.086,\n      \"msl\": 0.137,\n
+        \     \"trendLine\": 0.061,\n      \"upperConfidence\": 0.074,\n      \"lowerConfidence\":
+        0.048\n    },\n    {\n      \"year\": 2018,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2018\",\n      \"mslDeseasonalized\": 0.042,\n      \"msl\": 0.067,\n
+        \     \"trendLine\": 0.061,\n      \"upperConfidence\": 0.074,\n      \"lowerConfidence\":
+        0.048\n    },\n    {\n      \"year\": 2018,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2018\",\n      \"mslDeseasonalized\": 0.036,\n      \"msl\": 0.042,\n
+        \     \"trendLine\": 0.061,\n      \"upperConfidence\": 0.074,\n      \"lowerConfidence\":
+        0.048\n    },\n    {\n      \"year\": 2019,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2019\",\n      \"mslDeseasonalized\": 0.072,\n      \"msl\": 0.065,\n
+        \     \"trendLine\": 0.061,\n      \"upperConfidence\": 0.074,\n      \"lowerConfidence\":
+        0.048\n    },\n    {\n      \"year\": 2019,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2019\",\n      \"mslDeseasonalized\": 0.013,\n      \"msl\": -0.014,\n
+        \     \"trendLine\": 0.061,\n      \"upperConfidence\": 0.074,\n      \"lowerConfidence\":
+        0.048\n    },\n    {\n      \"year\": 2019,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2019\",\n      \"mslDeseasonalized\": -0.011,\n      \"msl\": -0.05,\n
+        \     \"trendLine\": 0.061,\n      \"upperConfidence\": 0.074,\n      \"lowerConfidence\":
+        0.048\n    },\n    {\n      \"year\": 2019,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2019\",\n      \"mslDeseasonalized\": 0.041,\n      \"msl\": -0.002,\n
+        \     \"trendLine\": 0.062,\n      \"upperConfidence\": 0.075,\n      \"lowerConfidence\":
+        0.049\n    },\n    {\n      \"year\": 2019,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2019\",\n      \"mslDeseasonalized\": 0.069,\n      \"msl\": 0.027,\n
+        \     \"trendLine\": 0.062,\n      \"upperConfidence\": 0.075,\n      \"lowerConfidence\":
+        0.049\n    },\n    {\n      \"year\": 2019,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2019\",\n      \"mslDeseasonalized\": 0.102,\n      \"msl\": 0.073,\n
+        \     \"trendLine\": 0.062,\n      \"upperConfidence\": 0.075,\n      \"lowerConfidence\":
+        0.049\n    },\n    {\n      \"year\": 2019,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2019\",\n      \"mslDeseasonalized\": 0.073,\n      \"msl\": 0.084,\n
+        \     \"trendLine\": 0.062,\n      \"upperConfidence\": 0.075,\n      \"lowerConfidence\":
+        0.049\n    },\n    {\n      \"year\": 2019,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2019\",\n      \"mslDeseasonalized\": 0.104,\n      \"msl\": 0.139,\n
+        \     \"trendLine\": 0.062,\n      \"upperConfidence\": 0.075,\n      \"lowerConfidence\":
+        0.049\n    },\n    {\n      \"year\": 2019,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2019\",\n      \"mslDeseasonalized\": 0.151,\n      \"msl\": 0.21,\n
+        \     \"trendLine\": 0.062,\n      \"upperConfidence\": 0.075,\n      \"lowerConfidence\":
+        0.049\n    },\n    {\n      \"year\": 2019,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2019\",\n      \"mslDeseasonalized\": 0.056,\n      \"msl\": 0.107,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2019,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2019\",\n      \"mslDeseasonalized\": 0.063,\n      \"msl\": 0.088,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2019,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2019\",\n      \"mslDeseasonalized\": 0.118,\n      \"msl\": 0.124,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2020\",\n      \"mslDeseasonalized\": 0.117,\n      \"msl\": 0.11,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2020\",\n      \"mslDeseasonalized\": 0.041,\n      \"msl\": 0.014,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2020\",\n      \"mslDeseasonalized\": 0.079,\n      \"msl\": 0.04,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2020\",\n      \"mslDeseasonalized\": 0.087,\n      \"msl\": 0.044,\n
+        \     \"trendLine\": 0.063,\n      \"upperConfidence\": 0.076,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2020\",\n      \"mslDeseasonalized\": 0.133,\n      \"msl\": 0.091,\n
+        \     \"trendLine\": 0.064,\n      \"upperConfidence\": 0.077,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2020,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2020\",\n      \"mslDeseasonalized\": 0.187,\n      \"msl\": 0.158,\n
+        \     \"trendLine\": 0.064,\n      \"upperConfidence\": 0.078,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2020\",\n      \"mslDeseasonalized\": 0.07,\n      \"msl\": 0.081,\n
+        \     \"trendLine\": 0.064,\n      \"upperConfidence\": 0.078,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2020\",\n      \"mslDeseasonalized\": 0.014,\n      \"msl\": 0.049,\n
+        \     \"trendLine\": 0.064,\n      \"upperConfidence\": 0.078,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2020\",\n      \"mslDeseasonalized\": 0.065,\n      \"msl\": 0.124,\n
+        \     \"trendLine\": 0.064,\n      \"upperConfidence\": 0.078,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2020\",\n      \"mslDeseasonalized\": 0.16,\n      \"msl\": 0.211,\n
+        \     \"trendLine\": 0.064,\n      \"upperConfidence\": 0.078,\n      \"lowerConfidence\":
+        0.05\n    },\n    {\n      \"year\": 2020,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2020\",\n      \"mslDeseasonalized\": 0.117,\n      \"msl\": 0.142,\n
+        \     \"trendLine\": 0.065,\n      \"upperConfidence\": 0.079,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2020,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2020\",\n      \"mslDeseasonalized\": 0.143,\n      \"msl\": 0.149,\n
+        \     \"trendLine\": 0.065,\n      \"upperConfidence\": 0.079,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2021,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2021\",\n      \"mslDeseasonalized\": 0.133,\n      \"msl\": 0.126,\n
+        \     \"trendLine\": 0.065,\n      \"upperConfidence\": 0.079,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2021,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2021\",\n      \"mslDeseasonalized\": 0.105,\n      \"msl\": 0.078,\n
+        \     \"trendLine\": 0.065,\n      \"upperConfidence\": 0.079,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2021,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2021\",\n      \"mslDeseasonalized\": 0.086,\n      \"msl\": 0.047,\n
+        \     \"trendLine\": 0.065,\n      \"upperConfidence\": 0.079,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2021,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2021\",\n      \"mslDeseasonalized\": 0.073,\n      \"msl\": 0.03,\n
+        \     \"trendLine\": 0.065,\n      \"upperConfidence\": 0.079,\n      \"lowerConfidence\":
+        0.051\n    },\n    {\n      \"year\": 2021,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2021\",\n      \"mslDeseasonalized\": 0.037,\n      \"msl\": -0.005,\n
+        \     \"trendLine\": 0.066,\n      \"upperConfidence\": 0.08,\n      \"lowerConfidence\":
+        0.052\n    },\n    {\n      \"year\": 2021,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2021\",\n      \"mslDeseasonalized\": 0.089,\n      \"msl\": 0.06,\n
+        \     \"trendLine\": 0.066,\n      \"upperConfidence\": 0.08,\n      \"lowerConfidence\":
+        0.052\n    },\n    {\n      \"year\": 2021,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2021\",\n      \"mslDeseasonalized\": 0.076,\n      \"msl\": 0.087,\n
+        \     \"trendLine\": 0.066,\n      \"upperConfidence\": 0.08,\n      \"lowerConfidence\":
+        0.052\n    },\n    {\n      \"year\": 2021,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2021\",\n      \"mslDeseasonalized\": 0.078,\n      \"msl\": 0.113,\n
+        \     \"trendLine\": 0.066,\n      \"upperConfidence\": 0.08,\n      \"lowerConfidence\":
+        0.052\n    },\n    {\n      \"year\": 2021,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2021\",\n      \"mslDeseasonalized\": 0.065,\n      \"msl\": 0.124,\n
+        \     \"trendLine\": 0.066,\n      \"upperConfidence\": 0.08,\n      \"lowerConfidence\":
+        0.052\n    },\n    {\n      \"year\": 2021,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2021\",\n      \"mslDeseasonalized\": 0.031,\n      \"msl\": 0.082,\n
+        \     \"trendLine\": 0.066,\n      \"upperConfidence\": 0.08,\n      \"lowerConfidence\":
+        0.052\n    },\n    {\n      \"year\": 2021,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2021\",\n      \"mslDeseasonalized\": 0.043,\n      \"msl\": 0.068,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2021,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2021\",\n      \"mslDeseasonalized\": 0.045,\n      \"msl\": 0.051,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2022,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2022\",\n      \"mslDeseasonalized\": 0.044,\n      \"msl\": 0.037,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2022,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2022\",\n      \"mslDeseasonalized\": 0.082,\n      \"msl\": 0.055,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2022,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2022\",\n      \"mslDeseasonalized\": 0.081,\n      \"msl\": 0.042,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2022,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2022\",\n      \"mslDeseasonalized\": 0.055,\n      \"msl\": 0.012,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2022,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2022\",\n      \"mslDeseasonalized\": 0.092,\n      \"msl\": 0.05,\n
+        \     \"trendLine\": 0.067,\n      \"upperConfidence\": 0.081,\n      \"lowerConfidence\":
+        0.053\n    },\n    {\n      \"year\": 2022,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2022\",\n      \"mslDeseasonalized\": 0.087,\n      \"msl\": 0.058,\n
+        \     \"trendLine\": 0.068,\n      \"upperConfidence\": 0.082,\n      \"lowerConfidence\":
+        0.054\n    },\n    {\n      \"year\": 2022,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2022\",\n      \"mslDeseasonalized\": 0.036,\n      \"msl\": 0.047,\n
+        \     \"trendLine\": 0.068,\n      \"upperConfidence\": 0.082,\n      \"lowerConfidence\":
+        0.054\n    },\n    {\n      \"year\": 2022,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2022\",\n      \"mslDeseasonalized\": 0.03,\n      \"msl\": 0.065,\n
+        \     \"trendLine\": 0.068,\n      \"upperConfidence\": 0.082,\n      \"lowerConfidence\":
+        0.054\n    },\n    {\n      \"year\": 2022,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2022\",\n      \"mslDeseasonalized\": 0.065,\n      \"msl\": 0.124,\n
+        \     \"trendLine\": 0.068,\n      \"upperConfidence\": 0.082,\n      \"lowerConfidence\":
+        0.054\n    },\n    {\n      \"year\": 2022,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2022\",\n      \"mslDeseasonalized\": 0.06,\n      \"msl\": 0.111,\n
+        \     \"trendLine\": 0.068,\n      \"upperConfidence\": 0.082,\n      \"lowerConfidence\":
+        0.054\n    },\n    {\n      \"year\": 2022,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2022\",\n      \"mslDeseasonalized\": 0.02,\n      \"msl\": 0.045,\n
+        \     \"trendLine\": 0.068,\n      \"upperConfidence\": 0.082,\n      \"lowerConfidence\":
+        0.054\n    },\n    {\n      \"year\": 2022,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2022\",\n      \"mslDeseasonalized\": 0.037,\n      \"msl\": 0.043,\n
+        \     \"trendLine\": 0.069,\n      \"upperConfidence\": 0.083,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2023\",\n      \"mslDeseasonalized\": 0.037,\n      \"msl\": 0.03,\n
+        \     \"trendLine\": 0.069,\n      \"upperConfidence\": 0.083,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2023\",\n      \"mslDeseasonalized\": 0.054,\n      \"msl\": 0.027,\n
+        \     \"trendLine\": 0.069,\n      \"upperConfidence\": 0.083,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2023\",\n      \"mslDeseasonalized\": 0.028,\n      \"msl\": -0.011,\n
+        \     \"trendLine\": 0.069,\n      \"upperConfidence\": 0.083,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2023\",\n      \"mslDeseasonalized\": -0.032,\n      \"msl\": -0.075,\n
+        \     \"trendLine\": 0.069,\n      \"upperConfidence\": 0.083,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2023\",\n      \"mslDeseasonalized\": 0.041,\n      \"msl\": -0.001,\n
+        \     \"trendLine\": 0.069,\n      \"upperConfidence\": 0.083,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2023\",\n      \"mslDeseasonalized\": 0.025,\n      \"msl\": -0.004,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.084,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2023,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2023\",\n      \"mslDeseasonalized\": 0.039,\n      \"msl\": 0.05,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.084,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2023,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2023\",\n      \"mslDeseasonalized\": 0.13,\n      \"msl\": 0.165,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.084,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2023,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2023\",\n      \"mslDeseasonalized\": 0.161,\n      \"msl\": 0.22,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.085,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2023\",\n      \"mslDeseasonalized\": 0.19,\n      \"msl\": 0.241,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.085,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2023\",\n      \"mslDeseasonalized\": 0.175,\n      \"msl\": 0.2,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.085,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2023,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2023\",\n      \"mslDeseasonalized\": 0.095,\n      \"msl\": 0.101,\n
+        \     \"trendLine\": 0.07,\n      \"upperConfidence\": 0.085,\n      \"lowerConfidence\":
+        0.055\n    },\n    {\n      \"year\": 2024,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2024\",\n      \"mslDeseasonalized\": 0.106,\n      \"msl\": 0.099,\n
+        \     \"trendLine\": 0.071,\n      \"upperConfidence\": 0.086,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2024,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2024\",\n      \"mslDeseasonalized\": 0.067,\n      \"msl\": 0.04,\n
+        \     \"trendLine\": 0.071,\n      \"upperConfidence\": 0.086,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2024,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2024\",\n      \"mslDeseasonalized\": 0.045,\n      \"msl\": 0.006,\n
+        \     \"trendLine\": 0.071,\n      \"upperConfidence\": 0.086,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2024,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2024\",\n      \"mslDeseasonalized\": 0.071,\n      \"msl\": 0.028,\n
+        \     \"trendLine\": 0.071,\n      \"upperConfidence\": 0.086,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2024,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2024\",\n      \"mslDeseasonalized\": 0.122,\n      \"msl\": 0.08,\n
+        \     \"trendLine\": 0.071,\n      \"upperConfidence\": 0.086,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2024,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2024\",\n      \"mslDeseasonalized\": 0.099,\n      \"msl\": 0.07,\n
+        \     \"trendLine\": 0.071,\n      \"upperConfidence\": 0.086,\n      \"lowerConfidence\":
+        0.056\n    },\n    {\n      \"year\": 2024,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2024\",\n      \"mslDeseasonalized\": 0.123,\n      \"msl\": 0.134,\n
+        \     \"trendLine\": 0.072,\n      \"upperConfidence\": 0.087,\n      \"lowerConfidence\":
+        0.057\n    },\n    {\n      \"year\": 2024,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2024\",\n      \"mslDeseasonalized\": 0.195,\n      \"msl\": 0.23,\n
+        \     \"trendLine\": 0.072,\n      \"upperConfidence\": 0.087,\n      \"lowerConfidence\":
+        0.057\n    },\n    {\n      \"year\": 2024,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2024\",\n      \"mslDeseasonalized\": 0.182,\n      \"msl\": 0.241,\n
+        \     \"trendLine\": 0.072,\n      \"upperConfidence\": 0.087,\n      \"lowerConfidence\":
+        0.057\n    },\n    {\n      \"year\": 2024,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2024\",\n      \"mslDeseasonalized\": 0.107,\n      \"msl\": 0.158,\n
+        \     \"trendLine\": 0.072,\n      \"upperConfidence\": 0.087,\n      \"lowerConfidence\":
+        0.057\n    },\n    {\n      \"year\": 2024,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2024\",\n      \"mslDeseasonalized\": 0.143,\n      \"msl\": 0.168,\n
+        \     \"trendLine\": 0.072,\n      \"upperConfidence\": 0.087,\n      \"lowerConfidence\":
+        0.057\n    },\n    {\n      \"year\": 2024,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2024\",\n      \"mslDeseasonalized\": 0.091,\n      \"msl\": 0.097,\n
+        \     \"trendLine\": 0.072,\n      \"upperConfidence\": 0.087,\n      \"lowerConfidence\":
+        0.057\n    },\n    {\n      \"year\": 2025,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2025\",\n      \"mslDeseasonalized\": 0.049,\n      \"msl\": 0.042,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2025\",\n      \"mslDeseasonalized\": 0.074,\n      \"msl\": 0.047,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2025\",\n      \"mslDeseasonalized\": 0.11,\n      \"msl\": 0.071,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2025\",\n      \"mslDeseasonalized\": 0.167,\n      \"msl\": 0.124,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2025\",\n      \"mslDeseasonalized\": 0.086,\n      \"msl\": 0.044,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 6,\n      \"meanDate\":
+        \"06/15/2025\",\n      \"mslDeseasonalized\": 0.118,\n      \"msl\": 0.089,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 7,\n      \"meanDate\":
+        \"07/15/2025\",\n      \"mslDeseasonalized\": 0.096,\n      \"msl\": 0.107,\n
+        \     \"trendLine\": 0.073,\n      \"upperConfidence\": 0.088,\n      \"lowerConfidence\":
+        0.058\n    },\n    {\n      \"year\": 2025,\n      \"month\": 8,\n      \"meanDate\":
+        \"08/15/2025\",\n      \"mslDeseasonalized\": 0.081,\n      \"msl\": 0.116,\n
+        \     \"trendLine\": 0.074,\n      \"upperConfidence\": 0.089,\n      \"lowerConfidence\":
+        0.059\n    },\n    {\n      \"year\": 2025,\n      \"month\": 9,\n      \"meanDate\":
+        \"09/15/2025\",\n      \"mslDeseasonalized\": 0.087,\n      \"msl\": 0.146,\n
+        \     \"trendLine\": 0.074,\n      \"upperConfidence\": 0.089,\n      \"lowerConfidence\":
+        0.059\n    },\n    {\n      \"year\": 2025,\n      \"month\": 10,\n      \"meanDate\":
+        \"10/15/2025\",\n      \"mslDeseasonalized\": 0.132,\n      \"msl\": 0.183,\n
+        \     \"trendLine\": 0.074,\n      \"upperConfidence\": 0.089,\n      \"lowerConfidence\":
+        0.059\n    },\n    {\n      \"year\": 2025,\n      \"month\": 11,\n      \"meanDate\":
+        \"11/15/2025\",\n      \"mslDeseasonalized\": 0.168,\n      \"msl\": 0.193,\n
+        \     \"trendLine\": 0.074,\n      \"upperConfidence\": 0.089,\n      \"lowerConfidence\":
+        0.059\n    },\n    {\n      \"year\": 2025,\n      \"month\": 12,\n      \"meanDate\":
+        \"12/15/2025\",\n      \"mslDeseasonalized\": 0.147,\n      \"msl\": 0.153,\n
+        \     \"trendLine\": 0.074,\n      \"upperConfidence\": 0.089,\n      \"lowerConfidence\":
+        0.059\n    },\n    {\n      \"year\": 2026,\n      \"month\": 1,\n      \"meanDate\":
+        \"01/15/2026\",\n      \"mslDeseasonalized\": 0.089,\n      \"msl\": 0.082,\n
+        \     \"trendLine\": null,\n      \"upperConfidence\": null,\n      \"lowerConfidence\":
+        null\n    },\n    {\n      \"year\": 2026,\n      \"month\": 2,\n      \"meanDate\":
+        \"02/15/2026\",\n      \"mslDeseasonalized\": 0.125,\n      \"msl\": 0.098,\n
+        \     \"trendLine\": null,\n      \"upperConfidence\": null,\n      \"lowerConfidence\":
+        null\n    },\n    {\n      \"year\": 2026,\n      \"month\": 3,\n      \"meanDate\":
+        \"03/15/2026\",\n      \"mslDeseasonalized\": 0.169,\n      \"msl\": 0.13,\n
+        \     \"trendLine\": null,\n      \"upperConfidence\": null,\n      \"lowerConfidence\":
+        null\n    },\n    {\n      \"year\": 2026,\n      \"month\": 4,\n      \"meanDate\":
+        \"04/15/2026\",\n      \"mslDeseasonalized\": 0.132,\n      \"msl\": 0.089,\n
+        \     \"trendLine\": null,\n      \"upperConfidence\": null,\n      \"lowerConfidence\":
+        null\n    },\n    {\n      \"year\": 2026,\n      \"month\": 5,\n      \"meanDate\":
+        \"05/15/2026\",\n      \"mslDeseasonalized\": 0.093,\n      \"msl\": 0.051,\n
+        \     \"trendLine\": null,\n      \"upperConfidence\": null,\n      \"lowerConfidence\":
+        null\n    }\n  ]\n}"
     headers:
       Access-Control-Allow-Headers:
       - X-Requested-With
@@ -3530,19 +3578,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Jul 2026 17:06:52 GMT
+      - Thu, 30 Jul 2026 18:55:48 GMT
       content-length:
-      - '195133'
+      - '195776'
       x-amz-apigw-id:
-      - A3cO_GU1oAMET0A=
+      - BVWoSGhUoAMEtQw=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Tue, 21 Jul 2026 17:06:52 GMT
+      - Thu, 30 Jul 2026 18:55:48 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - b8a2d7ff-9149-4137-bfee-29ce84c9328e
+      - 30f582e6-2dda-4238-871a-e6e18be58a6c
     status:
       code: 200
       message: OK

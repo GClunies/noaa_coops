@@ -58,7 +58,12 @@ def metadata_response() -> MagicMock:
                 "lng": -122.3393,
                 "affiliations": "",
                 "benchmarks": {},
-                "datums": [],
+                "datums": {
+                    "datums": [
+                        {"name": "STND", "description": "Station Datum", "value": 0.0}
+                    ],
+                    "self": "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/9447130/datums.json",
+                },
                 "details": {},
                 "disclaimers": {},
                 "floodlevels": {},

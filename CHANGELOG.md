@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - **Derived Product API (DPAPI) support:** `Station.get_derived_product()` fetches computed/aggregate NOAA products — sea level trends, sea level rise projections, high-tide-flooding counts, extreme water levels, and regional frequency analysis. See README for supported products and usage.
 - Parameter validation for derived products fails fast with `ValueError` before any network call, matching `get_data()`'s existing behavior.
 - Added `scenario` validation for `slr_projections`: must be one of `all`, `low`, `intermediate-low`, `intermediate`, `intermediate-high`, `high`, `extreme` (default `all`).
+- Station metadata now stores previously-dropped schema fields: harmonic constituents (`harcon`) for current and current-prediction stations, `center_bin_1_dist`, `height_from_bottom`,`superseded_datums` for water-level stations, and others.
+- Multi-bin current prediction stations now keep offsets for every bin via `current_pred_offsets_by_bin`, instead of only the first.
 
 ### Fixed
 
@@ -25,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Enforced datum validation for the `ofs_water_level` product to ensure requests fail fast before hitting the API.
 - `Station.get_data` uses `PRODUCT_LIMITS` for `_fetch_in_blocks` block sizing, so each product respects its own documented API date-range cap. Previously, all products used a hardcoded 31-day limit (except `hourly_height`/`high_low` at 365 days).
 - Fixed block-count calculation in `_fetch_in_blocks`: switching from `floor(n/block)+1` to `ceil(n/block)` eliminates a zero-length API call when the date range divided evenly by the block size.
+- Fixed `populate_metadata` misclassifying tide-prediction stations with a null `datums` block as water-level stations, which stripped their offset values.
+- Fixed the `tidepredoffsets` expand-param typo and a malformed `units` query param (was joined with a second `?` instead of `&`) in metadata requests.
+- 1-minute interval `predictions` requests are now capped at NOAA's practical 30-day window instead of the product's normal limit.
 
 ### Changed
 

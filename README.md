@@ -68,6 +68,30 @@ also promoted to top-level attributes on the `Station` object:
 {'lat': 47.60264, 'lon': -122.3393}
 ```
 
+Current prediction stations with multiple bins (e.g. depth bins along a
+current meter mooring) expose every bin's prediction offsets, keyed by
+`currbin` number, via `.current_pred_offsets_by_bin`. The scalar attributes
+(`curr_bin`, `current_pred_offsets`) only describe the first bin:
+
+```python
+>>> act = Station(id="ACT0921")  # has three current bins
+>>> act.current_pred_offsets_by_bin
+{1: {'id': 'ACT0921',
+  'refStationId': 'BOS1111',
+  'refStationBin': 14,
+  'meanFloodDir': 239.0,
+  'meanEbbDir': 63.0,
+  'mfcTimeAdjMin': 60,
+  'sbeTimeAdjMin': 37,
+  'mecTimeAdjMin': -13,
+  'sbfTimeAdjMin': 44,
+  'mfcAmpAdj': 0.4,
+  'mecAmpAdj': 0.4,
+  'self': '...'},
+ 2: {'id': 'ACT0921', 'refStationId': 'BOS1111', ...},
+ 3: {'id': 'ACT0921', 'refStationId': 'BOS1111', ...}}
+```
+
 ### Data inventory
 
 Per-product first/last observation dates:

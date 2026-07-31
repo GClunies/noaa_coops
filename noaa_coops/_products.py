@@ -98,6 +98,23 @@ PRODUCT_LIMITS: dict[str, int] = {
     "ofs_water_level": 31,
 }
 
+#: (product, interval) pairs where NOAA's practical per-request window is
+#: stricter than PRODUCT_LIMITS[product]. Currently: 1-minute interval
+#: predictions are much denser than other intervals, so the window drops
+#: from 365 days to 30.
+INTERVAL_LIMIT_OVERRIDES: dict[tuple[str, str], int] = {
+    ("predictions", "1"): 30,
+}
+
+
+def get_max_days(product: str, interval: Optional[Union[str, int]]) -> int:
+    """Max single-request date-range window in days for this product/interval."""
+    if interval is not None:
+        override = INTERVAL_LIMIT_OVERRIDES.get((product, str(interval)))
+        if override is not None:
+            return override
+    return PRODUCT_LIMITS[product]
+
 
 # ---------------------------------------------------------------------------
 # Validation

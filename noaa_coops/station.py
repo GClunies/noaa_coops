@@ -23,7 +23,11 @@ from noaa_coops._exceptions import COOPSAPIError
 from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION, _SOAP_SESSION
 from noaa_coops._metadata import populate_metadata
 from noaa_coops._parsing import normalize_data_frame, parse_known_date_formats
-from noaa_coops._products import PRODUCT_LIMITS, build_request_params, validate_params
+from noaa_coops._products import (
+    build_request_params,
+    get_max_days,
+    validate_params,
+)
 
 # Back-compat re-exports (callers did `from noaa_coops.station import COOPSAPIError`
 # for years; keep that path working after the Tier 4 split).
@@ -208,7 +212,7 @@ class Station:
         if interval is None and product == "daily_max_min":
             interval = "h"
 
-        max_days = PRODUCT_LIMITS[product]
+        max_days = get_max_days(product, interval)
         single_block = delta.days <= max_days
 
         if single_block:
@@ -407,7 +411,7 @@ class Station:
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = PRODUCT_LIMITS[product]
+        block_size = get_max_days(product, interval)
         delta = end_dt - begin_dt
         num_blocks = int(math.ceil(delta.days / block_size))
 

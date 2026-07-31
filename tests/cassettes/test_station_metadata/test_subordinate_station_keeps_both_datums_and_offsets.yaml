@@ -1,0 +1,736 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"tidal\": true,\n      \"greatlakes\": false,\n      \"shefcode\":
+        \"\",\n      \"details\": {\n        \"id\": \"8721994\",\n        \"established\":
+        \"1972-03-22 00:00:00\",\n        \"removed\": \"1972-05-23 23:59:00\",\n
+        \       \"noaachart\": \"11476\",\n        \"timemeridian\": -75,\n        \"timezone\":
+        -5.0,\n        \"origyear\": \"1972-03-22 00:00:00\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/details.json\"\n
+        \     },\n      \"sensors\": {\n        \"units\": \"meters\",\n        \"sensors\":
+        null,\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/sensors.json\"\n
+        \     },\n      \"floodlevels\": null,\n      \"datums\": {\n        \"accepted\":
+        \"Dec 23 2009\",\n        \"superseded\": \"\",\n        \"epoch\": \"1983-2001\",\n
+        \       \"units\": \"meters\",\n        \"OrthometricDatum\": \"NAVD88\",\n
+        \       \"datums\": [\n          {\n            \"name\": \"STND\",\n            \"description\":
+        \"Station Datum\",\n            \"value\": 0.0\n          },\n          {\n
+        \           \"name\": \"MHHW\",\n            \"description\": \"Mean Higher-High
+        Water\",\n            \"value\": 1.147\n          },\n          {\n            \"name\":
+        \"MHW\",\n            \"description\": \"Mean High Water\",\n            \"value\":
+        1.131\n          },\n          {\n            \"name\": \"DTL\",\n            \"description\":
+        \"Mean Diurnal Tide Level\",\n            \"value\": 1.087\n          },\n
+        \         {\n            \"name\": \"MTL\",\n            \"description\":
+        \"Mean Tide Level\",\n            \"value\": 1.09\n          },\n          {\n
+        \           \"name\": \"MSL\",\n            \"description\": \"Mean Sea Level\",\n
+        \           \"value\": 1.09\n          },\n          {\n            \"name\":
+        \"MLW\",\n            \"description\": \"Mean Low Water\",\n            \"value\":
+        1.049\n          },\n          {\n            \"name\": \"MLLW\",\n            \"description\":
+        \"Mean Lower-Low Water\",\n            \"value\": 1.027\n          },\n          {\n
+        \           \"name\": \"GT\",\n            \"description\": \"Great Diurnal
+        Range\",\n            \"value\": 0.119\n          },\n          {\n            \"name\":
+        \"MN\",\n            \"description\": \"Mean Range of Tide\",\n            \"value\":
+        0.082\n          },\n          {\n            \"name\": \"DHQ\",\n            \"description\":
+        \"Mean Diurnal High Water Inequality\",\n            \"value\": 0.016\n          },\n
+        \         {\n            \"name\": \"DLQ\",\n            \"description\":
+        \"Mean Diurnal Low Water Inequality\",\n            \"value\": 0.022\n          },\n
+        \         {\n            \"name\": \"HWI\",\n            \"description\":
+        \"Greenwich High Water Interval (in hours)\",\n            \"value\": 2.386\n
+        \         },\n          {\n            \"name\": \"LWI\",\n            \"description\":
+        \"Greenwich Low Water Interval (in hours)\",\n            \"value\": 9.366\n
+        \         },\n          {\n            \"name\": \"NAVD88\",\n            \"description\":
+        \"North American Vertical Datum of 1988\",\n            \"value\": 1.348\n
+        \         }\n        ],\n        \"LAT\": null,\n        \"LATdate\": \"\",\n
+        \       \"LATtime\": \"\",\n        \"HAT\": null,\n        \"HATdate\": \"\",\n
+        \       \"HATtime\": \"\",\n        \"min\": null,\n        \"mindate\": \"\",\n
+        \       \"mintime\": \"\",\n        \"max\": null,\n        \"maxdate\": \"\",\n
+        \       \"maxtime\": \"\",\n        \"disclaimers\": {\n          \"disclaimers\":
+        [],\n          \"self\": null\n        },\n        \"DatumAnalysisPeriod\":
+        [\n          \"04/01/1972 - 04/30/1972\"\n        ],\n        \"NGSLink\":
+        \"\",\n        \"ctrlStation\": \"8722029 SEBASTIAN, INDIAN RIVER, FL\",\n
+        \       \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/datums.json\"\n
+        \     },\n      \"supersededdatums\": {\n        \"accepted\": null,\n        \"superseded\":
+        null,\n        \"epoch\": null,\n        \"units\": \"meters\",\n        \"OrthometricDatum\":
+        null,\n        \"datums\": null,\n        \"LAT\": null,\n        \"LATdate\":
+        null,\n        \"LATtime\": null,\n        \"HAT\": null,\n        \"HATdate\":
+        null,\n        \"HATtime\": null,\n        \"min\": null,\n        \"mindate\":
+        null,\n        \"mintime\": null,\n        \"max\": null,\n        \"maxdate\":
+        null,\n        \"maxtime\": null,\n        \"disclaimers\": {\n          \"disclaimers\":
+        [],\n          \"self\": null\n        },\n        \"DatumAnalysisPeriod\":
+        [],\n        \"NGSLink\": null,\n        \"ctrlStation\": null,\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/supersededdatums.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"meters\",\n
+        \       \"HarmonicConstituents\": [],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/harcon.json\"\n
+        \     },\n      \"benchmarks\": {\n        \"benchmarks\": [\n          {\n
+        \           \"designation\": \"872 1994 TIDAL 2\",\n            \"vm\": 5389,\n
+        \           \"lat\": 27.8728,\n            \"lng\": -80.4975,\n            \"description\":
+        \"The primary bench mark is a disk set flush in the top of a concrete base
+        of a sign pole, 8.78 m (28.8 ft) east of the approximate centerline of U.S.
+        Highway 1 northbound lanes, 6.86 m (22.5 ft) north of the approximate centerline
+        of the entrance drive into Sebastian River Marina, and 1.16 m (3.8 ft) west
+        of a carsonite witness post.\",\n            \"published\": true,\n            \"stamping\":
+        \"NO 2 1972\",\n            \"alias\": null,\n            \"dateEst\": \"1972-03-22\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"35\",\n            \"settingClass\":
+        \"Mat foundations\",\n            \"settingClassDescr\": \"Sign pole\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": \"AF6811\",\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"872 1994 H TIDAL\",\n            \"vm\": 5392,\n            \"lat\": 27.86917,\n
+        \           \"lng\": -80.496,\n            \"description\": \"The bench mark
+        is a disk located 178.31 m (585.0 ft) south of NOS bench mark 1994 G 1986,
+        17.98 m (59.0 ft) north of the extended centerline of Daytona Boulevard, 8.84
+        m (29.0 ft) east of the centerline of the northbound lane of U.S. Highway
+        1, 8.23 m (27.0 ft) north of the centerline of the driveway into Sebastian
+        Inlet Marina at 8685 U.S. Highway 1, and 0.98 m (3.2 ft) north of a wooden
+        power pole. The bench mark is crimped to the top of a stainless steel rod
+        driven 17.1 m (56.1 ft) to refusal and encased in a 5-inch PVC pipe with concrete
+        kickblock.\",\n            \"published\": true,\n            \"stamping\":
+        \"1994 H 1986\",\n            \"alias\": null,\n            \"dateEst\": null,\n
+        \           \"agency\": \"National Ocean Service (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"49\",\n            \"settingClass\":
+        \"Stainless steel rod\",\n            \"settingClassDescr\": \"Stainless steel
+        rod\",\n            \"opusPid\": null,\n            \"idbPid\": \"AF7537\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 17.1,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"872 1994 G TIDAL\",\n            \"vm\":
+        5393,\n            \"lat\": 27.8725,\n            \"lng\": -80.498,\n            \"description\":
+        \"The bench mark is a disk set flush in the south end of a concrete box culvert
+        headwall on the east side of U.S. Highway 1 across from the Riverview Mobile
+        Villa at 8600 U.S. Highway 1, 134.11 m (440.0 ft) SSE of bench mark 1994 F
+        1986, 18.29 m (60.0 ft) NNW of a wooden power service pole, 8.32 m (27.3 ft)
+        east of the centerline of the northbound lane of U.S. Highway 1, and 0.30
+        m (1.0 ft) NW of a carsonite witness post.\",\n            \"published\":
+        true,\n            \"stamping\": \"1994 G 1986\",\n            \"alias\":
+        null,\n            \"dateEst\": null,\n            \"agency\": \"FL Department
+        of Natural Resources (FLDNR)\",\n            \"monumentTypeId\": \"10\",\n
+        \           \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"32\",\n            \"settingClass\":
+        \"Retaining walls\",\n            \"settingClassDescr\": \"Headwall\",\n            \"opusPid\":
+        null,\n            \"idbPid\": \"AF7536\",\n            \"stationId\": null,\n
+        \           \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n            \"monumentCondDescr\":
+        \"Good\",\n            \"verified\": true,\n            \"display\": true,\n
+        \           \"stateCode\": null,\n            \"elevation\": null,\n            \"datums\":
+        null\n          },\n          {\n            \"designation\": \"872 1994 F
+        TIDAL\",\n            \"vm\": 5394,\n            \"lat\": 27.8717,\n            \"lng\":
+        -80.49694,\n            \"description\": \"The bench mark is a disk set flush
+        in the top of a concrete box drain, 139.60 m (458.0 ft) south of bench mark
+        NO 2 1972, 10.76 m (35.3 ft) east of the centerline of the southbound lane
+        of U.S. Highway 1, 9.08 m (29.8 ft) west of the centerline of the northbound
+        lane of U.S. Highway 1, and 0.91 m (3.0 ft) below the level of the highway.\",\n
+        \           \"published\": true,\n            \"stamping\": \"1994 F 1986\",\n
+        \           \"alias\": null,\n            \"dateEst\": null,\n            \"agency\":
+        \"FL Department of Natural Resources (FLDNR)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"30\",\n            \"settingClass\":
+        \"Light structures (other than those listed below)\",\n            \"settingClassDescr\":
+        \"Box drain\",\n            \"opusPid\": null,\n            \"idbPid\": \"AF7535\",\n
+        \           \"stationId\": null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\":
+        \"G\",\n            \"monumentCondDescr\": \"Good\",\n            \"verified\":
+        true,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"R 401\",\n            \"vm\":
+        19460,\n            \"lat\": 27.86,\n            \"lng\": -80.4917,\n            \"description\":
+        \"The bench mark is a disk set in the top of and 1.58 m (5.2 ft) east of the
+        west end of the north concrete abutment of the southbound highway bridge of
+        the southbound lanes of the highway, and 0.09 m (0.3 ft) above the level of
+        the highway.\",\n            \"published\": true,\n            \"stamping\":
+        \"R 401 1991\",\n            \"alias\": null,\n            \"dateEst\": null,\n
+        \           \"agency\": \"National Geodetic Survey (NGS)\",\n            \"monumentTypeId\":
+        \"5\",\n            \"monumentType\": \"DB\",\n            \"monumentTypeDescr\":
+        \"Bench Mark disk\",\n            \"settingClassId\": \"38\",\n            \"settingClass\":
+        \"Abutments and piers of large bridges\",\n            \"settingClassDescr\":
+        \"Bridge abutment\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"AF7499\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"G\",\n            \"monumentCondDescr\": \"Good\",\n
+        \           \"verified\": true,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"872 1994 TIDAL 1\",\n            \"vm\":
+        5388,\n            \"lat\": 27.875,\n            \"lng\": -80.4967,\n            \"description\":
+        \"The bench mark is a disk set in a concrete bulkheand located in the \\\"L\\\"
+        section of the east end of the concrete portion of the NE fuel pier, 39.23
+        m (128.7 ft) east of the junction of the pier with the bulkhead, 2.29 m (7.5
+        ft) north of the south edge of the pier, and 0.18 m (0.6 ft) south of the
+        north edge of the \\\"L\\\".   Note: The bulkhead is now covered by a wooden
+        walkway and the bench mark is inaccessible.  Mark not found in 1988 and 1989
+        by US Power Squadron, but is most likely there.\",\n            \"published\":
+        false,\n            \"stamping\": \"NO 1 1972\",\n            \"alias\": null,\n
+        \           \"dateEst\": \"1972-03-22\",\n            \"agency\": \"National
+        Ocean Survey (NOS)\",\n            \"monumentTypeId\": \"10\",\n            \"monumentType\":
+        \"DJ\",\n            \"monumentTypeDescr\": \"Tidal Station disk\",\n            \"settingClassId\":
+        \"32\",\n            \"settingClass\": \"Retaining walls\",\n            \"settingClassDescr\":
+        \"Concrete bulkhead\",\n            \"opusPid\": null,\n            \"idbPid\":
+        \"AF6814\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"N\",\n            \"monumentCondDescr\": \"Not
+        recovered, not found,\",\n            \"verified\": false,\n            \"display\":
+        true,\n            \"stateCode\": null,\n            \"elevation\": null,\n
+        \           \"datums\": null\n          },\n          {\n            \"designation\":
+        \"872 1994 TIDAL 5\",\n            \"vm\": 5391,\n            \"lat\": 27.8733,\n
+        \           \"lng\": -80.4983,\n            \"description\": \"The bench mark
+        is a disk set flush in the concrete sea wall on the east side of the Summit
+        Landings restaurant, 39.93 m (131 ft) WSW of bench mark NO 1 1972, 4.27 m
+        (14.0 ft) NE of the NE corner of the restaurant, and 1.83 m (6.0 ft) south
+        of the NE corner of the sea wall.  Note:  The sea wall is now covered by a
+        wooden walkway and the bench mark is inaccessible.  Mark not found in 1988
+        and 1989 by US Power Squadron.\",\n            \"published\": false,\n            \"stamping\":
+        \"NO 5 1972\",\n            \"alias\": null,\n            \"dateEst\": \"1972-11-08\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"32\",\n            \"settingClass\":
+        \"Retaining walls\",\n            \"settingClassDescr\": \"Concrete sea wall\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": \"AF6813\",\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"N\",\n
+        \           \"monumentCondDescr\": \"Not recovered, not found,\",\n            \"verified\":
+        false,\n            \"display\": true,\n            \"stateCode\": null,\n
+        \           \"elevation\": null,\n            \"datums\": null\n          },\n
+        \         {\n            \"designation\": \"872 1994 TIDAL 4\",\n            \"vm\":
+        5390,\n            \"lat\": 27.874,\n            \"lng\": -80.498,\n            \"description\":
+        \"The bench mark is a disk set flush in the concrete sea wall on the north
+        side of Summit Landings Restaurant at the Sebastian River Marina, 13.81 m
+        (45.3 ft) NW of the NW corner of the marina office building, 8.38 m (27.5
+        ft) NW of the NW corner of the one story restaurant building, 4.75 m (15.6
+        ft) east of the west end of the seawall, 4.11 m (13.5 ft) NW of a 0.91 m (3.0
+        ft) square concrete slab for a sump pump, and 1.22 m (4.0 ft) NW of a wooden
+        power pole with 2 guy wires.\",\n            \"published\": true,\n            \"stamping\":
+        \"NO 4 1972\",\n            \"alias\": null,\n            \"dateEst\": \"1972-11-08\",\n
+        \           \"agency\": \"National Ocean Survey (NOS)\",\n            \"monumentTypeId\":
+        \"10\",\n            \"monumentType\": \"DJ\",\n            \"monumentTypeDescr\":
+        \"Tidal Station disk\",\n            \"settingClassId\": \"32\",\n            \"settingClass\":
+        \"Retaining walls\",\n            \"settingClassDescr\": \"Concrete seawall\",\n
+        \           \"opusPid\": null,\n            \"idbPid\": \"AF6812\",\n            \"stationId\":
+        null,\n            \"vmDepth\": 0.0,\n            \"monumentCond\": \"G\",\n
+        \           \"monumentCondDescr\": \"Good\",\n            \"verified\": true,\n
+        \           \"display\": true,\n            \"stateCode\": null,\n            \"elevation\":
+        null,\n            \"datums\": null\n          },\n          {\n            \"designation\":
+        \"S 401\",\n            \"vm\": 19461,\n            \"lat\": 27.86806,\n            \"lng\":
+        -80.49639,\n            \"description\": \"The bench mark is a flange-encased
+        rod located 48.49 m (159.1 ft) SW of the center of the entrance to the Mini
+        Storage Mall at 8700 Daytona Boulevard, 7.32 m (24.0 ft) NW of and level with
+        the boulevard centerline, 0.30 m (1.0 ft) NE of a utility pole, and 0.30 m
+        (1.0 ft) SE of a witness post.  The datum point is the top of a stainless
+        steel rod, driven to refusal at a depth of 31.4 m (103.0 ft), and encased
+        in a 5-inch NGS logo cap flush with the ground.\",\n            \"published\":
+        true,\n            \"stamping\": \"S 401 1991\",\n            \"alias\": null,\n
+        \           \"dateEst\": null,\n            \"agency\": \"National Geodetic
+        Survey (NGS)\",\n            \"monumentTypeId\": \"24\",\n            \"monumentType\":
+        \"F\",\n            \"monumentTypeDescr\": \"Flange-encased Rod\",\n            \"settingClassId\":
+        \"49\",\n            \"settingClass\": \"Stainless steel rod\",\n            \"settingClassDescr\":
+        \"Stainless steel rod\",\n            \"opusPid\": \"AF7500\",\n            \"idbPid\":
+        \"AF7500\",\n            \"stationId\": null,\n            \"vmDepth\": 0.0,\n
+        \           \"monumentCond\": \"G\",\n            \"monumentCondDescr\": \"Good\",\n
+        \           \"verified\": true,\n            \"display\": true,\n            \"stateCode\":
+        null,\n            \"elevation\": null,\n            \"datums\": null\n          }\n
+        \       ],\n        \"to_reach\": \"To reach the tidal bench marks from the
+        north end of the U.S. Highway 1 bridge over Sebastian Creek, proceed 2.1 km
+        (1.3 mi) north on U.S. Highway 1 to the Summit Landings.  The bench marks
+        are in the vicinity of the Summit Landings Marina.  The tide gage and staff
+        were located on the wooden fuel pier.\",\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/benchmarks.json\"\n
+        \     },\n      \"tidePredOffsets\": {\n        \"refStationId\": \"8723178\",\n
+        \       \"type\": \"S\",\n        \"heightOffsetHighTide\": 0.14,\n        \"heightOffsetLowTide\":
+        0.57,\n        \"timeOffsetHighTide\": 74,\n        \"timeOffsetLowTide\":
+        139,\n        \"heightAdjustedType\": \"R\",\n        \"self\": null\n      },\n
+        \     \"ofsMapOffsets\": {\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/ofsmapoffsets.json\"\n
+        \     },\n      \"state\": \"FL\",\n      \"timezone\": \"EST\",\n      \"timezonecorr\":
+        -5,\n      \"observedst\": true,\n      \"stormsurge\": false,\n      \"nearby\":
+        {\n        \"count\": 45,\n        \"units\": null,\n        \"stations\":
+        [\n          {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        15.359635,\n            \"id\": \"8721843\",\n            \"name\": \"MELBOURNE
+        CAUSEWAY, FL\",\n            \"lat\": 28.08329963684082,\n            \"lng\":
+        -80.5916976928711,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721843.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological\",\n
+        \           \"distance\": 29.864208,\n            \"id\": \"8722213\",\n            \"name\":
+        \"Binney Dock, FL\",\n            \"lat\": 27.4683,\n            \"lng\":
+        -80.3,\n            \"affiliations\": \"\",\n            \"portscode\": \"\",\n
+        \           \"products\": null,\n            \"disclaimers\": null,\n            \"notices\":
+        null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8722213.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 37.83334,\n            \"id\": \"8721604\",\n            \"name\":
+        \"Trident Pier, Port Canaveral, FL\",\n            \"lat\": 28.415800094604492,\n
+        \           \"lng\": -80.59310150146484,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721604.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        50.59217,\n            \"id\": \"8722376\",\n            \"name\": \"SOUTH
+        FORK,ST. LUCIE RIVER, FL\",\n            \"lat\": 27.165,\n            \"lng\":
+        -80.255,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8722376.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        52.590137,\n            \"id\": \"8722375\",\n            \"name\": \"SOUTH
+        POINT, ST LUCIE INLET, FL\",\n            \"lat\": 27.1583,\n            \"lng\":
+        -80.1567,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8722375.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        64.7832,\n            \"id\": \"8722471\",\n            \"name\": \"CONCH
+        BAR, JUPITER SOUND, FL\",\n            \"lat\": 26.9883,\n            \"lng\":
+        -80.0933,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8722471.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        67.172424,\n            \"id\": \"8721323\",\n            \"name\": \"SCOTTSMOOR,
+        INDIAN RIVER, FL\",\n            \"lat\": 28.805,\n            \"lng\": -80.8583,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721323.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        85.17894,\n            \"id\": \"8721147\",\n            \"name\": \"Ponce
+        De Leon Inlet South, FL\",\n            \"lat\": 29.06333333333333,\n            \"lng\":
+        -80.91583333333334,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721147.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        88.61012,\n            \"id\": \"8721106\",\n            \"name\": \"Rose
+        Bay, FL\",\n            \"lat\": 29.102935791015625,\n            \"lng\":
+        -80.97111511230469,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721106.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 90.48603,\n            \"id\": \"8722670\",\n            \"name\":
+        \"Lake Worth Pier, Atlantic Ocean, FL\",\n            \"lat\": 26.6127778,\n
+        \           \"lng\": -80.0341667,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8722670.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        99.99568,\n            \"id\": \"8726609\",\n            \"name\": \"ALAFIA
+        RIVER, FL\",\n            \"lat\": 27.860000610351562,\n            \"lng\":
+        -82.38333129882812,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726609.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 102.06723,\n            \"id\": \"8726674\",\n            \"name\":
+        \"East Bay, FL\",\n            \"lat\": 27.923099517822266,\n            \"lng\":
+        -82.42140197753906,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726674.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        102.31178,\n            \"id\": \"8726679\",\n            \"name\": \"East
+        Bay Causeway, FL\",\n            \"lat\": 27.92888888888889,\n            \"lng\":
+        -82.42575,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726679.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological,Physical\",\n            \"distance\":
+        103.321754,\n            \"id\": \"8726671\",\n            \"name\": \"Sparkman
+        Channel Entrance, FL\",\n            \"lat\": 27.92052777777778,\n            \"lng\":
+        -82.44519444444444,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726671.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        103.417656,\n            \"id\": \"8726694\",\n            \"name\": \"TPA
+        Cruise Terminal 2, FL\",\n            \"lat\": 27.94297222222222,\n            \"lng\":
+        -82.44586111111111,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726694.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        107.22032,\n            \"id\": \"8726504\",\n            \"name\": \"Cut
+        D Channel, Inbound Rear Range, FL\",\n            \"lat\": 27.753583908081055,\n
+        \           \"lng\": -82.5136947631836,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726504.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 108.97872,\n            \"id\": \"8726607\",\n            \"name\":
+        \"Old Port Tampa, FL\",\n            \"lat\": 27.857799530029297,\n            \"lng\":
+        -82.55280303955078,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726607.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 110.660194,\n            \"id\": \"8726384\",\n
+        \           \"name\": \"Port Manatee, FL\",\n            \"lat\": 27.638700485229492,\n
+        \           \"lng\": -82.56210327148438,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726384.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 111.70285,\n            \"id\": \"8725520\",\n            \"name\":
+        \"Fort Myers, FL\",\n            \"lat\": 26.64777777777778,\n            \"lng\":
+        -81.8711111111111,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8725520.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 112.404465,\n            \"id\": \"8726412\",\n
+        \           \"name\": \"Middle Tampa Bay, FL\",\n            \"lat\": 27.66175,\n
+        \           \"lng\": -82.59952777777778,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726412.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        112.5487,\n            \"id\": \"8721002\",\n            \"name\": \"JUNIPER
+        CLUB, LAKE GEORGE, FL\",\n            \"lat\": 29.2467,\n            \"lng\":
+        -81.6383,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721002.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        113.04238,\n            \"id\": \"8726247\",\n            \"name\": \"BRADENTON,
+        MANATEE RIVER, FL\",\n            \"lat\": 27.5,\n            \"lng\": -82.57330322265625,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726247.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 113.16885,\n            \"id\": \"8726520\",\n            \"name\":
+        \"St. Petersburg, FL\",\n            \"lat\": 27.76059913635254,\n            \"lng\":
+        -82.62689971923828,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726520.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        115.757355,\n            \"id\": \"8726371\",\n            \"name\": \"Sunshine
+        Skyway Bridge Air Gap, FL\",\n            \"lat\": 27.62058333333333,\n            \"lng\":
+        -82.65580555555556,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726371.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        121.46447,\n            \"id\": \"8725528\",\n            \"name\": \"PINE
+        ISLAND, CHARLOTTE HARBOR, FL\",\n            \"lat\": 26.66,\n            \"lng\":
+        -82.155,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8725528.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 123.967674,\n            \"id\": \"8726724\",\n
+        \           \"name\": \"Clearwater Beach, FL\",\n            \"lat\": 27.978300094604492,\n
+        \           \"lng\": -82.83170318603516,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8726724.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 125.42963,\n            \"id\": \"8722956\",\n            \"name\":
+        \"South Port Everglades, FL\",\n            \"lat\": 26.0816667,\n            \"lng\":
+        -80.1166667,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8722956.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 126.07031,\n            \"id\": \"8720757\",\n            \"name\":
+        \"Bings Landing, Matanzas River, FL\",\n            \"lat\": 29.614999771118164,\n
+        \           \"lng\": -81.20500183105469,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720757.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        138.1515,\n            \"id\": \"8725114\",\n            \"name\": \"Naples
+        Bay, North, FL\",\n            \"lat\": 26.136699676513672,\n            \"lng\":
+        -81.78829956054688,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8725114.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        141.07852,\n            \"id\": \"8725081\",\n            \"name\": \"Gordon
+        River Inlet, FL\",\n            \"lat\": 26.09230613708496,\n            \"lng\":
+        -81.79814147949219,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8725081.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 149.06587,\n            \"id\": \"8723214\",\n            \"name\":
+        \"Virginia Key, FL\",\n            \"lat\": 25.731399536132812,\n            \"lng\":
+        -80.16179656982422,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8723214.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        149.5725,\n            \"id\": \"8724919\",\n            \"name\": \"CHOKOLOSKEE,
+        FL\",\n            \"lat\": 25.8133,\n            \"lng\": -81.3633,\n            \"affiliations\":
+        \"\",\n            \"portscode\": \"\",\n            \"products\": null,\n
+        \           \"disclaimers\": null,\n            \"notices\": null,\n            \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8724919.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        153.06982,\n            \"id\": \"8720494\",\n            \"name\": \"TOLOMATO
+        RIVER, ICWW, FL\",\n            \"lat\": 29.994400024414062,\n            \"lng\":
+        -81.32949829101562,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720494.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        156.51842,\n            \"id\": \"8720499\",\n            \"name\": \"TROUT
+        CREEK, ST. JOHNS RIVER, FL\",\n            \"lat\": 29.985,\n            \"lng\":
+        -81.565,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720499.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 160.16313,\n            \"id\": \"8727520\",\n            \"name\":
+        \"Cedar Key, FL\",\n            \"lat\": 29.135000228881836,\n            \"lng\":
+        -83.03170013427734,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8727520.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 172.25807,\n            \"id\": \"8720357\",\n            \"name\":
+        \"I-295 Buckman Bridge, FL\",\n            \"lat\": 30.19241666666667,\n            \"lng\":
+        -81.68888888888888,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720357.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 179.92738,\n            \"id\": \"8720226\",\n            \"name\":
+        \"Southbank Riverwalk, St Johns River, FL\",\n            \"lat\": 30.32,\n
+        \           \"lng\": -81.6583,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720226.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        180.33018,\n            \"id\": \"8720228\",\n            \"name\": \"Little
+        Jetties Visibility, FL\",\n            \"lat\": 30.37936111111111,\n            \"lng\":
+        -81.44602777777777,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720228.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Meteorological,Physical\",\n
+        \           \"distance\": 181.31438,\n            \"id\": \"8720218\",\n            \"name\":
+        \"Mayport (Bar Pilots Dock), FL\",\n            \"lat\": 30.39816666666667,\n
+        \           \"lng\": -81.42788888888889,\n            \"affiliations\": \"\",\n
+        \           \"portscode\": \"\",\n            \"products\": null,\n            \"disclaimers\":
+        null,\n            \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720218.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Physical\",\n            \"distance\":
+        181.32314,\n            \"id\": \"8720245\",\n            \"name\": \"Jacksonville
+        University, FL\",\n            \"lat\": 30.35408333333333,\n            \"lng\":
+        -81.61175,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720245.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        181.46515,\n            \"id\": \"8720244\",\n            \"name\": \"MILL
+        COVE, FL\",\n            \"lat\": 30.3700008392334,\n            \"lng\":
+        -81.55830383300781,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720244.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        182.37512,\n            \"id\": \"8720233\",\n            \"name\": \"Blount
+        Island Command, FL\",\n            \"lat\": 30.39258333333333,\n            \"lng\":
+        -81.52252777777778,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720233.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level\",\n            \"distance\":
+        182.39844,\n            \"id\": \"8720376\",\n            \"name\": \"Dames
+        Point Bridge Air Gap, FL\",\n            \"lat\": 30.3845,\n            \"lng\":
+        -81.55711111111111,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720376.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Water Level,Physical\",\n            \"distance\":
+        182.5624,\n            \"id\": \"8720219\",\n            \"name\": \"Dames
+        Point, FL\",\n            \"lat\": 30.386699676513672,\n            \"lng\":
+        -81.55829620361328,\n            \"affiliations\": \"\",\n            \"portscode\":
+        \"\",\n            \"products\": null,\n            \"disclaimers\": null,\n
+        \           \"notices\": null,\n            \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720219.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          },\n
+        \         {\n            \"stationType\": \"Meteorological\",\n            \"distance\":
+        184.58119,\n            \"id\": \"8720215\",\n            \"name\": \"Navy
+        Fuel Depot, FL\",\n            \"lat\": 30.4,\n            \"lng\": -81.6267,\n
+        \           \"affiliations\": \"\",\n            \"portscode\": \"\",\n            \"products\":
+        null,\n            \"disclaimers\": null,\n            \"notices\": null,\n
+        \           \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8720215.json\",\n
+        \           \"expand\": null,\n            \"tideType\": \"\"\n          }\n
+        \       ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/nearby.json\"\n
+        \     },\n      \"forecast\": false,\n      \"outlook\": false,\n      \"HTFhistorical\":
+        false,\n      \"HTFmonthly\": false,\n      \"nonNavigational\": false,\n
+        \     \"inundationdb\": false,\n      \"id\": \"8721994\",\n      \"name\":
+        \"MICCO, INDIAN RIVER\",\n      \"lat\": 27.8733,\n      \"lng\": -80.4967,\n
+        \     \"affiliations\": \"\",\n      \"portscode\": null,\n      \"products\":
+        {\n        \"products\": [\n          {\n            \"name\": \"Tide Predictions\",\n
+        \           \"value\": \"https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721994\"\n
+        \         },\n          {\n            \"name\": \"Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=8721994\"\n          },\n
+        \         {\n            \"name\": \"Superseded  Benchmarks\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/benchmarks.html?id=8721994&type=superseded\"\n
+        \         },\n          {\n            \"name\": \"Datums\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/datums.html?id=8721994\"\n          }\n
+        \       ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/products.json\"\n
+        \     },\n      \"disclaimers\": {\n        \"disclaimers\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/disclaimers.json\"\n
+        \     },\n      \"notices\": {\n        \"notices\": [],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994/notices.json\"\n
+        \     },\n      \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8721994.json\",\n
+        \     \"expand\": \"details,sensors,floodlevels,datums,harcon,tidepredoffsets,ofsmapoffsets,products,disclaimers,notices\",\n
+        \     \"tideType\": \"\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 31 Jul 2026 08:01:56 GMT
+      content-length:
+      - '45601'
+      x-amz-apigw-id:
+      - BXJyRGr7oAMEniQ=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Fri, 31 Jul 2026 08:01:56 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 128f3803-c3e7-4a4a-bdc9-5cc825e723c3
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl/DataInventory.wsdl
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<wsdl:definitions targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:apachesoap=\"http://xml.apache.org/xml-soap\" xmlns:impl=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:intf=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns:wsdl=\"http://schemas.xmlsoap.org/wsdl/\" xmlns:wsdlsoap=\"http://schemas.xmlsoap.org/wsdl/soap/\"
+        xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n<!--WSDL created by Apache
+        Axis version: 1.4\nBuilt on Apr 22, 2006 (06:55:48 PDT)-->\n <wsdl:types>\n
+        \ <schema elementFormDefault=\"qualified\" targetNamespace=\"https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl\"
+        xmlns=\"http://www.w3.org/2001/XMLSchema\">\n   <element name=\"Parameters\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"stationId\" type=\"xsd:string\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n   <complexType name=\"location\">\n
+        \   <sequence>\n     <element name=\"lat\" type=\"xsd:string\"/>\n     <element
+        name=\"long\" nillable=\"true\" type=\"xsd:string\"/>\n     <element name=\"state\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"metadata\">\n    <sequence>\n     <element name=\"location\" type=\"impl:location\"/>\n
+        \    <element name=\"date_established\" type=\"xsd:string\"/>\n     <element
+        name=\"shef_id\" type=\"xsd:string\"/>\n     <element name=\"deployment_designation\"
+        type=\"xsd:string\"/>\n    </sequence>\n   </complexType>\n   <complexType
+        name=\"parameter\">\n    <sequence/>\n    <attribute name=\"first\" type=\"xsd:string\"/>\n
+        \   <attribute name=\"last\" type=\"xsd:string\"/>\n    <attribute name=\"name\"
+        type=\"xsd:string\"/>\n   </complexType>\n   <complexType name=\"station\">\n
+        \   <sequence>\n     <element name=\"metadata\" type=\"impl:metadata\"/>\n
+        \    <element maxOccurs=\"unbounded\" minOccurs=\"0\" name=\"parameter\" type=\"impl:parameter\"/>\n
+        \   </sequence>\n    <attribute name=\"ID\" type=\"xsd:string\"/>\n    <attribute
+        name=\"name\" type=\"xsd:string\"/>\n   </complexType>\n   <element name=\"DataInventory\">\n
+        \   <complexType>\n     <sequence>\n      <element name=\"station\" type=\"impl:station\"/>\n
+        \    </sequence>\n    </complexType>\n   </element>\n  </schema>\n </wsdl:types>\n\n
+        \  <wsdl:message name=\"getDataInventoryResponse\">\n\n      <wsdl:part element=\"impl:DataInventory\"
+        name=\"DataInventory\"/>\n\n   </wsdl:message>\n\n   <wsdl:message name=\"getDataInventoryRequest\">\n\n
+        \     <wsdl:part element=\"impl:Parameters\" name=\"Parameters\"/>\n\n   </wsdl:message>\n\n
+        \  <wsdl:portType name=\"DataInventoryPortType\">\n\n      <wsdl:operation
+        name=\"getDataInventory\" parameterOrder=\"Parameters\">\n\n         <wsdl:input
+        message=\"impl:getDataInventoryRequest\" name=\"getDataInventoryRequest\"/>\n\n
+        \        <wsdl:output message=\"impl:getDataInventoryResponse\" name=\"getDataInventoryResponse\"/>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:portType>\n\n   <wsdl:binding name=\"DataInventorySoapBinding\"
+        type=\"impl:DataInventoryPortType\">\n\n      <wsdlsoap:binding style=\"document\"
+        transport=\"http://schemas.xmlsoap.org/soap/http\"/>\n\n      <wsdl:operation
+        name=\"getDataInventory\">\n\n         <wsdlsoap:operation soapAction=\"\"/>\n\n
+        \        <wsdl:input name=\"getDataInventoryRequest\">\n\n            <wsdlsoap:body
+        use=\"literal\"/>\n\n         </wsdl:input>\n\n         <wsdl:output name=\"getDataInventoryResponse\">\n\n
+        \           <wsdlsoap:body use=\"literal\"/>\n\n         </wsdl:output>\n\n
+        \     </wsdl:operation>\n\n   </wsdl:binding>\n\n   <wsdl:service name=\"DataInventoryService\">\n\n
+        \     <wsdl:port binding=\"impl:DataInventorySoapBinding\" name=\"DataInventory\">\n\n
+        \        <wsdlsoap:address location=\"https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory\"/>\n\n
+        \     </wsdl:port>\n\n   </wsdl:service>\n\n</wsdl:definitions>"
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3712'
+      Content-Type:
+      - text/xml
+      Date:
+      - Fri, 31 Jul 2026 08:01:58 GMT
+      ETag:
+      - W/"3712-1673306860000"
+      Last-Modified:
+      - Mon, 09 Jan 2023 23:27:40 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: ''
+- request:
+    body: '<?xml version=''1.0'' encoding=''utf-8''?>
+
+      <soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/"><soap-env:Body><ns0:Parameters
+      xmlns:ns0="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><ns0:stationId>8721994</ns0:stationId></ns0:Parameters></soap-env:Body></soap-env:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '323'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '""'
+    method: POST
+    uri: https://opendap.co-ops.nos.noaa.gov/axis/services/DataInventory
+  response:
+    body:
+      string: <?xml version="1.0" encoding="utf-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><DataInventory
+        xmlns="https://opendap.co-ops.nos.noaa.gov/axis/webservices/datainventory/wsdl"><station
+        ID="8721994" name="MICCO, INDIAN RIVER"><metadata><location><lat>27.8733</lat><long>-80.4967</long><state>FL</state></location><date_established>1972-03-22</date_established><shef_id></shef_id><deployment_designation></deployment_designation></metadata><parameter
+        first="1972-04-01 00:00" last="1972-04-30 23:54" name="Verified Monthly Mean
+        Water Level"/></station></DataInventory></soapenv:Body></soapenv:Envelope>
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/xml;charset=utf-8
+      Date:
+      - Fri, 31 Jul 2026 08:02:00 GMT
+      Server:
+      - nginx
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: ''
+version: 1
