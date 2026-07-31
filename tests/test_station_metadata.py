@@ -8,10 +8,11 @@ Station IDs are documented per test so cassettes can be re-recorded:
 """
 
 from __future__ import annotations
- 
+
 import pytest
- 
+
 import noaa_coops as nc
+
 
 @pytest.mark.vcr
 def test_subordinate_station_keeps_both_datums_and_offsets() -> None:
