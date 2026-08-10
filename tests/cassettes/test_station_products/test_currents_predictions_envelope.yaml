@@ -1,0 +1,1263 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/cb0102.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"project\": \"Chesapeake Bay South PORTS\",\n      \"deployed\": \"2025-01-27
+        15:00:00\",\n      \"retrieved\": \"\",\n      \"timezone_offset\": \"-5\",\n
+        \     \"observedst\": true,\n      \"project_type\": \"PORTS\",\n      \"noaachart\":
+        12222,\n      \"deployments\": {\n        \"units\": \"meters\",\n        \"flood_direction_degrees\":
+        280.0,\n        \"orientation\": \"down\",\n        \"sensor_depth\": 1.925,\n
+        \       \"depth\": 22.0,\n        \"measured_depth\": 22.0,\n        \"height_from_bottom\":
+        0.0,\n        \"sample_interval\": 360,\n        \"ping_int\": null,\n        \"first_good_data\":
+        \"\",\n        \"last_good_data\": \"\",\n        \"deployments\": [\n          {\n
+        \           \"id\": \"cb0102\",\n            \"deployed\": \"2025-01-27 15:00:00\",\n
+        \           \"retrieved\": \"\",\n            \"lat\": 36.95940017700195,\n
+        \           \"lng\": -76.01280212402344,\n            \"instrument_id\": 23114,\n
+        \           \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"AQD 1780/AQP 10549\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2024-06-12 11:32:00\",\n            \"retrieved\":
+        \"2025-01-27 14:55:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 41421,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"AQD 18125/AQP 12945\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2024-06-12 11:30:00\",\n            \"retrieved\": \"2024-06-12 11:31:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        41421,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"AQD 18125/AQP 12945\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2023-12-05 16:30:00\",\n            \"retrieved\":
+        \"2024-06-12 11:25:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 35875,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"AQD 2709/AQP 2634\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2023-06-05 00:00:00\",\n            \"retrieved\": \"2023-12-05 16:25:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        36740,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"AQD 12191/AQP 7166\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2022-11-07 16:15:00\",\n            \"retrieved\":
+        \"2023-03-27 21:09:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 23127,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"AQD 2343/AQP 7350\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2022-08-03 12:35:00\",\n            \"retrieved\": \"2022-11-07 16:00:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        21859,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"AQD 13430/AQP 8125\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2021-07-20 12:00:00\",\n            \"retrieved\":
+        \"2022-08-03 12:30:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 16327,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"5268\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2020-12-03 18:00:00\",\n            \"retrieved\": \"2021-07-20 11:50:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        29083,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"14185\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2020-07-08 13:01:00\",\n            \"retrieved\":
+        \"2020-12-03 17:00:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 16189,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1274\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2019-11-14 17:31:00\",\n            \"retrieved\": \"2020-07-08 13:00:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        33513,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"*9107\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2019-05-29 12:21:00\",\n            \"retrieved\":
+        \"2019-11-14 17:30:00\",\n            \"lat\": 36.95939,\n            \"lng\":
+        -76.01821,\n            \"instrument_id\": 16272,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"2885\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2018-12-27 13:01:00\",\n            \"retrieved\": \"2019-05-29 12:20:00\",\n
+        \           \"lat\": 36.95939,\n            \"lng\": -76.01281,\n            \"instrument_id\":
+        16269,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"2879\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2018-05-24 19:37:00\",\n            \"retrieved\":
+        \"2018-12-27 13:00:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 25858,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"*2\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2017-11-03 16:56:00\",\n            \"retrieved\": \"2018-05-24 19:36:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        16402,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"11735\",\n            \"frequency\":
+        \"1000\",\n            \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2017-04-17 21:00:00\",\n            \"retrieved\":
+        \"2017-11-03 16:55:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 16350,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"9107\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2016-10-20 12:50:00\",\n            \"retrieved\": \"2017-04-14 20:58:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        16272,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"2885\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2016-03-01 15:30:00\",\n            \"retrieved\":
+        \"2016-10-20 12:45:00\",\n            \"lat\": 36.9594,\n            \"lng\":
+        -76.0128,\n            \"instrument_id\": 16361,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"6412\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2015-10-22 17:00:00\",\n            \"retrieved\": \"2016-03-01 15:00:00\",\n
+        \           \"lat\": 36.9594,\n            \"lng\": -76.0128,\n            \"instrument_id\":
+        16203,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1337\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2015-06-23 18:00:00\",\n            \"retrieved\":
+        \"2015-10-22 16:30:00\",\n            \"lat\": 36.95922,\n            \"lng\":
+        -76.01302,\n            \"instrument_id\": 16203,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1337\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2015-01-06 17:10:00\",\n            \"retrieved\": \"2015-06-23 17:00:00\",\n
+        \           \"lat\": 36.95922,\n            \"lng\": -76.01302,\n            \"instrument_id\":
+        16361,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"6412\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2014-06-25 15:00:00\",\n            \"retrieved\":
+        \"2015-01-06 16:00:00\",\n            \"lat\": 36.95922,\n            \"lng\":
+        -76.01302,\n            \"instrument_id\": 16273,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"2889\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2014-01-06 14:00:00\",\n            \"retrieved\": \"2014-06-24 23:00:00\",\n
+        \           \"lat\": 36.95922,\n            \"lng\": -76.01302,\n            \"instrument_id\":
+        16272,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"2885\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2013-08-07 14:00:00\",\n            \"retrieved\":
+        \"2014-01-06 13:00:00\",\n            \"lat\": 36.95922,\n            \"lng\":
+        -76.01302,\n            \"instrument_id\": 16351,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"9109\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2013-05-09 16:50:00\",\n            \"retrieved\": \"2013-08-06 23:00:00\",\n
+        \           \"lat\": 36.95922,\n            \"lng\": -76.01302,\n            \"instrument_id\":
+        16351,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"9109\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2012-09-21 19:00:00\",\n            \"retrieved\":
+        \"2013-05-09 15:15:00\",\n            \"lat\": 36.95922,\n            \"lng\":
+        -76.01302,\n            \"instrument_id\": 16272,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"2885\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2012-05-11 19:00:00\",\n            \"retrieved\": \"2012-09-21 18:00:00\",\n
+        \           \"lat\": 36.95922,\n            \"lng\": -76.01302,\n            \"instrument_id\":
+        16351,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"9109\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2012-03-22 15:00:00\",\n            \"retrieved\":
+        \"2012-05-04 16:00:00\",\n            \"lat\": 36.95922,\n            \"lng\":
+        -76.01302,\n            \"instrument_id\": 16351,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"9109\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2011-09-28 17:00:00\",\n            \"retrieved\": \"2012-03-22 14:00:00\",\n
+        \           \"lat\": 36.95922,\n            \"lng\": -76.01302,\n            \"instrument_id\":
+        16341,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"5321\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2011-02-16 16:00:00\",\n            \"retrieved\":
+        \"2011-09-28 15:15:00\",\n            \"lat\": 36.95922,\n            \"lng\":
+        -76.01302,\n            \"instrument_id\": 16189,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1274\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2010-07-15 19:00:00\",\n            \"retrieved\": \"2011-02-16 15:00:00\",\n
+        \           \"lat\": 36.95922,\n            \"lng\": -76.01302,\n            \"instrument_id\":
+        16210,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1788\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2010-01-15 16:20:00\",\n            \"retrieved\":
+        \"2010-07-15 18:45:00\",\n            \"lat\": 36.9592,\n            \"lng\":
+        -76.013,\n            \"instrument_id\": 16214,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1825\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2009-08-27 15:50:00\",\n            \"retrieved\": \"2010-01-15 15:45:00\",\n
+        \           \"lat\": 36.95903,\n            \"lng\": -76.01263,\n            \"instrument_id\":
+        16202,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1780\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2009-06-19 13:00:00\",\n            \"retrieved\":
+        \"2009-08-25 17:00:00\",\n            \"lat\": 36.95903,\n            \"lng\":
+        -76.01263,\n            \"instrument_id\": 16202,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1780\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2009-01-22 15:00:00\",\n            \"retrieved\": \"2009-06-19 12:30:00\",\n
+        \           \"lat\": 36.95903,\n            \"lng\": -76.012627,\n            \"instrument_id\":
+        16208,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1232\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2008-07-30 18:38:00\",\n            \"retrieved\":
+        \"2009-01-22 14:20:00\",\n            \"lat\": 36.95903,\n            \"lng\":
+        -76.01263,\n            \"instrument_id\": 16186,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"899\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2007-12-05 16:32:00\",\n            \"retrieved\": \"2008-07-30 14:10:00\",\n
+        \           \"lat\": 36.95903,\n            \"lng\": -76.01263,\n            \"instrument_id\":
+        16215,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1686\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2007-08-30 15:00:00\",\n            \"retrieved\":
+        \"2007-12-05 15:30:00\",\n            \"lat\": 36.95903,\n            \"lng\":
+        -76.01263,\n            \"instrument_id\": 16202,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1780\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2007-07-26 15:48:00\",\n            \"retrieved\": \"2007-08-27 13:30:00\",\n
+        \           \"lat\": 36.95903,\n            \"lng\": -76.01263,\n            \"instrument_id\":
+        16202,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1780\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2007-06-19 15:47:00\",\n            \"retrieved\":
+        \"2007-07-19 09:00:00\",\n            \"lat\": 36.95903,\n            \"lng\":
+        -76.01263,\n            \"instrument_id\": 16197,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1307\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2007-01-12 15:45:00\",\n            \"retrieved\": \"2007-06-19 15:00:00\",\n
+        \           \"lat\": 36.95903,\n            \"lng\": -76.01263,\n            \"instrument_id\":
+        16210,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1788\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2006-12-14 00:00:00\",\n            \"retrieved\":
+        \"2007-01-12 13:00:00\",\n            \"lat\": 36.95903,\n            \"lng\":
+        -76.01263,\n            \"instrument_id\": 16196,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1524\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2006-05-18 00:00:00\",\n            \"retrieved\": \"2006-12-13 11:00:00\",\n
+        \           \"lat\": 36.95903,\n            \"lng\": -76.01263,\n            \"instrument_id\":
+        16198,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1308\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2005-11-08 00:00:00\",\n            \"retrieved\":
+        \"2006-05-17 23:54:00\",\n            \"lat\": 36.95903,\n            \"lng\":
+        -76.01263,\n            \"instrument_id\": 16200,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1034\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2005-10-18 00:00:00\",\n            \"retrieved\": \"2005-11-07 23:54:00\",\n
+        \           \"lat\": 36.95917,\n            \"lng\": -76.01278,\n            \"instrument_id\":
+        16200,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"1034\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          },\n          {\n            \"id\":
+        \"cb0102\",\n            \"deployed\": \"2005-02-09 00:00:00\",\n            \"retrieved\":
+        \"2005-10-17 23:54:00\",\n            \"lat\": 36.95917,\n            \"lng\":
+        -76.01278,\n            \"instrument_id\": 16195,\n            \"instrument_desc\":
+        \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"1310\",\n            \"frequency\": \"1000\",\n            \"nbr_beams\":
+        \"3\"\n          },\n          {\n            \"id\": \"cb0102\",\n            \"deployed\":
+        \"2004-05-14 00:00:00\",\n            \"retrieved\": \"2005-02-08 00:00:00\",\n
+        \           \"lat\": 36.95917,\n            \"lng\": -76.01278,\n            \"instrument_id\":
+        16187,\n            \"instrument_desc\": \"Nortek Gen 1 ADCP\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"0733\",\n            \"frequency\": \"1000\",\n
+        \           \"nbr_beams\": \"3\"\n          }\n        ],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/cb0102/deployments.json\"\n
+        \     },\n      \"bins\": {\n        \"nbr_of_bins\": 15,\n        \"max_pics_bin\":
+        15,\n        \"units\": \"meters\",\n        \"bin_size\": 1.0,\n        \"center_bin_1_dist\":
+        1.4,\n        \"real_time_bin\": 4,\n        \"bins\": [\n          {\n            \"num\":
+        1,\n            \"depth\": 3.51,\n            \"distance\": null,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 2,\n            \"depth\": 4.51,\n            \"distance\":
+        null,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 3,\n            \"depth\":
+        5.52,\n            \"distance\": null,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        4,\n            \"depth\": 6.52,\n            \"distance\": null,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": true\n          },\n
+        \         {\n            \"num\": 5,\n            \"depth\": 7.53,\n            \"distance\":
+        null,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 6,\n            \"depth\":
+        8.5,\n            \"distance\": null,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        7,\n            \"depth\": 9.51,\n            \"distance\": null,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 8,\n            \"depth\": 10.52,\n            \"distance\":
+        null,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 9,\n            \"depth\":
+        11.52,\n            \"distance\": null,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": true\n          },\n          {\n            \"num\":
+        10,\n            \"depth\": 12.53,\n            \"distance\": null,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 11,\n            \"depth\": 13.53,\n            \"distance\":
+        null,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 12,\n            \"depth\":
+        14.51,\n            \"distance\": null,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        13,\n            \"depth\": 15.51,\n            \"distance\": null,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 14,\n            \"depth\": 16.52,\n            \"distance\":
+        null,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 15,\n            \"depth\":
+        17.53,\n            \"distance\": null,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          }\n        ],\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/cb0102/bins.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"meters,
+        centimeters/second\",\n        \"HarmonicConstituents\": [\n          {\n
+        \           \"binNbr\": 4,\n            \"binDepth\": 6.52,\n            \"constNum\":
+        1,\n            \"constituentName\": \"M2\",\n            \"description\":
+        \"Principal lunar semidiurnal constituent\",\n            \"majorAmplitude\":
+        59.06,\n            \"majorPhase\": 254.1,\n            \"majorPhaseGMT\":
+        39.0,\n            \"minorAmplitude\": 1.65,\n            \"minorPhase\":
+        326.3,\n            \"minorPhaseGMT\": 111.2,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 2,\n            \"constituentName\": \"S2\",\n
+        \           \"description\": \"Principal solar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 11.78,\n            \"majorPhase\": 270.5,\n
+        \           \"majorPhaseGMT\": 60.5,\n            \"minorAmplitude\": 0.67,\n
+        \           \"minorPhase\": 307.2,\n            \"minorPhaseGMT\": 97.2,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 3,\n            \"constituentName\":
+        \"N2\",\n            \"description\": \"Larger lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 15.69,\n            \"majorPhase\":
+        231.6,\n            \"majorPhaseGMT\": 13.8,\n            \"minorAmplitude\":
+        0.93,\n            \"minorPhase\": 297.4,\n            \"minorPhaseGMT\":
+        79.6,\n            \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\":
+        -0.87,\n            \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 4,\n            \"constituentName\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        14.51,\n            \"majorPhase\": 124.0,\n            \"majorPhaseGMT\":
+        199.2,\n            \"minorAmplitude\": 2.68,\n            \"minorPhase\":
+        25.5,\n            \"minorPhaseGMT\": 100.7,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 5,\n            \"constituentName\": \"M4\",\n
+        \           \"description\": \"Shallow water overtides of principal lunar
+        constituent\",\n            \"majorAmplitude\": 0.41,\n            \"majorPhase\":
+        287.2,\n            \"majorPhaseGMT\": 217.0,\n            \"minorAmplitude\":
+        2.52,\n            \"minorPhase\": 110.3,\n            \"minorPhaseGMT\":
+        40.1,\n            \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\":
+        -0.87,\n            \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 6,\n            \"constituentName\":
+        \"O1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        12.5,\n            \"majorPhase\": 147.3,\n            \"majorPhaseGMT\":
+        217.0,\n            \"minorAmplitude\": 2.01,\n            \"minorPhase\":
+        62.8,\n            \"minorPhaseGMT\": 132.5,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 7,\n            \"constituentName\": \"M6\",\n
+        \           \"description\": \"Shallow water overtides of principal lunar
+        constituent\",\n            \"majorAmplitude\": 1.13,\n            \"majorPhase\":
+        341.2,\n            \"majorPhaseGMT\": 56.0,\n            \"minorAmplitude\":
+        1.59,\n            \"minorPhase\": 136.0,\n            \"minorPhaseGMT\":
+        210.8,\n            \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\":
+        -0.87,\n            \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 8,\n            \"constituentName\":
+        \"MK3\",\n            \"description\": \"Shallow water terdiurnal\",\n            \"majorAmplitude\":
+        0.72,\n            \"majorPhase\": 351.2,\n            \"majorPhaseGMT\":
+        211.3,\n            \"minorAmplitude\": 2.06,\n            \"minorPhase\":
+        24.6,\n            \"minorPhaseGMT\": 244.7,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 9,\n            \"constituentName\": \"S4\",\n
+        \           \"description\": \"Shallow water overtides of principal solar
+        constituent\",\n            \"majorAmplitude\": 0.62,\n            \"majorPhase\":
+        8.6,\n            \"majorPhaseGMT\": 308.6,\n            \"minorAmplitude\":
+        0.21,\n            \"minorPhase\": 193.9,\n            \"minorPhaseGMT\":
+        133.9,\n            \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\":
+        -0.87,\n            \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 10,\n            \"constituentName\":
+        \"MN4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.72,\n            \"majorPhase\": 210.4,\n
+        \           \"majorPhaseGMT\": 137.5,\n            \"minorAmplitude\": 0.93,\n
+        \           \"minorPhase\": 43.4,\n            \"minorPhaseGMT\": 330.5,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 11,\n            \"constituentName\":
+        \"NU2\",\n            \"description\": \"Larger lunar evectional constituent\",\n
+        \           \"majorAmplitude\": 2.52,\n            \"majorPhase\": 224.6,\n
+        \           \"majorPhaseGMT\": 7.2,\n            \"minorAmplitude\": 0.62,\n
+        \           \"minorPhase\": 5.9,\n            \"minorPhaseGMT\": 148.5,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 12,\n            \"constituentName\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"majorAmplitude\": 0.21,\n            \"majorPhase\":
+        3.3,\n            \"majorPhaseGMT\": 93.3,\n            \"minorAmplitude\":
+        0.41,\n            \"minorPhase\": 33.7,\n            \"minorPhaseGMT\": 123.7,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 13,\n            \"constituentName\":
+        \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"majorAmplitude\":
+        1.85,\n            \"majorPhase\": 227.1,\n            \"majorPhaseGMT\":
+        6.9,\n            \"minorAmplitude\": 0.36,\n            \"minorPhase\": 290.5,\n
+        \           \"minorPhaseGMT\": 70.3,\n            \"majorMeanSpeed\": 2.31,\n
+        \           \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n          },\n
+        \         {\n            \"binNbr\": 4,\n            \"binDepth\": 6.52,\n
+        \           \"constNum\": 14,\n            \"constituentName\": \"2N2\",\n
+        \           \"description\": \"Lunar elliptical semidiurnal second-order constituent\",\n
+        \           \"majorAmplitude\": 2.62,\n            \"majorPhase\": 212.5,\n
+        \           \"majorPhaseGMT\": 352.0,\n            \"minorAmplitude\": 0.46,\n
+        \           \"minorPhase\": 264.0,\n            \"minorPhaseGMT\": 43.5,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 15,\n            \"constituentName\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"majorAmplitude\":
+        1.18,\n            \"majorPhase\": 233.5,\n            \"majorPhaseGMT\":
+        314.2,\n            \"minorAmplitude\": 0.51,\n            \"minorPhase\":
+        239.5,\n            \"minorPhaseGMT\": 320.2,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 16,\n            \"constituentName\": \"LAM2\",\n
+        \           \"description\": \"Smaller lunar evectional constituent\",\n            \"majorAmplitude\":
+        1.23,\n            \"majorPhase\": 323.4,\n            \"majorPhaseGMT\":
+        110.7,\n            \"minorAmplitude\": 0.57,\n            \"minorPhase\":
+        199.1,\n            \"minorPhaseGMT\": 346.4,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 18,\n            \"constituentName\": \"M1\",\n
+        \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 2.06,\n            \"majorPhase\": 181.7,\n
+        \           \"majorPhaseGMT\": 254.2,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 149.6,\n            \"minorPhaseGMT\": 222.1,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 19,\n            \"constituentName\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.54,\n            \"majorPhase\": 155.3,\n
+        \           \"majorPhaseGMT\": 233.2,\n            \"minorAmplitude\": 0.31,\n
+        \           \"minorPhase\": 145.2,\n            \"minorPhaseGMT\": 223.1,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 25,\n            \"constituentName\":
+        \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.77,\n            \"majorPhase\": 189.9,\n
+        \           \"majorPhaseGMT\": 257.3,\n            \"minorAmplitude\": 0.67,\n
+        \           \"minorPhase\": 82.8,\n            \"minorPhaseGMT\": 150.2,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 26,\n            \"constituentName\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 4.42,\n            \"majorPhase\": 99.8,\n
+        \           \"majorPhaseGMT\": 166.8,\n            \"minorAmplitude\": 0.62,\n
+        \           \"minorPhase\": 71.6,\n            \"minorPhaseGMT\": 138.6,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 29,\n            \"constituentName\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"majorAmplitude\":
+        1.8,\n            \"majorPhase\": 288.4,\n            \"majorPhaseGMT\": 352.7,\n
+        \           \"minorAmplitude\": 0.72,\n            \"minorPhase\": 88.0,\n
+        \           \"minorPhaseGMT\": 152.3,\n            \"majorMeanSpeed\": 2.31,\n
+        \           \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n          },\n
+        \         {\n            \"binNbr\": 4,\n            \"binDepth\": 6.52,\n
+        \           \"constNum\": 30,\n            \"constituentName\": \"P1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"majorAmplitude\":
+        5.04,\n            \"majorPhase\": 163.0,\n            \"majorPhaseGMT\":
+        237.8,\n            \"minorAmplitude\": 1.08,\n            \"minorPhase\":
+        80.2,\n            \"minorPhaseGMT\": 155.0,\n            \"majorMeanSpeed\":
+        2.31,\n            \"minorMeanSpeed\": -0.87,\n            \"azi\": 294.7\n
+        \         },\n          {\n            \"binNbr\": 4,\n            \"binDepth\":
+        6.52,\n            \"constNum\": 31,\n            \"constituentName\": \"2SM2\",\n
+        \           \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 1.75,\n            \"majorPhase\": 219.8,\n
+        \           \"majorPhaseGMT\": 14.9,\n            \"minorAmplitude\": 0.46,\n
+        \           \"minorPhase\": 205.2,\n            \"minorPhaseGMT\": 0.3,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 32,\n            \"constituentName\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 1.18,\n            \"majorPhase\": 218.2,\n
+        \           \"majorPhaseGMT\": 75.6,\n            \"minorAmplitude\": 0.57,\n
+        \           \"minorPhase\": 304.7,\n            \"minorPhaseGMT\": 162.1,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 33,\n            \"constituentName\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 1.75,\n            \"majorPhase\":
+        322.0,\n            \"majorPhaseGMT\": 109.6,\n            \"minorAmplitude\":
+        1.9,\n            \"minorPhase\": 137.8,\n            \"minorPhaseGMT\": 285.4,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 34,\n            \"constituentName\":
+        \"2MK3\",\n            \"description\": \"Shallow water terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.41,\n            \"majorPhase\": 298.5,\n
+        \           \"majorPhaseGMT\": 153.1,\n            \"minorAmplitude\": 1.54,\n
+        \           \"minorPhase\": 70.9,\n            \"minorPhaseGMT\": 285.5,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 35,\n            \"constituentName\":
+        \"K2\",\n            \"description\": \"Lunisolar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.37,\n            \"majorPhase\": 266.1,\n
+        \           \"majorPhaseGMT\": 56.5,\n            \"minorAmplitude\": 0.57,\n
+        \           \"minorPhase\": 170.3,\n            \"minorPhaseGMT\": 320.7,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 36,\n            \"constituentName\":
+        \"M8\",\n            \"description\": \"Shallow water eighth diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.62,\n            \"majorPhase\": 176.2,\n
+        \           \"majorPhaseGMT\": 35.9,\n            \"minorAmplitude\": 0.21,\n
+        \           \"minorPhase\": 308.3,\n            \"minorPhaseGMT\": 168.0,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        4,\n            \"binDepth\": 6.52,\n            \"constNum\": 37,\n            \"constituentName\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.23,\n            \"majorPhase\": 249.4,\n
+        \           \"majorPhaseGMT\": 184.3,\n            \"minorAmplitude\": 1.08,\n
+        \           \"minorPhase\": 122.3,\n            \"minorPhaseGMT\": 57.2,\n
+        \           \"majorMeanSpeed\": 2.31,\n            \"minorMeanSpeed\": -0.87,\n
+        \           \"azi\": 294.7\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 1,\n            \"constituentName\":
+        \"M2\",\n            \"description\": \"Principal lunar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 59.88,\n            \"majorPhase\": 245.9,\n
+        \           \"majorPhaseGMT\": 30.8,\n            \"minorAmplitude\": 0.31,\n
+        \           \"minorPhase\": 307.7,\n            \"minorPhaseGMT\": 92.6,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 2,\n            \"constituentName\":
+        \"S2\",\n            \"description\": \"Principal solar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 12.55,\n            \"majorPhase\": 265.8,\n
+        \           \"majorPhaseGMT\": 55.8,\n            \"minorAmplitude\": 0.26,\n
+        \           \"minorPhase\": 284.7,\n            \"minorPhaseGMT\": 74.7,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 3,\n            \"constituentName\":
+        \"N2\",\n            \"description\": \"Larger lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 16.26,\n            \"majorPhase\":
+        226.9,\n            \"majorPhaseGMT\": 9.1,\n            \"minorAmplitude\":
+        0.21,\n            \"minorPhase\": 17.0,\n            \"minorPhaseGMT\": 159.2,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 4,\n            \"constituentName\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        11.83,\n            \"majorPhase\": 114.2,\n            \"majorPhaseGMT\":
+        189.4,\n            \"minorAmplitude\": 0.82,\n            \"minorPhase\":
+        102.3,\n            \"minorPhaseGMT\": 177.5,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 5,\n            \"constituentName\": \"M4\",\n
+        \           \"description\": \"Shallow water overtides of principal lunar
+        constituent\",\n            \"majorAmplitude\": 0.77,\n            \"majorPhase\":
+        76.2,\n            \"majorPhaseGMT\": 6.0,\n            \"minorAmplitude\":
+        2.11,\n            \"minorPhase\": 105.2,\n            \"minorPhaseGMT\":
+        35.0,\n            \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\":
+        -0.51,\n            \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 6,\n            \"constituentName\":
+        \"O1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        10.96,\n            \"majorPhase\": 135.6,\n            \"majorPhaseGMT\":
+        205.3,\n            \"minorAmplitude\": 0.51,\n            \"minorPhase\":
+        209.9,\n            \"minorPhaseGMT\": 279.6,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 7,\n            \"constituentName\": \"M6\",\n
+        \           \"description\": \"Shallow water overtides of principal lunar
+        constituent\",\n            \"majorAmplitude\": 1.03,\n            \"majorPhase\":
+        227.2,\n            \"majorPhaseGMT\": 302.0,\n            \"minorAmplitude\":
+        1.29,\n            \"minorPhase\": 26.2,\n            \"minorPhaseGMT\": 101.0,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 8,\n            \"constituentName\":
+        \"MK3\",\n            \"description\": \"Shallow water terdiurnal\",\n            \"majorAmplitude\":
+        0.67,\n            \"majorPhase\": 270.4,\n            \"majorPhaseGMT\":
+        130.5,\n            \"minorAmplitude\": 1.13,\n            \"minorPhase\":
+        346.1,\n            \"minorPhaseGMT\": 206.2,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 9,\n            \"constituentName\": \"S4\",\n
+        \           \"description\": \"Shallow water overtides of principal solar
+        constituent\",\n            \"majorAmplitude\": 0.36,\n            \"majorPhase\":
+        69.7,\n            \"majorPhaseGMT\": 9.7,\n            \"minorAmplitude\":
+        0.46,\n            \"minorPhase\": 104.0,\n            \"minorPhaseGMT\":
+        44.0,\n            \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\":
+        -0.51,\n            \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 10,\n            \"constituentName\":
+        \"MN4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.31,\n            \"majorPhase\": 152.2,\n
+        \           \"majorPhaseGMT\": 79.3,\n            \"minorAmplitude\": 0.98,\n
+        \           \"minorPhase\": 105.1,\n            \"minorPhaseGMT\": 32.2,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 11,\n            \"constituentName\":
+        \"NU2\",\n            \"description\": \"Larger lunar evectional constituent\",\n
+        \           \"majorAmplitude\": 2.47,\n            \"majorPhase\": 202.2,\n
+        \           \"majorPhaseGMT\": 344.8,\n            \"minorAmplitude\": 0.31,\n
+        \           \"minorPhase\": 239.9,\n            \"minorPhaseGMT\": 22.5,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 12,\n            \"constituentName\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"majorAmplitude\": 0.62,\n            \"majorPhase\":
+        73.3,\n            \"majorPhaseGMT\": 163.3,\n            \"minorAmplitude\":
+        0.26,\n            \"minorPhase\": 213.0,\n            \"minorPhaseGMT\":
+        303.0,\n            \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\":
+        -0.51,\n            \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 13,\n            \"constituentName\":
+        \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"majorAmplitude\":
+        2.16,\n            \"majorPhase\": 225.3,\n            \"majorPhaseGMT\":
+        5.1,\n            \"minorAmplitude\": 0.57,\n            \"minorPhase\": 170.5,\n
+        \           \"minorPhaseGMT\": 310.3,\n            \"majorMeanSpeed\": 11.47,\n
+        \           \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n          },\n
+        \         {\n            \"binNbr\": 9,\n            \"binDepth\": 11.52,\n
+        \           \"constNum\": 14,\n            \"constituentName\": \"2N2\",\n
+        \           \"description\": \"Lunar elliptical semidiurnal second-order constituent\",\n
+        \           \"majorAmplitude\": 2.73,\n            \"majorPhase\": 227.5,\n
+        \           \"majorPhaseGMT\": 7.0,\n            \"minorAmplitude\": 0.36,\n
+        \           \"minorPhase\": 322.4,\n            \"minorPhaseGMT\": 101.9,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 15,\n            \"constituentName\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"majorAmplitude\":
+        0.98,\n            \"majorPhase\": 191.3,\n            \"majorPhaseGMT\":
+        272.0,\n            \"minorAmplitude\": 0.77,\n            \"minorPhase\":
+        9.8,\n            \"minorPhaseGMT\": 90.5,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 16,\n            \"constituentName\": \"LAM2\",\n
+        \           \"description\": \"Smaller lunar evectional constituent\",\n            \"majorAmplitude\":
+        1.49,\n            \"majorPhase\": 290.7,\n            \"majorPhaseGMT\":
+        78.0,\n            \"minorAmplitude\": 0.26,\n            \"minorPhase\":
+        114.2,\n            \"minorPhaseGMT\": 261.5,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 18,\n            \"constituentName\": \"M1\",\n
+        \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 2.73,\n            \"majorPhase\": 163.5,\n
+        \           \"majorPhaseGMT\": 236.0,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 258.6,\n            \"minorPhaseGMT\": 331.1,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 19,\n            \"constituentName\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.59,\n            \"majorPhase\": 122.0,\n
+        \           \"majorPhaseGMT\": 199.9,\n            \"minorAmplitude\": 0.21,\n
+        \           \"minorPhase\": 134.3,\n            \"minorPhaseGMT\": 212.2,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 25,\n            \"constituentName\":
+        \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.1,\n            \"majorPhase\": 160.0,\n
+        \           \"majorPhaseGMT\": 227.4,\n            \"minorAmplitude\": 0.36,\n
+        \           \"minorPhase\": 296.5,\n            \"minorPhaseGMT\": 3.9,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 26,\n            \"constituentName\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 4.53,\n            \"majorPhase\": 90.0,\n
+        \           \"majorPhaseGMT\": 157.0,\n            \"minorAmplitude\": 0.51,\n
+        \           \"minorPhase\": 69.9,\n            \"minorPhaseGMT\": 136.9,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 29,\n            \"constituentName\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"majorAmplitude\":
+        1.18,\n            \"majorPhase\": 214.6,\n            \"majorPhaseGMT\":
+        278.9,\n            \"minorAmplitude\": 0.62,\n            \"minorPhase\":
+        122.0,\n            \"minorPhaseGMT\": 186.3,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 30,\n            \"constituentName\": \"P1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"majorAmplitude\":
+        5.04,\n            \"majorPhase\": 162.4,\n            \"majorPhaseGMT\":
+        237.2,\n            \"minorAmplitude\": 0.46,\n            \"minorPhase\":
+        81.8,\n            \"minorPhaseGMT\": 156.6,\n            \"majorMeanSpeed\":
+        11.47,\n            \"minorMeanSpeed\": -0.51,\n            \"azi\": 289.6\n
+        \         },\n          {\n            \"binNbr\": 9,\n            \"binDepth\":
+        11.52,\n            \"constNum\": 31,\n            \"constituentName\": \"2SM2\",\n
+        \           \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.87,\n            \"majorPhase\": 235.2,\n
+        \           \"majorPhaseGMT\": 30.3,\n            \"minorAmplitude\": 0.21,\n
+        \           \"minorPhase\": 172.0,\n            \"minorPhaseGMT\": 327.1,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 32,\n            \"constituentName\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 1.7,\n            \"majorPhase\": 189.1,\n
+        \           \"majorPhaseGMT\": 46.5,\n            \"minorAmplitude\": 0.72,\n
+        \           \"minorPhase\": 280.6,\n            \"minorPhaseGMT\": 138.0,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 33,\n            \"constituentName\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 1.9,\n            \"majorPhase\":
+        244.1,\n            \"majorPhaseGMT\": 31.7,\n            \"minorAmplitude\":
+        1.03,\n            \"minorPhase\": 32.4,\n            \"minorPhaseGMT\": 180.0,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 34,\n            \"constituentName\":
+        \"2MK3\",\n            \"description\": \"Shallow water terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.41,\n            \"majorPhase\": 280.8,\n
+        \           \"majorPhaseGMT\": 135.4,\n            \"minorAmplitude\": 1.34,\n
+        \           \"minorPhase\": 10.2,\n            \"minorPhaseGMT\": 224.8,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 35,\n            \"constituentName\":
+        \"K2\",\n            \"description\": \"Lunisolar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.57,\n            \"majorPhase\": 275.4,\n
+        \           \"majorPhaseGMT\": 65.8,\n            \"minorAmplitude\": 0.93,\n
+        \           \"minorPhase\": 128.1,\n            \"minorPhaseGMT\": 278.5,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 36,\n            \"constituentName\":
+        \"M8\",\n            \"description\": \"Shallow water eighth diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.46,\n            \"majorPhase\": 43.0,\n
+        \           \"majorPhaseGMT\": 262.7,\n            \"minorAmplitude\": 0.21,\n
+        \           \"minorPhase\": 239.3,\n            \"minorPhaseGMT\": 99.0,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        9,\n            \"binDepth\": 11.52,\n            \"constNum\": 37,\n            \"constituentName\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.34,\n            \"majorPhase\": 192.1,\n
+        \           \"majorPhaseGMT\": 127.0,\n            \"minorAmplitude\": 0.82,\n
+        \           \"minorPhase\": 139.0,\n            \"minorPhaseGMT\": 73.9,\n
+        \           \"majorMeanSpeed\": 11.47,\n            \"minorMeanSpeed\": -0.51,\n
+        \           \"azi\": 289.6\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 1,\n            \"constituentName\":
+        \"M2\",\n            \"description\": \"Principal lunar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 47.95,\n            \"majorPhase\": 235.5,\n
+        \           \"majorPhaseGMT\": 20.4,\n            \"minorAmplitude\": 3.24,\n
+        \           \"minorPhase\": 139.7,\n            \"minorPhaseGMT\": 284.6,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 2,\n            \"constituentName\":
+        \"S2\",\n            \"description\": \"Principal solar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 10.85,\n            \"majorPhase\": 260.4,\n
+        \           \"majorPhaseGMT\": 50.4,\n            \"minorAmplitude\": 0.46,\n
+        \           \"minorPhase\": 105.5,\n            \"minorPhaseGMT\": 255.5,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 3,\n            \"constituentName\":
+        \"N2\",\n            \"description\": \"Larger lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 12.45,\n            \"majorPhase\":
+        219.6,\n            \"majorPhaseGMT\": 1.8,\n            \"minorAmplitude\":
+        0.15,\n            \"minorPhase\": 38.9,\n            \"minorPhaseGMT\": 181.1,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 4,\n            \"constituentName\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        8.9,\n            \"majorPhase\": 92.0,\n            \"majorPhaseGMT\": 167.2,\n
+        \           \"minorAmplitude\": 2.01,\n            \"minorPhase\": 160.9,\n
+        \           \"minorPhaseGMT\": 236.1,\n            \"majorMeanSpeed\": 9.88,\n
+        \           \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n          },\n
+        \         {\n            \"binNbr\": 14,\n            \"binDepth\": 16.52,\n
+        \           \"constNum\": 5,\n            \"constituentName\": \"M4\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"majorAmplitude\":
+        2.42,\n            \"majorPhase\": 77.6,\n            \"majorPhaseGMT\": 7.4,\n
+        \           \"minorAmplitude\": 1.34,\n            \"minorPhase\": 162.3,\n
+        \           \"minorPhaseGMT\": 92.1,\n            \"majorMeanSpeed\": 9.88,\n
+        \           \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n          },\n
+        \         {\n            \"binNbr\": 14,\n            \"binDepth\": 16.52,\n
+        \           \"constNum\": 6,\n            \"constituentName\": \"O1\",\n            \"description\":
+        \"Lunar diurnal constituent\",\n            \"majorAmplitude\": 8.95,\n            \"majorPhase\":
+        116.6,\n            \"majorPhaseGMT\": 186.3,\n            \"minorAmplitude\":
+        1.9,\n            \"minorPhase\": 205.4,\n            \"minorPhaseGMT\": 275.1,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 7,\n            \"constituentName\":
+        \"M6\",\n            \"description\": \"Shallow water overtides of principal
+        lunar constituent\",\n            \"majorAmplitude\": 1.54,\n            \"majorPhase\":
+        202.8,\n            \"majorPhaseGMT\": 277.6,\n            \"minorAmplitude\":
+        0.36,\n            \"minorPhase\": 292.9,\n            \"minorPhaseGMT\":
+        7.7,\n            \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\":
+        -1.8,\n            \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 8,\n            \"constituentName\":
+        \"MK3\",\n            \"description\": \"Shallow water terdiurnal\",\n            \"majorAmplitude\":
+        0.87,\n            \"majorPhase\": 140.2,\n            \"majorPhaseGMT\":
+        0.3,\n            \"minorAmplitude\": 0.15,\n            \"minorPhase\": 23.0,\n
+        \           \"minorPhaseGMT\": 243.1,\n            \"majorMeanSpeed\": 9.88,\n
+        \           \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n          },\n
+        \         {\n            \"binNbr\": 14,\n            \"binDepth\": 16.52,\n
+        \           \"constNum\": 9,\n            \"constituentName\": \"S4\",\n            \"description\":
+        \"Shallow water overtides of principal solar constituent\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 55.1,\n            \"majorPhaseGMT\": 355.1,\n
+        \           \"minorAmplitude\": 0.15,\n            \"minorPhase\": 110.4,\n
+        \           \"minorPhaseGMT\": 50.4,\n            \"majorMeanSpeed\": 9.88,\n
+        \           \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n          },\n
+        \         {\n            \"binNbr\": 14,\n            \"binDepth\": 16.52,\n
+        \           \"constNum\": 10,\n            \"constituentName\": \"MN4\",\n
+        \           \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.03,\n            \"majorPhase\": 26.9,\n
+        \           \"majorPhaseGMT\": 314.0,\n            \"minorAmplitude\": 1.18,\n
+        \           \"minorPhase\": 134.1,\n            \"minorPhaseGMT\": 61.2,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 11,\n            \"constituentName\":
+        \"NU2\",\n            \"description\": \"Larger lunar evectional constituent\",\n
+        \           \"majorAmplitude\": 1.39,\n            \"majorPhase\": 175.6,\n
+        \           \"majorPhaseGMT\": 318.2,\n            \"minorAmplitude\": 0.62,\n
+        \           \"minorPhase\": 179.3,\n            \"minorPhaseGMT\": 321.9,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 12,\n            \"constituentName\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"majorAmplitude\": 0.05,\n            \"majorPhase\":
+        60.2,\n            \"majorPhaseGMT\": 150.2,\n            \"minorAmplitude\":
+        0.26,\n            \"minorPhase\": 327.1,\n            \"minorPhaseGMT\":
+        57.1,\n            \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\":
+        -1.8,\n            \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 13,\n            \"constituentName\":
+        \"MU2\",\n            \"description\": \"Variational constituent\",\n            \"majorAmplitude\":
+        1.54,\n            \"majorPhase\": 237.1,\n            \"majorPhaseGMT\":
+        16.9,\n            \"minorAmplitude\": 0.21,\n            \"minorPhase\":
+        21.2,\n            \"minorPhaseGMT\": 161.0,\n            \"majorMeanSpeed\":
+        9.88,\n            \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n
+        \         },\n          {\n            \"binNbr\": 14,\n            \"binDepth\":
+        16.52,\n            \"constNum\": 14,\n            \"constituentName\": \"2N2\",\n
+        \           \"description\": \"Lunar elliptical semidiurnal second-order constituent\",\n
+        \           \"majorAmplitude\": 2.26,\n            \"majorPhase\": 213.7,\n
+        \           \"majorPhaseGMT\": 353.2,\n            \"minorAmplitude\": 0.36,\n
+        \           \"minorPhase\": 276.2,\n            \"minorPhaseGMT\": 55.7,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 15,\n            \"constituentName\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"majorAmplitude\":
+        1.13,\n            \"majorPhase\": 214.3,\n            \"majorPhaseGMT\":
+        295.0,\n            \"minorAmplitude\": 0.51,\n            \"minorPhase\":
+        6.9,\n            \"minorPhaseGMT\": 87.6,\n            \"majorMeanSpeed\":
+        9.88,\n            \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n
+        \         },\n          {\n            \"binNbr\": 14,\n            \"binDepth\":
+        16.52,\n            \"constNum\": 16,\n            \"constituentName\": \"LAM2\",\n
+        \           \"description\": \"Smaller lunar evectional constituent\",\n            \"majorAmplitude\":
+        1.49,\n            \"majorPhase\": 260.7,\n            \"majorPhaseGMT\":
+        48.0,\n            \"minorAmplitude\": 0.31,\n            \"minorPhase\":
+        77.8,\n            \"minorPhaseGMT\": 225.1,\n            \"majorMeanSpeed\":
+        9.88,\n            \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n
+        \         },\n          {\n            \"binNbr\": 14,\n            \"binDepth\":
+        16.52,\n            \"constNum\": 18,\n            \"constituentName\": \"M1\",\n
+        \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.95,\n            \"majorPhase\": 156.7,\n
+        \           \"majorPhaseGMT\": 229.2,\n            \"minorAmplitude\": 0.36,\n
+        \           \"minorPhase\": 172.5,\n            \"minorPhaseGMT\": 245.0,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 19,\n            \"constituentName\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.34,\n            \"majorPhase\": 127.3,\n
+        \           \"majorPhaseGMT\": 205.2,\n            \"minorAmplitude\": 0.41,\n
+        \           \"minorPhase\": 237.1,\n            \"minorPhaseGMT\": 315.0,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 25,\n            \"constituentName\":
+        \"RHO\",\n            \"description\": \"Larger lunar evectional diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.57,\n            \"majorPhase\": 163.0,\n
+        \           \"majorPhaseGMT\": 230.4,\n            \"minorAmplitude\": 0.26,\n
+        \           \"minorPhase\": 312.4,\n            \"minorPhaseGMT\": 19.8,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 26,\n            \"constituentName\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 2.88,\n            \"majorPhase\": 92.0,\n
+        \           \"majorPhaseGMT\": 159.0,\n            \"minorAmplitude\": 0.72,\n
+        \           \"minorPhase\": 119.7,\n            \"minorPhaseGMT\": 186.7,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 29,\n            \"constituentName\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"majorAmplitude\":
+        1.23,\n            \"majorPhase\": 164.6,\n            \"majorPhaseGMT\":
+        228.9,\n            \"minorAmplitude\": 0.05,\n            \"minorPhase\":
+        270.0,\n            \"minorPhaseGMT\": 334.3,\n            \"majorMeanSpeed\":
+        9.88,\n            \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n
+        \         },\n          {\n            \"binNbr\": 14,\n            \"binDepth\":
+        16.52,\n            \"constNum\": 30,\n            \"constituentName\": \"P1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"majorAmplitude\":
+        3.96,\n            \"majorPhase\": 142.3,\n            \"majorPhaseGMT\":
+        217.1,\n            \"minorAmplitude\": 0.62,\n            \"minorPhase\":
+        226.7,\n            \"minorPhaseGMT\": 301.5,\n            \"majorMeanSpeed\":
+        9.88,\n            \"minorMeanSpeed\": -1.8,\n            \"azi\": 279.4\n
+        \         },\n          {\n            \"binNbr\": 14,\n            \"binDepth\":
+        16.52,\n            \"constNum\": 31,\n            \"constituentName\": \"2SM2\",\n
+        \           \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.57,\n            \"majorPhase\": 291.2,\n
+        \           \"majorPhaseGMT\": 86.3,\n            \"minorAmplitude\": 0.36,\n
+        \           \"minorPhase\": 154.9,\n            \"minorPhaseGMT\": 310.0,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 32,\n            \"constituentName\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.87,\n            \"majorPhase\": 128.8,\n
+        \           \"majorPhaseGMT\": 346.2,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 283.6,\n            \"minorPhaseGMT\": 141.0,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 33,\n            \"constituentName\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 1.9,\n            \"majorPhase\":
+        197.8,\n            \"majorPhaseGMT\": 345.4,\n            \"minorAmplitude\":
+        0.51,\n            \"minorPhase\": 327.8,\n            \"minorPhaseGMT\":
+        115.4,\n            \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\":
+        -1.8,\n            \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 34,\n            \"constituentName\":
+        \"2MK3\",\n            \"description\": \"Shallow water terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 1.23,\n            \"majorPhase\": 192.3,\n
+        \           \"majorPhaseGMT\": 46.9,\n            \"minorAmplitude\": 0.72,\n
+        \           \"minorPhase\": 58.0,\n            \"minorPhaseGMT\": 272.6,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 35,\n            \"constituentName\":
+        \"K2\",\n            \"description\": \"Lunisolar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.42,\n            \"majorPhase\": 247.6,\n
+        \           \"majorPhaseGMT\": 38.0,\n            \"minorAmplitude\": 0.67,\n
+        \           \"minorPhase\": 144.6,\n            \"minorPhaseGMT\": 295.0,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 36,\n            \"constituentName\":
+        \"M8\",\n            \"description\": \"Shallow water eighth diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.36,\n            \"majorPhase\": 31.7,\n
+        \           \"majorPhaseGMT\": 251.4,\n            \"minorAmplitude\": 0.36,\n
+        \           \"minorPhase\": 140.7,\n            \"minorPhaseGMT\": 0.4,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          },\n          {\n            \"binNbr\":
+        14,\n            \"binDepth\": 16.52,\n            \"constNum\": 37,\n            \"constituentName\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 1.49,\n            \"majorPhase\": 117.0,\n
+        \           \"majorPhaseGMT\": 51.9,\n            \"minorAmplitude\": 0.31,\n
+        \           \"minorPhase\": 180.9,\n            \"minorPhaseGMT\": 115.8,\n
+        \           \"majorMeanSpeed\": 9.88,\n            \"minorMeanSpeed\": -1.8,\n
+        \           \"azi\": 279.4\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/cb0102/harcon.json\"\n
+        \     },\n      \"height_from_bottom\": 0.0,\n      \"center_bin_1_dist\":
+        1.4,\n      \"id\": \"cb0102\",\n      \"name\": \"Cape Henry LB 2CH\",\n
+        \     \"lat\": 36.95940017700195,\n      \"lng\": -76.01280212402344,\n      \"affiliations\":
+        \"\",\n      \"portscode\": \"cs\",\n      \"products\": {\n        \"products\":
+        [\n          {\n            \"name\": \"Currents\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/cdata/DataPlot?id=cb0102\"\n          },\n
+        \         {\n            \"name\": \"Current Predictions\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/noaacurrents/Predictions?id=cb0102\"\n
+        \         },\n          {\n            \"name\": \"PORTS\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/ports/ports.html?id=cb0102\"\n          },\n
+        \         {\n            \"name\": \"OFS\",\n            \"value\": \"https://tidesandcurrents.noaa.gov/ofs/ofs_station.html?stname=Cape
+        Henry LB 2CH&ofs=cb&stnid=cb0102&subdomain=0\"\n          },\n          {\n
+        \           \"name\": \"PORT Code\",\n            \"value\": \"cs\"\n          },\n
+        \         {\n            \"name\": \"PORT Name\",\n            \"value\":
+        \"Chesapeake Bay South PORTS\"\n          },\n          {\n            \"name\":
+        \"OFS Code\",\n            \"value\": \"cb\"\n          },\n          {\n
+        \           \"name\": \"OFS Name\",\n            \"value\": \"Chesapeake Bay\"\n
+        \         }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/cb0102/products.json\"\n
+        \     },\n      \"disclaimers\": null,\n      \"notices\": null,\n      \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/cb0102.json\",\n
+        \     \"expand\": \"deployments,bins,harcon\",\n      \"tideType\": \"\"\n
+        \   }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Jul 2026 18:54:29 GMT
+      content-length:
+      - '71281'
+      x-amz-apigw-id:
+      - BVWb5FNnIAMESZg=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Thu, 30 Jul 2026 18:54:29 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - 7048bca0-a89c-4b23-9f1c-94211125e679
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20240101+00%3A00&end_date=20240102+00%3A00&station=cb0102&product=currents_predictions&application=noaa_coops&format=json&units=metric&time_zone=gmt&bin=4
+  response:
+    body:
+      string: '{"current_predictions":{"units":"meters, cm/s","cp":[{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:00","Depth":"6.7","Velocity_Major":-34.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:06","Depth":"6.7","Velocity_Major":-33.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:12","Depth":"6.7","Velocity_Major":-32.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:18","Depth":"6.7","Velocity_Major":-30.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:24","Depth":"6.7","Velocity_Major":-29.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:30","Depth":"6.7","Velocity_Major":-27.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:36","Depth":"6.7","Velocity_Major":-26.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:42","Depth":"6.7","Velocity_Major":-24.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:48","Depth":"6.7","Velocity_Major":-23},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        00:54","Depth":"6.7","Velocity_Major":-21.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:00","Depth":"6.7","Velocity_Major":-19.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:06","Depth":"6.7","Velocity_Major":-17.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:12","Depth":"6.7","Velocity_Major":-16.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:18","Depth":"6.7","Velocity_Major":-14.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:24","Depth":"6.7","Velocity_Major":-12.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:30","Depth":"6.7","Velocity_Major":-10.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:36","Depth":"6.7","Velocity_Major":-8.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:42","Depth":"6.7","Velocity_Major":-6.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:48","Depth":"6.7","Velocity_Major":-4.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        01:54","Depth":"6.7","Velocity_Major":-2.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:00","Depth":"6.7","Velocity_Major":-0.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:06","Depth":"6.7","Velocity_Major":1.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:12","Depth":"6.7","Velocity_Major":3.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:18","Depth":"6.7","Velocity_Major":5.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:24","Depth":"6.7","Velocity_Major":7.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:30","Depth":"6.7","Velocity_Major":10},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:36","Depth":"6.7","Velocity_Major":12.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:42","Depth":"6.7","Velocity_Major":14.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:48","Depth":"6.7","Velocity_Major":16.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        02:54","Depth":"6.7","Velocity_Major":19.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:00","Depth":"6.7","Velocity_Major":21.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:06","Depth":"6.7","Velocity_Major":24},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:12","Depth":"6.7","Velocity_Major":26.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:18","Depth":"6.7","Velocity_Major":28.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:24","Depth":"6.7","Velocity_Major":30.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:30","Depth":"6.7","Velocity_Major":33},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:36","Depth":"6.7","Velocity_Major":35.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:42","Depth":"6.7","Velocity_Major":37.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:48","Depth":"6.7","Velocity_Major":39},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        03:54","Depth":"6.7","Velocity_Major":40.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:00","Depth":"6.7","Velocity_Major":42.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:06","Depth":"6.7","Velocity_Major":43.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:12","Depth":"6.7","Velocity_Major":45.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:18","Depth":"6.7","Velocity_Major":46.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:24","Depth":"6.7","Velocity_Major":47.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:30","Depth":"6.7","Velocity_Major":48.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:36","Depth":"6.7","Velocity_Major":48.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:42","Depth":"6.7","Velocity_Major":49.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:48","Depth":"6.7","Velocity_Major":49.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        04:54","Depth":"6.7","Velocity_Major":49.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:00","Depth":"6.7","Velocity_Major":49.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:06","Depth":"6.7","Velocity_Major":49.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:12","Depth":"6.7","Velocity_Major":49.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:18","Depth":"6.7","Velocity_Major":49},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:24","Depth":"6.7","Velocity_Major":48.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:30","Depth":"6.7","Velocity_Major":47.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:36","Depth":"6.7","Velocity_Major":46.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:42","Depth":"6.7","Velocity_Major":46},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:48","Depth":"6.7","Velocity_Major":45},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        05:54","Depth":"6.7","Velocity_Major":43.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:00","Depth":"6.7","Velocity_Major":42.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:06","Depth":"6.7","Velocity_Major":41.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:12","Depth":"6.7","Velocity_Major":40},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:18","Depth":"6.7","Velocity_Major":38.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:24","Depth":"6.7","Velocity_Major":37.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:30","Depth":"6.7","Velocity_Major":35.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:36","Depth":"6.7","Velocity_Major":33.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:42","Depth":"6.7","Velocity_Major":32.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:48","Depth":"6.7","Velocity_Major":30.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        06:54","Depth":"6.7","Velocity_Major":28.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:00","Depth":"6.7","Velocity_Major":26.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:06","Depth":"6.7","Velocity_Major":24.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:12","Depth":"6.7","Velocity_Major":22.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:18","Depth":"6.7","Velocity_Major":20.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:24","Depth":"6.7","Velocity_Major":18.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:30","Depth":"6.7","Velocity_Major":16.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:36","Depth":"6.7","Velocity_Major":14.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:42","Depth":"6.7","Velocity_Major":12},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:48","Depth":"6.7","Velocity_Major":9.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        07:54","Depth":"6.7","Velocity_Major":7.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:00","Depth":"6.7","Velocity_Major":5.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:06","Depth":"6.7","Velocity_Major":2.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:12","Depth":"6.7","Velocity_Major":0.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:18","Depth":"6.7","Velocity_Major":-1.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:24","Depth":"6.7","Velocity_Major":-4.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:30","Depth":"6.7","Velocity_Major":-6.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:36","Depth":"6.7","Velocity_Major":-8.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:42","Depth":"6.7","Velocity_Major":-10.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:48","Depth":"6.7","Velocity_Major":-13.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        08:54","Depth":"6.7","Velocity_Major":-15.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:00","Depth":"6.7","Velocity_Major":-17.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:06","Depth":"6.7","Velocity_Major":-19.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:12","Depth":"6.7","Velocity_Major":-21.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:18","Depth":"6.7","Velocity_Major":-23.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:24","Depth":"6.7","Velocity_Major":-25.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:30","Depth":"6.7","Velocity_Major":-27.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:36","Depth":"6.7","Velocity_Major":-28.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:42","Depth":"6.7","Velocity_Major":-30.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:48","Depth":"6.7","Velocity_Major":-32.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        09:54","Depth":"6.7","Velocity_Major":-33.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:00","Depth":"6.7","Velocity_Major":-35.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:06","Depth":"6.7","Velocity_Major":-36.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:12","Depth":"6.7","Velocity_Major":-37.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:18","Depth":"6.7","Velocity_Major":-38.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:24","Depth":"6.7","Velocity_Major":-39.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:30","Depth":"6.7","Velocity_Major":-40.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:36","Depth":"6.7","Velocity_Major":-41.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:42","Depth":"6.7","Velocity_Major":-42.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:48","Depth":"6.7","Velocity_Major":-43.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        10:54","Depth":"6.7","Velocity_Major":-43.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:00","Depth":"6.7","Velocity_Major":-44},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:06","Depth":"6.7","Velocity_Major":-44.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:12","Depth":"6.7","Velocity_Major":-44.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:18","Depth":"6.7","Velocity_Major":-44.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:24","Depth":"6.7","Velocity_Major":-44.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:30","Depth":"6.7","Velocity_Major":-43.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:36","Depth":"6.7","Velocity_Major":-43.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:42","Depth":"6.7","Velocity_Major":-42.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:48","Depth":"6.7","Velocity_Major":-42.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        11:54","Depth":"6.7","Velocity_Major":-41.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:00","Depth":"6.7","Velocity_Major":-40.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:06","Depth":"6.7","Velocity_Major":-39.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:12","Depth":"6.7","Velocity_Major":-38.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:18","Depth":"6.7","Velocity_Major":-36.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:24","Depth":"6.7","Velocity_Major":-35.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:30","Depth":"6.7","Velocity_Major":-33.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:36","Depth":"6.7","Velocity_Major":-32.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:42","Depth":"6.7","Velocity_Major":-30.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:48","Depth":"6.7","Velocity_Major":-29},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        12:54","Depth":"6.7","Velocity_Major":-27.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:00","Depth":"6.7","Velocity_Major":-25.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:06","Depth":"6.7","Velocity_Major":-23.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:12","Depth":"6.7","Velocity_Major":-21.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:18","Depth":"6.7","Velocity_Major":-19.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:24","Depth":"6.7","Velocity_Major":-17.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:30","Depth":"6.7","Velocity_Major":-15.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:36","Depth":"6.7","Velocity_Major":-13.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:42","Depth":"6.7","Velocity_Major":-11.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:48","Depth":"6.7","Velocity_Major":-9.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        13:54","Depth":"6.7","Velocity_Major":-7.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:00","Depth":"6.7","Velocity_Major":-5.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:06","Depth":"6.7","Velocity_Major":-3.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:12","Depth":"6.7","Velocity_Major":-1.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:18","Depth":"6.7","Velocity_Major":0.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:24","Depth":"6.7","Velocity_Major":2.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:30","Depth":"6.7","Velocity_Major":5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:36","Depth":"6.7","Velocity_Major":7.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:42","Depth":"6.7","Velocity_Major":9.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:48","Depth":"6.7","Velocity_Major":11.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        14:54","Depth":"6.7","Velocity_Major":14},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:00","Depth":"6.7","Velocity_Major":16.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:06","Depth":"6.7","Velocity_Major":18.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:12","Depth":"6.7","Velocity_Major":21},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:18","Depth":"6.7","Velocity_Major":23.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:24","Depth":"6.7","Velocity_Major":25.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:30","Depth":"6.7","Velocity_Major":27.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:36","Depth":"6.7","Velocity_Major":30},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:42","Depth":"6.7","Velocity_Major":32.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:48","Depth":"6.7","Velocity_Major":34.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        15:54","Depth":"6.7","Velocity_Major":36.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:00","Depth":"6.7","Velocity_Major":38},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:06","Depth":"6.7","Velocity_Major":39.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:12","Depth":"6.7","Velocity_Major":41.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:18","Depth":"6.7","Velocity_Major":42.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:24","Depth":"6.7","Velocity_Major":44.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:30","Depth":"6.7","Velocity_Major":45.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:36","Depth":"6.7","Velocity_Major":46.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:42","Depth":"6.7","Velocity_Major":47.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:48","Depth":"6.7","Velocity_Major":48},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        16:54","Depth":"6.7","Velocity_Major":48.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:00","Depth":"6.7","Velocity_Major":48.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:06","Depth":"6.7","Velocity_Major":49},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:12","Depth":"6.7","Velocity_Major":49},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:18","Depth":"6.7","Velocity_Major":48.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:24","Depth":"6.7","Velocity_Major":48.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:30","Depth":"6.7","Velocity_Major":48},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:36","Depth":"6.7","Velocity_Major":47.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:42","Depth":"6.7","Velocity_Major":46.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:48","Depth":"6.7","Velocity_Major":45.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        17:54","Depth":"6.7","Velocity_Major":44.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:00","Depth":"6.7","Velocity_Major":43.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:06","Depth":"6.7","Velocity_Major":42.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:12","Depth":"6.7","Velocity_Major":41.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:18","Depth":"6.7","Velocity_Major":40.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:24","Depth":"6.7","Velocity_Major":38.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:30","Depth":"6.7","Velocity_Major":37.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:36","Depth":"6.7","Velocity_Major":35.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:42","Depth":"6.7","Velocity_Major":34.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:48","Depth":"6.7","Velocity_Major":32.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        18:54","Depth":"6.7","Velocity_Major":31},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:00","Depth":"6.7","Velocity_Major":29.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:06","Depth":"6.7","Velocity_Major":27.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:12","Depth":"6.7","Velocity_Major":26},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:18","Depth":"6.7","Velocity_Major":24.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:24","Depth":"6.7","Velocity_Major":22.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:30","Depth":"6.7","Velocity_Major":20.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:36","Depth":"6.7","Velocity_Major":18.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:42","Depth":"6.7","Velocity_Major":16.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:48","Depth":"6.7","Velocity_Major":14.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        19:54","Depth":"6.7","Velocity_Major":12.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:00","Depth":"6.7","Velocity_Major":11},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:06","Depth":"6.7","Velocity_Major":9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:12","Depth":"6.7","Velocity_Major":6.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:18","Depth":"6.7","Velocity_Major":4.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:24","Depth":"6.7","Velocity_Major":2.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:30","Depth":"6.7","Velocity_Major":0.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:36","Depth":"6.7","Velocity_Major":-1.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:42","Depth":"6.7","Velocity_Major":-3.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:48","Depth":"6.7","Velocity_Major":-5.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        20:54","Depth":"6.7","Velocity_Major":-7.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:00","Depth":"6.7","Velocity_Major":-9.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:06","Depth":"6.7","Velocity_Major":-11.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:12","Depth":"6.7","Velocity_Major":-13.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:18","Depth":"6.7","Velocity_Major":-15.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:24","Depth":"6.7","Velocity_Major":-17.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:30","Depth":"6.7","Velocity_Major":-18.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:36","Depth":"6.7","Velocity_Major":-20.7},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:42","Depth":"6.7","Velocity_Major":-22.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:48","Depth":"6.7","Velocity_Major":-24.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        21:54","Depth":"6.7","Velocity_Major":-25.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:00","Depth":"6.7","Velocity_Major":-27.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:06","Depth":"6.7","Velocity_Major":-28.8},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:12","Depth":"6.7","Velocity_Major":-30.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:18","Depth":"6.7","Velocity_Major":-31.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:24","Depth":"6.7","Velocity_Major":-32.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:30","Depth":"6.7","Velocity_Major":-34.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:36","Depth":"6.7","Velocity_Major":-35.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:42","Depth":"6.7","Velocity_Major":-36.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:48","Depth":"6.7","Velocity_Major":-37.4},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        22:54","Depth":"6.7","Velocity_Major":-38.3},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:00","Depth":"6.7","Velocity_Major":-39.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:06","Depth":"6.7","Velocity_Major":-39.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:12","Depth":"6.7","Velocity_Major":-40.6},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:18","Depth":"6.7","Velocity_Major":-41.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:24","Depth":"6.7","Velocity_Major":-41.5},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:30","Depth":"6.7","Velocity_Major":-41.9},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:36","Depth":"6.7","Velocity_Major":-42.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:42","Depth":"6.7","Velocity_Major":-42.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:48","Depth":"6.7","Velocity_Major":-42.2},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-01
+        23:54","Depth":"6.7","Velocity_Major":-42.1},{"meanFloodDir":297,"Bin":"4","meanEbbDir":112,"Time":"2024-01-02
+        00:00","Depth":"6.7","Velocity_Major":-41.8}]}}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Thu, 30 Jul 2026 18:54:30 GMT
+      content-length:
+      - '26593'
+      x-amz-apigw-id:
+      - BVWcCFXOoAMEItQ=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Thu, 30 Jul 2026 18:54:30 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - cab94c60-40b5-4756-ab6f-de9ae455c870
+    status:
+      code: 200
+      message: OK
+version: 1

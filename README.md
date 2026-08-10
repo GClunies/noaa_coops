@@ -132,12 +132,43 @@ t
 
 ![Water levels chart](https://user-images.githubusercontent.com/28986302/233147224-765fbe05-372c-40f3-8bbe-4102536e7ff3.png)
 
-Multi-month and multi-year ranges are automatically split into 31-day (or
-365-day for `hourly_height` / `high_low`) blocks and concatenated. If NOAA
-fails to return data for a block, you get a partial DataFrame along with a
-`RuntimeWarning` and a `df.attrs["missing_blocks"]` list describing which
-ranges failed — downstream code can detect gaps instead of silently averaging
-across them.
+Multi-month and multi-year ranges are automatically split into per-product
+blocks sized to NOAA's documented maximum range for that product (e.g. 4 days
+for `one_minute_water_level`, up to 10 years for `daily_mean`) and
+concatenated. If NOAA fails to return data for a block, you get a partial
+DataFrame along with a `RuntimeWarning` and a `df.attrs["missing_blocks"]`
+list describing which ranges failed — downstream code can detect gaps
+instead of silently averaging across them.
+
+### Daily max/min
+
+`daily_max_min` returns NOAA's daily extrema rather than the standard
+`v`/`s`/`f`/`q` shape used by most products. Each day contributes a `max`
+row and a `min` row, distinguished by the `record_type` column. `interval`
+defaults to `"h"` when omitted, to avoid mixing 6-minute and hourly data in
+the same DataFrame:
+
+```python
+>>> station = Station(id="9491094")
+>>> df = station.get_data(
+...     begin_date="20170101",
+...     end_date="20170102",
+...     product="daily_max_min",
+...     datum="STND",
+...     interval=6,
+...     units="english",
+...     time_zone="gmt",
+... )
+>>> df
+                    record_type  value  pcComplete  flag
+2017-01-01 09:42:00         max  9.951         100     0
+2017-01-02 22:24:00         max  8.488         100     0
+2017-01-01 23:54:00         min  8.425         100     0
+2017-01-02 17:24:00         min  7.198         100     0
+```
+
+Pass `max_min_type="max"` (or `"min"`) to fetch only one extreme instead of
+both.
 
 ### Supported arguments
 
@@ -147,12 +178,13 @@ the authoritative reference.
 
 | Argument    | Accepted values                                                                                                                                                                                     |
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `product`   | `water_level`, `hourly_height`, `high_low`, `daily_mean`, `monthly_mean`, `one_minute_water_level`, `predictions`, `datums`, `air_gap`, `air_temperature`, `water_temperature`, `wind`, `air_pressure`, `conductivity`, `visibility`, `humidity`, `salinity`, `currents`, `currents_predictions`, `ofs_water_level` |
+| `product`   | `water_level`, `hourly_height`, `high_low`, `daily_mean`, `daily_max_min`, `monthly_mean`, `one_minute_water_level`, `predictions`, `air_gap`, `air_temperature`, `water_temperature`, `wind`, `air_pressure`, `conductivity`, `visibility`, `humidity`, `salinity`, `currents`, `currents_predictions`, `ofs_water_level` |
 | `datum`     | `CRD`, `IGLD`, `LWD`, `MHHW`, `MHW`, `MTL`, `MSL`, `MLW`, `MLLW`, `NAVD`, `STND` (case-insensitive). **Required** for water-level products.                                                         |
 | `units`     | `metric`, `english`                                                                                                                                                                                 |
 | `time_zone` | `gmt`, `lst`, `lst_ldt`                                                                                                                                                                             |
 | `bin_num`   | Integer. **Required** for `currents` and `currents_predictions`. Find values on each station's info page.                                                                                           |
-| `interval`  | Product-specific. `predictions`: `h`, `1`, `5`, `10`, `15`, `30`, `60`, `hilo`. `currents`: `6`, `h`. `currents_predictions`: `h`, `1`, `6`, `10`, `30`, `60`, `max_slack`. Forbidden on `water_level`, `hourly_height`, `one_minute_water_level`. |
+| `interval`  | Product-specific. `predictions`: `h`, `1`, `5`, `10`, `15`, `30`, `60`, `hilo` (`interval="1"` caps the max request window at 30 days instead of the product's usual 365). `currents`: `6`, `h`. `currents_predictions`: `h`, `1`, `6`, `10`, `30`, `60`, `max_slack`. `daily_max_min`: `6`, `h`; defaults to `h` if omitted. Forbidden on `water_level`, `hourly_height`, `one_minute_water_level`. |
+| `max_min_type`| Parameter accepted only by `daily_max_min`, takes values max or min, returning those extremes 
 
 
 ### Derived products
