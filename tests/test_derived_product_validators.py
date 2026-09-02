@@ -60,6 +60,30 @@ BASE = {
         ({"product": "htf_annual", "year": 1750}, "Invalid year"),
         ({"product": "htf_annual", "year": 3000}, "Invalid year"),
         ({"product": "htf_annual", "year": "2020"}, "must be an int"),
+        ({"product": "sea_level_trends", "year": 2020}, "only supported for HTF"),
+        ({"product": "slr_projections", "year": 2020}, "only supported for HTF"),
+        ({"product": "sea_level_trends", "affil": "us"}, "Invalid affil"),
+        ({"product": "slr_projections", "affil": "bogus"}, "Invalid affil"),
+        (
+            {"product": "htf_annual", "affil": "US"},
+            "`affil` is only supported",
+        ),
+        (
+            {"product": "sea_level_trends", "projection_year": 2050},
+            "`projection_year` is only supported for slr_projections",
+        ),
+        (
+            {"product": "slr_projections", "projection_year": "2050"},
+            "`projection_year` must be an int",
+        ),
+        (
+            {"product": "sea_level_trends", "report_year": 2022},
+            "`report_year` is only supported",
+        ),
+        (
+            {"product": "slr_projections", "report_year": "2022"},
+            "`report_year` must be an int",
+        ),
     ],
 )
 def test_validate_params_rejects_bad_input(overrides, match):
@@ -99,6 +123,12 @@ def test_validate_params_rejects_bad_input(overrides, match):
         {"product": "extreme_water_levels", "level_type": "low"},
         {"product": "htf_annual", "year": 2001},
         {"product": "htf_annual", "year": 1800},
+        {"product": "sea_level_trends", "affil": "US"},
+        {"product": "slr_projections", "affil": "Global"},
+        {"product": "slr_projection_offsets", "affil": "US"},
+        {"product": "slr_projections", "projection_year": 2050},
+        {"product": "slr_projections", "report_year": 2022},
+        {"product": "slr_projection_offsets", "report_year": 2022},
     ],
 )
 def test_valid_derived_params_accepted(overrides):
