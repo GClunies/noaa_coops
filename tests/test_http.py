@@ -165,6 +165,66 @@ def test_make_api_request_passes_timeout() -> None:
     _assert_timeout(mock_get)
 
 
+@pytest.mark.parametrize(
+    ("record_key", "expected_type"),
+    [
+        pytest.param("dailyMax6Min", "max", id="maximum"),
+        pytest.param("dailyMin6Min", "min", id="minimum"),
+    ],
+)
+def test_daily_max_min_record_type_is_explicit(
+    record_key: str, expected_type: str
+) -> None:
+    """Known NOAA record keys map to their corresponding record type."""
+    station = _bare_station()
+    mock_resp = MagicMock(spec=requests.Response)
+    mock_resp.status_code = 200
+    mock_resp.json.return_value = {
+        "data": [
+            {
+                record_key: [
+                    {
+                        "date6Min": "2026-01-01",
+                        "time6Min": "00:00",
+                        "value6Min": "1.0",
+                    }
+                ]
+            }
+        ]
+    }
+
+    with patch("noaa_coops.station._SESSION.get", return_value=mock_resp):
+        result = station._make_api_request("https://example.com/data", "daily_max_min")
+
+    assert result.loc[0, "record_type"] == expected_type
+
+
+def test_daily_max_min_rejects_an_unexpected_record_key() -> None:
+    """Unknown NOAA keys fail explicitly instead of being mislabeled as maxima."""
+    station = _bare_station()
+    mock_resp = MagicMock(spec=requests.Response)
+    mock_resp.status_code = 200
+    mock_resp.json.return_value = {
+        "data": [
+            {
+                "dailyAverage6Min": [
+                    {
+                        "date6Min": "2026-01-01",
+                        "time6Min": "00:00",
+                        "value6Min": "1.0",
+                    }
+                ]
+            }
+        ]
+    }
+
+    with (
+        patch("noaa_coops.station._SESSION.get", return_value=mock_resp),
+        pytest.raises(KeyError, match="Unexpected daily_max_min record key"),
+    ):
+        station._make_api_request("https://example.com/data", "daily_max_min")
+
+
 # ---------------------------------------------------------------------------
 # Narrow-exception tests (no more bare `except:`)
 # ---------------------------------------------------------------------------
