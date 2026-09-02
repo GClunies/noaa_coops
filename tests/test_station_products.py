@@ -141,3 +141,39 @@ def test_datums_rejected_by_get_data() -> None:
             product="datums",
             datum="MLLW",
         )
+
+
+def test_daily_max_min_rejects_unexpected_record_key(monkeypatch) -> None:
+    """The daily_max_min flattener maps 'dailyMax'/'dailyMin' keys to
+    record_type 'max'/'min'. Any other key must raise a clear KeyError
+    instead of silently defaulting to 'max'.
+    """
+    from noaa_coops import station as station_mod
+
+    class FakeResponse:
+        status_code = 200
+
+        @staticmethod
+        def json() -> dict:
+            return {
+                "data": [
+                    {
+                        "dailyWeird": [
+                            {
+                                "dateHourly": "2015-01-01",
+                                "timeHourly": "09:00",
+                                "valueHourly": 1.0,
+                                "pcCompleteHourly": 100,
+                                "flagHourly": 0,
+                            }
+                        ]
+                    }
+                ]
+            }
+
+    monkeypatch.setattr(
+        station_mod._SESSION, "get", lambda url, timeout: FakeResponse()
+    )
+    station = nc.Station.__new__(nc.Station)  # skip metadata fetch in __init__
+    with pytest.raises(KeyError, match="Unexpected record key 'dailyWeird'"):
+        station._make_api_request("http://fake", product="daily_max_min")
