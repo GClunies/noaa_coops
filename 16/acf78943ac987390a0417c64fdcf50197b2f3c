@@ -1,0 +1,16 @@
+noaa_coops/_derived.py
+  h_54e5c83907823d 460-461,463,465
+tests/test_derived_products.py
+  h_54e5c83907823d 179-180
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "16acf78943ac987390a0417c64fdcf50197b2f3c",
+  "prompts": {},
+  "humans": {
+    "h_54e5c83907823d": {
+      "author": "Gregory Clunies <greg.clunies@gmail.com>"
+    }
+  }
+}
