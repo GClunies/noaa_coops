@@ -457,12 +457,12 @@ def parse_dpapi_response(
     everything else falls through to a generic json_normalize on whichever
     top-level key holds a list.
     """
-    product = _to_api_product(product)
-    if product == "extrfa":
+    api_product = _to_api_product(product)
+    if api_product == "extrfa":
         df = _parse_extrfa(payload)
-    elif product == "sealvltrends":
+    elif api_product == "sealvltrends":
         df = _parse_sealvltrends(payload, detail)
-    elif product == "extremewaterlevels":
+    elif api_product == "extremewaterlevels":
         df = _parse_extremewaterlevels(payload, level_type)
     else:
         top_level_key = next(

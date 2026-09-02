@@ -176,5 +176,5 @@ def test_parse_dpapi_response_listless_payload_raises_coops_api_error():
     """A payload with no list value raises COOPSAPIError, not StopIteration."""
     payload = {"error": {"message": "No data was found"}, "count": 0}
 
-    with pytest.raises(COOPSAPIError, match=r"high_tide_flooding_annual.*error.*count"):
-        parse_dpapi_response(payload, product="high_tide_flooding_annual")
+    with pytest.raises(COOPSAPIError, match=r"slr_projection_offsets.*error.*count"):
+        parse_dpapi_response(payload, product="slr_projection_offsets")
