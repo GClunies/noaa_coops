@@ -1,0 +1,14 @@
+examples/noaa_coops_new_features_tutorial.ipynb
+  h_54e5c83907823d 10,42,75,78,108,111,123,126,148,151,167,170,187,190,198,201,217,220,242,245,262,265,285,288,297,300,309,312,321,324
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "0bea0998a8f0b8d99c4467cf16952f63fd3d795d",
+  "prompts": {},
+  "humans": {
+    "h_54e5c83907823d": {
+      "author": "Gregory Clunies <greg.clunies@gmail.com>"
+    }
+  }
+}
