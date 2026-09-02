@@ -1,0 +1,317 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 1,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"project\": \"Boston Harbor PORTS\",\n      \"deployed\": \"2025-11-17
+        00:02:00\",\n      \"retrieved\": \"\",\n      \"timezone_offset\": \"-5\",\n
+        \     \"observedst\": true,\n      \"project_type\": \"PORTS\",\n      \"noaachart\":
+        null,\n      \"deployments\": {\n        \"units\": \"meters\",\n        \"flood_direction_degrees\":
+        310.0,\n        \"orientation\": \"side\",\n        \"sensor_depth\": 8.5,\n
+        \       \"depth\": 12.5,\n        \"measured_depth\": 12.5,\n        \"height_from_bottom\":
+        4.0,\n        \"sample_interval\": 360,\n        \"ping_int\": null,\n        \"first_good_data\":
+        \"\",\n        \"last_good_data\": \"\",\n        \"deployments\": [\n          {\n
+        \           \"id\": \"bh0101\",\n            \"deployed\": \"2025-11-17 00:02:00\",\n
+        \           \"retrieved\": \"\",\n            \"lat\": 42.34086227416992,\n
+        \           \"lng\": -71.01233673095703,\n            \"instrument_id\": 52259,\n
+        \           \"instrument_desc\": \"Sontek ADP/Nortek AWAC\",\n            \"real_time_bin\":
+        null,\n            \"serial_num\": \"*3\",\n            \"frequency\": \"250\",\n
+        \           \"nbr_beams\": \"2\"\n          },\n          {\n            \"id\":
+        \"bh0101\",\n            \"deployed\": \"2025-11-17 00:00:00\",\n            \"retrieved\":
+        \"2025-11-17 00:00:00\",\n            \"lat\": 42.34086227416992,\n            \"lng\":
+        -71.01233673095703,\n            \"instrument_id\": 26984,\n            \"instrument_desc\":
+        \"Sontek ADP/Nortek AWAC\",\n            \"real_time_bin\": null,\n            \"serial_num\":
+        \"*2\",\n            \"frequency\": \"250\",\n            \"nbr_beams\": \"2\"\n
+        \         }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/deployments.json\"\n
+        \     },\n      \"bins\": {\n        \"nbr_of_bins\": 23,\n        \"max_pics_bin\":
+        23,\n        \"units\": \"meters\",\n        \"bin_size\": 4.0,\n        \"center_bin_1_dist\":
+        6.0,\n        \"real_time_bin\": 17,\n        \"bins\": [\n          {\n            \"num\":
+        1,\n            \"depth\": null,\n            \"distance\": 6.0,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 2,\n            \"depth\": null,\n            \"distance\":
+        10.0,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 3,\n            \"depth\":
+        null,\n            \"distance\": 13.99,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        4,\n            \"depth\": null,\n            \"distance\": 18.01,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 5,\n            \"depth\": null,\n            \"distance\":
+        22.01,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 6,\n            \"depth\":
+        null,\n            \"distance\": 26.0,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        7,\n            \"depth\": null,\n            \"distance\": 29.99,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 8,\n            \"depth\": null,\n            \"distance\":
+        33.99,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 9,\n            \"depth\":
+        null,\n            \"distance\": 38.01,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        10,\n            \"depth\": null,\n            \"distance\": 42.0,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 11,\n            \"depth\": null,\n            \"distance\":
+        45.99,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          },\n          {\n            \"num\": 12,\n            \"depth\":
+        null,\n            \"distance\": 49.99,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        13,\n            \"depth\": null,\n            \"distance\": 54.01,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 14,\n            \"depth\": null,\n            \"distance\":
+        58.0,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 15,\n            \"depth\":
+        null,\n            \"distance\": 62.0,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        16,\n            \"depth\": null,\n            \"distance\": 65.99,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 17,\n            \"depth\": null,\n            \"distance\":
+        70.01,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 18,\n            \"depth\":
+        null,\n            \"distance\": 74.01,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        19,\n            \"depth\": null,\n            \"distance\": 78.0,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 20,\n            \"depth\": null,\n            \"distance\":
+        81.99,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        true\n          },\n          {\n            \"num\": 21,\n            \"depth\":
+        null,\n            \"distance\": 86.02,\n            \"qc_flag\": 1,\n            \"ping_int\":
+        null,\n            \"is_pics\": false\n          },\n          {\n            \"num\":
+        22,\n            \"depth\": null,\n            \"distance\": 90.01,\n            \"qc_flag\":
+        1,\n            \"ping_int\": null,\n            \"is_pics\": false\n          },\n
+        \         {\n            \"num\": 23,\n            \"depth\": null,\n            \"distance\":
+        94.0,\n            \"qc_flag\": 1,\n            \"ping_int\": null,\n            \"is_pics\":
+        false\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/bins.json\"\n
+        \     },\n      \"harmonicConstituents\": {\n        \"units\": \"meters,
+        centimeters/second\",\n        \"HarmonicConstituents\": [\n          {\n
+        \           \"binNbr\": 17,\n            \"binDepth\": 70.01,\n            \"constNum\":
+        1,\n            \"constituentName\": \"M2\",\n            \"description\":
+        \"Principal lunar semidiurnal constituent\",\n            \"majorAmplitude\":
+        18.62,\n            \"majorPhase\": 253.3,\n            \"majorPhaseGMT\":
+        38.2,\n            \"minorAmplitude\": 0.36,\n            \"minorPhase\":
+        328.4,\n            \"minorPhaseGMT\": 113.3,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 2,\n            \"constituentName\": \"S2\",\n
+        \           \"description\": \"Principal solar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.88,\n            \"majorPhase\": 244.5,\n
+        \           \"majorPhaseGMT\": 34.5,\n            \"minorAmplitude\": 0.26,\n
+        \           \"minorPhase\": 86.6,\n            \"minorPhaseGMT\": 236.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 3,\n            \"constituentName\":
+        \"N2\",\n            \"description\": \"Larger lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 4.78,\n            \"majorPhase\":
+        210.8,\n            \"majorPhaseGMT\": 353.0,\n            \"minorAmplitude\":
+        0.0,\n            \"minorPhase\": 156.9,\n            \"minorPhaseGMT\": 0.0,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 4,\n            \"constituentName\":
+        \"K1\",\n            \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        2.47,\n            \"majorPhase\": 22.6,\n            \"majorPhaseGMT\": 97.8,\n
+        \           \"minorAmplitude\": 0.62,\n            \"minorPhase\": 233.5,\n
+        \           \"minorPhaseGMT\": 308.7,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 5,\n            \"constituentName\": \"M4\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 287.5,\n            \"majorPhaseGMT\":
+        217.3,\n            \"minorAmplitude\": 0.21,\n            \"minorPhase\":
+        239.0,\n            \"minorPhaseGMT\": 168.8,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 6,\n            \"constituentName\": \"O1\",\n
+        \           \"description\": \"Lunar diurnal constituent\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 86.8,\n            \"majorPhaseGMT\": 156.5,\n
+        \           \"minorAmplitude\": 0.1,\n            \"minorPhase\": 174.2,\n
+        \           \"minorPhaseGMT\": 243.9,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 7,\n            \"constituentName\": \"M6\",\n            \"description\":
+        \"Shallow water overtides of principal lunar constituent\",\n            \"majorAmplitude\":
+        0.98,\n            \"majorPhase\": 128.5,\n            \"majorPhaseGMT\":
+        203.3,\n            \"minorAmplitude\": 0.15,\n            \"minorPhase\":
+        314.9,\n            \"minorPhaseGMT\": 29.7,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 8,\n            \"constituentName\": \"MK3\",\n
+        \           \"description\": \"Shallow water terdiurnal\",\n            \"majorAmplitude\":
+        0.31,\n            \"majorPhase\": 90.8,\n            \"majorPhaseGMT\": 310.9,\n
+        \           \"minorAmplitude\": 0.1,\n            \"minorPhase\": 37.9,\n
+        \           \"minorPhaseGMT\": 258.0,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 9,\n            \"constituentName\": \"S4\",\n            \"description\":
+        \"Shallow water overtides of principal solar constituent\",\n            \"majorAmplitude\":
+        0.26,\n            \"majorPhase\": 306.3,\n            \"majorPhaseGMT\":
+        246.3,\n            \"minorAmplitude\": 0.05,\n            \"minorPhase\":
+        180.5,\n            \"minorPhaseGMT\": 120.5,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 10,\n            \"constituentName\": \"MN4\",\n
+        \           \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.1,\n            \"majorPhase\": 126.0,\n
+        \           \"majorPhaseGMT\": 53.1,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 229.5,\n            \"minorPhaseGMT\": 156.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 12,\n            \"constituentName\":
+        \"S6\",\n            \"description\": \"Shallow water overtides of principal
+        solar constituent\",\n            \"majorAmplitude\": 0.21,\n            \"majorPhase\":
+        57.1,\n            \"majorPhaseGMT\": 147.1,\n            \"minorAmplitude\":
+        0.1,\n            \"minorPhase\": 97.0,\n            \"minorPhaseGMT\": 187.0,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 14,\n            \"constituentName\":
+        \"2N2\",\n            \"description\": \"Lunar elliptical semidiurnal second-order
+        constituent\",\n            \"majorAmplitude\": 1.8,\n            \"majorPhase\":
+        191.5,\n            \"majorPhaseGMT\": 331.0,\n            \"minorAmplitude\":
+        0.21,\n            \"minorPhase\": 313.2,\n            \"minorPhaseGMT\":
+        92.7,\n            \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\":
+        -0.77,\n            \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 15,\n            \"constituentName\":
+        \"OO1\",\n            \"description\": \"Lunar diurnal\",\n            \"majorAmplitude\":
+        0.26,\n            \"majorPhase\": 75.3,\n            \"majorPhaseGMT\": 156.0,\n
+        \           \"minorAmplitude\": 0.05,\n            \"minorPhase\": 118.3,\n
+        \           \"minorPhaseGMT\": 199.0,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 18,\n            \"constituentName\": \"M1\",\n
+        \           \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.57,\n            \"majorPhase\": 193.0,\n
+        \           \"majorPhaseGMT\": 265.5,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 19.7,\n            \"minorPhaseGMT\": 92.2,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 19,\n            \"constituentName\":
+        \"J1\",\n            \"description\": \"Smaller lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.1,\n            \"majorPhase\": 31.5,\n
+        \           \"majorPhaseGMT\": 109.4,\n            \"minorAmplitude\": 0.05,\n
+        \           \"minorPhase\": 244.0,\n            \"minorPhaseGMT\": 321.9,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 26,\n            \"constituentName\":
+        \"Q1\",\n            \"description\": \"Larger lunar elliptic diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.26,\n            \"majorPhase\": 33.9,\n
+        \           \"majorPhaseGMT\": 100.9,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 174.4,\n            \"minorPhaseGMT\": 241.4,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 29,\n            \"constituentName\":
+        \"2Q1\",\n            \"description\": \"Larger elliptic diurnal\",\n            \"majorAmplitude\":
+        0.41,\n            \"majorPhase\": 271.0,\n            \"majorPhaseGMT\":
+        335.3,\n            \"minorAmplitude\": 0.1,\n            \"minorPhase\":
+        277.9,\n            \"minorPhaseGMT\": 342.2,\n            \"majorMeanSpeed\":
+        2.78,\n            \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n
+        \         },\n          {\n            \"binNbr\": 17,\n            \"binDepth\":
+        70.01,\n            \"constNum\": 30,\n            \"constituentName\": \"P1\",\n
+        \           \"description\": \"Solar diurnal constituent\",\n            \"majorAmplitude\":
+        2.31,\n            \"majorPhase\": 68.8,\n            \"majorPhaseGMT\": 143.6,\n
+        \           \"minorAmplitude\": 0.72,\n            \"minorPhase\": 299.5,\n
+        \           \"minorPhaseGMT\": 14.3,\n            \"majorMeanSpeed\": 2.78,\n
+        \           \"minorMeanSpeed\": -0.77,\n            \"azi\": 305.5\n          },\n
+        \         {\n            \"binNbr\": 17,\n            \"binDepth\": 70.01,\n
+        \           \"constNum\": 31,\n            \"constituentName\": \"2SM2\",\n
+        \           \"description\": \"Shallow water semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.46,\n            \"majorPhase\": 241.4,\n
+        \           \"majorPhaseGMT\": 36.5,\n            \"minorAmplitude\": 0.1,\n
+        \           \"minorPhase\": 126.5,\n            \"minorPhaseGMT\": 281.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 32,\n            \"constituentName\":
+        \"M3\",\n            \"description\": \"Lunar terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.15,\n            \"majorPhase\": 265.8,\n
+        \           \"majorPhaseGMT\": 123.2,\n            \"minorAmplitude\": 0.05,\n
+        \           \"minorPhase\": 86.6,\n            \"minorPhaseGMT\": 304.0,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 33,\n            \"constituentName\":
+        \"L2\",\n            \"description\": \"Smaller lunar elliptic semidiurnal
+        constituent\",\n            \"majorAmplitude\": 0.72,\n            \"majorPhase\":
+        166.8,\n            \"majorPhaseGMT\": 314.4,\n            \"minorAmplitude\":
+        0.15,\n            \"minorPhase\": 358.2,\n            \"minorPhaseGMT\":
+        145.8,\n            \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\":
+        -0.77,\n            \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 34,\n            \"constituentName\":
+        \"2MK3\",\n            \"description\": \"Shallow water terdiurnal constituent\",\n
+        \           \"majorAmplitude\": 0.87,\n            \"majorPhase\": 304.8,\n
+        \           \"majorPhaseGMT\": 159.4,\n            \"minorAmplitude\": 0.05,\n
+        \           \"minorPhase\": 307.5,\n            \"minorPhaseGMT\": 162.1,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 35,\n            \"constituentName\":
+        \"K2\",\n            \"description\": \"Lunisolar semidiurnal constituent\",\n
+        \           \"majorAmplitude\": 2.26,\n            \"majorPhase\": 291.3,\n
+        \           \"majorPhaseGMT\": 81.7,\n            \"minorAmplitude\": 0.21,\n
+        \           \"minorPhase\": 199.3,\n            \"minorPhaseGMT\": 349.7,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 36,\n            \"constituentName\":
+        \"M8\",\n            \"description\": \"Shallow water eighth diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.77,\n            \"majorPhase\": 283.6,\n
+        \           \"majorPhaseGMT\": 143.3,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 282.9,\n            \"minorPhaseGMT\": 142.6,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          },\n          {\n            \"binNbr\":
+        17,\n            \"binDepth\": 70.01,\n            \"constNum\": 37,\n            \"constituentName\":
+        \"MS4\",\n            \"description\": \"Shallow water quarter diurnal constituent\",\n
+        \           \"majorAmplitude\": 0.41,\n            \"majorPhase\": 229.6,\n
+        \           \"majorPhaseGMT\": 164.5,\n            \"minorAmplitude\": 0.15,\n
+        \           \"minorPhase\": 251.0,\n            \"minorPhaseGMT\": 185.9,\n
+        \           \"majorMeanSpeed\": 2.78,\n            \"minorMeanSpeed\": -0.77,\n
+        \           \"azi\": 305.5\n          }\n        ],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/harcon.json\"\n
+        \     },\n      \"height_from_bottom\": 4.0,\n      \"center_bin_1_dist\":
+        6.0,\n      \"id\": \"bh0101\",\n      \"name\": \"Castle Island\",\n      \"lat\":
+        42.34086227416992,\n      \"lng\": -71.01233673095703,\n      \"affiliations\":
+        \"\",\n      \"portscode\": \"bh\",\n      \"products\": {\n        \"products\":
+        [\n          {\n            \"name\": \"Currents\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/cdata/DataPlot?id=bh0101\"\n          },\n
+        \         {\n            \"name\": \"Current Predictions\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/noaacurrents/Predictions?id=bh0101\"\n
+        \         },\n          {\n            \"name\": \"PORTS\",\n            \"value\":
+        \"https://tidesandcurrents.noaa.gov/ports/ports.html?id=bh0101\"\n          },\n
+        \         {\n            \"name\": \"PORT Code\",\n            \"value\":
+        \"bh\"\n          },\n          {\n            \"name\": \"PORT Name\",\n
+        \           \"value\": \"Boston Harbor PORTS\"\n          }\n        ],\n
+        \       \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101/products.json\"\n
+        \     },\n      \"disclaimers\": null,\n      \"notices\": null,\n      \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/bh0101.json\",\n
+        \     \"expand\": \"deployments,bins,harcon\",\n      \"tideType\": \"\"\n
+        \   }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 31 Jul 2026 08:02:09 GMT
+      content-length:
+      - '20912'
+      x-amz-apigw-id:
+      - BXJ0TGr1oAMEo4g=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Date:
+      - Fri, 31 Jul 2026 08:02:09 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - af6ae8a0-eb79-4091-9c6e-c7cdd5299dc7
+    status:
+      code: 200
+      message: OK
+version: 1

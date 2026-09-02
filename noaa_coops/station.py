@@ -17,12 +17,17 @@ import pandas as pd
 import requests
 import zeep
 
+from noaa_coops._derived import get_derived_product as _get_derived_product
 from noaa_coops._endpoints import DATA_GETTER_URL, INVENTORY_WSDL_URL
 from noaa_coops._exceptions import COOPSAPIError
 from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION, _SOAP_SESSION
 from noaa_coops._metadata import populate_metadata
 from noaa_coops._parsing import normalize_data_frame, parse_known_date_formats
-from noaa_coops._products import build_request_params, validate_params
+from noaa_coops._products import (
+    build_request_params,
+    get_max_days,
+    validate_params,
+)
 
 # Back-compat re-exports (callers did `from noaa_coops.station import COOPSAPIError`
 # for years; keep that path working after the Tier 4 split).
@@ -43,13 +48,15 @@ class Station:
 
     Constructs by ID and immediately fetches metadata. Users then call
     :meth:`get_data` to retrieve time-series observations/predictions,
-    or read any of the many metadata attributes populated during
-    construction.
+    :meth:`get_derived_product` for computed/aggregate products like sea
+    level trends and high-tide-flooding counts, or read any of the many
+    metadata attributes populated during construction.
 
     Supported NOAA APIs:
         - Data retrieval — https://tidesandcurrents.noaa.gov/api/
         - Metadata (mdapi) — https://tidesandcurrents.noaa.gov/mdapi/latest/
         - Data inventory (SOAP) — https://opendap.co-ops.nos.noaa.gov/axis/
+        - Derived products (DPAPI) — https://api.tidesandcurrents.noaa.gov/dpapi/prod/
     """
 
     # Per-product SOAP data inventory: {product_name: {"start_date": ..., "end_date": ...}}
@@ -160,6 +167,7 @@ class Station:
         begin_date: str,
         end_date: str,
         product: str,
+        max_min_type: Optional[str] = None,
         datum: Optional[str] = None,
         bin_num: Optional[int] = None,
         interval: Optional[Union[str, int]] = None,
@@ -174,6 +182,8 @@ class Station:
             end_date: End date, same formats as ``begin_date``.
             product: Data product name. See
                 https://api.tidesandcurrents.noaa.gov/api/prod/#products.
+            max_min_type: Optional; ``"max"`` or ``"min"``. Only valid when
+                ``product="daily_max_min"``.
             datum: Required for water-level products.
             bin_num: Required for ``currents`` / ``currents_predictions``.
             interval: Optional; allowed values depend on ``product``.
@@ -191,21 +201,26 @@ class Station:
             ``product``. When partial failures occurred,
             ``df.attrs["missing_blocks"]`` lists them.
         """
-        validate_params(product, datum, bin_num, interval, units, time_zone)
+        validate_params(
+            product, max_min_type, datum, bin_num, interval, units, time_zone
+        )
 
         begin_dt, begin_str = parse_known_date_formats(begin_date)
         end_dt, end_str = parse_known_date_formats(end_date)
         delta = end_dt - begin_dt
 
-        single_block = delta.days <= 31 or (
-            delta.days <= 365 and product in ("hourly_height", "high_low")
-        )
+        if interval is None and product == "daily_max_min":
+            interval = "h"
+
+        max_days = get_max_days(product, interval)
+        single_block = delta.days <= max_days
 
         if single_block:
             data_url = self._build_request_url(
                 begin_dt.strftime("%Y%m%d %H:%M"),
                 end_dt.strftime("%Y%m%d %H:%M"),
                 product=product,
+                max_min_type=max_min_type,
                 datum=datum,
                 bin_num=bin_num,
                 interval=interval,
@@ -218,6 +233,7 @@ class Station:
                 begin_dt=begin_dt,
                 end_dt=end_dt,
                 product=product,
+                max_min_type=max_min_type,
                 datum=datum,
                 bin_num=bin_num,
                 interval=interval,
@@ -236,6 +252,107 @@ class Station:
         return df
 
     # ------------------------------------------------------------------
+    # Derived products (DPAPI)
+    # ------------------------------------------------------------------
+
+    def get_derived_product(
+        self,
+        product: str,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        year: Optional[int] = None,
+        units: Optional[str] = "metric",
+        datum: Optional[str] = None,
+        affil: Optional[str] = None,
+        projection_year: Optional[int] = None,
+        report_year: Optional[int] = None,
+        scenario: Optional[str] = None,
+        detail: Optional[str] = None,
+        level_type: Optional[str] = None,
+    ) -> pd.DataFrame:
+        """Fetch a derived product from the NOAA CO-OPS Derived Product API (DPAPI).
+
+        The DPAPI provides access to computed/aggregate products — sea
+        level trends, sea level rise projections, high-tide-flooding
+        counts, extreme water levels, and regional frequency analysis —
+        as opposed to :meth:`get_data`'s raw time-series observations.
+        Always scoped to this station (``station.id`` is used as the
+        station_id for every request).
+
+        Args:
+            product: DPAPI product name. One of: ``"htf_daily"``,
+                ``"htf_monthly"``, ``"htf_seasonal"``,
+                ``"htf_annual"``, ``"sea_level_trends"``,
+                ``"slr_projections"``, ``"slr_projection_offsets"``,
+                ``"rfa_extreme_water_levels"``, ``"top_ten_water_levels"``,
+                ``"extreme_water_levels"``.
+            start_date: Start date. Accepts any of the formats in
+                :data:`noaa_coops._parsing.KNOWN_DATE_FORMATS`; normalized
+                to DPAPI's required ``"%Y%m%d"`` before the request is
+                sent. Required for ``"htf_daily"``; also accepted
+                (optional) by ``"htf_monthly"``. Not accepted by
+                ``"htf_seasonal"`` or ``"htf_annual"`` — use ``year``
+                instead.
+            end_date: End date, same formats as ``start_date``.
+            year: Year filter, used by HTF products. Must be between 1800
+                and the current year.
+            units: ``"metric"`` (default) or ``"english"``. NOAA's
+                server-side default when omitted varies by product —
+                ``top_ten_water_levels``, ``extreme_water_levels``,
+                ``rfa_extreme_water_levels``, and ``htf_daily`` default to
+                english; ``slr_projections`` defaults to metric. Passing
+                units explicitly is recommended.
+            datum: Datum reference. Valid values depend on ``product`` —
+                not every product accepts a datum at all.
+            affil: ``"US"`` or ``"Global"`` — ``sea_level_trends``,
+                ``slr_projections``, ``slr_projection_offsets``.
+            projection_year: ``slr_projections`` only.
+            report_year: ``slr_projections``, ``slr_projection_offsets``.
+                Not every report year has published data — if you get an
+                empty result, try omitting this or checking which years
+                are available.
+            scenario: ``slr_projections`` only. One of ``"all"``,
+                ``"low"``, ``"intermediate-low"``, ``"intermediate"``,
+                ``"intermediate-high"``, ``"high"``, ``"extreme"``.
+                Default (server-side, when omitted) is ``"all"``.
+            detail: ``sea_level_trends`` only. ``"monthly_means"``
+                (deseasonalized monthly series), ``"events"`` (may be
+                empty), or ``"seasonal_cycle"`` (the 12-month seasonal
+                pattern removed to compute the trend). Omit for the
+                top-level trend statistics.
+            level_type: ``extreme_water_levels`` only. ``"high"`` or
+                ``"low"`` — filters the ten-year event history. Omit for
+                full station metadata.
+
+        Raises:
+            ValueError: ``product`` is invalid, or a parameter is
+                required/unsupported/invalid for the chosen product.
+            COOPSAPIError: DPAPI returned a non-200 response.
+
+        Returns:
+            A DataFrame. Multi-row results
+            (e.g. RFA's exploded return-period table)
+            include station identity columns so each row
+            remains attributable to its station even after
+            the DataFrame leaves this call's scope.
+        """
+        return _get_derived_product(
+            self,
+            product,
+            start_date=start_date,
+            end_date=end_date,
+            year=year,
+            units=units,
+            datum=datum,
+            affil=affil,
+            projection_year=projection_year,
+            report_year=report_year,
+            scenario=scenario,
+            detail=detail,
+            level_type=level_type,
+        )
+
+    # ------------------------------------------------------------------
     # Internals
     # ------------------------------------------------------------------
 
@@ -245,6 +362,7 @@ class Station:
         end_date: str,
         *,
         product: str,
+        max_min_type: Optional[str],
         datum: Optional[str],
         bin_num: Optional[int],
         interval: Optional[Union[str, int]],
@@ -257,6 +375,7 @@ class Station:
             begin_date=begin_date,
             end_date=end_date,
             product=product,
+            max_min_type=max_min_type,
             datum=datum,
             bin_num=bin_num,
             interval=interval,
@@ -276,6 +395,7 @@ class Station:
         begin_dt: datetime,
         end_dt: datetime,
         product: str,
+        max_min_type: Optional[str],
         datum: Optional[str],
         bin_num: Optional[int],
         interval: Optional[Union[str, int]],
@@ -284,20 +404,21 @@ class Station:
     ) -> pd.DataFrame:
         """Fetch a date range that spans more than one NOAA block.
 
-        Loops over fixed-size blocks (31 or 365 days), accumulates
+        Loops over product-specific blocks (see ``PRODUCT_LIMITS`` in
+        ``_products.py`` for per-product day limits), accumulates
         successful block DataFrames into a list, concatenates once at
         the end (O(n) memory vs. the old O(n²) concat-in-loop pattern).
         Failed blocks are surfaced via logger.warning + df.attrs
         rather than silently dropped.
         """
-        block_size = 365 if product in ("hourly_height", "high_low") else 31
+        block_size = get_max_days(product, interval)
         delta = end_dt - begin_dt
-        num_blocks = int(math.floor(delta.days / block_size))
+        num_blocks = int(math.ceil(delta.days / block_size))
 
         blocks: list[pd.DataFrame] = []
         missing_blocks: list[dict[str, str]] = []
 
-        for i in range(num_blocks + 1):
+        for i in range(num_blocks):
             begin_loop = begin_dt + timedelta(days=(i * block_size))
             end_loop = begin_loop + timedelta(days=block_size)
             end_loop = end_dt if end_loop > end_dt else end_loop
@@ -306,6 +427,7 @@ class Station:
                 begin_loop.strftime("%Y%m%d %H:%M"),
                 end_loop.strftime("%Y%m%d %H:%M"),
                 product=product,
+                max_min_type=max_min_type,
                 datum=datum,
                 bin_num=bin_num,
                 interval=interval,
@@ -325,7 +447,7 @@ class Station:
                 logger.warning(
                     "Block %d/%d (%s → %s) failed: %s",
                     i + 1,
-                    num_blocks + 1,
+                    num_blocks,
                     begin_loop.date(),
                     end_loop.date(),
                     exc,
@@ -337,7 +459,7 @@ class Station:
             # discards intermediate attrs).
             df.attrs["missing_blocks"] = missing_blocks
             warnings.warn(
-                f"{len(missing_blocks)} of {num_blocks + 1} blocks failed "
+                f"{len(missing_blocks)} of {num_blocks} blocks failed "
                 f"for product {product!r}. See df.attrs['missing_blocks'] "
                 "for per-block error details.",
                 RuntimeWarning,
@@ -348,21 +470,33 @@ class Station:
     def _make_api_request(self, data_url: str, product: str) -> pd.DataFrame:
         """GET the datagetter endpoint and return the response JSON as a DataFrame.
 
+        Routes payload extraction based on the `product` type, flattening
+        nested/heterogenous dictionaries (like `daily_max_min`) into a
+        standardized column schema before passing to Pandas.
+
         Raises:
             COOPSAPIError: HTTP non-200, or a 200 response whose JSON body
                 contains a top-level ``"error"`` key.
+            KeyError: If a recognizable data payload cannot be found.
         """
         res = _SESSION.get(data_url, timeout=DEFAULT_TIMEOUT)
 
+        # Check the status code
         if res.status_code != 200:
-            raise COOPSAPIError(
-                message=(
-                    f"CO-OPS API returned an error. Status Code: "
-                    f"{res.status_code}. Reason: {res.reason}\n"
-                ),
+            err_msg = (
+                f"CO-OPS API returned an error. Status Code: "
+                f"{res.status_code}. Reason: {res.reason}"
             )
-
+            # Extract a specific JSON error message, if it exists
+            try:
+                err_payload = res.json()
+                if "error" in err_payload and "message" in err_payload["error"]:
+                    err_msg += f" | NOAA Message: {err_payload['error']['message']}"
+            except Exception:
+                pass  # If it's a 503 HTML page, just ignore and raise the base error
+            raise COOPSAPIError(message=err_msg + "\n")
         json_dict = res.json()
+
         if "error" in json_dict:
             err_msg = f"CO-OPS API returned an error: {json_dict['error']['message']}"
             if product == "water_level":
@@ -373,5 +507,54 @@ class Station:
                 )
             raise COOPSAPIError(message=err_msg)
 
-        key = "predictions" if product == "predictions" else "data"
-        return pd.json_normalize(json_dict[key])
+        # ------------------------------------------------------------
+        # Explicitly route the payload extraction based on the product
+        # ------------------------------------------------------------
+
+        if product == "daily_max_min":
+            if "data" not in json_dict or not isinstance(json_dict["data"], list):
+                payload = []
+            else:
+                flattened_payload = []
+                for item in json_dict["data"]:
+                    for key, records in item.items():
+                        for record in records:
+                            # Standardize the varying NOAA keys using safe fallbacks
+                            clean_record = {
+                                "record_type": "min" if "dailyMin" in key else "max",
+                                "date": record.get(
+                                    "date6Min", record.get("dateHourly")
+                                ),
+                                "time": record.get(
+                                    "time6Min", record.get("timeHourly")
+                                ),
+                                "value": record.get(
+                                    "value6Min", record.get("valueHourly")
+                                ),
+                                "pcComplete": record.get(
+                                    "pcComplete6Min", record.get("pcCompleteHourly")
+                                ),
+                                "flag": record.get(
+                                    "flag6Min", record.get("flagHourly")
+                                ),
+                            }
+                            flattened_payload.append(clean_record)
+                payload = flattened_payload
+
+        elif product == "predictions":
+            payload = json_dict.get("predictions", [])
+
+        elif product == "currents_predictions":
+            payload = json_dict.get("current_predictions", {}).get("cp", [])
+
+        elif "data" in json_dict:
+            payload = json_dict["data"]
+
+        else:
+            found_keys = list(json_dict.keys())
+            raise KeyError(
+                f"Could not locate a recognizable data payload for product '{product}'. "
+                f"Keys found: {found_keys}"
+            )
+
+        return pd.json_normalize(payload)

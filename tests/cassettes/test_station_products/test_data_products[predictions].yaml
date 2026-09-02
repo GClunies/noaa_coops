@@ -1103,19 +1103,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 31 Jul 2026 08:17:35 GMT
+      - Thu, 30 Jul 2026 18:54:20 GMT
       content-length:
       - '83812'
       x-amz-apigw-id:
-      - BXME8FliIAMEBQQ=
+      - BVWalFdUIAMEkIA=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Fri, 31 Jul 2026 08:17:25 GMT
+      - Thu, 30 Jul 2026 18:53:37 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - a041fb2e-f9fe-46f4-8008-1f246c5dc8cb
+      - 135304f8-1da8-4056-b457-3cabd0fc70fc
     status:
       code: 200
       message: OK
@@ -1186,7 +1186,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Fri, 31 Jul 2026 08:17:36 GMT
+      - Thu, 30 Jul 2026 18:54:22 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -1225,10 +1225,10 @@ interactions:
         first="1991-11-09 00:00" last="2019-01-02 18:36" name="Wind"/><parameter first="1991-11-09
         01:00" last="2019-01-02 18:36" name="Air Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Water Temperature"/><parameter first="2023-09-28
-        00:00" last="2026-07-31 08:12" name="Water Temperature"/><parameter first="1991-11-09
+        00:00" last="2026-07-30 18:48" name="Water Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Barometric Pressure"/><parameter first="2023-09-28
-        00:00" last="2026-07-31 08:12" name="Barometric Pressure"/><parameter first="2001-01-01
-        00:00" last="2026-07-31 08:06" name="Preliminary 6-Minute Water Level"/><parameter
+        00:00" last="2026-07-30 18:48" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-30 18:48" name="Preliminary 6-Minute Water Level"/><parameter
         first="1995-06-01 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
         Level"/><parameter first="1899-01-01 08:00" last="2026-06-30 23:00" name="Verified
         Hourly Height Water Level"/><parameter first="1977-10-18 10:18" last="1977-11-15
@@ -1243,7 +1243,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Fri, 31 Jul 2026 08:17:38 GMT
+      - Thu, 30 Jul 2026 18:54:23 GMT
       Server:
       - nginx
       Transfer-Encoding:
@@ -1251,4 +1251,62 @@ interactions:
     status:
       code: 200
       message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20150101+00%3A00&end_date=20150103+00%3A00&station=9447130&product=predictions&application=noaa_coops&format=json&units=metric&time_zone=gmt&datum=MLLW&interval=hilo
+  response:
+    body:
+      string: '{ "predictions" : [
+
+        {"t":"2015-01-01 03:40", "v":"0.011", "type":"L"},{"t":"2015-01-01 11:06",
+        "v":"3.091", "type":"H"},{"t":"2015-01-01 15:51", "v":"2.098", "type":"L"},{"t":"2015-01-01
+        21:15", "v":"3.537", "type":"H"},{"t":"2015-01-02 04:26", "v":"-0.214", "type":"L"},{"t":"2015-01-02
+        12:03", "v":"3.355", "type":"H"},{"t":"2015-01-02 17:00", "v":"2.168", "type":"L"},{"t":"2015-01-02
+        22:02", "v":"3.452", "type":"H"}
+
+        ]}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Thu, 30 Jul 2026 18:54:24 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Pragma:
+      - no-cache
+      content-length:
+      - '424'
+      x-amz-apigw-id:
+      - BVWbHFfWIAMEnlA=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '424'
+      x-amzn-Remapped-Date:
+      - Thu, 30 Jul 2026 18:54:24 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - d258c75a-fb65-407a-ad83-7be513293f73
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -1103,19 +1103,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 31 Jul 2026 08:17:35 GMT
+      - Thu, 30 Jul 2026 18:54:25 GMT
       content-length:
       - '83812'
       x-amz-apigw-id:
-      - BXME8FliIAMEBQQ=
+      - BVWbPGzeIAMEg9g=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Fri, 31 Jul 2026 08:17:25 GMT
+      - Thu, 30 Jul 2026 18:53:37 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - a041fb2e-f9fe-46f4-8008-1f246c5dc8cb
+      - 0b0ab1e8-1fc4-43a3-a620-b7319319a7d9
     status:
       code: 200
       message: OK
@@ -1186,7 +1186,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Fri, 31 Jul 2026 08:17:36 GMT
+      - Thu, 30 Jul 2026 18:54:26 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -1225,10 +1225,10 @@ interactions:
         first="1991-11-09 00:00" last="2019-01-02 18:36" name="Wind"/><parameter first="1991-11-09
         01:00" last="2019-01-02 18:36" name="Air Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Water Temperature"/><parameter first="2023-09-28
-        00:00" last="2026-07-31 08:12" name="Water Temperature"/><parameter first="1991-11-09
+        00:00" last="2026-07-30 18:48" name="Water Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Barometric Pressure"/><parameter first="2023-09-28
-        00:00" last="2026-07-31 08:12" name="Barometric Pressure"/><parameter first="2001-01-01
-        00:00" last="2026-07-31 08:06" name="Preliminary 6-Minute Water Level"/><parameter
+        00:00" last="2026-07-30 18:48" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-30 18:48" name="Preliminary 6-Minute Water Level"/><parameter
         first="1995-06-01 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
         Level"/><parameter first="1899-01-01 08:00" last="2026-06-30 23:00" name="Verified
         Hourly Height Water Level"/><parameter first="1977-10-18 10:18" last="1977-11-15
@@ -1243,7 +1243,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Fri, 31 Jul 2026 08:17:38 GMT
+      - Thu, 30 Jul 2026 18:54:27 GMT
       Server:
       - nginx
       Transfer-Encoding:
@@ -1251,4 +1251,55 @@ interactions:
     status:
       code: 200
       message: ''
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20150101+00%3A00&end_date=20150131+00%3A00&station=9447130&product=daily_max_min&application=noaa_coops&format=json&units=metric&time_zone=gmt&datum=MLLW&interval=6
+  response:
+    body:
+      string: '{"metadata":{"id":"9447130","name":"Seattle","lat":"47.6026","lon":"-122.3393"},
+        "data": [{"dailyMax6Min":[{"date6Min":"2015-01-01","time6Min":"21:12","value6Min":3.414,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-02","time6Min":"22:06","value6Min":3.404,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-03","time6Min":"12:24","value6Min":3.342,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-04","time6Min":"13:12","value6Min":3.48,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-05","time6Min":"13:36","value6Min":3.702,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-06","time6Min":"14:18","value6Min":3.708,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-07","time6Min":"14:54","value6Min":3.668,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-08","time6Min":"15:12","value6Min":3.646,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-09","time6Min":"16:00","value6Min":3.696,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-10","time6Min":"16:24","value6Min":3.688,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-11","time6Min":"16:54","value6Min":3.616,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-12","time6Min":"17:36","value6Min":3.498,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-13","time6Min":"18:12","value6Min":3.362,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-14","time6Min":"18:42","value6Min":3.328,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-15","time6Min":"19:36","value6Min":3.36,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-16","time6Min":"20:36","value6Min":3.256,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-17","time6Min":"21:24","value6Min":3.528,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-18","time6Min":"11:54","value6Min":3.716,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-19","time6Min":"12:36","value6Min":3.65,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-20","time6Min":"13:24","value6Min":3.68,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-21","time6Min":"13:48","value6Min":3.746,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-22","time6Min":"14:24","value6Min":3.79,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-23","time6Min":"15:12","value6Min":3.786,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-24","time6Min":"15:54","value6Min":3.85,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-25","time6Min":"16:30","value6Min":3.888,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-26","time6Min":"17:12","value6Min":3.874,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-27","time6Min":"18:00","value6Min":3.738,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-28","time6Min":"18:54","value6Min":3.452,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-29","time6Min":"20:00","value6Min":3.27,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-30","time6Min":"20:54","value6Min":3.16,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-31","time6Min":"11:36","value6Min":3.256,"pcComplete6Min":100,"flag6Min":"0"}]},{"dailyMin6Min":[{"date6Min":"2015-01-01","time6Min":"03:36","value6Min":-0.204,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-02","time6Min":"04:24","value6Min":-0.305,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-03","time6Min":"05:06","value6Min":-0.424,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-04","time6Min":"05:54","value6Min":-0.51,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-05","time6Min":"06:18","value6Min":-0.368,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-06","time6Min":"07:12","value6Min":-0.36,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-07","time6Min":"07:36","value6Min":-0.315,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-08","time6Min":"08:12","value6Min":-0.17,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-09","time6Min":"08:42","value6Min":0.09,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-10","time6Min":"09:24","value6Min":0.422,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-11","time6Min":"10:00","value6Min":0.766,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-12","time6Min":"23:54","value6Min":1.048,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-13","time6Min":"00:30","value6Min":0.998,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-14","time6Min":"01:18","value6Min":0.744,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-15","time6Min":"02:06","value6Min":0.534,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-16","time6Min":"03:06","value6Min":0.392,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-17","time6Min":"03:48","value6Min":0.03,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-18","time6Min":"04:42","value6Min":-0.091,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-19","time6Min":"05:12","value6Min":-0.397,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-20","time6Min":"06:00","value6Min":-0.71,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-21","time6Min":"06:48","value6Min":-0.787,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-22","time6Min":"07:30","value6Min":-0.688,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-23","time6Min":"08:18","value6Min":-0.474,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-24","time6Min":"09:00","value6Min":-0.072,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-25","time6Min":"09:42","value6Min":0.406,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-26","time6Min":"23:54","value6Min":0.672,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-27","time6Min":"00:06","value6Min":0.66,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-28","time6Min":"01:12","value6Min":0.402,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-29","time6Min":"02:06","value6Min":0.1,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-30","time6Min":"03:06","value6Min":-0.012,"pcComplete6Min":100,"flag6Min":"0"},{"date6Min":"2015-01-31","time6Min":"04:00","value6Min":-0.104,"pcComplete6Min":100,"flag6Min":"0"}]}]}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, max-age=0
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Thu, 30 Jul 2026 18:54:28 GMT
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Pragma:
+      - no-cache
+      content-length:
+      - '6268'
+      x-amz-apigw-id:
+      - BVWbxH8MoAMEudg=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '6268'
+      x-amzn-Remapped-Date:
+      - Thu, 30 Jul 2026 18:54:28 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - fef136d2-b061-4f2b-ad05-23187254e123
+    status:
+      code: 200
+      message: OK
 version: 1

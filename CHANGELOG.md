@@ -7,12 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- **`daily_max_min` product support:** `Station.get_data()` now accepts `product="daily_max_min"`.
+- Standardized API response handling for `daily_max_min` to unify 6-minute and hourly payloads into a consistent `(record_type, value, pcComplete, flag)` column schema.
+- Added `max_min_type` parameter to filter extrema (`"max"`, `"min"`, or `None` for both). 
+- `interval` now automatically defaults to `"h"` (hourly) when requesting `daily_max_min` to prevent mixed-interval responses.
+- Added `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED` registries, with strict parameter validation for `max_min_type`.
+- Added `PRODUCT_LIMITS` dictionary to `_products.py` to support pagination and chunking limits.
+- **Derived Product API (DPAPI) support:** `Station.get_derived_product()` fetches computed/aggregate NOAA products — sea level trends, sea level rise projections, high-tide-flooding counts, extreme water levels, and regional frequency analysis. See README for supported products and usage.
+- Parameter validation for derived products fails fast with `ValueError` before any network call, matching `get_data()`'s existing behavior.
+- Added `scenario` validation for `slr_projections`: must be one of `all`, `low`, `intermediate-low`, `intermediate`, `intermediate-high`, `high`, `extreme` (default `all`).
+- Station metadata now stores previously-dropped schema fields: harmonic constituents (`harcon`) for current and current-prediction stations, `center_bin_1_dist`, `height_from_bottom`,`superseded_datums` for water-level stations, and others.
+- Multi-bin current prediction stations now keep offsets for every bin via `current_pred_offsets_by_bin`, instead of only the first.
+
+### Fixed
+
+- Improved API error handling in `_make_api_request`: Reinstated checks for HTTP 200 responses that contain an embedded `{"error": {"message": "..."}}` body, ensuring bad parameter requests fail fast with clear error messages rather than silently crashing the parser.
+- Enforced datum validation for the `ofs_water_level` product to ensure requests fail fast before hitting the API.
+- `Station.get_data` uses `PRODUCT_LIMITS` for `_fetch_in_blocks` block sizing, so each product respects its own documented API date-range cap. Previously, all products used a hardcoded 31-day limit (except `hourly_height`/`high_low` at 365 days).
+- Fixed block-count calculation in `_fetch_in_blocks`: switching from `floor(n/block)+1` to `ceil(n/block)` eliminates a zero-length API call when the date range divided evenly by the block size.
+- Fixed `populate_metadata` misclassifying tide-prediction stations with a null `datums` block as water-level stations, which stripped their offset values.
+- Fixed the `tidepredoffsets` expand-param typo and a malformed `units` query param (was joined with a second `?` instead of `&`) in metadata requests.
+- 1-minute interval `predictions` requests are now capped at NOAA's practical 30-day window instead of the product's normal limit.
+
 ### Changed
 
 - SOAP `DataInventory` calls now go through a dedicated retrying
   `requests.Session` (`_SOAP_SESSION`) that retries POST as well as GET on
   transient failures (`429`/`5xx`). Gives the data-inventory path the same
   resiliency the REST path already had.
+
+### Removed
+
+- **`datums` product.** Removed from `ALL_PRODUCTS` — it's a Metadata API concept (`station.datums`), not a Data API product.
 
 ## [0.5.0]
 

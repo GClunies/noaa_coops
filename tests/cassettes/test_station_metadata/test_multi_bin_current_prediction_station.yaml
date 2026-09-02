@@ -1,0 +1,78 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+    method: GET
+    uri: https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311.json?expand=details,sensors,products,disclaimers,notices,datums,harcon,tidepredoffsets,benchmarks,nearby,bins,deployments,currentpredictionoffsets,floodlevels,supersededdatums&units=metric
+  response:
+    body:
+      string: "{\n  \"count\": 2,\n  \"units\": null,\n  \"stations\": [\n    {\n
+        \     \"currentpredictionoffsets\": {\n        \"id\": \"ACT0311\",\n        \"refStationId\":
+        \"PEB0607\",\n        \"refStationBin\": 7,\n        \"meanFloodDir\": 338.0,\n
+        \       \"meanEbbDir\": 171.0,\n        \"mfcTimeAdjMin\": -70,\n        \"sbeTimeAdjMin\":
+        24,\n        \"mecTimeAdjMin\": -62,\n        \"sbfTimeAdjMin\": -36,\n        \"mfcAmpAdj\":
+        0.3,\n        \"mecAmpAdj\": 0.4,\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311_1/currentpredictionoffsets.json\"\n
+        \     },\n      \"currbin\": 1,\n      \"type\": \"S\",\n      \"depth\":
+        4.57,\n      \"depthType\": \"S\",\n      \"timezone_offset\": \"\",\n      \"harmonicConstituents\":
+        {\n        \"units\": \"meters, centimeters/second\",\n        \"HarmonicConstituents\":
+        [],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311/harcon.json\"\n
+        \     },\n      \"id\": \"ACT0311\",\n      \"name\": \"Turtle Head Pt., ESE
+        of, Penobscot Bay\",\n      \"lat\": 44.37617,\n      \"lng\": -68.85467,\n
+        \     \"affiliations\": \"\",\n      \"portscode\": \"\",\n      \"products\":
+        null,\n      \"disclaimers\": null,\n      \"notices\": null,\n      \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311.json\",\n
+        \     \"expand\": \"currentpredictionoffsets,harcon\",\n      \"tideType\":
+        \"\"\n    },\n    {\n      \"currentpredictionoffsets\": {\n        \"id\":
+        \"ACT0311\",\n        \"refStationId\": \"PEB0607\",\n        \"refStationBin\":
+        7,\n        \"meanFloodDir\": 319.0,\n        \"meanEbbDir\": 155.0,\n        \"mfcTimeAdjMin\":
+        -78,\n        \"sbeTimeAdjMin\": -31,\n        \"mecTimeAdjMin\": -32,\n        \"sbfTimeAdjMin\":
+        -55,\n        \"mfcAmpAdj\": 0.2,\n        \"mecAmpAdj\": 0.4,\n        \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311_2/currentpredictionoffsets.json\"\n
+        \     },\n      \"currbin\": 2,\n      \"type\": \"S\",\n      \"depth\":
+        12.19,\n      \"depthType\": \"S\",\n      \"timezone_offset\": \"\",\n      \"harmonicConstituents\":
+        {\n        \"units\": \"meters, centimeters/second\",\n        \"HarmonicConstituents\":
+        [],\n        \"self\": \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311/harcon.json\"\n
+        \     },\n      \"id\": \"ACT0311\",\n      \"name\": \"Turtle Head Pt., ESE
+        of, Penobscot Bay\",\n      \"lat\": 44.37617,\n      \"lng\": -68.85467,\n
+        \     \"affiliations\": \"\",\n      \"portscode\": \"\",\n      \"products\":
+        null,\n      \"disclaimers\": null,\n      \"notices\": null,\n      \"self\":
+        \"https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/ACT0311.json\",\n
+        \     \"expand\": \"currentpredictionoffsets,harcon\",\n      \"tideType\":
+        \"\"\n    }\n  ],\n  \"self\": null\n}"
+    headers:
+      Access-Control-Allow-Headers:
+      - X-Requested-With
+      Access-Control-Allow-Methods:
+      - GET
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 31 Jul 2026 08:02:07 GMT
+      content-length:
+      - '2583'
+      x-amz-apigw-id:
+      - BXJ0DEJoIAMEZhQ=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '2583'
+      x-amzn-Remapped-Date:
+      - Fri, 31 Jul 2026 08:02:07 GMT
+      x-amzn-Remapped-Server:
+      - nginx
+      x-amzn-RequestId:
+      - c9bd6989-46c4-437e-aacd-af78a19072c9
+    status:
+      code: 200
+      message: OK
+version: 1

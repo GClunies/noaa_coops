@@ -14,6 +14,7 @@ VALID_DATUMS: frozenset[str] = frozenset(
 )
 VALID_UNITS: frozenset[str] = frozenset({"metric", "english"})
 VALID_TIME_ZONES: frozenset[str] = frozenset({"gmt", "lst", "lst_ldt"})
+VALID_MAX_MIN_TYPES: frozenset[str] = frozenset({"max", "min"})
 
 #: Every product NOAA exposes through the datagetter endpoint.
 ALL_PRODUCTS: frozenset[str] = frozenset(
@@ -22,10 +23,10 @@ ALL_PRODUCTS: frozenset[str] = frozenset(
         "hourly_height",
         "high_low",
         "daily_mean",
+        "daily_max_min",
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
-        "datums",
         "air_gap",
         "air_temperature",
         "water_temperature",
@@ -51,6 +52,8 @@ DATUM_REQUIRED: frozenset[str] = frozenset(
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
+        "daily_max_min",
+        "ofs_water_level",
     }
 )
 
@@ -68,7 +71,49 @@ ALLOWED_INTERVALS: dict[str, frozenset[str]] = {
     "predictions": frozenset({"h", "1", "5", "10", "15", "30", "60", "hilo"}),
     "currents": frozenset({"6", "h"}),
     "currents_predictions": frozenset({"h", "1", "6", "10", "30", "60", "max_slack"}),
+    "daily_max_min": frozenset({"6", "h"}),
 }
+
+#: Maximum date range in days per product for a single API request.
+PRODUCT_LIMITS: dict[str, int] = {
+    "water_level": 31,
+    "hourly_height": 365,
+    "high_low": 365,
+    "daily_mean": 3655,
+    "daily_max_min": 3655,
+    "monthly_mean": 73000,
+    "one_minute_water_level": 4,
+    "predictions": 365,
+    "air_gap": 31,
+    "air_temperature": 31,
+    "water_temperature": 31,
+    "wind": 31,
+    "air_pressure": 31,
+    "conductivity": 31,
+    "visibility": 31,
+    "humidity": 31,
+    "salinity": 31,
+    "currents": 31,
+    "currents_predictions": 31,
+    "ofs_water_level": 31,
+}
+
+#: (product, interval) pairs where NOAA's practical per-request window is
+#: stricter than PRODUCT_LIMITS[product]. Currently: 1-minute interval
+#: predictions are much denser than other intervals, so the window drops
+#: from 365 days to 30.
+INTERVAL_LIMIT_OVERRIDES: dict[tuple[str, str], int] = {
+    ("predictions", "1"): 30,
+}
+
+
+def get_max_days(product: str, interval: Optional[Union[str, int]]) -> int:
+    """Max single-request date-range window in days for this product/interval."""
+    if interval is not None:
+        override = INTERVAL_LIMIT_OVERRIDES.get((product, str(interval)))
+        if override is not None:
+            return override
+    return PRODUCT_LIMITS[product]
 
 
 # ---------------------------------------------------------------------------
@@ -78,6 +123,7 @@ ALLOWED_INTERVALS: dict[str, frozenset[str]] = {
 
 def validate_params(
     product: str,
+    max_min_type: Optional[str],
     datum: Optional[str],
     bin_num: Optional[int],
     interval: Optional[Union[str, int]],
@@ -95,6 +141,21 @@ def validate_params(
             "https://api.tidesandcurrents.noaa.gov/api/prod/#products "
             "for list of available products"
         )
+
+    # -------------------------------------------------------------
+    # Validate max_min_type
+    # -------------------------------------------------------------
+    if max_min_type is not None:
+        if product != "daily_max_min":
+            raise ValueError(
+                f"The `max_min_type` parameter is only supported for the "
+                f"`daily_max_min` product, but you requested `{product}`."
+            )
+        if max_min_type.lower() not in VALID_MAX_MIN_TYPES:
+            raise ValueError(
+                f"Invalid max_min_type '{max_min_type}' provided. "
+                f"Must be one of: {sorted(VALID_MAX_MIN_TYPES)}"
+            )
 
     if product in DATUM_REQUIRED:
         if datum is None:
@@ -160,6 +221,7 @@ def build_request_params(
     begin_date: str,
     end_date: str,
     product: str,
+    max_min_type: Optional[str],
     datum: Optional[str],
     bin_num: Optional[int],
     interval: Optional[Union[str, int]],
@@ -179,6 +241,8 @@ def build_request_params(
         "application": "noaa_coops",
         "format": "json",
     }
+    if max_min_type is not None:
+        params["max_min_type"] = max_min_type
 
     if units is not None:
         params["units"] = units

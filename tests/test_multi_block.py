@@ -140,3 +140,47 @@ def test_multi_block_total_failure_raises() -> None:
             units="metric",
             time_zone="gmt",
         )
+
+
+@responses.activate
+def test_ceil_fix_no_spurious_extra_block() -> None:
+    """A date range exactly divisible by the block size produces the right
+    number of API calls — no extra zero-length call at the end."""
+    for ts in ["2015-01-15 00:00", "2015-02-15 00:00"]:
+        responses.add(
+            responses.GET, DATA_GETTER_URL_RE, json=_block_body(ts), status=200
+        )
+
+    station = _bare_station()
+    station.get_data(
+        begin_date="20150101",
+        end_date="20150304",
+        product="water_level",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+
+    assert len(responses.calls) == 2
+
+
+@responses.activate
+def test_product_specific_block_size() -> None:
+    """Each product chunks at its own documented API limit, not a shared default.
+    A 5-day one_minute_water_level range (4-day limit) must produce 2 calls."""
+    for ts in ["2015-01-02 00:00", "2015-01-05 00:00"]:
+        responses.add(
+            responses.GET, DATA_GETTER_URL_RE, json=_block_body(ts), status=200
+        )
+
+    station = _bare_station()
+    station.get_data(
+        begin_date="20150101",
+        end_date="20150106",
+        product="one_minute_water_level",
+        datum="MLLW",
+        units="metric",
+        time_zone="gmt",
+    )
+
+    assert len(responses.calls) == 2

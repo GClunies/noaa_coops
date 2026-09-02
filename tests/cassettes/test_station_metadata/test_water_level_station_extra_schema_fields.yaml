@@ -1103,19 +1103,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 31 Jul 2026 08:17:35 GMT
+      - Fri, 31 Jul 2026 08:02:11 GMT
       content-length:
       - '83812'
       x-amz-apigw-id:
-      - BXME8FliIAMEBQQ=
+      - BXJ0kGEcIAMEujg=
       x-amzn-Remapped-Connection:
       - keep-alive
       x-amzn-Remapped-Date:
-      - Fri, 31 Jul 2026 08:17:25 GMT
+      - Fri, 31 Jul 2026 08:01:41 GMT
       x-amzn-Remapped-Server:
       - nginx
       x-amzn-RequestId:
-      - a041fb2e-f9fe-46f4-8008-1f246c5dc8cb
+      - 4ac720ad-d721-4198-a552-ee23b7216d05
     status:
       code: 200
       message: OK
@@ -1186,7 +1186,7 @@ interactions:
       Content-Type:
       - text/xml
       Date:
-      - Fri, 31 Jul 2026 08:17:36 GMT
+      - Fri, 31 Jul 2026 08:02:12 GMT
       ETag:
       - W/"3712-1673306860000"
       Last-Modified:
@@ -1225,10 +1225,10 @@ interactions:
         first="1991-11-09 00:00" last="2019-01-02 18:36" name="Wind"/><parameter first="1991-11-09
         01:00" last="2019-01-02 18:36" name="Air Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Water Temperature"/><parameter first="2023-09-28
-        00:00" last="2026-07-31 08:12" name="Water Temperature"/><parameter first="1991-11-09
+        00:00" last="2026-07-31 07:54" name="Water Temperature"/><parameter first="1991-11-09
         00:00" last="2019-01-02 18:36" name="Barometric Pressure"/><parameter first="2023-09-28
-        00:00" last="2026-07-31 08:12" name="Barometric Pressure"/><parameter first="2001-01-01
-        00:00" last="2026-07-31 08:06" name="Preliminary 6-Minute Water Level"/><parameter
+        00:00" last="2026-07-31 07:54" name="Barometric Pressure"/><parameter first="2001-01-01
+        00:00" last="2026-07-31 07:54" name="Preliminary 6-Minute Water Level"/><parameter
         first="1995-06-01 00:00" last="2026-06-30 23:54" name="Verified 6-Minute Water
         Level"/><parameter first="1899-01-01 08:00" last="2026-06-30 23:00" name="Verified
         Hourly Height Water Level"/><parameter first="1977-10-18 10:18" last="1977-11-15
@@ -1243,7 +1243,7 @@ interactions:
       Content-Type:
       - text/xml;charset=utf-8
       Date:
-      - Fri, 31 Jul 2026 08:17:38 GMT
+      - Fri, 31 Jul 2026 08:02:14 GMT
       Server:
       - nginx
       Transfer-Encoding:

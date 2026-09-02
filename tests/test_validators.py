@@ -29,12 +29,12 @@ from noaa_coops._products import validate_params
         "wind",
         "air_pressure",
         "predictions",
-        "datums",
         "high_low",
         "hourly_height",
         "daily_mean",
         "monthly_mean",
         "one_minute_water_level",
+        "daily_max_min",
     ],
 )
 def test_valid_products_accepted(product: str) -> None:
@@ -48,10 +48,12 @@ def test_valid_products_accepted(product: str) -> None:
         "monthly_mean",
         "one_minute_water_level",
         "predictions",
+        "daily_max_min",
     }
     datum = "MLLW" if product in datum_required else None
     validate_params(
         product=product,
+        max_min_type=None,
         datum=datum,
         bin_num=None,
         interval=None,
@@ -64,6 +66,7 @@ def test_unknown_product_rejected() -> None:
     with pytest.raises(ValueError, match="Invalid product"):
         validate_params(
             product="not_a_real_product",
+            max_min_type=None,
             datum=None,
             bin_num=None,
             interval=None,
@@ -83,6 +86,7 @@ def test_unknown_product_rejected() -> None:
 def test_valid_datums_accepted(datum: str) -> None:
     validate_params(
         product="water_level",
+        max_min_type=None,
         datum=datum,
         bin_num=None,
         interval=None,
@@ -95,6 +99,20 @@ def test_missing_datum_for_water_level_rejected() -> None:
     with pytest.raises(ValueError, match="No datum"):
         validate_params(
             product="water_level",
+            max_min_type=None,
+            datum=None,
+            bin_num=None,
+            interval=None,
+            units="metric",
+            time_zone="gmt",
+        )
+
+
+def test_missing_datum_for_ofs_water_level_rejected() -> None:
+    with pytest.raises(ValueError, match="No datum"):
+        validate_params(
+            product="ofs_water_level",
+            max_min_type=None,
             datum=None,
             bin_num=None,
             interval=None,
@@ -107,6 +125,7 @@ def test_lowercase_datum_accepted() -> None:
     """Datums are normalized to uppercase before validation, so `mllw` is valid."""
     validate_params(
         product="water_level",
+        max_min_type=None,
         datum="mllw",
         bin_num=None,
         interval=None,
@@ -119,6 +138,7 @@ def test_unknown_datum_rejected() -> None:
     with pytest.raises(ValueError, match="Invalid datum"):
         validate_params(
             product="water_level",
+            max_min_type=None,
             datum="nope",
             bin_num=None,
             interval=None,
@@ -136,6 +156,7 @@ def test_unknown_datum_rejected() -> None:
 def test_valid_units_accepted(units: str) -> None:
     validate_params(
         product="water_temperature",
+        max_min_type=None,
         datum=None,
         bin_num=None,
         interval=None,
@@ -148,6 +169,7 @@ def test_invalid_units_rejected() -> None:
     with pytest.raises(ValueError, match="[Uu]nit"):
         validate_params(
             product="water_temperature",
+            max_min_type=None,
             datum=None,
             bin_num=None,
             interval=None,
@@ -160,6 +182,7 @@ def test_invalid_units_rejected() -> None:
 def test_valid_time_zones_accepted(time_zone: str) -> None:
     validate_params(
         product="water_temperature",
+        max_min_type=None,
         datum=None,
         bin_num=None,
         interval=None,
@@ -172,11 +195,58 @@ def test_invalid_time_zone_rejected() -> None:
     with pytest.raises(ValueError, match="[Tt]ime [Zz]one"):
         validate_params(
             product="water_temperature",
+            max_min_type=None,
             datum=None,
             bin_num=None,
             interval=None,
             units="metric",
             time_zone="utc",
+        )
+
+
+# ---------------------------------------------------------------------------
+# validate_params: max_min_type (daily_max_min product)
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("max_min_type", ["max", "min", None])
+def test_daily_max_min_valid_max_min_types(max_min_type: str | None) -> None:
+    """max_min_type of 'max', 'min', or None are all valid for daily_max_min."""
+    validate_params(
+        product="daily_max_min",
+        max_min_type=max_min_type,
+        datum="STND",
+        bin_num=None,
+        interval=6,
+        units="english",
+        time_zone="gmt",
+    )
+
+
+def test_max_min_type_on_wrong_product_rejected() -> None:
+    """max_min_type is only allowed with daily_max_min."""
+    with pytest.raises(ValueError, match="daily_max_min"):
+        validate_params(
+            product="water_level",
+            max_min_type="max",
+            datum="MLLW",
+            bin_num=None,
+            interval=None,
+            units="metric",
+            time_zone="gmt",
+        )
+
+
+def test_invalid_max_min_type_rejected() -> None:
+    with pytest.raises(ValueError, match="max_min_type"):
+        validate_params(
+            product="daily_max_min",
+            max_min_type="average",
+            datum="STND",
+            bin_num=None,
+            interval=None,
+            units="english",
+            time_zone="gmt",
         )
 
 
