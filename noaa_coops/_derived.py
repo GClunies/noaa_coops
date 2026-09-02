@@ -457,15 +457,22 @@ def parse_dpapi_response(
     everything else falls through to a generic json_normalize on whichever
     top-level key holds a list.
     """
-    product = _to_api_product(product)
-    if product == "extrfa":
+    api_product = _to_api_product(product)
+    if api_product == "extrfa":
         df = _parse_extrfa(payload)
-    elif product == "sealvltrends":
+    elif api_product == "sealvltrends":
         df = _parse_sealvltrends(payload, detail)
-    elif product == "extremewaterlevels":
+    elif api_product == "extremewaterlevels":
         df = _parse_extremewaterlevels(payload, level_type)
     else:
-        top_level_key = next(k for k, v in payload.items() if isinstance(v, list))
+        top_level_key = next(
+            (k for k, v in payload.items() if isinstance(v, list)), None
+        )
+        if top_level_key is None:
+            raise COOPSAPIError(
+                f"DPAPI response for product '{product}' contains no list "
+                f"value to parse; payload keys: {list(payload)}"
+            )
         df = pd.json_normalize(payload[top_level_key])
 
     return df.reset_index(drop=True)

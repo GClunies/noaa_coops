@@ -16,6 +16,8 @@ import pytest
 
 import noaa_coops as nc
 from noaa_coops._derived import build_dpapi_url
+from noaa_coops._derived import parse_dpapi_response
+from noaa_coops._exceptions import COOPSAPIError
 
 DERIVED_PRODUCT_MATRIX = [
     pytest.param(
@@ -168,3 +170,11 @@ def test_sea_level_trends_monthly_means() -> None:
     }
     assert not df.empty
     assert set(df.columns) == expected_cols
+
+
+def test_parse_dpapi_response_listless_payload_raises_coops_api_error():
+    """A payload with no list value raises COOPSAPIError, not StopIteration."""
+    payload = {"error": {"message": "No data was found"}, "count": 0}
+
+    with pytest.raises(COOPSAPIError, match=r"slr_projection_offsets.*error.*count"):
+        parse_dpapi_response(payload, product="slr_projection_offsets")
