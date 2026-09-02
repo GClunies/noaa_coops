@@ -465,7 +465,14 @@ def parse_dpapi_response(
     elif product == "extremewaterlevels":
         df = _parse_extremewaterlevels(payload, level_type)
     else:
-        top_level_key = next(k for k, v in payload.items() if isinstance(v, list))
+        top_level_key = next(
+            (k for k, v in payload.items() if isinstance(v, list)), None
+        )
+        if top_level_key is None:
+            raise COOPSAPIError(
+                f"DPAPI response for product '{product}' contains no list "
+                f"value to parse; payload keys: {list(payload)}"
+            )
         df = pd.json_normalize(payload[top_level_key])
 
     return df.reset_index(drop=True)
