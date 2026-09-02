@@ -518,10 +518,20 @@ class Station:
                 flattened_payload = []
                 for item in json_dict["data"]:
                     for key, records in item.items():
+                        if "dailyMin" in key:
+                            record_type = "min"
+                        elif "dailyMax" in key:
+                            record_type = "max"
+                        else:
+                            raise KeyError(
+                                f"Unexpected record key '{key}' in daily_max_min "
+                                "response; expected a key containing 'dailyMax' "
+                                "or 'dailyMin'."
+                            )
                         for record in records:
                             # Standardize the varying NOAA keys using safe fallbacks
                             clean_record = {
-                                "record_type": "min" if "dailyMin" in key else "max",
+                                "record_type": record_type,
                                 "date": record.get(
                                     "date6Min", record.get("dateHourly")
                                 ),
