@@ -22,7 +22,6 @@ import noaa_coops as nc
 from noaa_coops._http import DEFAULT_TIMEOUT
 from noaa_coops.station import COOPSAPIError, Station
 
-
 # ---------------------------------------------------------------------------
 # Fixtures / helpers
 # ---------------------------------------------------------------------------

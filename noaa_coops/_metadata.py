@@ -21,7 +21,7 @@ from typing import TYPE_CHECKING
 
 from noaa_coops._endpoints import METADATA_BASE_URL
 from noaa_coops._exceptions import COOPSAPIError
-from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION
+from noaa_coops._http import _SESSION, DEFAULT_TIMEOUT
 
 if TYPE_CHECKING:
     from noaa_coops.station import Station

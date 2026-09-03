@@ -16,7 +16,6 @@ import responses
 
 from noaa_coops.station import COOPSAPIError, Station
 
-
 DATA_GETTER_URL_RE = __import__("re").compile(
     r"https://api\.tidesandcurrents\.noaa\.gov/api/prod/datagetter\?.*"
 )

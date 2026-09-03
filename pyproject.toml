@@ -47,6 +47,11 @@ dev = [
     "vcrpy>=8.0",  # 8+ requires Python 3.10; has the VCRHTTPResponse fix for urllib3 2.x
 ]
 
+[tool.ruff.lint]
+# The NOAA CO-OPS API speaks naive timestamps in station-local time or GMT
+# selected by the time_zone parameter, so naive datetimes are intentional.
+ignore = ["DTZ"]
+
 [build-system]
 requires = ["hatchling>=1.24"]
 build-backend = "hatchling.build"

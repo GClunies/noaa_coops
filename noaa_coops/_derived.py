@@ -8,14 +8,14 @@ the same way ``Station.__init__`` calls ``populate_metadata`` from ``_metadata.p
 from __future__ import annotations
 
 import datetime
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 import pandas as pd
 import requests
 
 from noaa_coops._endpoints import DPAPI_BASE_URL
 from noaa_coops._exceptions import COOPSAPIError
-from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION
+from noaa_coops._http import _SESSION, DEFAULT_TIMEOUT
 from noaa_coops._parsing import parse_known_date_formats
 
 if TYPE_CHECKING:
@@ -116,17 +116,17 @@ DATUM_OPTIONS: dict[str, frozenset[str]] = {
 
 def validate_params(
     product: str,
-    start_date: Optional[str],
-    end_date: Optional[str],
-    units: Optional[str],
-    datum: Optional[str],
-    detail: Optional[str] = None,
-    level_type: Optional[str] = None,
-    scenario: Optional[str] = None,
-    year: Optional[int] = None,
-    affil: Optional[str] = None,
-    projection_year: Optional[int] = None,
-    report_year: Optional[int] = None,
+    start_date: str | None,
+    end_date: str | None,
+    units: str | None,
+    datum: str | None,
+    detail: str | None = None,
+    level_type: str | None = None,
+    scenario: str | None = None,
+    year: int | None = None,
+    affil: str | None = None,
+    projection_year: int | None = None,
+    report_year: int | None = None,
 ) -> None:
     """Validate arguments before any DPAPI request is made.
 
@@ -145,11 +145,10 @@ def validate_params(
 
     api_product = _to_api_product(product)
 
-    if api_product in DATES_REQUIRED:
-        if not start_date or not end_date:
-            raise ValueError(
-                f"`start_date` and `end_date` are both required for product '{product}'."
-            )
+    if api_product in DATES_REQUIRED and (not start_date or not end_date):
+        raise ValueError(
+            f"`start_date` and `end_date` are both required for product '{product}'."
+        )
 
     if api_product in DATES_NOT_APPLICABLE and (start_date or end_date):
         raise ValueError(
@@ -265,16 +264,16 @@ def validate_params(
 def build_dpapi_url(
     product: str,
     station_id: str,
-    start_date: Optional[str] = None,
-    end_date: Optional[str] = None,
-    year: Optional[int] = None,
-    units: Optional[str] = "metric",
-    datum: Optional[str] = None,
-    affil: Optional[str] = None,
-    projection_year: Optional[int] = None,
-    report_year: Optional[int] = None,
-    scenario: Optional[str] = None,
-    detail: Optional[str] = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    year: int | None = None,
+    units: str | None = "metric",
+    datum: str | None = None,
+    affil: str | None = None,
+    projection_year: int | None = None,
+    report_year: int | None = None,
+    scenario: str | None = None,
+    detail: str | None = None,
 ) -> str:
     """Build a DPAPI request URL. Assumes validate_params() already ran.
     ``product`` is the public snake_case name; it's translated to NOAA's
@@ -406,7 +405,7 @@ def _parse_extrfa(payload: dict) -> pd.DataFrame:
     )
 
 
-def _parse_extremewaterlevels(payload: dict, level_type: Optional[str]) -> pd.DataFrame:
+def _parse_extremewaterlevels(payload: dict, level_type: str | None) -> pd.DataFrame:
     records = payload["ExtremeWaterLevels"]
     meta_fields: list[str | list[str]] = [
         "stationId",
@@ -452,7 +451,7 @@ def _parse_extremewaterlevels(payload: dict, level_type: Optional[str]) -> pd.Da
     )
 
 
-def _parse_sealvltrends(payload: dict, detail: Optional[str]) -> pd.DataFrame:
+def _parse_sealvltrends(payload: dict, detail: str | None) -> pd.DataFrame:
     if detail == "monthly_means":
         return pd.json_normalize(payload["data"])
 
@@ -497,8 +496,8 @@ def _parse_sealvltrends(payload: dict, detail: Optional[str]) -> pd.DataFrame:
 def parse_dpapi_response(
     payload: dict,
     product: str,
-    detail: Optional[str] = None,
-    level_type: Optional[str] = None,
+    detail: str | None = None,
+    level_type: str | None = None,
 ) -> pd.DataFrame:
     """Turn a raw DPAPI JSON payload into a DataFrame.
 
@@ -538,21 +537,20 @@ def parse_dpapi_response(
 
 
 def get_derived_product(
-    station: "Station",
+    station: Station,
     product: str,
-    start_date: Optional[str] = None,
-    end_date: Optional[str] = None,
-    year: Optional[int] = None,
-    units: Optional[str] = "metric",
-    datum: Optional[str] = None,
-    affil: Optional[str] = None,
-    projection_year: Optional[int] = None,
-    report_year: Optional[int] = None,
-    scenario: Optional[str] = None,
-    detail: Optional[
-        str
-    ] = None,  # sea_level_trends: "monthly_means" | "events" | "seasonal_cycle"
-    level_type: Optional[str] = None,  # extreme_water_levels: "high" | "low"
+    start_date: str | None = None,
+    end_date: str | None = None,
+    year: int | None = None,
+    units: str | None = "metric",
+    datum: str | None = None,
+    affil: str | None = None,
+    projection_year: int | None = None,
+    report_year: int | None = None,
+    scenario: str | None = None,
+    detail: str
+    | None = None,  # sea_level_trends: "monthly_means" | "events" | "seasonal_cycle"
+    level_type: str | None = None,  # extreme_water_levels: "high" | "low"
 ) -> pd.DataFrame:
     """Fetch a derived product for ``station`` from the NOAA DPAPI.
 

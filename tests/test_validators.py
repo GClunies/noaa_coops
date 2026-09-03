@@ -14,7 +14,6 @@ import pytest
 from noaa_coops._parsing import parse_known_date_formats
 from noaa_coops._products import validate_params
 
-
 # ---------------------------------------------------------------------------
 # validate_params: product validation
 # ---------------------------------------------------------------------------
