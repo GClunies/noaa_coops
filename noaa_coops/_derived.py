@@ -69,6 +69,19 @@ SLR_PROJECTION_SCENARIOS: frozenset[str] = frozenset(
     }
 )
 
+#: `affil` options — sea_level_trends, slr_projections, slr_projection_offsets.
+AFFIL_OPTIONS: frozenset[str] = frozenset({"US", "Global"})
+
+#: API products that accept `affil`.
+AFFIL_PRODUCTS: frozenset[str] = frozenset(
+    {"sealvltrends", "slr_projections", "slr_projectionOffsets"}
+)
+
+#: API products that accept `report_year`.
+REPORT_YEAR_PRODUCTS: frozenset[str] = frozenset(
+    {"slr_projections", "slr_projectionOffsets"}
+)
+
 #: Public product name -> NOAA DPAPI product name.
 #: `Station.get_derived_product` accepts and returns the public name; only
 #: `build_dpapi_url` needs to know the underlying API spelling. Products
@@ -111,6 +124,9 @@ def validate_params(
     level_type: Optional[str] = None,
     scenario: Optional[str] = None,
     year: Optional[int] = None,
+    affil: Optional[str] = None,
+    projection_year: Optional[int] = None,
+    report_year: Optional[int] = None,
 ) -> None:
     """Validate arguments before any DPAPI request is made.
 
@@ -194,12 +210,50 @@ def validate_params(
             )
 
     if year is not None:
+        if api_product not in HTF_PRODUCTS:
+            raise ValueError(
+                f"`year` is only supported for HTF products, not '{product}'."
+            )
         if isinstance(year, bool) or not isinstance(year, int):
             raise ValueError(f"`year` must be an int, got {type(year).__name__}.")
         current_year = datetime.date.today().year
         if not (1800 <= year <= current_year):
             raise ValueError(
                 f"Invalid year '{year}'. Must be between 1800 and {current_year}."
+            )
+
+    if affil is not None:
+        if api_product not in AFFIL_PRODUCTS:
+            raise ValueError(
+                "`affil` is only supported for sea_level_trends, slr_projections, "
+                f"and slr_projection_offsets, not '{product}'."
+            )
+        if affil not in AFFIL_OPTIONS:
+            raise ValueError(
+                f"Invalid affil '{affil}'. Must be one of: {sorted(AFFIL_OPTIONS)}"
+            )
+
+    if projection_year is not None:
+        if api_product != "slr_projections":
+            raise ValueError(
+                f"`projection_year` is only supported for slr_projections, "
+                f"not '{product}'."
+            )
+        if isinstance(projection_year, bool) or not isinstance(projection_year, int):
+            raise ValueError(
+                "`projection_year` must be an int, "
+                f"got {type(projection_year).__name__}."
+            )
+
+    if report_year is not None:
+        if api_product not in REPORT_YEAR_PRODUCTS:
+            raise ValueError(
+                "`report_year` is only supported for slr_projections and "
+                f"slr_projection_offsets, not '{product}'."
+            )
+        if isinstance(report_year, bool) or not isinstance(report_year, int):
+            raise ValueError(
+                f"`report_year` must be an int, got {type(report_year).__name__}."
             )
 
 
@@ -569,6 +623,9 @@ def get_derived_product(
         level_type=level_type,
         scenario=scenario,
         year=year,
+        affil=affil,
+        projection_year=projection_year,
+        report_year=report_year,
     )
 
     url = build_dpapi_url(
