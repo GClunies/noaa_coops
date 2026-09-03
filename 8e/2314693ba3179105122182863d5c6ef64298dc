@@ -1,0 +1,16 @@
+pyproject.toml
+  h_54e5c83907823d 41-44
+uv.lock
+  h_54e5c83907823d 19,21,23-78,372,374,376-497,620,630,632-682,728,734,1298,1300,1302-1318
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "8e2314693ba3179105122182863d5c6ef64298dc",
+  "prompts": {},
+  "humans": {
+    "h_54e5c83907823d": {
+      "author": "Gregory Clunies <greg.clunies@gmail.com>"
+    }
+  }
+}
