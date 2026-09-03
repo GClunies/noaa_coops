@@ -24,6 +24,9 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          # mypy runs with python_version = 3.11 (the support floor), so the
+          # env must hold the packages a 3.11 user resolves (e.g. numpy 2.4).
+          python-version: '3.11'
       - run: uv sync --locked --all-extras --group dev
       - run: uv run mypy noaa_coops
 
@@ -31,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.11', '3.12', '3.13']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
