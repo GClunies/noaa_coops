@@ -38,14 +38,21 @@ Changelog = "https://github.com/GClunies/noaa_coops/blob/main/CHANGELOG.md"
 dev = [
     "pytest>=8.2.2",
     "pytest-cov>=5.0.0",
-    "mypy>=1.10.1",
-    "ruff>=0.5.0",
+    # Exact pins: these tools define the lint/typecheck gates, so their
+    # behavior must only change via an explicit, visible version bump.
+    "mypy==2.3.1",
+    "ruff==0.16.5",
     "pandas-stubs>=2.2.0",
     "types-requests>=2.32.0",
     "responses>=0.26.0",
     "pytest-recording>=0.13.4",
     "vcrpy>=8.0",  # 8+ requires Python 3.10; has the VCRHTTPResponse fix for urllib3 2.x
 ]
+
+[tool.ruff.lint]
+# The NOAA CO-OPS API speaks naive timestamps in station-local time or GMT
+# selected by the time_zone parameter, so naive datetimes are intentional.
+ignore = ["DTZ"]
 
 [build-system]
 requires = ["hatchling>=1.24"]

@@ -11,7 +11,6 @@ import math
 import re
 import warnings
 from datetime import datetime, timedelta
-from typing import Optional, Union
 
 import pandas as pd
 import requests
@@ -20,7 +19,7 @@ import zeep
 from noaa_coops._derived import get_derived_product as _get_derived_product
 from noaa_coops._endpoints import DATA_GETTER_URL, INVENTORY_WSDL_URL
 from noaa_coops._exceptions import COOPSAPIError
-from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION, _SOAP_SESSION
+from noaa_coops._http import _SESSION, _SOAP_SESSION, DEFAULT_TIMEOUT
 from noaa_coops._metadata import populate_metadata
 from noaa_coops._parsing import normalize_data_frame, parse_known_date_formats
 from noaa_coops._products import (
@@ -31,7 +30,7 @@ from noaa_coops._products import (
 
 # Back-compat re-exports (callers did `from noaa_coops.station import COOPSAPIError`
 # for years; keep that path working after the Tier 4 split).
-__all__ = ["COOPSAPIError", "DEFAULT_TIMEOUT", "Station"]
+__all__ = ["DEFAULT_TIMEOUT", "COOPSAPIError", "Station"]
 
 logger = logging.getLogger(__name__)
 
@@ -167,12 +166,12 @@ class Station:
         begin_date: str,
         end_date: str,
         product: str,
-        max_min_type: Optional[str] = None,
-        datum: Optional[str] = None,
-        bin_num: Optional[int] = None,
-        interval: Optional[Union[str, int]] = None,
-        units: Optional[str] = "metric",
-        time_zone: Optional[str] = "gmt",
+        max_min_type: str | None = None,
+        datum: str | None = None,
+        bin_num: int | None = None,
+        interval: str | int | None = None,
+        units: str | None = "metric",
+        time_zone: str | None = "gmt",
     ) -> pd.DataFrame:
         """Fetch data from the NOAA CO-OPS API as a pandas DataFrame.
 
@@ -258,17 +257,17 @@ class Station:
     def get_derived_product(
         self,
         product: str,
-        start_date: Optional[str] = None,
-        end_date: Optional[str] = None,
-        year: Optional[int] = None,
-        units: Optional[str] = "metric",
-        datum: Optional[str] = None,
-        affil: Optional[str] = None,
-        projection_year: Optional[int] = None,
-        report_year: Optional[int] = None,
-        scenario: Optional[str] = None,
-        detail: Optional[str] = None,
-        level_type: Optional[str] = None,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        year: int | None = None,
+        units: str | None = "metric",
+        datum: str | None = None,
+        affil: str | None = None,
+        projection_year: int | None = None,
+        report_year: int | None = None,
+        scenario: str | None = None,
+        detail: str | None = None,
+        level_type: str | None = None,
     ) -> pd.DataFrame:
         """Fetch a derived product from the NOAA CO-OPS Derived Product API (DPAPI).
 
@@ -362,12 +361,12 @@ class Station:
         end_date: str,
         *,
         product: str,
-        max_min_type: Optional[str],
-        datum: Optional[str],
-        bin_num: Optional[int],
-        interval: Optional[Union[str, int]],
-        units: Optional[str],
-        time_zone: Optional[str],
+        max_min_type: str | None,
+        datum: str | None,
+        bin_num: int | None,
+        interval: str | int | None,
+        units: str | None,
+        time_zone: str | None,
     ) -> str:
         """URL-encode the datagetter query for this product + date range."""
         params = build_request_params(
@@ -395,12 +394,12 @@ class Station:
         begin_dt: datetime,
         end_dt: datetime,
         product: str,
-        max_min_type: Optional[str],
-        datum: Optional[str],
-        bin_num: Optional[int],
-        interval: Optional[Union[str, int]],
-        units: Optional[str],
-        time_zone: Optional[str],
+        max_min_type: str | None,
+        datum: str | None,
+        bin_num: int | None,
+        interval: str | int | None,
+        units: str | None,
+        time_zone: str | None,
     ) -> pd.DataFrame:
         """Fetch a date range that spans more than one NOAA block.
 
@@ -413,7 +412,7 @@ class Station:
         """
         block_size = get_max_days(product, interval)
         delta = end_dt - begin_dt
-        num_blocks = int(math.ceil(delta.days / block_size))
+        num_blocks = math.ceil(delta.days / block_size)
 
         blocks: list[pd.DataFrame] = []
         missing_blocks: list[dict[str, str]] = []
@@ -421,7 +420,7 @@ class Station:
         for i in range(num_blocks):
             begin_loop = begin_dt + timedelta(days=(i * block_size))
             end_loop = begin_loop + timedelta(days=block_size)
-            end_loop = end_dt if end_loop > end_dt else end_loop
+            end_loop = min(end_loop, end_dt)
 
             data_url = self._build_request_url(
                 begin_loop.strftime("%Y%m%d %H:%M"),
@@ -492,7 +491,7 @@ class Station:
                 err_payload = res.json()
                 if "error" in err_payload and "message" in err_payload["error"]:
                     err_msg += f" | NOAA Message: {err_payload['error']['message']}"
-            except Exception:
+            except Exception:  # noqa: BLE001, S110
                 pass  # If it's a 503 HTML page, just ignore and raise the base error
             raise COOPSAPIError(message=err_msg + "\n")
         json_dict = res.json()

@@ -15,8 +15,7 @@ from __future__ import annotations
 import pytest
 
 import noaa_coops as nc
-from noaa_coops._derived import build_dpapi_url
-from noaa_coops._derived import parse_dpapi_response
+from noaa_coops._derived import build_dpapi_url, parse_dpapi_response
 from noaa_coops._exceptions import COOPSAPIError
 
 DERIVED_PRODUCT_MATRIX = [

@@ -11,7 +11,8 @@ the equivalent tests against `_products.validate_params`
 from __future__ import annotations
 
 import pytest
-import noaa_coops._derived as _derived
+
+from noaa_coops import _derived
 from noaa_coops._derived import validate_params
 
 BASE = {

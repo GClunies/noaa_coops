@@ -7,8 +7,6 @@ product is now a one-place change instead of three.
 
 from __future__ import annotations
 
-from typing import Optional, Union
-
 VALID_DATUMS: frozenset[str] = frozenset(
     {"CRD", "IGLD", "LWD", "MHHW", "MHW", "MTL", "MSL", "MLW", "MLLW", "NAVD", "STND"}
 )
@@ -107,7 +105,7 @@ INTERVAL_LIMIT_OVERRIDES: dict[tuple[str, str], int] = {
 }
 
 
-def get_max_days(product: str, interval: Optional[Union[str, int]]) -> int:
+def get_max_days(product: str, interval: str | int | None) -> int:
     """Max single-request date-range window in days for this product/interval."""
     if interval is not None:
         override = INTERVAL_LIMIT_OVERRIDES.get((product, str(interval)))
@@ -123,12 +121,12 @@ def get_max_days(product: str, interval: Optional[Union[str, int]]) -> int:
 
 def validate_params(
     product: str,
-    max_min_type: Optional[str],
-    datum: Optional[str],
-    bin_num: Optional[int],
-    interval: Optional[Union[str, int]],
-    units: Optional[str],
-    time_zone: Optional[str],
+    max_min_type: str | None,
+    datum: str | None,
+    bin_num: int | None,
+    interval: str | int | None,
+    units: str | None,
+    time_zone: str | None,
 ) -> None:
     """Validate every user-provided argument to ``Station.get_data``.
 
@@ -182,14 +180,17 @@ def validate_params(
             "    hourly_height: 1 hour\n"
         )
 
-    if interval is not None and product in ALLOWED_INTERVALS:
-        if str(interval) not in ALLOWED_INTERVALS[product]:
-            raise ValueError(
-                f"`interval` parameter {interval} is not supported for "
-                f"`{product}` product. See "
-                "https://tidesandcurrents.noaa.gov/api/prod/#interval "
-                "for list of available intervals."
-            )
+    if (
+        interval is not None
+        and product in ALLOWED_INTERVALS
+        and str(interval) not in ALLOWED_INTERVALS[product]
+    ):
+        raise ValueError(
+            f"`interval` parameter {interval} is not supported for "
+            f"`{product}` product. See "
+            "https://tidesandcurrents.noaa.gov/api/prod/#interval "
+            "for list of available intervals."
+        )
 
     if product in BIN_REQUIRED and bin_num is None:
         raise ValueError(
@@ -221,12 +222,12 @@ def build_request_params(
     begin_date: str,
     end_date: str,
     product: str,
-    max_min_type: Optional[str],
-    datum: Optional[str],
-    bin_num: Optional[int],
-    interval: Optional[Union[str, int]],
-    units: Optional[str],
-    time_zone: Optional[str],
+    max_min_type: str | None,
+    datum: str | None,
+    bin_num: int | None,
+    interval: str | int | None,
+    units: str | None,
+    time_zone: str | None,
 ) -> dict[str, str]:
     """Build the URL-encoded query params dict for the datagetter endpoint.
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from noaa_coops._endpoints import STATIONS_LIST_URL
 from noaa_coops._exceptions import COOPSAPIError
-from noaa_coops._http import DEFAULT_TIMEOUT, _SESSION
+from noaa_coops._http import _SESSION, DEFAULT_TIMEOUT
 
 
 def get_stations_from_bbox(

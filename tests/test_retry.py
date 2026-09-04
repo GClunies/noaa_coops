@@ -16,7 +16,6 @@ import noaa_coops as nc
 from noaa_coops._http import _SESSION
 from noaa_coops.station import COOPSAPIError
 
-
 DATA_GETTER_URL_RE = re.compile(
     r"https://api\.tidesandcurrents\.noaa\.gov/api/prod/datagetter\?.*"
 )
