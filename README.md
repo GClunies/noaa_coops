@@ -14,7 +14,7 @@ A Python wrapper for the NOAA CO-OPS Tides & Currents
 
 ## Installation
 
-Supported on Python **3.10, 3.11, 3.12, and 3.13**.
+Supported on Python **3.11, 3.12, and 3.13**.
 
 ```bash
 uv add noaa-coops
