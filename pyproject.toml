@@ -40,7 +40,7 @@ dev = [
     # Exact pins: these tools define the lint/typecheck gates, so their
     # behavior must only change via an explicit, visible version bump.
     "mypy==2.3.1",
-    "ruff==0.16.5",
+    "ruff==0.16.7",
     "pandas-stubs>=2.2.0",
     "types-requests>=2.32.0",
     "responses>=0.26.0",
