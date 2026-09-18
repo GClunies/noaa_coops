@@ -1,0 +1,129 @@
+name: Release Please
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release-automation
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Run release-please in manifest mode
+        id: release
+        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: main
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+      - name: Read and validate the release pull request
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        id: release-pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_JSON: ${{ steps.release.outputs.pr }}
+        run: |
+          PR_NUMBER=$(jq -er '.number' <<<"$PR_JSON")
+          PR=$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}")
+          BASE=$(jq -r '.base.ref' <<<"$PR")
+          HEAD_REF=$(jq -r '.head.ref' <<<"$PR")
+          HEAD_SHA=$(jq -r '.head.sha' <<<"$PR")
+          HEAD_REPOSITORY=$(jq -r '.head.repo.full_name' <<<"$PR")
+          AUTHOR=$(jq -r '.user.login' <<<"$PR")
+          test "$BASE" = main
+          test "$HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+          test "$AUTHOR" = "github-actions[bot]"
+          case "$HEAD_REF" in
+            release-please--branches--main|release-please--branches--main--components--*) ;;
+            *) echo "::error::Unexpected release PR branch: $HEAD_REF"; exit 1 ;;
+          esac
+          {
+            echo "number=$PR_NUMBER"
+            echo "head_ref=$HEAD_REF"
+            echo "head_sha=$HEAD_SHA"
+          } >> "$GITHUB_OUTPUT"
+      - name: Install uv for release preparation
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+      - name: Prepare release pull request
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        id: prepare
+        env:
+          HEAD_REF: ${{ steps.release-pr.outputs.head_ref }}
+          HEAD_SHA: ${{ steps.release-pr.outputs.head_sha }}
+        run: |
+          git clone --branch "$HEAD_REF" --single-branch "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git" "$RUNNER_TEMP/release-pr"
+          cd "$RUNNER_TEMP/release-pr"
+          test "$(git rev-parse HEAD)" = "$HEAD_SHA"
+          git fetch origin main:refs/remotes/origin/main
+
+          mapfile -d '' CHANGED_PATHS < <(git diff --name-only -z origin/main...HEAD)
+          for PATH_NAME in "${CHANGED_PATHS[@]}"; do
+            case "$PATH_NAME" in
+              pyproject.toml|uv.lock|CITATION.cff|CHANGELOG.md|.release-please-manifest.json|release-please-config.json) ;;
+              *) echo "::error::Unexpected path in release PR: $PATH_NAME"; exit 1 ;;
+            esac
+          done
+
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          BASE_MANIFEST=$(git show origin/main:.release-please-manifest.json)
+          BASE_RELEASE_AS=$(git show origin/main:release-please-config.json | jq -r '.packages["."]["release-as"] // empty')
+          if [[ "$(jq -c . <<<"$BASE_MANIFEST")" = '{}' || "$BASE_RELEASE_AS" = 1.0.0 ]]; then
+            VERSION=$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+            test "$VERSION" = 1.0.0
+            python "$GITHUB_WORKSPACE/scripts/release.py" bootstrap-changelog --path CHANGELOG.md --source "$GITHUB_WORKSPACE/CHANGELOG.md" --version 1.0.0
+            jq 'del(.packages["."]["release-as"])' release-please-config.json > "$RUNNER_TEMP/release-please-config.json"
+            mv "$RUNNER_TEMP/release-please-config.json" release-please-config.json
+            git add CHANGELOG.md release-please-config.json
+          fi
+
+          uv lock
+          if ! git diff --quiet -- uv.lock; then
+            git add uv.lock
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: prepare release metadata"
+          fi
+          echo "final_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Push prepared release pull request
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ steps.release-pr.outputs.head_ref }}
+          FINAL_SHA: ${{ steps.prepare.outputs.final_sha }}
+        run: |
+          cd "$RUNNER_TEMP/release-pr"
+          cleanup_git_auth() {
+            git config --global --unset-all credential.https://github.com.helper || true
+          }
+          trap cleanup_git_auth EXIT
+          gh auth setup-git
+          git push origin "HEAD:${HEAD_REF}"
+          gh workflow run pull_request.yml --repo "$GITHUB_REPOSITORY" --ref "$HEAD_REF" -f expected_sha="$FINAL_SHA"
+
+      - name: Dispatch publication for the created release
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag_name }}
+          RELEASE_SHA: ${{ steps.release.outputs.sha }}
+        run: |
+          test -n "$RELEASE_TAG"
+          test -n "$RELEASE_SHA"
+          gh workflow run publish.yml --ref "$RELEASE_TAG" -f tag="$RELEASE_TAG" -f expected_sha="$RELEASE_SHA"

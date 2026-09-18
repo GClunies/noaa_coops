@@ -1,146 +1,49 @@
 # Changelog
 
-All notable changes to this project are documented in this file.
+This project follows [Semantic Versioning](https://semver.org/). Release PRs update this changelog before publication.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
-and this project adheres to [Semantic Versioning](https://semver.org/).
+## Unreleased
 
-## [Unreleased]
+These notes include the unpublished 0.5.0 work and later changes since PyPI 0.4.0.
 
-### Added
+### Breaking changes
 
-- **`daily_max_min` product support:** `Station.get_data()` now accepts `product="daily_max_min"`.
-- Standardized API response handling for `daily_max_min` to unify 6-minute and hourly payloads into a consistent `(record_type, value, pcComplete, flag)` column schema.
-- Added `max_min_type` parameter to filter extrema (`"max"`, `"min"`, or `None` for both). 
-- `interval` now automatically defaults to `"h"` (hourly) when requesting `daily_max_min` to prevent mixed-interval responses.
-- Added `daily_max_min` to `ALL_PRODUCTS` and `DATUM_REQUIRED` registries, with strict parameter validation for `max_min_type`.
-- Added `PRODUCT_LIMITS` dictionary to `_products.py` to support pagination and chunking limits.
-- **Derived Product API (DPAPI) support:** `Station.get_derived_product()` fetches computed/aggregate NOAA products — sea level trends, sea level rise projections, high-tide-flooding counts, extreme water levels, and regional frequency analysis. See README for supported products and usage.
-- Parameter validation for derived products fails fast with `ValueError` before any network call, matching `get_data()`'s existing behavior.
-- Added `scenario` validation for `slr_projections`: must be one of `all`, `low`, `intermediate-low`, `intermediate`, `intermediate-high`, `high`, `extreme` (default `all`).
-- Station metadata now stores previously-dropped schema fields: harmonic constituents (`harcon`) for current and current-prediction stations, `center_bin_1_dist`, `height_from_bottom`,`superseded_datums` for water-level stations, and others.
-- Multi-bin current prediction stations now keep offsets for every bin via `current_pred_offsets_by_bin`, instead of only the first.
+- Use Python 3.11 or later. Python 3.9 and 3.10 are no longer supported.
+- Read datum metadata from `station.datums`. `datums` is not a supported Data API product.
+- Use `if not station.data_inventory` to detect an unavailable inventory. The attribute now always exists, even after a SOAP failure.
 
-### Fixed
+### Features
 
-- Improved API error handling in `_make_api_request`: Reinstated checks for HTTP 200 responses that contain an embedded `{"error": {"message": "..."}}` body, ensuring bad parameter requests fail fast with clear error messages rather than silently crashing the parser.
-- Enforced datum validation for the `ofs_water_level` product to ensure requests fail fast before hitting the API.
-- `Station.get_data` uses `PRODUCT_LIMITS` for `_fetch_in_blocks` block sizing, so each product respects its own documented API date-range cap. Previously, all products used a hardcoded 31-day limit (except `hourly_height`/`high_low` at 365 days).
-- Fixed block-count calculation in `_fetch_in_blocks`: switching from `floor(n/block)+1` to `ceil(n/block)` eliminates a zero-length API call when the date range divided evenly by the block size.
-- Fixed `populate_metadata` misclassifying tide-prediction stations with a null `datums` block as water-level stations, which stripped their offset values.
-- Fixed the `tidepredoffsets` expand-param typo and a malformed `units` query param (was joined with a second `?` instead of `&`) in metadata requests.
-- 1-minute interval `predictions` requests are now capped at NOAA's practical 30-day window instead of the product's normal limit.
+- Fetch derived products with `Station.get_derived_product()`. Supported products include sea level trends, projections, flood counts, extreme water levels, and regional frequency analysis.
+- Fetch daily extrema with `Station.get_data(product="daily_max_min")`. Use `max_min_type` to select minima or maxima. The default interval is hourly.
+- Import `COOPSAPIError` directly from `noaa_coops`. The existing import from `noaa_coops.station` remains available.
+- Retain harmonic constituents, superseded datums, and additional station metadata fields.
+- Access offsets for every current-prediction bin through `current_pred_offsets_by_bin`.
 
-### Changed
+### Fixes
 
-- SOAP `DataInventory` calls now go through a dedicated retrying
-  `requests.Session` (`_SOAP_SESSION`) that retries POST as well as GET on
-  transient failures (`429`/`5xx`). Gives the data-inventory path the same
-  resiliency the REST path already had.
+- Reject invalid derived-product parameters before a network request.
+- Require a datum for `ofs_water_level` requests.
+- Raise `COOPSAPIError` for NOAA error payloads returned with HTTP 200.
+- Respect product-specific limits when splitting requests into date ranges. One-minute predictions use a 30-day limit.
+- Avoid empty final requests when a date range divides evenly into request blocks.
+- Preserve tide-prediction offsets for stations without datums. Correct the metadata request parameters for offsets and units.
+- Use consistent columns for daily extrema returned at different intervals.
+- Retry transient REST and SOAP errors. Apply timeouts to HTTP requests.
+- Report partial date-range failures with a warning and `DataFrame.attrs["missing_blocks"]`.
+- Combine response blocks once instead of repeatedly copying accumulated data.
+- Handle missing SOAP inventory fields without an uncaught `KeyError`.
+- Raise `ValueError` for unsupported date formats.
 
-### Removed
+### Development
 
-- **`datums` product.** Removed from `ALL_PRODUCTS` — it's a Metadata API concept (`station.datums`), not a Data API product.
+- Build packages with `uv` and Hatchling.
+- Run offline product tests with recorded NOAA responses.
+- Run lint, type checks, and tests for Python 3.11 through 3.13 in CI.
+- Run a nightly live SOAP inventory test and track failures in GitHub issues.
+- Prepare reviewed release PRs with automated version bumps and release notes.
+- Publish release artifacts through `uv` with PyPI Trusted Publishing.
 
-## [0.5.0]
+## 0.4.0 - 2024-08-03
 
-Major modernization release. Every layer of the project was touched — build
-system, CI/CD, internal structure, testing, and docs. Behavior for existing
-users is almost entirely unchanged; two small backward-compatible behavioral
-changes are called out under *Changed* below.
-
-### Added
-
-- **Module-level HTTP session** with automatic retries on transient failures
-  (`429`, `500`, `502`, `503`, `504`) via a `urllib3.util.retry.Retry` adapter
-  (`noaa_coops/_http.py`). All calls — including `get_stations_from_bbox` —
-  share the session's connection pool and retry policy.
-- **Warn-and-continue** behavior on multi-block fetches: when one block in a
-  multi-month fetch fails, a `RuntimeWarning` is emitted and
-  `df.attrs["missing_blocks"]` is populated with `{begin, end, error}` entries
-  instead of silently dropping the block.
-- **Declarative product registry** (`noaa_coops/_products.py`) replacing the
-  historical 186-line `_check_product_params` if/elif tree + 150-line
-  `_build_request_url` if/elif tree. Adding a new NOAA product is now a
-  one-place change.
-- **Public export**: `COOPSAPIError` is now importable as
-  `from noaa_coops import COOPSAPIError` (the old
-  `from noaa_coops.station import COOPSAPIError` path still works).
-- **Offline test suite** using [pytest-recording](https://github.com/kiwicom/pytest-recording)
-  VCR cassettes. Default `pytest` runs in ~1.5s with zero network calls.
-- **Nightly live canary** (`.github/workflows/nightly.yml`) runs `pytest -m
-  live` daily at 06:00 UTC. On failure, opens a tracking issue so NOAA drift
-  is visible without flooding the inbox.
-- **Manual publish workflows** mirroring the PyPA pattern:
-  `.github/workflows/test-publish.yml` publishes to TestPyPI,
-  `.github/workflows/publish.yml` publishes to PyPI + creates the
-  `v{VERSION}` tag + cuts a GitHub Release with an auto-generated changelog
-  from `git log`. Both `workflow_dispatch`.
-- **Dependabot** configured for `github-actions` and the `uv` ecosystems.
-- **pre-commit** hooks (`.pre-commit-config.yaml`) — ruff check + format +
-  standard hygiene hooks. Free auto-fix PRs via pre-commit.ci.
-
-### Changed
-
-- **Build backend swapped to hatchling.** Version is read from
-  `noaa_coops/__init__.py` by `hatchling.build`. No more `poetry-core`.
-- **CI swapped to `uv` + `hatchling`.** Jobs: `lint` (ruff), `typecheck`
-  (mypy), and `test` (pytest matrix across Python 3.10 – 3.13 on
-  `ubuntu-latest`).
-- **Added HTTP timeouts everywhere.** Every `requests.get` / `_SESSION.get`
-  passes `timeout=(5.0, 30.0)` (connect, read). No more hangs on stalled NOAA
-  endpoints.
-- **Narrower exception handling.** Bare `except:` in `Station.__init__`
-  replaced with `(requests.RequestException, zeep.exceptions.Error,
-  AttributeError, TypeError)` + a `logging.warning`. `KeyboardInterrupt` and
-  `SystemExit` now propagate correctly.
-- **Internal module split.** `station.py` shrunk from 825 lines to ~350.
-  New internal modules: `_exceptions.py`, `_endpoints.py`, `_http.py`,
-  `_parsing.py`, `_products.py`, `_metadata.py`, plus the public `api.py`.
-  All previous import paths continue to work.
-- **`pyproject.toml` converted to PEP 621** `[project]` table with
-  classifiers, keywords, and `[project.urls]` so the PyPI page renders useful
-  metadata.
-- **`station.data_inventory` is always set.** An empty dict `{}` now
-  indicates the SOAP fetch failed, rather than the attribute being unset.
-  Callers using `hasattr(station, 'data_inventory')` should switch to
-  `if not station.data_inventory:`.
-
-### Fixed
-
-- **O(n²) memory in multi-block fetches.** The multi-block loop used to
-  rebuild the full DataFrame on every iteration via
-  `df = pd.concat([df, df_block])`. Now appends to a list and concatenates
-  once at the end.
-- **Silent `KeyError` crash in `get_data_inventory`.** If the SOAP response
-  lacked a `"parameter"` key, the error escaped the narrow catch in
-  `Station.__init__` and crashed construction. Now handled locally via
-  `try/except (KeyError, TypeError)`.
-- **`_parse_known_date_formats` `UnboundLocalError` trap.** The old
-  `match = False` flag pattern (set only in the `except` branch) could raise
-  `UnboundLocalError` in edge cases. Rewritten as a clean for/try/continue
-  loop that raises `ValueError` after exhausting all known formats.
-- **`stale --cov=reflekt` config.** pytest coverage was pointing at the
-  wrong project. Fixed to `--cov=noaa_coops`.
-
-### Removed
-
-- **Python 3.9 support.** 3.9 went EOL in October 2025 and the modern testing
-  stack (vcrpy 8.x, urllib3 2.x, types-requests 2.32.4+) requires ≥3.10.
-  Supported versions: 3.10, 3.11, 3.12, 3.13.
-- **Dead files.** `.bumpversion.cfg` (stuck at `0.1.9` targeting nonexistent
-  `setup.py`), `.flake8` (superseded by ruff), `mypy.ini` (migrated into
-  `pyproject.toml`), `pytest.ini` (same), old `poetry.lock`, and a 96-line
-  `if __name__ == "__main__":` debug block in `station.py`.
-- **Third-party publish action.** Replaced `JRubics/poetry-publish` with the
-  PyPA-official `pypa/gh-action-pypi-publish`.
-
-## [0.4.0] - 2023-xx-xx
-
-Earlier releases are documented in the
-[GitHub release history](https://github.com/GClunies/noaa_coops/releases).
-
-<!-- Links -->
-[Unreleased]: https://github.com/GClunies/noaa_coops/compare/v0.5.0...HEAD
-[0.5.0]: https://github.com/GClunies/noaa_coops/compare/v0.4.0...v0.5.0
-[0.4.0]: https://github.com/GClunies/noaa_coops/releases/tag/v0.4.0
+The last published version before the release automation setup is [0.4.0 on PyPI](https://pypi.org/project/noaa-coops/0.4.0/).

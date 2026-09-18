@@ -2,130 +2,187 @@ name: Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing stable release tag
+        required: true
+        type: string
+      expected_sha:
+        description: Exact commit referenced by the release tag
+        required: true
+        type: string
+
+concurrency:
+  group: publish-${{ inputs.tag }}
+  cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.version.outputs.version }}
+      version: ${{ steps.repository.outputs.version }}
+      artifact_name: ${{ steps.repository.outputs.artifact_name }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          ref: ${{ inputs.expected_sha }}
           fetch-depth: 0
-
-      - name: Read version from __init__.py
-        id: version
+          persist-credentials: false
+      - name: Validate immutable release inputs
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.tag }}
         run: |
-          VERSION=$(grep '__version__' noaa_coops/__init__.py | sed 's/.*"\(.*\)"/\1/')
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          test "$GITHUB_REF" = "refs/tags/$RELEASE_TAG"
+          test "$GITHUB_SHA" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")" = "$EXPECTED_SHA"
+          git fetch origin main:refs/remotes/origin/main
+          git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
+          RELEASE=$(gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --json isDraft,isPrerelease)
+          test "$(jq -r '.isDraft' <<<"$RELEASE")" = false
+          test "$(jq -r '.isPrerelease' <<<"$RELEASE")" = false
+      - name: Validate repository release metadata
+        id: repository
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: |
+          VERSION=$(python scripts/release.py validate-repository --tag "$RELEASE_TAG")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Detected version: $VERSION"
+          echo "artifact_name=dist-${RELEASE_TAG}-${EXPECTED_SHA}" >> "$GITHUB_OUTPUT"
 
-      - name: Validate semver
+  notes-sync:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          ref: ${{ inputs.expected_sha }}
+          persist-credentials: false
+      - name: Replace release notes with the tagged changelog section
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          VERSION: ${{ needs.validate.outputs.version }}
         run: |
-          if ! echo "${{ steps.version.outputs.version }}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-            echo "::error::Version in noaa_coops/__init__.py must be semver (e.g. 0.6.0), got: ${{ steps.version.outputs.version }}"
-            exit 1
-          fi
+          python scripts/release.py changelog-section --path CHANGELOG.md --version "$VERSION" > "$RUNNER_TEMP/release-notes.md"
+          gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --notes-file "$RUNNER_TEMP/release-notes.md"
+          EXPECTED_NOTES=$(cat "$RUNNER_TEMP/release-notes.md")
+          ACTUAL_NOTES=$(gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --json body --jq '.body')
+          test "$ACTUAL_NOTES" = "$EXPECTED_NOTES"
 
-      - name: Check tag does not already exist
-        run: |
-          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
-            echo "::error::Tag v${{ steps.version.outputs.version }} already exists. Bump the version in noaa_coops/__init__.py first."
-            exit 1
-          fi
-
-  test:
+  quality:
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-      - name: Run tests
-        run: |
-          uv sync --locked --all-extras --group dev
-          uv run pytest -m "not live"
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          ref: ${{ inputs.expected_sha }}
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+        with:
+          enable-cache: true
+          python-version: '3.11'
+      - run: uv sync --locked --all-extras --group dev
+      - run: uv run ruff check noaa_coops scripts tests
+      - run: uv run ruff format --check noaa_coops scripts tests
+      - run: uv run mypy noaa_coops
+      - run: uv run pytest -m "not live"
 
   build:
-    needs: test
+    needs: [validate, quality]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-      - name: Build package
-        run: uv build
-      - name: Upload dist
-        uses: actions/upload-artifact@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
-          name: dist
+          ref: ${{ inputs.expected_sha }}
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+      - name: Build and inspect distributions
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+        run: |
+          uv build --no-sources
+          python scripts/release.py validate-artifacts --dist dist --version "$VERSION"
+          uv venv "$RUNNER_TEMP/wheel-check"
+          uv pip install --python "$RUNNER_TEMP/wheel-check/bin/python" dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/wheel-check/bin/python" -c "import noaa_coops; assert noaa_coops.__version__ == '$VERSION'; assert all(callable(getattr(noaa_coops, name)) for name in ('COOPSAPIError', 'Station', 'get_stations_from_bbox'))"
+      - name: Retain immutable distributions
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0
+        with:
+          name: ${{ needs.validate.outputs.artifact_name }}
           path: dist/
+          if-no-files-found: error
+          overwrite: false
+          retention-days: 30
 
-  publish-pypi:
-    needs: [validate, build]
+  publish:
+    needs: [validate, build, notes-sync]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - name: Download retained distributions
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ needs.validate.outputs.artifact_name }}
+          path: dist/
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+      - name: Publish distributions with PyPI trusted publishing
+        run: uv publish --trusted-publishing always --check-url https://pypi.org/simple dist/*
+
+  attach-assets:
+    needs: [validate, publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download retained distributions
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ needs.validate.outputs.artifact_name }}
+          path: dist/
+      - name: Attach identical distributions to the existing GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          RELEASE_ID=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${RELEASE_TAG}" --jq '.id')
+          for FILE in dist/*; do
+            NAME=$(basename "$FILE")
+            ASSET_ID=$(gh api "repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}/assets" --paginate --jq ".[] | select(.name == \"$NAME\") | .id")
+            if [[ -n "$ASSET_ID" ]]; then
+              gh api -H 'Accept: application/octet-stream' "repos/${GITHUB_REPOSITORY}/releases/assets/${ASSET_ID}" > "$RUNNER_TEMP/$NAME"
+              if ! cmp --silent "$FILE" "$RUNNER_TEMP/$NAME"; then
+                echo "::error::Existing release asset $NAME has different bytes"
+                exit 1
+              fi
+            else
+              gh release upload "$RELEASE_TAG" "$FILE" --repo "$GITHUB_REPOSITORY"
+            fi
+          done
+
+  verify-pypi:
+    needs: [validate, attach-assets]
     runs-on: ubuntu-latest
     steps:
-      - name: Download dist
-        uses: actions/download-artifact@v8
-        with:
-          name: dist
-          path: dist/
-      - uses: astral-sh/setup-uv@v7
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_TOKEN }}
-      - name: Verify install from PyPI
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+      - name: Install the exact release from PyPI outside the source tree
+        env:
+          VERSION: ${{ needs.validate.outputs.version }}
+        working-directory: ${{ runner.temp }}
         run: |
-          sleep 10
-          uv venv /tmp/verify-env
-          uv pip install --python /tmp/verify-env/bin/python noaa-coops==${{ needs.validate.outputs.version }}
-          /tmp/verify-env/bin/python -c "from noaa_coops import __version__; assert __version__ == '${{ needs.validate.outputs.version }}', f'Version mismatch: {__version__}'"
-
-  release:
-    needs: [validate, publish-pypi]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - name: Download dist
-        uses: actions/download-artifact@v8
-        with:
-          name: dist
-          path: dist/
-
-      - name: Generate changelog
-        id: changelog
-        run: |
-          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -z "$PREV_TAG" ]; then
-            RANGE="HEAD"
-          else
-            RANGE="${PREV_TAG}..HEAD"
-          fi
-          {
-            echo "body<<CHANGELOG_EOF"
-            echo "## What's Changed"
-            echo ""
-            git log "$RANGE" --pretty=format:"- %s (%h)" --no-merges
-            echo ""
-            echo ""
-            echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG:-initial}...v${{ needs.validate.outputs.version }}"
-            echo "CHANGELOG_EOF"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Create git tag
-        run: |
-          git tag "v${{ needs.validate.outputs.version }}"
-          git push origin "v${{ needs.validate.outputs.version }}"
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
-        with:
-          tag_name: v${{ needs.validate.outputs.version }}
-          name: v${{ needs.validate.outputs.version }}
-          body: ${{ steps.changelog.outputs.body }}
-          files: dist/*
+          uv venv pypi-check
+          uv pip install --python pypi-check/bin/python --no-cache noaa-coops=="$VERSION"
+          pypi-check/bin/python -c "import noaa_coops; assert noaa_coops.__version__ == '$VERSION'; assert all(callable(getattr(noaa_coops, name)) for name in ('COOPSAPIError', 'Station', 'get_stations_from_bbox'))"

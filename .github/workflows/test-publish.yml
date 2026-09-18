@@ -2,92 +2,137 @@ name: Test Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact release PR commit to rehearse
+        required: true
+        type: string
+
+concurrency:
+  group: test-publish-${{ inputs.expected_sha }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pull-requests: read
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
+      artifact_name: ${{ steps.version.outputs.artifact_name }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          ref: ${{ inputs.expected_sha }}
           fetch-depth: 0
-
-      - name: Read version from __init__.py
-        id: version
+          persist-credentials: false
+      - name: Validate the canonical release pull request
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(grep '__version__' noaa_coops/__init__.py | sed 's/.*"\(.*\)"/\1/')
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Detected version: $VERSION"
-
-      - name: Validate semver
-        run: |
-          if ! echo "${{ steps.version.outputs.version }}" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-            echo "::error::Version in noaa_coops/__init__.py must be semver (e.g. 0.6.0), got: ${{ steps.version.outputs.version }}"
-            exit 1
-          fi
-
-      - name: Check tag does not already exist
-        run: |
-          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
-            echo "::error::Tag v${{ steps.version.outputs.version }} already exists. Bump the version in noaa_coops/__init__.py first."
-            exit 1
-          fi
-
-      - name: Check version not already on TestPyPI
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          STATUS=$(curl -sS -o /dev/null -w "%{http_code}" "https://test.pypi.org/pypi/noaa-coops/$VERSION/json")
-          if [ "$STATUS" = "200" ]; then
-            echo "::error::Version $VERSION is already published to TestPyPI. Bump the version in noaa_coops/__init__.py."
-            exit 1
-          fi
-          echo "Version $VERSION is not yet on TestPyPI (HTTP $STATUS)."
-
-  test:
-    needs: validate
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-      - name: Run tests
-        run: |
-          uv sync --locked --all-extras --group dev
-          uv run pytest -m "not live"
-
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
-      - name: Build package
-        run: uv build
-      - name: Upload dist
-        uses: actions/upload-artifact@v7
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$GITHUB_SHA" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          git fetch origin main:refs/remotes/origin/main
+          git merge-base --is-ancestor origin/main "$EXPECTED_SHA"
+          PRS=$(gh api "repos/${GITHUB_REPOSITORY}/commits/${EXPECTED_SHA}/pulls")
+          test "$(jq 'length' <<<"$PRS")" = 1
+          PR=$(jq '.[0]' <<<"$PRS")
+          BASE=$(jq -r '.base.ref' <<<"$PR")
+          HEAD_REF=$(jq -r '.head.ref' <<<"$PR")
+          HEAD_SHA=$(jq -r '.head.sha' <<<"$PR")
+          HEAD_REPOSITORY=$(jq -r '.head.repo.full_name' <<<"$PR")
+          AUTHOR=$(jq -r '.user.login' <<<"$PR")
+          STATE=$(jq -r '.state' <<<"$PR")
+          test "$BASE" = main
+          test "$HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+          test "$AUTHOR" = "github-actions[bot]"
+          test "$STATE" = open
+          test "$HEAD_SHA" = "$EXPECTED_SHA"
+          case "$HEAD_REF" in
+            release-please--branches--main|release-please--branches--main--components--*) ;;
+            *) echo "::error::Unexpected release PR branch: $HEAD_REF"; exit 1 ;;
+          esac
+          test "$GITHUB_REF" = "refs/heads/$HEAD_REF"
+          git show origin/main:scripts/release.py > "$RUNNER_TEMP/release.py"
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
         with:
-          name: dist
+          enable-cache: true
+          python-version: '3.11'
+      - name: Run release checks and build
+        id: version
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: |
+          VERSION=$(python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')
+          test "$(python "$RUNNER_TEMP/release.py" validate-repository --tag "v$VERSION")" = "$VERSION"
+          uv sync --locked --all-extras --group dev
+          uv run ruff check noaa_coops scripts tests
+          uv run ruff format --check noaa_coops scripts tests
+          uv run mypy noaa_coops
+          uv run pytest -m "not live"
+          uv build --no-sources
+          python "$RUNNER_TEMP/release.py" validate-artifacts --dist dist --version "$VERSION"
+          uv venv "$RUNNER_TEMP/wheel-check"
+          uv pip install --python "$RUNNER_TEMP/wheel-check/bin/python" dist/*.whl
+          cd "$RUNNER_TEMP"
+          "$RUNNER_TEMP/wheel-check/bin/python" -c "import noaa_coops; assert noaa_coops.__version__ == '$VERSION'; assert all(callable(getattr(noaa_coops, name)) for name in ('COOPSAPIError', 'Station', 'get_stations_from_bbox'))"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=test-dist-${EXPECTED_SHA}" >> "$GITHUB_OUTPUT"
+      - name: Retain immutable distributions
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.0
+        with:
+          name: ${{ steps.version.outputs.artifact_name }}
           path: dist/
+          if-no-files-found: error
+          overwrite: false
+          retention-days: 14
 
   publish-testpypi:
-    needs: [validate, build]
+    needs: build
+    runs-on: ubuntu-latest
+    # Restrict this environment to the canonical release branch and required reviewers.
+    environment: testpypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ needs.build.outputs.artifact_name }}
+          path: dist/
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+      - name: Publish with TestPyPI trusted publishing
+        run: uv publish --trusted-publishing always --publish-url https://test.pypi.org/legacy/ --check-url https://test.pypi.org/simple dist/*
+
+  verify-testpypi:
+    needs: [build, publish-testpypi]
     runs-on: ubuntu-latest
     steps:
-      - name: Download dist
-        uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: dist
-          path: dist/
-      - uses: astral-sh/setup-uv@v7
-      - name: Publish to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_TOKEN }}
-          repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
-      - name: Verify install from TestPyPI
+          name: ${{ needs.build.outputs.artifact_name }}
+          path: ${{ runner.temp }}/test-dist/
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
+      - name: Install dependencies from PyPI and noaa-coops from TestPyPI
+        env:
+          VERSION: ${{ needs.build.outputs.version }}
+        working-directory: ${{ runner.temp }}
         run: |
-          sleep 10
-          uv venv /tmp/verify-env
-          uv pip install --python /tmp/verify-env/bin/python --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ --index-strategy unsafe-best-match noaa-coops==${{ needs.validate.outputs.version }}
-          /tmp/verify-env/bin/python -c "from noaa_coops import __version__; assert __version__ == '${{ needs.validate.outputs.version }}', f'Version mismatch: {__version__}'"
+          python - <<'PY'
+          from email.parser import BytesParser
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          wheel = next(Path("test-dist").glob("*.whl"))
+          with ZipFile(wheel) as archive:
+              metadata_name = next(name for name in archive.namelist() if name.endswith(".dist-info/METADATA"))
+              metadata = BytesParser().parsebytes(archive.read(metadata_name))
+          Path("requirements.txt").write_text("\n".join(metadata.get_all("Requires-Dist", [])) + "\n")
+          PY
+          uv venv testpypi-check
+          uv pip install --python testpypi-check/bin/python --requirements requirements.txt
+          uv pip install --python testpypi-check/bin/python --no-deps --index-url https://test.pypi.org/simple noaa-coops=="$VERSION"
+          testpypi-check/bin/python -c "import noaa_coops; assert noaa_coops.__version__ == '$VERSION'; assert all(callable(getattr(noaa_coops, name)) for name in ('COOPSAPIError', 'Station', 'get_stations_from_bbox'))"

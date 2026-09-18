@@ -1,27 +1,90 @@
 name: CI
+
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, edited]
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      expected_sha:
+        description: Exact commit that must be tested
+        required: true
+        type: string
+
+permissions:
+  contents: read
 
 jobs:
-  lint:
+  verify-ref:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Reject stale manual dispatches
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: |
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$GITHUB_SHA" = "$EXPECTED_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+
+  pr-title:
+    if: ${{ github.event_name == 'pull_request' }}
+    needs: verify-ref
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title and breaking migration notes
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_ACTOR: ${{ github.event.pull_request.user.login }}
+          PR_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+
+          title = os.environ["PR_TITLE"]
+          body = os.environ.get("PR_BODY", "")
+          actor = os.environ["PR_ACTOR"]
+          head = os.environ["PR_HEAD"]
+          release_branch = re.fullmatch(r"release-please--branches--main(?:--components--.*)?", head)
+          if actor == "github-actions[bot]" and release_branch:
+              raise SystemExit(0)
+          conventional = re.fullmatch(r"(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([^)\r\n]+\))?!?: .+", title)
+          if not conventional:
+              raise SystemExit("PR title must use the Conventional Commit format")
+          if title.split(":", 1)[0].endswith("!") and not re.search(r"(?m)^BREAKING CHANGE:[ \t]*\S(?:.*(?:\n(?!\n).*)*)?", body):
+              raise SystemExit("a breaking PR title requires a BREAKING CHANGE: migration paragraph")
+          PY
+
+  lint:
+    needs: verify-ref
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
         with:
           enable-cache: true
       - run: uv sync --locked --all-extras --group dev
-      - run: uv run ruff check noaa_coops tests
-      - run: uv run ruff format --check noaa_coops tests
+      - run: uv run ruff check noaa_coops scripts tests
+      - run: uv run ruff format --check noaa_coops scripts tests
 
   typecheck:
+    needs: verify-ref
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
         with:
           enable-cache: true
           # mypy runs with python_version = 3.11 (the support floor), so the
@@ -31,14 +94,17 @@ jobs:
       - run: uv run mypy noaa_coops
 
   test:
+    needs: verify-ref
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.11', '3.12', '3.13']
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7.1.6
         with:
           enable-cache: true
           python-version: ${{ matrix.python-version }}
