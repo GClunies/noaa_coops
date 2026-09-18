@@ -1,0 +1,38 @@
+.github/pull_request_template.md
+  h_54e5c83907823d 15-17
+.github/workflows/publish.yml
+  h_54e5c83907823d 5-17,20,26-27,29,31,33-38,40-55,57-59,61-75,77-81,83,87-99,102,105,107-123,125-127,129-130,132-134,136-137,139,141-143,145-146,148-149,151-152,154,156-159,161-174,176-184,186-188
+.github/workflows/pull_request.yml
+  h_54e5c83907823d 2,6,9-17,20-65,67,70-73,77-78,81,84-87,97,104-107,112
+.github/workflows/release.yml
+  h_54e5c83907823d 1-129
+.github/workflows/test-publish.yml
+  h_54e5c83907823d 5-17,20,24,26,28,30-34,36-68,70-71,73-75,77-86,88,90-92,95,97-100,102,104,106-114,116-122,124-138
+.release-please-manifest.json
+  h_54e5c83907823d 1
+CHANGELOG.md
+  h_54e5c83907823d 3,5,7,9,11-13,15,17-21,23,25-36,38,40-45,47,49
+CONTRIBUTING.md
+  h_54e5c83907823d 62-146
+noaa_coops/__init__.py
+  h_54e5c83907823d 3-4,10
+release-please-config.json
+  h_54e5c83907823d 1-33
+scripts/release.py
+  h_54e5c83907823d 1-223
+tests/test_release_automation.py
+  h_54e5c83907823d 1-329
+tests/test_release_workflows.py
+  h_54e5c83907823d 1-129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2e6b9212e573681be5930a525da7baf500c94d57",
+  "prompts": {},
+  "humans": {
+    "h_54e5c83907823d": {
+      "author": "Gregory Clunies <greg.clunies@gmail.com>"
+    }
+  }
+}
