@@ -1,6 +1,6 @@
 [project]
 name = "noaa-coops"
-version = "0.5.0"
+version = "1.0.0"
 description = "Python wrapper for NOAA Tides & Currents Data and Metadata."
 readme = "README.md"
 license = "Apache-2.0"
