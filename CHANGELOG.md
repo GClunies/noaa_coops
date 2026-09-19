@@ -2,7 +2,9 @@
 
 This project follows [Semantic Versioning](https://semver.org/). Release PRs update this changelog before publication.
 
-## Unreleased
+## [Unreleased]
+
+## 1.0.0 (2026-09-18)
 
 These notes include the unpublished 0.5.0 work and later changes since PyPI 0.4.0.
 

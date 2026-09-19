@@ -4,7 +4,6 @@
     ".": {
       "release-type": "python",
       "package-name": "noaa-coops",
-      "release-as": "1.0.0",
       "include-v-in-tag": true,
       "include-component-in-tag": false,
       "changelog-sections": [
